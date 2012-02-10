@@ -1,0 +1,28 @@
+.stickr_success {
+	padding: 20px 10px; 
+	background: url('../../img/web/bg_success.png'); 
+	color: white;
+	width: 250px;
+	position: relative;
+	border-radius: 5px;
+	z-index: 10000;	
+}
+.stickr_error {
+	padding: 20px 10px;
+	background: url('../../img/web/bg_error.png'); 
+	color: white;
+	width: 250px;
+	position: relative;
+	border-radius: 5px;
+	z-index: 10000;
+}
+.stickr_message {
+	padding: 20px 10px;
+	background: url('../../img/web/bg_message.png');
+	color: white;
+	width: 250px;
+	position: relative;
+	border-radius: 5px;
+	z-index: 10000;
+}
+

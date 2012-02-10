@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model package="minishop" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" version="1.1">
+	<object class="ModAddress" table="modAddress" extends="xPDOSimpleObject">
+		<field key="uid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
+		<field key="receiver" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="phone" dbtype="varchar" precision="20" phptype="string" null="false" />
+		<field key="index" dbtype="int" precision="11" phptype="integer" null="false" />
+		<field key="region" dbtype="varchar" precision="100" phptype="string" null="false" />
+		<field key="city" dbtype="varchar" precision="100" phptype="string" null="false" />
+		<field key="metro" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="street" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="building" dbtype="varchar" precision="10" phptype="string" null="false" />
+		<field key="room" dbtype="varchar" precision="10" phptype="string" null="false" />
+		<field key="comment" dbtype="text" phptype="string" null="false" />
+
+		<index alias="uid" name="uid" primary="false" unique="false" type="BTREE" >
+			<column key="uid" length="" collation="A" null="false" />
+		</index>
+	</object>
+	<object class="ModCategories" table="modCategories" extends="xPDOSimpleObject">
+		<field key="gid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
+		<field key="cid" dbtype="int" precision="11" phptype="integer" null="false" />
+
+		<index alias="gid" name="gid" primary="false" unique="false" type="BTREE" >
+			<column key="gid" length="" collation="A" null="false" />
+			<column key="cid" length="" collation="A" null="false" />
+		</index>
+	</object>
+	<object class="ModDelivery" table="modDelivery" extends="xPDOSimpleObject">
+		<field key="wid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
+		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="description" dbtype="text" phptype="string" null="false" />
+		<field key="price" dbtype="float" precision="10,2" phptype="float" null="false" default="0.00" />
+		<field key="enabled" dbtype="tinyint" precision="1" phptype="integer" null="false" default="1" />
+
+		<index alias="wid" name="wid" primary="false" unique="false" type="BTREE" >
+			<column key="wid" length="" collation="A" null="false" />
+		</index>
+	</object>
+	<object class="ModGoods" table="modGoods" extends="xPDOSimpleObject">
+		<field key="wid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
+		<field key="gid" dbtype="int" precision="11" phptype="integer" null="false" />
+		<field key="article" dbtype="varchar" precision="50" phptype="string" null="false" />
+		<field key="price" dbtype="float" precision="10,2" phptype="float" null="false" />
+		<field key="img" dbtype="text" phptype="string" null="false" />
+		<field key="remains" dbtype="int" precision="11" phptype="integer" null="false" />
+
+		<index alias="wid" name="wid" primary="false" unique="true" type="BTREE" >
+			<column key="wid" length="" collation="A" null="false" />
+			<column key="gid" length="" collation="A" null="false" />
+		</index>
+	</object>
+	<object class="ModLog" table="modLog" extends="xPDOSimpleObject">
+		<field key="type" dbtype="varchar" precision="50" phptype="string" null="false" index="index" />
+		<field key="iid" dbtype="int" precision="11" phptype="integer" null="false" />
+		<field key="operation" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="old" dbtype="text" phptype="string" null="false" />
+		<field key="new" dbtype="text" phptype="string" null="false" />
+		<field key="uid" dbtype="int" precision="11" phptype="integer" null="false" />
+		<field key="ip" dbtype="varchar" precision="15" phptype="string" null="false" />
+		<field key="timestamp" dbtype="timestamp" phptype="timestamp" null="false" default="CURRENT_TIMESTAMP" index="index"  extra="on update current_timestamp" />
+
+		<index alias="timestamp" name="timestamp" primary="false" unique="false" type="BTREE" >
+			<column key="timestamp" length="" collation="A" null="false" />
+		</index>
+		<index alias="type" name="type" primary="false" unique="false" type="BTREE" >
+			<column key="type" length="" collation="A" null="false" />
+			<column key="iid" length="" collation="A" null="false" />
+		</index>
+	</object>
+	<object class="ModOrderedGoods" table="modOrderedGoods" extends="xPDOSimpleObject">
+		<field key="gid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
+		<field key="oid" dbtype="int" precision="11" phptype="integer" null="false" />
+		<field key="num" dbtype="int" precision="11" phptype="integer" null="false" default="1" />
+		<field key="price" dbtype="float" precision="10,2" phptype="float" null="false" />
+		<field key="sum" dbtype="float" precision="10,2" phptype="float" null="false" />
+
+		<index alias="gid" name="gid" primary="false" unique="false" type="BTREE" >
+			<column key="gid" length="" collation="A" null="false" />
+			<column key="oid" length="" collation="A" null="false" />
+		</index>
+	</object>
+	<object class="ModOrders" table="modOrders" extends="xPDOSimpleObject">
+		<field key="uid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
+		<field key="num" dbtype="varchar" precision="20" phptype="string" null="false" />
+		<field key="wid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
+		<field key="status" dbtype="tinyint" precision="2" phptype="integer" null="false" default="1" index="index" />
+		<field key="sum" dbtype="float" precision="10,2" phptype="float" null="false" />
+		<field key="created" dbtype="timestamp" phptype="timestamp" null="false" default="0000-00-00 00:00:00" />
+		<field key="updated" dbtype="timestamp" phptype="timestamp" null="false" default="0000-00-00 00:00:00"  extra="on update current_timestamp" />
+		<field key="comment" dbtype="text" phptype="string" null="false" />
+		<field key="delivery" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
+		<field key="address" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
+
+		<index alias="status" name="status" primary="false" unique="false" type="BTREE" >
+			<column key="status" length="" collation="A" null="false" />
+		</index>
+		<index alias="uid" name="uid" primary="false" unique="false" type="BTREE" >
+			<column key="uid" length="" collation="A" null="false" />
+		</index>
+		<index alias="warehouse" name="warehouse" primary="false" unique="false" type="BTREE" >
+			<column key="wid" length="" collation="A" null="false" />
+		</index>
+	</object>
+	<object class="ModStatus" table="modStatus" extends="xPDOSimpleObject">
+		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />
+		<field key="color" dbtype="char" precision="6" phptype="string" null="false" default="000000" />
+		<field key="email2user" dbtype="tinyint" precision="1" phptype="integer" null="false" />
+		<field key="email2manager" dbtype="tinyint" precision="1" phptype="integer" null="false" />
+		<field key="subject2user" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="subject2manager" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="body2user" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="body2manager" dbtype="varchar" precision="255" phptype="string" null="false" />
+
+		<index alias="name" name="name" primary="false" unique="false" type="BTREE" >
+			<column key="name" length="" collation="A" null="false" />
+		</index>
+	</object>
+	<object class="ModWarehouse" table="modWarehouse" extends="xPDOSimpleObject">
+		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />
+		<field key="currency" dbtype="varchar" precision="20" phptype="string" null="false" />
+		<field key="address" dbtype="text" phptype="string" null="false" />
+		<field key="phone" dbtype="varchar" precision="20" phptype="string" null="false" />
+		<field key="email" dbtype="varchar" precision="100" phptype="string" null="false" />
+		<field key="description" dbtype="text" phptype="string" null="false" />
+		<field key="permission" dbtype="varchar" precision="100" phptype="string" null="false" />
+
+		<index alias="name" name="name" primary="false" unique="false" type="BTREE" >
+			<column key="name" length="" collation="A" null="false" />
+		</index>
+	</object>
+</model>
