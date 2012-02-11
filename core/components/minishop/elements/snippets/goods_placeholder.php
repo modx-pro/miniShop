@@ -12,10 +12,17 @@ $wid = $_SESSION['minishop']['warehouse'];
 if ($res = $modx->getObject('ModGoods', array('gid' => $input, 'wid' => $wid))) {
 
 	if ($options == 'price') {
-		echo $modx->runSnippet('msGetPrice', array('price' => $res->get('price')));
+	  	$result = $modx->runSnippet('msGetPrice', array('price' => $res->get('price')));
 	}
 	else {
-		echo $res->get($options);
+		$result = $res->get($options);
+	}
+  
+  	if (empty($result)) {
+	    	echo ' ';
+	}
+	else {
+	    	echo $result;
 	}
 }
 else {

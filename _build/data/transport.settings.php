@@ -40,7 +40,7 @@ $settings[1]= $modx->newObject('modSystemSetting');
 $settings[1]->fromArray(array(
     'key' => 'minishop.categories_tpl',
     'value' => 1,
-    'xtype' => 'numberfield',
+    'xtype' => 'textfield',
     'namespace' => 'minishop',
     'area' => 'settings',
 ),'',true,true);
@@ -49,7 +49,7 @@ $settings[2]= $modx->newObject('modSystemSetting');
 $settings[2]->fromArray(array(
     'key' => 'minishop.goods_tpl',
     'value' => 1,
-    'xtype' => 'numberfield',
+    'xtype' => 'textfield',
     'namespace' => 'minishop',
     'area' => 'settings',
 ),'',true,true);

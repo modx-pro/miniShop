@@ -7,8 +7,7 @@ if (!is_object($modx->miniShop)) {
 }
 
 	$ids = $modx->miniShop->getGoods($categoryId);
-	$scriptProperties['resources'] = implode(',', $ids);
-
-	echo $modx->runSnippet('getResources', $scriptProperties);
+	
+	echo implode(',', $ids);
   
 ?>

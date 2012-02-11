@@ -2,9 +2,10 @@
   <h1>[[*longtitle:default=`[[*pagetitle]]`]]</h1>
   
   [[!getPage?
-    &element=`msGetGoods`
+    &element=`getResources`
     &tpl=`tpl.msGoods.row`
-    &limit=`10`
+    &resources=`[[!msGetGoods]]`
+    &limit=`15`
     &sortby=`pagetitle`
     &sortdir=`ASC`
   ]]

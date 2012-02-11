@@ -45,19 +45,30 @@ if ($object->xpdo) {
             $manager->createObjectContainer('ModStatus');
             $manager->createObjectContainer('ModWarehouse');
 			
-			$tmp = $modx->newObject('ModWarehouse', array('name' => 'Основной', 'currency' => 'руб.', 'email' => $modx->getOption('emailsender')));
-			$tmp->save();
-			$tmp = $modx->newObject('ModStatus', array(
-				'name' => 'Новый'
-				,'email2user' => 1
-				,'email2manager' => 1
-				,'subject2user' => 'Вы сделали заказ №[[+num]]'
-				,'subject2manager' => 'Новый заказ №[[+num]]'
-				,'body2user' => 'tpl.msOrderEmail.user'
-				,'body2manager' => 'tpl.msOrderEmail.manager'
-			));
-			$tmp->save();
-
+			$exists = $modx->getCount('ModWarehouse');
+			if ($exists == 0) {
+				$tmp = $modx->newObject('ModWarehouse', array(
+					'name' => 'Основной'
+					,'currency' => 'руб.'
+					,'email' => $modx->getOption('emailsender')
+				));
+				$tmp->save();
+			}
+			
+			$exists = $modx->getCount('ModStatus');
+			if ($exists == 0) {
+				$tmp = $modx->newObject('ModStatus', array(
+					'name' => 'Новый'
+					,'email2user' => 1
+					,'email2manager' => 1
+					,'subject2user' => 'Вы сделали заказ №[[+num]]'
+					,'subject2manager' => 'Новый заказ №[[+num]]'
+					,'body2user' => 'tpl.msOrderEmail.user'
+					,'body2manager' => 'tpl.msOrderEmail.manager'
+				));
+				$tmp->save();
+			}
+			
             break;
         case xPDOTransport::ACTION_UPGRADE:
             break;

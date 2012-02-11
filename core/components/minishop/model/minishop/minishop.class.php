@@ -252,16 +252,17 @@ class miniShop {
 		return $data;
 	}
 
-	// Функция выводит id ресурсов категории. Как прямых потомков, так и назначенных через дополнительные свойства в админке
+	// Функция выводит id ресурсов для которых указанная категория - дополнительная
 	function getGoods($id = 0) {
 		if (empty($id)) {$id = $this->modx->resource->id;}
+		
 		if (!$res = $this->modx->getObject('modResource', $id)) {
 			return array();
 		}
 		// Контекст ресурсов
-		$context = $res->get('context_key'); 
+		//$context = $res->get('context_key'); 
 		// Прямые потомки категории
-		$ids1 = $this->modx->getChildIds($id, 10, array('context' => $context));
+		//$ids1 = $this->modx->getChildIds($id, 10, array('context' => $context));
 
 		// Непрямые, а через связи в ModCategories
 		$ids2 = array();
@@ -271,21 +272,8 @@ class miniShop {
 			}
 		}
 
-		$tids = array_merge($ids1, $ids2);
-		$goods_tpls = $this->config['ms_goods_tpls'];
-
-		// Отбрасываем все левые ресурсы, которые не подходят по шаблону 
-		$ids = array();
-		foreach ($tids as $v) {
-			$q = $this->modx->newQuery('modResource');
-			$q->where(array('id' => $v, 'template:IN' => $goods_tpls));
-			$q->select('id,template');
-
-			if ($res = $this->modx->getObject('modResource', $q)) {
-				$ids[] = $v;
-			}
-		}
-		return $ids;
+		//$ids = array_merge($ids1, $ids2);
+		return $ids2;
 	}
 	
 	
