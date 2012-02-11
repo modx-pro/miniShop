@@ -137,15 +137,16 @@ miniShop.window.CreateItem = function(config) {
     config = config || {};
     this.ident = config.ident || 'mecitem'+Ext.id();
 
-    Ext.applyIf(config,{
-        title: _('ms.status.create')
-        ,id: this.ident
-        ,height: 150
-        ,width: 475
+	Ext.applyIf(config,{
+		title: _('ms.status.create')
+		,id: this.ident
+		,height: 150
+		,width: 475
 		,labelAlign: 'left'
 		,labelWidth: 200
-        ,url: miniShop.config.connector_url
-        ,action: 'mgr/status/create'
+		,url: miniShop.config.connector_url
+		,action: 'mgr/status/create'
+		,modal: true
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'

@@ -180,27 +180,27 @@ Ext.reg('minishop-grid-warehouses',miniShop.grid.Warehouses);
 
 
 miniShop.window.CreateWarehouse = function(config) {
-    config = config || {};
-    this.ident = config.ident || 'mecitem'+Ext.id();
-    Ext.applyIf(config,{
-        title: _('ms.warehouse.create_change')
-        ,id: this.ident
-        ,width: 475
-        ,url: miniShop.config.connector_url
+	config = config || {};
+	this.ident = config.ident || 'mecitem'+Ext.id();
+	Ext.applyIf(config,{
+		title: _('ms.warehouse.create_change')
+		,id: this.ident
+		,width: 475
+		,url: miniShop.config.connector_url
 		,action: 'mgr/warehouse/create'
 		,labelAlign: 'left'
 		,labelWidth: 150
 		,modal: true
-       ,fields: [{
-            xtype: 'modx-tabs'
-            ,autoHeight: true
-            ,deferredRender: false
-            ,items: [{
+		,fields: [{
+			xtype: 'modx-tabs'
+			,autoHeight: true
+			,deferredRender: false
+			,items: [{
 				title: _('ms.main')
 				,layout: 'form'
 				,style: 'padding: 0 5px;'
 				,bodyStyle: 'padding-top: 10px;'
-				,labelWidth: 120
+				,labelWidth: 110
 				// Поля основных параметров склада
 				,items: [{
 					xtype: 'hidden'
