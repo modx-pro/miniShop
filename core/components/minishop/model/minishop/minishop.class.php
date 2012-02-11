@@ -211,8 +211,8 @@ class miniShop {
 				if (empty($str) || !preg_match('/[0-9]/', $str)) {return false;}
 			break;
 			case 'fio': 
-				$str = preg_replace('/[^-а-я]/iu', '', $str);
-				if (empty($str) || !preg_match('/[-а-я]/iu', $str)) {return false;}
+				$str = preg_replace('/[^-а-яa-z]/iu', '', $str);
+				if (empty($str) || !preg_match('/[-а-яa-z]/iu', $str)) {return false;}
 				else {$str = $this->utf8_ucfirst($str);}
 			break;
 			case 'phone': 

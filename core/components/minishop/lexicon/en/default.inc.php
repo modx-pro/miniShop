@@ -2,7 +2,7 @@
 /**
  * miniShop
  *
- * Copyright 2010 by Shaun McCormick <shaun+minishop@modx.com>
+ * Copyright 2012 by Vasiliy Naumkin <bezumkin@yandex.ru>
  *
  * miniShop is free software; you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
@@ -26,190 +26,172 @@
  * @subpackage lexicon
  */
 $_lang['minishop'] = 'miniShop';
-$_lang['ms.menu_desc'] = 'Небольшой интернет-магазин для MODX Revolution';
-$_lang['ms.order'] = 'Заказ';
-$_lang['ms.orders'] = 'Заказы';
-$_lang['ms.goods'] = 'Товары';
-$_lang['ms.warehouse'] = 'Склад';
-$_lang['ms.warehouses'] = 'Склады';
-$_lang['ms.category'] = 'Категория';
-$_lang['ms.categories'] = 'Категории';
-$_lang['ms.address'] = 'Адрес';
-$_lang['ms.orderhistory'] = 'История';
-$_lang['ms.delivery'] = 'Доставка';
+$_lang['ms.menu_desc'] = 'A simple online store for MODX Revolution';
+$_lang['ms.order'] = 'Order';
+$_lang['ms.orders'] = 'Orders';
+$_lang['ms.goods'] = 'Goods';
+$_lang['ms.warehouse'] = 'Warehouse';
+$_lang['ms.warehouses'] = 'Warehouses';
+$_lang['ms.category'] = 'Category';
+$_lang['ms.categories'] = 'Categories';
+$_lang['ms.address'] = 'Address';
+$_lang['ms.orderhistory'] = 'Hystory';
+$_lang['ms.delivery'] = 'Delivery';
 $_lang['ms.email'] = 'Email';
-$_lang['ms.currency'] = 'Валюта';
-$_lang['ms.receiver'] = 'Получатель';
-$_lang['ms.phone'] = 'Телефон';
-$_lang['ms.index'] = 'Индекс';
-$_lang['ms.region'] = 'Область';
-$_lang['ms.city'] = 'Город';
-$_lang['ms.metro'] = 'Метро';
-$_lang['ms.street'] = 'Улица';
-$_lang['ms.building'] = 'Дом/строение';
-$_lang['ms.room'] = 'Офис/квартира';
-$_lang['ms.description'] = 'Описание';
-$_lang['ms.main'] = 'Основное';
-$_lang['ms.price'] = 'Цена';
-$_lang['ms.name'] = 'Название';
-$_lang['ms.article'] = 'Артикул';
-$_lang['ms.remains'] = 'Остаток';
-$_lang['ms.img'] = 'Изображение';
+$_lang['ms.currency'] = 'Currency';
+$_lang['ms.receiver'] = 'Receiver';
+$_lang['ms.phone'] = 'Phone';
+$_lang['ms.index'] = 'Index';
+$_lang['ms.region'] = 'Region';
+$_lang['ms.city'] = 'City';
+$_lang['ms.metro'] = 'Metro';
+$_lang['ms.street'] = 'Street';
+$_lang['ms.building'] = 'Building';
+$_lang['ms.room'] = 'Room';
+$_lang['ms.description'] = 'Sescription';
+$_lang['ms.main'] = 'Main';
+$_lang['ms.price'] = 'Price';
+$_lang['ms.name'] = 'Name';
+$_lang['ms.article'] = 'Article';
+$_lang['ms.remains'] = 'Remains';
+$_lang['ms.img'] = 'Image';
 $_lang['ms.iid'] = 'ItemID';
-$_lang['ms.type'] = 'Тип';
-$_lang['ms.color'] = 'Цвет';
-$_lang['ms.content'] = 'Описание';
-$_lang['ms.enabled'] = 'Вкл.';
-$_lang['ms.operation'] = 'Операция';
-$_lang['ms.properties'] = 'Свойства';
-$_lang['ms.permission'] = 'Право доступа';
-$_lang['ms.required_field'] = 'Это поле обязательно';
-$_lang['ms.no_permission'] = 'У вас нет прав для выполнения этой операции.';
-$_lang['ms.permission.description'] = 'Разрешение, которое будет требовать объект от пользователя. Права создаются в разделе "Безопасность &rarr; Контроль доступа"';
+$_lang['ms.type'] = 'Type';
+$_lang['ms.color'] = 'Color';
+$_lang['ms.content'] = 'Content';
+$_lang['ms.enabled'] = 'Enable';
+$_lang['ms.operation'] = 'Operation';
+$_lang['ms.properties'] = 'Properties';
+$_lang['ms.permission'] = 'Permission';
+$_lang['ms.required_field'] = 'This fiel is required/';
+$_lang['ms.no_permission'] = 'You dont have permission for this action.';
+$_lang['ms.permission.description'] = 'Required permission for edit this object.';
 
-$_lang['ms.warehouse.select'] = 'Выберите склад';
-$_lang['ms.warehouse.create'] = 'Создать склад';
-$_lang['ms.warehouse.update'] = 'Изменить свойства склада';
-$_lang['ms.warehouse.remove'] = 'Удалить склад';
-$_lang['ms.warehouse.remove_confirm'] = 'Вы уверены, что хотите удалить <b>склад</b>? <span style="color: brown;">Это также удалит <b>все</b> остатки на этом складе и его методы доставки!</span>';
-$_lang['ms.warehouse.err_save'] = 'Ошибка при сохранении склада.';
-$_lang['ms.warehouse.err_remove'] = 'Ошибка удаления склада.';
-$_lang['ms.warehouse.err_ae'] = 'Склад с таким именем уже существует.';
-$_lang['ms.warehouse.err_nf'] = 'Склад не найден.';
-$_lang['ms.warehouses.desc.currency'] = 'Валюта в любом виде. Например: <b>руб.</b> или <b>$</b>. В дальнейшем, в зависимости от этого параметра вы сможете формировать цену.';
+$_lang['ms.warehouse.select'] = 'Select warehouse';
+$_lang['ms.warehouse.create'] = 'New warehouse';
+$_lang['ms.warehouse.update'] = 'Edit warehouse';
+$_lang['ms.warehouse.remove'] = 'Remove warehouse';
+$_lang['ms.warehouse.remove_confirm'] = 'Are you sure to remove this <b>warehouse</b>? <span style="color: brown;"> This will also remove <b>all</ b> remains on this warehouse and its delivery methods!</ span>';
+$_lang['ms.warehouse.err_save'] = 'Failed to save the warehouse.';
+$_lang['ms.warehouse.err_remove'] = 'Failed to remove the warehouse.';
+$_lang['ms.warehouse.err_ae'] = 'Warehouse with the same name already exists.';
+$_lang['ms.warehouse.err_nf'] = 'Warehouse not found.';
+$_lang['ms.warehouses.desc.currency'] = 'Any currency type. RUR or $, for example.';
 
 
-$_lang['ms.delivery.create'] = 'Создать доставку';
-$_lang['ms.delivery.remove'] = 'Удалить доставку';
-$_lang['ms.delivery.update'] = 'Изменить свойства доставки';
-$_lang['ms.delivery.remove_confirm'] = 'Вы уверены, что хотите удалить способ доставки?';
-$_lang['ms.delivery.err_save'] = 'Ошибка при сохранении доставки.';
-$_lang['ms.delivery.err_remove'] = 'Ошибка удаления доставки.';
-$_lang['ms.delivery.err_ae'] = 'Доставка с таким названием уже существует.';
-$_lang['ms.delivery.err_nf'] = 'Доставка не найдена.';
+$_lang['ms.delivery.create'] = 'New delivery';
+$_lang['ms.delivery.remove'] = 'Remove delivery';
+$_lang['ms.delivery.update'] = 'Edit delivery';
+$_lang['ms.delivery.remove_confirm'] = 'Are you sure to remove this delivery?';
+$_lang['ms.delivery.err_save'] = 'Failed to save the delivery.';
+$_lang['ms.delivery.err_remove'] = 'Failed to remove the delivery.';
+$_lang['ms.delivery.err_ae'] = 'Delivery with the same name already exists.';
+$_lang['ms.delivery.err_nf'] = 'Delivery not found.';
 
-$_lang['ms.status'] = 'Статус';
-$_lang['ms.statuses'] = 'Статусы';
-$_lang['ms.statusname'] = 'Статус';
-$_lang['ms.status.create'] = 'Создать статус';
-$_lang['ms.status.update'] = 'Изменить свойства статуса';
-$_lang['ms.status.remove'] = 'Удалить статус';
-$_lang['ms.status.remove_confirm'] = 'Вы действительно хотите удалить этот статус?';
-$_lang['ms.email2user'] = 'Уведомление покупателю';
-$_lang['ms.subject2user'] = 'Тема письма покупателю';
-$_lang['ms.body2user'] = 'Чанк письма покупателю';
-$_lang['ms.email2manager'] = 'Уведомление менеджеру';
-$_lang['ms.subject2manager'] = 'Тема письма менеджеру';
-$_lang['ms.body2manager'] = 'Чанк письма менеджеру';
-$_lang['ms.status.err_ae'] = 'Это имя уже используется';
-$_lang['ms.status.err_save'] = 'Ошибка при сохранении статуса';
+$_lang['ms.status'] = 'Status';
+$_lang['ms.statuses'] = 'Statuses';
+$_lang['ms.statusname'] = 'Statusname';
+$_lang['ms.status.create'] = 'New status';
+$_lang['ms.status.update'] = 'Edit status';
+$_lang['ms.status.remove'] = 'Remove status';
+$_lang['ms.status.remove_confirm'] = 'Are you sure to remove this status?';
+$_lang['ms.email2user'] = 'Email to user';
+$_lang['ms.subject2user'] = 'Subject for email to user';
+$_lang['ms.body2user'] = 'Chunk for email to user';
+$_lang['ms.email2manager'] = 'Email to manager';
+$_lang['ms.subject2manager'] = 'Subject for email to manager';
+$_lang['ms.body2manager'] = 'Chunk for email to manager';
+$_lang['ms.status.err_ae'] = 'This name already exists.';
+$_lang['ms.status.err_save'] = 'Failed to save the status.';
 
-$_lang['ms.num'] = 'Номер';
+$_lang['ms.num'] = 'Number';
 $_lang['ms.id'] = 'ID';
 $_lang['ms.uid'] = 'UserID';
 $_lang['ms.oid'] = 'OrderID';
 $_lang['ms.gid'] = 'GoodsID';
 $_lang['ms.cid'] = 'CatID';
 $_lang['ms.ip'] = 'IP';
-$_lang['ms.timestamp'] = 'Метка времени';
-$_lang['ms.username'] = 'Логин';
-$_lang['ms.fullname'] = 'Имя';
+$_lang['ms.timestamp'] = 'Timestamp';
+$_lang['ms.username'] = 'Login';
+$_lang['ms.fullname'] = 'Fullname';
 
-$_lang['ms.sum'] = 'Сумма';
-$_lang['ms.created'] = 'Создан';
-$_lang['ms.updated'] = 'Обновлен';
-$_lang['ms.comment'] = 'Комментарий';
+$_lang['ms.sum'] = 'Sum';
+$_lang['ms.created'] = 'Created';
+$_lang['ms.updated'] = 'Updated';
+$_lang['ms.comment'] = 'Comment';
 
-$_lang['ms.orders.intro_msg'] = 'Раздел управления заказами';
-$_lang['ms.goods.intro_msg'] = 'Раздел управления товарами.<br/>В этом разделе вы управляете ресурсами из дерева слева, то есть, все изменения "здесь" меняют ресурсы сайта.';
-$_lang['ms.warehouses.intro_msg'] = 'Раздел управления складами и их свойствами';
-$_lang['ms.status.intro_msg'] = 'Здесь вы должны создать статусы заказов для дальнейшей работы.';
+$_lang['ms.orders.intro_msg'] = 'Orders management section';
+$_lang['ms.goods.intro_msg'] = 'Goods management section';
+$_lang['ms.warehouses.intro_msg'] = 'Warehouses management section';
+$_lang['ms.status.intro_msg'] = 'Statuses management section';
 
+$_lang['ms.orders.item_err_save'] = 'Order not found.';
+$_lang['ms.orders.edit'] = 'Edit order';
+$_lang['ms.orders.remove'] = 'Remove order';
+$_lang['ms.orders.remove_confirm'] = 'Are you sure to remove this order?';
+$_lang['ms.orders.goods_err_save'] = 'Goods not found.';
+$_lang['ms.orders.search'] = 'Search order by number';
+$_lang['ms.orders.filter_clear'] = 'Clear';
+$_lang['ms.status.select'] = 'Select status';
+$_lang['ms.category.select'] = 'Select category';
+$_lang['ms.combo.all'] = 'All';
+$_lang['ms.combo.select'] = 'Select';
 
-$_lang['ms.orders.item_err_save'] = 'Заказ с таким id не найден';
-$_lang['ms.orders.edit'] = 'Свойства заказа';
-$_lang['ms.orders.remove'] = 'Удалить заказ';
-$_lang['ms.orders.remove_confirm'] = 'Вы действительно хотите удалить этот заказ?';
-$_lang['ms.orders.goods_err_save'] = 'Товар с таким id не найден';
-$_lang['ms.orders.search'] = 'Поиск заказа по номеру...';
-$_lang['ms.orders.filter_clear'] = 'Очистить';
-$_lang['ms.status.select'] = 'Выберите статус заказа';
-$_lang['ms.category.select'] = 'Выберите категорию товаров';
-$_lang['ms.combo.all'] = 'Все';
-$_lang['ms.combo.select'] = 'Выберите';
+$_lang['ms.window.editorder'] = 'Edit order';
+$_lang['ms.window.editgoods'] = 'Edit goods';
+$_lang['ms.order_err_nf'] = 'Order not found';
 
+$_lang['ms.address.createnew'] = 'Create new address';
 
+$_lang['ms.goods.price'] = 'Price';
+$_lang['ms.goods.name'] = 'Name';
+$_lang['ms.goods.num'] = 'Count';
+$_lang['ms.goods.sum'] = 'Sum';
+$_lang['ms.goods.change'] = 'Edit goods';
+$_lang['ms.goods.goto_manager_page'] = 'Open goods page';
+$_lang['ms.goods.goto_site_page'] = 'View goods on site';
+$_lang['ms.goods.delete'] = 'Remove goods';
+$_lang['ms.goods.delete_confirm'] = 'Are you sure to remove goods?<br/>This will set parameter "deleted" to 1.';
+$_lang['ms.goods.err_delete'] = 'Failed to remove goods.';
+$_lang['ms.goods.err_ns'] = 'Goods ID not set.';
+$_lang['ms.goods.err_nf'] = 'Goods not found';
+$_lang['ms.goods.err_wh_ns'] = 'Warehouse ID not set.';
+$_lang['ms.goods.err_save'] = 'Failure to save goods.';
+$_lang['ms.goods.wh_err_nf'] = 'Warehouse not found.';
+$_lang['ms.goods.duplicate'] = 'Apply to all warehouses.';
+$_lang['ms.goods.duplicate.desc'] = 'This will apply additional goods parameters (price, article etc.) to all warehouses.';
 
-$_lang['ms.window.editorder'] = 'Изменение свойств заказа';
-$_lang['ms.window.editgoods'] = 'Изменение свойств товара';
-$_lang['ms.order_err_nf'] = 'Заказ с указанным id не найден';
+$_lang['ms.log.old'] = 'Old value';
+$_lang['ms.log.new'] = 'New value';
 
-$_lang['ms.address.createnew'] = 'Заполнить новый адрес получения';
+$_lang['ms.addToCart.success'] = 'This goods was successfully added to cart.';
+$_lang['ms.addToCart.error'] = 'Error adding goods.';
+$_lang['ms.remFromCart.success'] = 'Goods was remove.';
+$_lang['ms.remFromCart.error'] = 'Failure to remove goods..';
+$_lang['ms.Cart.empty'] = 'You cart is empty.';
 
-$_lang['ms.goods.price'] = 'Цена';
-$_lang['ms.goods.name'] = 'Наименование';
-$_lang['ms.goods.num'] = 'Кол-во';
-$_lang['ms.goods.sum'] = 'Сумма';
-$_lang['ms.goods.change'] = 'Изменить свойства товара';
-$_lang['ms.goods.goto_manager_page'] = 'Открыть страницу товара';
-$_lang['ms.goods.goto_site_page'] = 'Просмотреть товар на сайте';
-$_lang['ms.goods.delete'] = 'Удалить товар';
-$_lang['ms.goods.delete_confirm'] = 'Вы действительно хотите удалить товар?<br/>Это поставит метку "удален" и товар исчезнет из списка. В дальнейшем, вы сможете окончательно удалить его из дерева ресурсов, или восстановить.<br/>Также, это удалит дополнительные свойства товара: цену, изображение, артикул и остаток.';
-$_lang['ms.goods.err_delete'] = 'Ошибка при удалении товара.';
-$_lang['ms.goods.err_ns'] = 'Не указан ID товара.';
-$_lang['ms.goods.err_nf'] = 'Товар с указанным ID не найден.';
-$_lang['ms.goods.err_wh_ns'] = 'Не указан ID склада товара.';
-$_lang['ms.goods.err_save'] = 'Ошибка при сохранении товара.';
-$_lang['ms.goods.wh_err_nf'] = 'Не указан склад товара.';
-$_lang['ms.goods.duplicate'] = 'Для всех складов';
-$_lang['ms.goods.duplicate.desc'] = 'Если вы отметите это чекбокс, то текущее сохранение перезапишет состояние этого твоара на всех доступных складах.';
+$_lang['ms.delivery.self'] = 'Self delivery';
+$_lang['ms.delivery.err_save'] = 'Failure to save delivery.';
+$_lang['ms.delivery.create'] = 'New delivery.';
+$_lang['ms.delivery.err_ae'] = 'This name already exists.';
 
+$_lang['ms.changeCartCount.success'] = 'Changes saved successfully.';
+$_lang['ms.changeCartCount.error'] = 'Error when changing.';
 
+$_lang['ms.saveDelivery.success'] = 'You choose the delivery.';
 
+$_lang['ms.validate.address_select'] = 'You must select a saved address, or enter a new.';
+$_lang['ms.validate.email'] = 'Your Email is required for ordering.';
+$_lang['ms.validate.notempty'] = 'This field is required.';
+$_lang['ms.validate.receiver'] = 'Fullname is required';
+$_lang['ms.validate.index'] = 'Zip code must be 6 digits';
+$_lang['ms.validate.phone'] = 'The phone number must consist of digits.';
 
-$_lang['ms.log.old'] = 'Старое значение';
-$_lang['ms.log.new'] = 'Значение';
+$_lang['ms.captcha.error'] = 'Wrong captcha! Please try again.';
+$_lang['ms.cart_hash.error'] = 'You have changed the contents of the cart during checkout. Please confirm the order.';
 
-
-
-
-
-
-
-
-
-$_lang['ms.addToCart.success'] = 'Товар успешно добавлен в корзину.';
-$_lang['ms.addToCart.error'] = 'Ошибка добавления товара.';
-$_lang['ms.remFromCart.success'] = 'Товар удален из корзины.';
-$_lang['ms.remFromCart.error'] = 'Ошибка удаления товара.';
-$_lang['ms.Cart.empty'] = 'Ваша корзина пуста.';
-
-$_lang['ms.delivery.self'] = 'Самовывоз';
-$_lang['ms.delivery.err_save'] = 'Ошибка сохранения варианта доставки.';
-$_lang['ms.delivery.create'] = 'Создать доставку';
-$_lang['ms.delivery.err_ae'] = 'Это название уже существует.';
-
-$_lang['ms.changeCartCount.success'] = 'Изменения успешно сохранены.';
-$_lang['ms.changeCartCount.error'] = 'Ошибка при изменении.';
-
-$_lang['ms.saveDelivery.success'] = 'Вы выбрали способ доставки.';
-
-
-$_lang['ms.validate.address_select'] = 'Вы должны выбрать сохраненный адрес, или ввести новый.';
-$_lang['ms.validate.email'] = 'Ваш Email необходим для оформления заказа.';
-$_lang['ms.validate.notempty'] = 'Это поле обязательно для заполнения';
-$_lang['ms.validate.receiver'] = 'Ф.И.О. должно состоять из русских букв';
-$_lang['ms.validate.index'] = 'Почтовый индекс должен состоять из 6 цифр';
-$_lang['ms.validate.phone'] = 'Номер телефона должен состоять из цифр.';
-
-$_lang['ms.captcha.error'] = 'Неверное проверочное число! Попробуйте еще раз.';
-$_lang['ms.cart_hash.error'] = 'Вы изменили содержимое корзины в процессе оформления товара. Подтвердите заказ.';
-
-$_lang['ms.email.subject.send2user'] = 'Ваш заказ №[[+num]] принят для исполнения!';
-$_lang['ms.email.subject.send2manager'] = 'У вас новый заказ №[[+num]]!';
-
-$_lang['ms.vieworder'] = 'Подробности';
-$_lang['ms.chunk.select'] = 'Выберите чанк';
+$_lang['ms.vieworder'] = 'Details';
+$_lang['ms.chunk.select'] = 'Select chunk';
 
 
 

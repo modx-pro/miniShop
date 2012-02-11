@@ -1,6 +1,6 @@
 <?php
 /**
- * eventsCalendar2
+ * miniShop
  *
  * Copyright 2012 by Vasiliy Naumkin <bezumkin@yandex.ru>
  *

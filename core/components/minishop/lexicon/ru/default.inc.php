@@ -2,7 +2,7 @@
 /**
  * miniShop
  *
- * Copyright 2010 by Shaun McCormick <shaun+minishop@modx.com>
+ * Copyright 2012 by Vasiliy Naumkin <bezumkin@yandex.ru>
  *
  * miniShop is free software; you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
@@ -78,7 +78,6 @@ $_lang['ms.warehouse.err_ae'] = 'Склад с таким именем уже с
 $_lang['ms.warehouse.err_nf'] = 'Склад не найден.';
 $_lang['ms.warehouses.desc.currency'] = 'Валюта в любом виде. Например: <b>руб.</b> или <b>$</b>. В дальнейшем, в зависимости от этого параметра вы сможете формировать цену.';
 
-
 $_lang['ms.delivery.create'] = 'Создать доставку';
 $_lang['ms.delivery.remove'] = 'Удалить доставку';
 $_lang['ms.delivery.update'] = 'Изменить свойства доставки';
@@ -125,7 +124,6 @@ $_lang['ms.goods.intro_msg'] = 'Раздел управления товарам
 $_lang['ms.warehouses.intro_msg'] = 'Раздел управления складами и их свойствами';
 $_lang['ms.status.intro_msg'] = 'Здесь вы должны создать статусы заказов для дальнейшей работы.';
 
-
 $_lang['ms.orders.item_err_save'] = 'Заказ с таким id не найден';
 $_lang['ms.orders.edit'] = 'Свойства заказа';
 $_lang['ms.orders.remove'] = 'Удалить заказ';
@@ -137,8 +135,6 @@ $_lang['ms.status.select'] = 'Выберите статус заказа';
 $_lang['ms.category.select'] = 'Выберите категорию товаров';
 $_lang['ms.combo.all'] = 'Все';
 $_lang['ms.combo.select'] = 'Выберите';
-
-
 
 $_lang['ms.window.editorder'] = 'Изменение свойств заказа';
 $_lang['ms.window.editgoods'] = 'Изменение свойств товара';
@@ -164,19 +160,8 @@ $_lang['ms.goods.wh_err_nf'] = 'Не указан склад товара.';
 $_lang['ms.goods.duplicate'] = 'Для всех складов';
 $_lang['ms.goods.duplicate.desc'] = 'Если вы отметите это чекбокс, то текущее сохранение перезапишет состояние этого твоара на всех доступных складах.';
 
-
-
-
 $_lang['ms.log.old'] = 'Старое значение';
 $_lang['ms.log.new'] = 'Значение';
-
-
-
-
-
-
-
-
 
 $_lang['ms.addToCart.success'] = 'Товар успешно добавлен в корзину.';
 $_lang['ms.addToCart.error'] = 'Ошибка добавления товара.';
@@ -194,22 +179,15 @@ $_lang['ms.changeCartCount.error'] = 'Ошибка при изменении.';
 
 $_lang['ms.saveDelivery.success'] = 'Вы выбрали способ доставки.';
 
-
 $_lang['ms.validate.address_select'] = 'Вы должны выбрать сохраненный адрес, или ввести новый.';
 $_lang['ms.validate.email'] = 'Ваш Email необходим для оформления заказа.';
 $_lang['ms.validate.notempty'] = 'Это поле обязательно для заполнения';
-$_lang['ms.validate.receiver'] = 'Ф.И.О. должно состоять из русских букв';
+$_lang['ms.validate.receiver'] = 'Ф.И.О. должно состоять из букв';
 $_lang['ms.validate.index'] = 'Почтовый индекс должен состоять из 6 цифр';
 $_lang['ms.validate.phone'] = 'Номер телефона должен состоять из цифр.';
 
 $_lang['ms.captcha.error'] = 'Неверное проверочное число! Попробуйте еще раз.';
 $_lang['ms.cart_hash.error'] = 'Вы изменили содержимое корзины в процессе оформления товара. Подтвердите заказ.';
 
-$_lang['ms.email.subject.send2user'] = 'Ваш заказ №[[+num]] принят для исполнения!';
-$_lang['ms.email.subject.send2manager'] = 'У вас новый заказ №[[+num]]!';
-
 $_lang['ms.vieworder'] = 'Подробности';
 $_lang['ms.chunk.select'] = 'Выберите чанк';
-
-
-
