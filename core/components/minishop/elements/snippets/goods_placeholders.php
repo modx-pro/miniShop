@@ -1,5 +1,5 @@
 <?php
-//include $modx->getOption('minishop.core_path') . 'elements/snippets/orders_placeholders.php';
+//echo include $modx->getOption('minishop.core_path') . 'elements/snippets/orders_placeholders.php';
 
 if (!is_object($modx->miniShop)) {
 	$miniShop = $modx->getService('miniShop','miniShop',$modx->getOption('minishop.core_path',null,$modx->getOption('core_path').'components/minishop/').'model/minishop/', $scriptProperties);
@@ -27,5 +27,5 @@ if ($res = $modx->getObject('ModWarehouse', $wid)) {
 	
 	$modx->setPlaceholders($arr);
 }
-
+return '';
 ?>

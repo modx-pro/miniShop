@@ -1,5 +1,5 @@
 <?php
-//include $modx->getOption('minishop.core_path') . 'elements/snippets/goods_placeholder.php';
+//echo include $modx->getOption('minishop.core_path') . 'elements/snippets/goods_placeholder.php';
 
 if (!is_object($modx->miniShop)) {
   $miniShop = $modx->getService('miniShop','miniShop',$modx->getOption('minishop.core_path',null,$modx->getOption('core_path').'components/minishop/').'model/minishop/', $scriptProperties);
@@ -19,13 +19,13 @@ if ($res = $modx->getObject('ModGoods', array('gid' => $input, 'wid' => $wid))) 
 	}
   
   	if (empty($result)) {
-	    	echo ' ';
+	    	return ' ';
 	}
 	else {
-	    	echo $result;
+	    	return $result;
 	}
 }
 else {
-	echo ' ';
+	return ' ';
 }
 ?>

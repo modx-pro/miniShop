@@ -1,5 +1,5 @@
 <?php
-//include $modx->getOption('minishop.core_path') . 'elements/snippets/change_warehouse.php';
+//echo include $modx->getOption('minishop.core_path') . 'elements/snippets/change_warehouse.php';
 
 if ($_POST['action'] == 'changeWarehouse' && !empty($_POST['warehouse'])) {
   	$_SESSION['minishop'] = array();
@@ -29,7 +29,7 @@ else {
       
       $options .= '<option value="'.$v->get('id').'" '.$selected.'>'.$v->get('name').'</option>';
     }
-    echo $modx->getChunk('tpl.msChangeWarehouse', array('options' => $options));
+    return $modx->getChunk('tpl.msChangeWarehouse', array('options' => $options));
   }
 }
 ?>

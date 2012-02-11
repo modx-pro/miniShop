@@ -48,11 +48,15 @@ $_SESSION['minishop']['warehouse'] = $warehouse;
 $_SESSION['minishop']['category'] = $category;
 
 $c = $modx->newQuery('modResource');
-
+$c->where(array('deleted' => false));
 // Фильтрация по категории
 if (!empty($category)) {
-	$ids = $modx->miniShop->getGoods($category);
-	$c->where(array('id:IN' => $ids, 'deleted' => false));
+	$c->andCondition(array('parent' => $category), '', 1);
+	
+	$ids = $modx->miniShop->getGoodsByCategories($category);
+	if (!empty($ids)) {
+		$c->orCondition(array('id:IN' => $ids), '', 1);
+	}
 }
 else {
 	$c->where(array('template:IN' => $goods_tpls, 'deleted' => false));

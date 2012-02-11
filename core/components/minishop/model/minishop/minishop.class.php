@@ -253,27 +253,21 @@ class miniShop {
 	}
 
 	// Функция выводит id ресурсов для которых указанная категория - дополнительная
-	function getGoods($id = 0) {
-		if (empty($id)) {$id = $this->modx->resource->id;}
+	function getGoods($x) {
+		return $this->getGoodsByCategories($x);
+	}
+	function getGoodsByCategories($parents = array()) {
+		if (empty($parents)) {$parents = array($this->modx->resource->id);}
+		if (!is_array($parents)) {$parents = explode(',', $parents);}
 		
-		if (!$res = $this->modx->getObject('modResource', $id)) {
-			return array();
-		}
-		// Контекст ресурсов
-		//$context = $res->get('context_key'); 
-		// Прямые потомки категории
-		//$ids1 = $this->modx->getChildIds($id, 10, array('context' => $context));
-
-		// Непрямые, а через связи в ModCategories
-		$ids2 = array();
-		if ($res = $this->modx->getCollection('ModCategories', array('cid' => $id))) {
+		// Поиск подходящих ресурсов через связи в ModCategories
+		$ids = array();
+		if ($res = $this->modx->getCollection('ModCategories', array('cid:IN' => $parents))) {
 			foreach ($res as $v) {
 				$ids2[] = $v->get('gid');
 			}
 		}
-
-		//$ids = array_merge($ids1, $ids2);
-		return $ids2;
+		return $ids;
 	}
 	
 	

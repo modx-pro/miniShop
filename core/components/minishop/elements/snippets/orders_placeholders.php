@@ -1,5 +1,5 @@
 <?php
-//include $modx->getOption('minishop.core_path') . 'elements/snippets/orders_placeholders.php';
+//echo include $modx->getOption('minishop.core_path') . 'elements/snippets/orders_placeholders.php';
 
 if (empty($oid)) {return false;}
 
@@ -61,5 +61,5 @@ foreach ($cart as $v) {
 }
 
 $modx->setPlaceholders($arr);
-
+return '';
 ?>

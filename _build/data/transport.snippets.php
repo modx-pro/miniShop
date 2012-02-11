@@ -92,6 +92,14 @@ $snippets[6]->fromArray(array(
 ),'',true,true);
 $snippets[6]->setProperties($properties);
 
+$snippets[7]= $modx->newObject('modSnippet');
+$snippets[7]->fromArray(array(
+    'id' => 0,
+    'name' => 'msGetResources',
+    'description' => 'Модифицированный getResources 1.4.2pl для miniShop. Поддержка мультикатегорий и дополнительных свойств товаров.',
+    'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/ms_getresources.php'),
+),'',true,true);
+$snippets[7]->setProperties($properties);
 
 unset($properties);
 return $snippets;
