@@ -68,21 +68,21 @@ switch ($action) {
 	case 'confirmOrder': $res = $miniShop->confirmOrder(); break;
 	
 	case 'submitOrder': $res = $miniShop->submitOrder($_POST['captcha']); break;
+    default: $res = '';
 }
 
 // Вывод ответа, в зависимости от типа запроса
 if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest' && !empty($res)) {
 	if (!$_REQUEST['json_encode']) {
-		echo json_encode($res);
+		return json_encode($res);
 	}
 	else {
 		$maxIterations= (integer) $modx->getOption('parser_max_iterations', null, 10);
 		$modx->getParser()->processElementTags('', $res, false, false, '[[', ']]', array(), $maxIterations);
 		$modx->getParser()->processElementTags('', $res, true, true, '[[', ']]', array(), $maxIterations);
-		echo $res;
+		return $res;
 	}
-	die;
 }
 else {
-	echo $res;
+	return $res;
 }
