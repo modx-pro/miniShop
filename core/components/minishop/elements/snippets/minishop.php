@@ -42,12 +42,7 @@ $c['tplOrderEmailRow'] = $modx->getOption('tplOrderEmailRow', $scriptProperties,
 
 $c['tplSubmitOrderSuccess'] = $modx->getOption('tplSubmitOrderSuccess', $scriptProperties, 'tpl.msSubmitOrder.success');
 //$c['tplSubmitOrderError'] = $modx->getOption('tplSubmitOrderError', $scriptProperties, 'tpl.msSubmitOrder.error');
- 
-// Вывод ошибок
-ini_set('display_errors', 1); 
-error_reporting(E_ALL); 
- 
- 
+
 $miniShop = $modx->getService('minishop','miniShop',$modx->getOption('minishop.core_path',null,$modx->getOption('core_path').'components/minishop/').'model/minishop/',$c);
 if (!($miniShop instanceof miniShop)) return '';
 
