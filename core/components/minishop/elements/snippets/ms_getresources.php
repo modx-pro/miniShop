@@ -109,6 +109,7 @@ $showDeleted = !empty($showDeleted) ? true : false;
 
 $sortby = isset($sortby) ? $sortby : 'publishedon';
 $sortbyTV = isset($sortbyTV) ? $sortbyTV : '';
+$sortbyMS = isset($sortbyMS) ? $sortbyMS : '';	// add by bezumkin 12.02.2012
 $sortbyAlias = isset($sortbyAlias) ? $sortbyAlias : 'modResource';
 $sortbyEscaped = !empty($sortbyEscaped) ? true : false;
 $sortdir = isset($sortdir) ? $sortdir : 'DESC';
@@ -399,6 +400,15 @@ if (!empty($sortbyTV)) {
     }
     $criteria->sortby("sortTV", $sortdirTV);
 }
+// add by bezumkin 12.02.2012
+if (!empty($sortbyMS)) {
+	$criteria->leftJoin('ModGoods', 'ModGoods', array(
+		"ModGoods.gid = modResource.id",
+		"ModGoods.wid = ".$_SESSION['minishop']['warehouse']
+	));
+	$criteria->sortby($sortbyMS, $sortdir);
+}
+// eof add
 if (!empty($sortby)) {
     if (strpos($sortby, '{') === 0) {
         $sorts = $modx->fromJSON($sortby);
