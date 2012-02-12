@@ -5,7 +5,7 @@
     &element=`msGetResources`
     &tpl=`tpl.msGoods.row`
     &limit=`15`
-    &sortby=`pagetitle`
+    &sortbyMS=`price`
     &sortdir=`ASC`
   ]]
   
