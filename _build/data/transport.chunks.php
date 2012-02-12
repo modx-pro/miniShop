@@ -31,7 +31,7 @@ $chunks[0]= $modx->newObject('modChunk');
 $chunks[0]->fromArray(array(
     'id' => 0,
     'name' => 'Content.category',
-    'description' => 'Основной чанк для вывода категории товаров.',
+    'description' => 'Main chunk for listing goods category',
     'snippet' => getSnippetContent($sources['source_core'].'/elements/chunks/Content.category.tpl'),
 ),'',true,true);
 
@@ -39,7 +39,7 @@ $chunks[1]= $modx->newObject('modChunk');
 $chunks[1]->fromArray(array(
     'id' => 0,
     'name' => 'Content.goods',
-    'description' => 'Основной чанк для вывода страницы товара.',
+    'description' => 'Main chunk for goods page',
     'snippet' => getSnippetContent($sources['source_core'].'/elements/chunks/Content.goods.tpl'),
 ),'',true,true);
 
@@ -47,7 +47,7 @@ $chunks[2]= $modx->newObject('modChunk');
 $chunks[2]->fromArray(array(
     'id' => 0,
     'name' => 'tpl.msAddrForm',
-    'description' => 'Форма заказа товара.',
+    'description' => 'Order form.',
     'snippet' => getSnippetContent($sources['source_core'].'/elements/chunks/msAddrForm.tpl'),
 ),'',true,true);
 
@@ -55,7 +55,7 @@ $chunks[3]= $modx->newObject('modChunk');
 $chunks[3]->fromArray(array(
     'id' => 0,
     'name' => 'tpl.msCart',
-    'description' => 'Контейнер корзины с заголовком таблицы и включением формы заказа.',
+    'description' => 'Shopping cart outer.',
     'snippet' => getSnippetContent($sources['source_core'].'/elements/chunks/msCart.outer.tpl'),
 ),'',true,true);
 
@@ -63,7 +63,7 @@ $chunks[4]= $modx->newObject('modChunk');
 $chunks[4]->fromArray(array(
     'id' => 0,
     'name' => 'tpl.msCart.row',
-    'description' => 'Строка товара в корзине.',
+    'description' => 'Shopping cart row.',
     'snippet' => getSnippetContent($sources['source_core'].'/elements/chunks/msCart.row.tpl'),
 ),'',true,true);
 
@@ -71,7 +71,7 @@ $chunks[5]= $modx->newObject('modChunk');
 $chunks[5]->fromArray(array(
     'id' => 0,
     'name' => 'tpl.msChangeWarehouse',
-    'description' => 'Оформление переключателя складов на страницах сайта.',
+    'description' => 'Warehouse switch on webpages.',
     'snippet' => getSnippetContent($sources['source_core'].'/elements/chunks/msChangeWarehouse.tpl'),
 ),'',true,true);
 
@@ -79,7 +79,7 @@ $chunks[6]= $modx->newObject('modChunk');
 $chunks[6]->fromArray(array(
     'id' => 0,
     'name' => 'tpl.msGoods.row',
-    'description' => 'Чанк для вывода одного товара в категории. Используется getResources.',
+    'description' => 'Chunk for getResouces, that listing godds in categories',
     'snippet' => getSnippetContent($sources['source_core'].'/elements/chunks/msGoods.row.tpl'),
 ),'',true,true);
 
@@ -87,7 +87,7 @@ $chunks[7]= $modx->newObject('modChunk');
 $chunks[7]->fromArray(array(
     'id' => 0,
     'name' => 'tpl.msOrderEmail.manager',
-    'description' => 'Почтовое уведомление менеджеру о заказе. Используется в настройках статусов компонента.',
+    'description' => 'Email notice to manager. This should be selected in status settings in manager.',
     'snippet' => getSnippetContent($sources['source_core'].'/elements/chunks/msOrderEmail.manager.tpl'),
 ),'',true,true);
 
@@ -95,7 +95,7 @@ $chunks[8]= $modx->newObject('modChunk');
 $chunks[8]->fromArray(array(
     'id' => 0,
     'name' => 'tpl.msOrderEmail.row',
-    'description' => 'Строка заказанного товара для таблицы в почтовом уведомлении.',
+    'description' => 'One ordrered goods in email notice',
     'snippet' => getSnippetContent($sources['source_core'].'/elements/chunks/msOrderEmail.row.tpl'),
 ),'',true,true);
 
@@ -103,7 +103,7 @@ $chunks[9]= $modx->newObject('modChunk');
 $chunks[9]->fromArray(array(
     'id' => 0,
     'name' => 'tpl.msOrderEmail.user',
-    'description' => 'Почтовое уведомление покупателю о заказе. Используется в настройках статусов компонента.',
+    'description' => 'Email notice to customer. This should be selected in status settings in manager.',
     'snippet' => getSnippetContent($sources['source_core'].'/elements/chunks/msOrderEmail.user.tpl'),
 ),'',true,true);
 
@@ -111,7 +111,7 @@ $chunks[10]= $modx->newObject('modChunk');
 $chunks[10]->fromArray(array(
     'id' => 0,
     'name' => 'tpl.msSubmitOrder.success',
-    'description' => 'Сообщение об успешном оформлении заказа.',
+    'description' => 'Thank you for your order!',
     'snippet' => getSnippetContent($sources['source_core'].'/elements/chunks/msSubmitOrder.success.tpl'),
 ),'',true,true);
 

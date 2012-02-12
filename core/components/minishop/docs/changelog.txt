@@ -1,4 +1,4 @@
-История изменений miniShop.
+Changelog for miniShop.
 
 
 
@@ -7,8 +7,14 @@
 - Добавил модифицированный сниппет getResources для ускорения загрузки категорий. От обычного отличается поддержкой мультикатегорий и дополнительных свойств.
 - Английская локализация
 - Множество различных изменений в коде для улучшения производительности и стабильности.
+-----
+- Added a modified snippet getResources to speed up loading categories. Differs from the usual support Multicategories and additional properties.
+- English localization
+- Lots of various changes in the code to improve performance and stability.
 
 
 1.0.0 beta1 (10.02.2012)
 ==============
 - Первый публичный релиз
+-----
+- First public release
