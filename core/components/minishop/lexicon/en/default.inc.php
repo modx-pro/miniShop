@@ -48,7 +48,7 @@ $_lang['ms.metro'] = 'Metro';
 $_lang['ms.street'] = 'Street';
 $_lang['ms.building'] = 'Building';
 $_lang['ms.room'] = 'Room';
-$_lang['ms.description'] = 'Sescription';
+$_lang['ms.description'] = 'Description';
 $_lang['ms.main'] = 'Main';
 $_lang['ms.price'] = 'Price';
 $_lang['ms.name'] = 'Name';
@@ -63,15 +63,15 @@ $_lang['ms.enabled'] = 'Enable';
 $_lang['ms.operation'] = 'Operation';
 $_lang['ms.properties'] = 'Properties';
 $_lang['ms.permission'] = 'Permission';
-$_lang['ms.required_field'] = 'This fiel is required/';
-$_lang['ms.no_permission'] = 'You dont have permission for this action.';
+$_lang['ms.required_field'] = 'This field is required.';
+$_lang['ms.no_permission'] = 'You don\'t have permission for this action.';
 $_lang['ms.permission.description'] = 'Required permission for edit this object.';
 
 $_lang['ms.warehouse.select'] = 'Select warehouse';
 $_lang['ms.warehouse.create'] = 'New warehouse';
 $_lang['ms.warehouse.update'] = 'Edit warehouse';
 $_lang['ms.warehouse.remove'] = 'Remove warehouse';
-$_lang['ms.warehouse.remove_confirm'] = 'Are you sure to remove this <b>warehouse</b>? <span style="color: brown;"> This will also remove <b>all</ b> remains on this warehouse and its delivery methods!</ span>';
+$_lang['ms.warehouse.remove_confirm'] = 'Are you sure to remove this <b>warehouse</b>? <span style="color: brown;"> This will also remove <b>all</b> remains on this warehouse and its delivery methods!</span>';
 $_lang['ms.warehouse.err_save'] = 'Failed to save the warehouse.';
 $_lang['ms.warehouse.err_remove'] = 'Failed to remove the warehouse.';
 $_lang['ms.warehouse.err_ae'] = 'Warehouse with the same name already exists.';
@@ -164,11 +164,11 @@ $_lang['ms.goods.duplicate.desc'] = 'This will apply additional goods parameters
 $_lang['ms.log.old'] = 'Old value';
 $_lang['ms.log.new'] = 'New value';
 
-$_lang['ms.addToCart.success'] = 'This goods was successfully added to cart.';
+$_lang['ms.addToCart.success'] = 'The goods were successfully added to cart.';
 $_lang['ms.addToCart.error'] = 'Error adding goods.';
-$_lang['ms.remFromCart.success'] = 'Goods was remove.';
-$_lang['ms.remFromCart.error'] = 'Failure to remove goods..';
-$_lang['ms.Cart.empty'] = 'You cart is empty.';
+$_lang['ms.remFromCart.success'] = 'Goods were removed.';
+$_lang['ms.remFromCart.error'] = 'Failure to remove goods.';
+$_lang['ms.Cart.empty'] = 'Your cart is empty.';
 
 $_lang['ms.delivery.self'] = 'Self delivery';
 $_lang['ms.delivery.err_save'] = 'Failure to save delivery.';
