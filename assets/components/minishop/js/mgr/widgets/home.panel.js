@@ -10,6 +10,7 @@ miniShop.panel.Home = function(config) {
         },{
             xtype: 'modx-tabs'
             ,bodyStyle: 'padding: 10px'
+            ,cls: 'container'
             ,defaults: { border: false ,autoHeight: true }
             ,border: true
             //,activeItem: 0
