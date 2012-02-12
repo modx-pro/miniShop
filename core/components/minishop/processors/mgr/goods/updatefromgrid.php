@@ -26,7 +26,7 @@
  * @subpackage processors
  */
 /* get board */
-//if (!$modx->hasPermission('save')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
+if (!$modx->hasPermission('save')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
 
 $tmp = $modx->fromJSON($scriptProperties['data']);
 $cid = $tmp['cid'];

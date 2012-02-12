@@ -1,12 +1,10 @@
 <?php
-//echo include $modx->getOption('minishop.core_path') . 'elements/snippets/orders_placeholders.php';
+//echo require $modx->getOption('core_path') . 'components/minishop/elements/snippets/goods_placeholders.php';
 
-if (!is_object($modx->miniShop)) {
+if (!isset($modx->miniShop) || !is_object($modx->miniShop)) {
 	$miniShop = $modx->getService('miniShop','miniShop',$modx->getOption('minishop.core_path',null,$modx->getOption('core_path').'components/minishop/').'model/minishop/', $scriptProperties);
 	if (!($miniShop instanceof miniShop)) return '';
 }
-
-$modx->miniShop->initialize();
 
 $gid = $modx->resource->id;					// goods id
 $wid = $_SESSION['minishop']['warehouse'];	// warehouse id

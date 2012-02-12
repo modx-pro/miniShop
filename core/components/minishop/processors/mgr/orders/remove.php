@@ -32,11 +32,6 @@ $id = $scriptProperties['id'];
 if (!$res = $modx->getObject('ModOrders', $id)) {
 	return $modx->error->failure($modx->lexicon('ms.orders.err_nf'));
 }
-/*
-if (!$modx->hasPermission('ms_orders_remove')) {
-	return $modx->error->failure($modx->lexicon('ms.no_permission'));
-}
-*/
 
 if ($res->remove() == false) {
     return $modx->error->failure($modx->lexicon('ms.orders.err_remove'));

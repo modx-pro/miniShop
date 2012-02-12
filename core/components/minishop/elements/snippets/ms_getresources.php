@@ -1,4 +1,5 @@
 <?php
+//echo require $modx->getOption('core_path') . 'components/minishop/elements/snippets/ms_getresources.php';
 /**
  * -----------------
  * Это модифицированный getResources 1.4.2pl для miniShop
@@ -196,7 +197,7 @@ foreach ($parents as $parent) {
 }
 
 // add by bezumkin 22/02.2012
-if (!is_object($modx->miniShop)) {
+if (!isset($modx->miniShop) || !is_object($modx->miniShop)) {
 	$modx->getService('miniShop','miniShop',$modx->getOption('minishop.core_path',null,$modx->getOption('core_path').'components/minishop/').'model/minishop/', array());
 }
 $incats = $modx->miniShop->getGoodsByCategories($parentArray);

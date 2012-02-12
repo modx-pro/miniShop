@@ -50,8 +50,7 @@ if ($res = $modx->getObject('ModOrders', $id)) {
 	else {
 		$arr['delivery'] = $modx->lexicon('ms.delivery.self');
 	}
-	//$res->set('created', strftime('%d.%m.%Y %H:%M:%S', strtotime($res->get('created'))));
-	//$arr = $res->toArray('',true);
+
 }
 else {
 	return $modx->error->failure($modx->lexicon('ms.order_err_nf'));

@@ -1,5 +1,5 @@
 <?php
-//echo include $modx->getOption('minishop.core_path') . 'elements/snippets/getprice.php';
+//echo require $modx->getOption('core_path') . 'components/minishop/elements/snippets/getprice.php';
 
 //$input или $price - цена товара
 //$options - любые параметры

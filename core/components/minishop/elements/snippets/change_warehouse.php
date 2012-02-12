@@ -1,5 +1,5 @@
 <?php
-//echo include $modx->getOption('minishop.core_path') . 'elements/snippets/change_warehouse.php';
+//echo require $modx->getOption('core_path') . 'components/minishop/elements/snippets/change_warehouse.php';
 
 if ($_POST['action'] == 'changeWarehouse' && !empty($_POST['warehouse'])) {
   	$_SESSION['minishop'] = array();
@@ -9,7 +9,7 @@ if ($_POST['action'] == 'changeWarehouse' && !empty($_POST['warehouse'])) {
   	return;
 }
 else {
-  if (!is_object($modx->miniShop)) {
+  if (!isset($modx->miniShop) || !is_object($modx->miniShop)) {
     $miniShop = $modx->getService('miniShop','miniShop',$modx->getOption('minishop.core_path',null,$modx->getOption('core_path').'components/minishop/').'model/minishop/', $scriptProperties);
     if (!($miniShop instanceof miniShop)) return '';
   }

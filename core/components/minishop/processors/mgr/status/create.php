@@ -1,6 +1,6 @@
 <?php
 /**
- * modExtra
+ * miniShop
  *
  * Copyright 2010 by Shaun McCormick <shaun+modextra@modx.com>
  *

@@ -47,11 +47,11 @@ if ($object->xpdo) {
             $modx =& $object->xpdo;
 
             /* setup paths */
-            createSetting($modx,'core_path',$modx->getOption('core_path').'components/minishop/');
-            createSetting($modx,'assets_path',$modx->getOption('assets_path').'components/minishop/');
+            //createSetting($modx,'core_path',$modx->getOption('core_path').'components/minishop/');
+            //createSetting($modx,'assets_path',$modx->getOption('assets_path').'components/minishop/');
 
             /* setup urls */
-            createSetting($modx,'assets_url',$modx->getOption('assets_url').'components/minishop/');
+            //createSetting($modx,'assets_url',$modx->getOption('assets_url').'components/minishop/');
 
         break;
     }

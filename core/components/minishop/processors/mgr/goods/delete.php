@@ -32,11 +32,7 @@ $id = $scriptProperties['id'];
 if (!$res = $modx->getObject('modResource', $id)) {
 	return $modx->error->failure($modx->lexicon('ms.goods.err_nf'));
 }
-/*
-if (!$modx->hasPermission('ms_orders_remove')) {
-	return $modx->error->failure($modx->lexicon('ms.no_permission'));
-}
-*/
+
 $res->set('deleted', 1);
 if ($res->save() == false) {
     return $modx->error->failure($modx->lexicon('ms.goods.err_delete'));

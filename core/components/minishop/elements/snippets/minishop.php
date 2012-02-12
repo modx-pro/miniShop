@@ -1,5 +1,5 @@
 <?php
-//include $modx->getOption('minishop.core_path') . 'elements/snippets/minishop.php';
+//echo require $modx->getOption('core_path') . 'components/minishop/elements/snippets/minishop.php';
 
 if (empty($_REQUEST['action'])) {
 	$action = $modx->getOption('action', $scriptProperties, 'getCart');
@@ -69,14 +69,15 @@ switch ($action) {
 // Вывод ответа, в зависимости от типа запроса
 if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest' && !empty($res)) {
 	if (!$_REQUEST['json_encode']) {
-		return json_encode($res);
+		echo json_encode($res);
 	}
 	else {
 		$maxIterations= (integer) $modx->getOption('parser_max_iterations', null, 10);
 		$modx->getParser()->processElementTags('', $res, false, false, '[[', ']]', array(), $maxIterations);
 		$modx->getParser()->processElementTags('', $res, true, true, '[[', ']]', array(), $maxIterations);
-		return $res;
+		echo $res;
 	}
+	die;
 }
 else {
 	return $res;

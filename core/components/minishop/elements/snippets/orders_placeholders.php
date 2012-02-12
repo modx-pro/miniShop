@@ -1,11 +1,11 @@
 <?php
-//echo include $modx->getOption('minishop.core_path') . 'elements/snippets/orders_placeholders.php';
+//echo require $modx->getOption('core_path') . 'components/minishop/elements/snippets/orders_placeholders.php';
 
 if (empty($oid)) {return false;}
 
 $tplCartRows = $modx->getOption('tplRow', $scriptProperties, 'tpl.msOrderEmail.row');
 
-if (!is_object($modx->miniShop)) {
+if (!isset($modx->miniShop) || !is_object($modx->miniShop)) {
 	$miniShop = $modx->getService('miniShop','miniShop',$modx->getOption('minishop.core_path',null,$modx->getOption('core_path').'components/minishop/').'model/minishop/', $scriptProperties);
 	if (!($miniShop instanceof miniShop)) return '';
 }

@@ -28,8 +28,6 @@
 /* get board */
 if (!$modx->hasPermission('save')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
 
-if (!$modx->hasPermission('save')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
-
 $id = $modx->getOption('id', $_REQUEST, 0);
 $status = $modx->getOption('status', $_REQUEST, 1);
 $wid = $modx->getOption('wid', $_REQUEST, 0);
