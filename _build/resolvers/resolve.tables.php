@@ -27,14 +27,14 @@
  */
  
 if ($object->xpdo) {
+	$modx =& $object->xpdo;
+	$modelPath = $modx->getOption('minishop.core_path',null,$modx->getOption('core_path').'components/minishop/').'model/';
+	$modx->addPackage('minishop',$modelPath, $modx->config['table_prefix'].'ms_');
+
+	$manager = $modx->getManager();
+
     switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         case xPDOTransport::ACTION_INSTALL:
-            $modx =& $object->xpdo;
-            $modelPath = $modx->getOption('minishop.core_path',null,$modx->getOption('core_path').'components/minishop/').'model/';
-            $modx->addPackage('minishop',$modelPath, $modx->config['table_prefix'].'ms_');
-
-            $manager = $modx->getManager();
-
             $manager->createObjectContainer('ModAddress');
             $manager->createObjectContainer('ModCategories');
             $manager->createObjectContainer('ModDelivery');
@@ -44,6 +44,7 @@ if ($object->xpdo) {
             $manager->createObjectContainer('ModOrders');
             $manager->createObjectContainer('ModStatus');
             $manager->createObjectContainer('ModWarehouse');
+            $manager->createObjectContainer('ModSuggestion');
 			
 			$exists = $modx->getCount('ModWarehouse');
 			if ($exists == 0) {
@@ -71,6 +72,7 @@ if ($object->xpdo) {
 			
             break;
         case xPDOTransport::ACTION_UPGRADE:
+            $manager->createObjectContainer('ModSuggestion');
             break;
     }
 }

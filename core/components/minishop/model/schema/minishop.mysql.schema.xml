@@ -105,8 +105,8 @@
 	<object class="ModStatus" table="modStatus" extends="xPDOSimpleObject">
 		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />
 		<field key="color" dbtype="char" precision="6" phptype="string" null="false" default="000000" />
-		<field key="email2user" dbtype="tinyint" precision="1" phptype="integer" null="false" />
-		<field key="email2manager" dbtype="tinyint" precision="1" phptype="integer" null="false" />
+		<field key="email2user" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" />
+		<field key="email2manager" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" />
 		<field key="subject2user" dbtype="varchar" precision="255" phptype="string" null="false" />
 		<field key="subject2manager" dbtype="varchar" precision="255" phptype="string" null="false" />
 		<field key="body2user" dbtype="varchar" precision="255" phptype="string" null="false" />
@@ -115,6 +115,11 @@
 		<index alias="name" name="name" primary="false" unique="false" type="BTREE" >
 			<column key="name" length="" collation="A" null="false" />
 		</index>
+	</object>
+	<object class="ModSuggestion" table="modSuggestion" extends="xPDOSimpleObject">
+		<field key="gid" dbtype="int" precision="11" phptype="integer" null="false" />
+		<field key="suggestion" dbtype="text" phptype="string" null="false" />
+		<field key="bought" dbtype="text" phptype="string" null="false" />
 	</object>
 	<object class="ModWarehouse" table="modWarehouse" extends="xPDOSimpleObject">
 		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />

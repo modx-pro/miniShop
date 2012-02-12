@@ -7,8 +7,8 @@ $xpdo_meta_map['ModStatus']= array (
   array (
     'name' => NULL,
     'color' => '000000',
-    'email2user' => NULL,
-    'email2manager' => NULL,
+    'email2user' => 0,
+    'email2manager' => 0,
     'subject2user' => NULL,
     'subject2manager' => NULL,
     'body2user' => NULL,
@@ -38,6 +38,7 @@ $xpdo_meta_map['ModStatus']= array (
       'precision' => '1',
       'phptype' => 'integer',
       'null' => false,
+      'default' => 0,
     ),
     'email2manager' => 
     array (
@@ -45,6 +46,7 @@ $xpdo_meta_map['ModStatus']= array (
       'precision' => '1',
       'phptype' => 'integer',
       'null' => false,
+      'default' => 0,
     ),
     'subject2user' => 
     array (
