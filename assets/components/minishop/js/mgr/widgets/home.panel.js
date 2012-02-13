@@ -106,7 +106,7 @@ MODx.combo.status = function(config) {
         ,displayField: 'name'
         ,valueField: 'id'
         ,fields: ['id','name']
-        //,pageSize: 5
+        ,pageSize: 10
 		,value: miniShop.config.status
 		,emptyText: _('ms.combo.select')
         ,url: miniShop.config.connector_url
@@ -135,7 +135,7 @@ MODx.combo.category = function(config) {
 		//,autoSelect: true
 		,editable: true
         ,fields: ['pagetitle','id']
-        ,pageSize: 5
+        ,pageSize: 10
 		,value: miniShop.config.category
 		,emptyText: _('ms.category.select')
         ,url: miniShop.config.connector_url
@@ -159,7 +159,7 @@ MODx.combo.warehouse = function(config) {
 		//,autoSelect: true
 		//,editable: true
         ,fields: ['name','id']
-        ,pageSize: 5
+        ,pageSize: 10
 		,value: miniShop.config.warehouse
 		,emptyText: _('ms.warehouse.select')
         ,url: miniShop.config.connector_url

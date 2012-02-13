@@ -31,7 +31,7 @@ $categories_tpls = explode(',', $this->modx->getOption('minishop.categories_tpl'
 
 $isLimit = !empty($_REQUEST['limit']);
 $start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,5);
+$limit = $modx->getOption('limit',$_REQUEST, 20);
 $sort = $modx->getOption('sort',$_REQUEST,'pagetitle');
 $dir = $modx->getOption('dir',$_REQUEST,'ASC');
 $gid = $modx->getOption('gid', $_REQUEST, 0);
@@ -42,7 +42,6 @@ if (empty($gid)) {
 }
 
 $c = $modx->newQuery('modResource');
-$c->select('id,pagetitle');
 $c->where(array('template:IN' => $categories_tpls, 'isfolder' => 1));
 
 // Фильтрация по строке поиска
@@ -52,9 +51,8 @@ if (!empty($query)) {
 
 $count = $modx->getCount('modResource',$c);
 $c->sortby($sort,$dir);
-
 if ($isLimit) $c->limit($limit,$start);
-$c->select('id,pagetitle');
+$c->select('modResource.id,modResource.pagetitle');
 
 // Узнаем основную категорию товара
 if ($tmp = $modx->getObject('modResource', $gid)) {
@@ -66,9 +64,9 @@ $arr = array();
 foreach ($res as $v) {
 	if ($v->get('id') == $parent) {continue;} // Выключаем основную категорию товара из списка
     $tmp = array(
-		'cid' => $v->get('id')
+		'id' => $v->get('id')
 		,'gid' => $gid
-		,'name' => $v->get('pagetitle')
+		,'pagetitle' => $v->get('pagetitle')
 	);
 	
 	if ($tmp2 = $modx->getObject('ModCategories', array('cid' => $v->get('id'), 'gid' => $gid))) {

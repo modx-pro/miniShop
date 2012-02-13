@@ -414,14 +414,14 @@ miniShop.grid.Categories = function(config) {
 		//,preventSaveRefresh: false
 		//,clicksToEdit: 'auto'
 		,save_action: 'mgr/goods/updatefromgrid'
-        ,fields: ['cid','gid','name','enabled']
+        ,fields: ['id','gid','pagetitle','enabled']
 		,pageSize: 10
         ,autoHeight: true
         ,paging: true
         ,remoteSort: true
         ,columns: [{
             header: _('ms.cid')
-            ,dataIndex: 'cid'
+            ,dataIndex: 'id'
 			,hidden: true
         },{
             header: _('ms.gid')
@@ -429,27 +429,39 @@ miniShop.grid.Categories = function(config) {
 			,hidden: true
         },{
             header: _('ms.name')
-            ,dataIndex: 'name'
-            ,width: 150
-			//,sortable: true
+            ,dataIndex: 'pagetitle'
+            ,width: 100
+			,sortable: true
         },{
 			header: _('ms.enabled')
 			,dataIndex: 'enabled'
 			,width: 60
-			,sortable: true
+			//,sortable: true
 			,editor: { xtype: 'combo-boolean', renderer: 'boolean' }
 		}]
-		/*
         ,tbar: [{
-            text: _('minishop.item_create')
-            ,handler: this.createItem
-            ,scope: this
-        }]
-		*/
+			xtype: 'tbfill'
+		},{
+			xtype: 'minishop-filter-byquery'
+			,id: Ext.id() + '-filter-byquery'
+			,width: 150
+			,emptyText: _('ms.search')
+			,listeners: {
+				render: { fn: function(tf) {tf.getEl().addKeyListener(Ext.EventObject.ENTER, function() {this.FilterByQuery(tf);}, this);},scope: this}
+			}
+		}]
     });
     miniShop.grid.Categories.superclass.constructor.call(this,config);
 };
-Ext.extend(miniShop.grid.Categories,MODx.grid.Grid);
+Ext.extend(miniShop.grid.Categories,MODx.grid.Grid, {
+    
+	FilterByQuery: function(tf, nv, ov) {
+        var s = this.getStore();
+        s.baseParams.query = tf.getValue();
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+	}
+});
 Ext.reg('minishop-grid-categories',miniShop.grid.Categories);
 
 
