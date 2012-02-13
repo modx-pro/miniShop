@@ -43,6 +43,7 @@ miniShop.grid.Orders = function(config) {
             header: _('ms.num')
             ,dataIndex: 'num'
             ,width: 80
+			,sortable: true
         },{
             header: _('ms.warehouse')
             ,dataIndex: 'wid'
@@ -58,19 +59,12 @@ miniShop.grid.Orders = function(config) {
             ,dataIndex: 'status'
             ,width: 50
 			,renderer: this.renderStatus
+			,sortable: true
 			//,editor: {
 				//xtype: 'minishop-combo-status'
 				//,renderer: 'boolean'
-				//,renderer: this.renderStatus.createDelegate(this,[this],true)
 			//}
-        },
-		{
-            header: _('ms.statusname')
-            ,dataIndex: 'statusname'
-            ,width: 50
-			,hidden: true
-        },
-		{
+        },{
             header: _('ms.sum')
             ,dataIndex: 'sum'
             ,width: 50
@@ -159,9 +153,11 @@ Ext.extend(miniShop.grid.Orders,MODx.grid.Grid,{
         this.refresh();
 	}
 	,renderStatus: function(v) {
-		var name = miniShop.config.statuses[v].name;
-		var color = miniShop.config.statuses[v].color;
-		return '<span style="color: #'+color+'">'+name+'</span>';
+		if (miniShop.config.statuses[v]) {
+			var name = miniShop.config.statuses[v].name;
+			var color = miniShop.config.statuses[v].color;
+			return '<span style="color: #'+color+'">'+name+'</span>';
+		}
     }
 /*
 	,getRowParams: function(e) {
@@ -489,11 +485,13 @@ miniShop.grid.Goods = function(config) {
             header: _('id')
             ,dataIndex: 'id'
             ,hidden: true
+			,sortable: true
         },{
-            header: _('id')
+            header: _('ms.gid')
             ,dataIndex: 'gid'
             //,width: 30
 			,hidden: true
+			,sortable: true
         },{
             header: _('ms.goods.name')
             ,dataIndex: 'name'
@@ -505,14 +503,17 @@ miniShop.grid.Goods = function(config) {
 			,editor: {
 				xtype: 'numberfield'
 			}
+			,sortable: true
         },{
             header: _('ms.goods.price')
             ,dataIndex: 'price'
             ,width: 50
+			,sortable: true
         },{
             header: _('ms.goods.sum')
             ,dataIndex: 'sum'
             ,width: 50
+			,sortable: true
         }]
 		/*
         ,tbar: [{
@@ -546,7 +547,7 @@ miniShop.grid.Log = function(config) {
 		//,preventSaveRefresh: false
 		//,clicksToEdit: 'auto'
 		//,save_action: 'mgr/goods/updatefromgrid'
-        ,fields: ['iid','type','statusname','operation','old','new','uid','ip','timestamp']
+        ,fields: ['iid','type','operation','old','new','uid','ip','timestamp']
 		,pageSize: 10
         ,autoHeight: true
         ,paging: true
@@ -555,30 +556,36 @@ miniShop.grid.Log = function(config) {
         ,columns: [{
             header: _('ms.iid')
             ,dataIndex: 'iid'
-            //,width: 30
 			,hidden: true
         },{
-            header: _('ms.status')
-            ,dataIndex: 'statusname'
+            header: _('ms.log.old')
+            ,dataIndex: 'old'
             ,width: 50
+			,hidden: true
+			,sortable: true
+			,renderer: this.renderStatus
         },{
             header: _('ms.log.new')
             ,dataIndex: 'new'
             ,width: 50
-			,hidden: true
+			,sortable: true
+			,renderer: this.renderStatus
         },{
             header: _('ms.uid')
             ,dataIndex: 'uid'
             ,width: 50
+			,sortable: true
         },{
             header: _('ms.ip')
             ,dataIndex: 'ip'
             ,width: 50
 			,hidden: true
+			,sortable: true
         },{
             header: _('ms.timestamp')
             ,dataIndex: 'timestamp'
             ,width: 100
+			,sortable: true
         }]
 		/*
         ,tbar: [{
@@ -590,5 +597,13 @@ miniShop.grid.Log = function(config) {
     });
     miniShop.grid.Log.superclass.constructor.call(this,config);
 };
-Ext.extend(miniShop.grid.Log,MODx.grid.Grid);
+Ext.extend(miniShop.grid.Log,MODx.grid.Grid,{
+	renderStatus: function(v) {
+		if (miniShop.config.statuses[v]) {
+			var name = miniShop.config.statuses[v].name;
+			var color = miniShop.config.statuses[v].color;
+			return '<span style="color: #'+color+'">'+name+'</span>';
+		}
+    }
+});
 Ext.reg('minishop-grid-log',miniShop.grid.Log);

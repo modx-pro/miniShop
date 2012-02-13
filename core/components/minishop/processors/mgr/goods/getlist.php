@@ -48,7 +48,14 @@ $_SESSION['minishop']['warehouse'] = $warehouse;
 $_SESSION['minishop']['category'] = $category;
 
 $c = $modx->newQuery('modResource');
-$c->where(array('deleted' => false));
+
+$c->leftJoin('ModGoods', 'ModGoods', array(
+	"ModGoods.gid = modResource.id",
+	"ModGoods.wid = ".$_SESSION['minishop']['warehouse']
+));
+
+$c->where(array('modResource.deleted' => false, 'ModGoods.wid' => $warehouse));
+
 // Фильтрация по категории
 if (!empty($category)) {
 	$c->andCondition(array('parent' => $category), '', 1);
@@ -59,34 +66,20 @@ if (!empty($category)) {
 	}
 }
 else {
-	$c->where(array('template:IN' => $goods_tpls, 'deleted' => false));
+	$c->andCondition(array('template:IN' => $goods_tpls), '', 1);
 }
 
 // Фильтрация по строке поиска
 if (!empty($query)) {
-	// Поиск по названию
-	$c->where(array('pagetitle:LIKE' => '%'.$query.'%'));
-	
-	// И по артиклю
-	$gids = array();
-	$tq = $modx->newQuery('ModGoods', array('article:LIKE' => '%'.$query.'%', 'wid' => $warehouse));
-	$tq->select('id,gid');
-	if ($tres = $modx->getCollection('ModGoods', $tq)) {
-		foreach ($tres as $tv) {
-			$gids[] = $tv->get('gid');
-		}
-	}
-	if (!empty($gids)) {
-		$c->orCondition(array('id:IN' => $gids));
-	}
+	// Поиск по названию и артиклю
+	$c->andCondition(array('modResource.pagetitle:LIKE' => '%'.$query.'%'), '', 2);
+	$c->orCondition(array('ModGoods.article:LIKE' => '%'.$query.'%'), '', 2);
 }
 
 $count = $modx->getCount('modResource',$c);
-
+if ($sort == 'id') {$sort = 'modResource.id';}
 $c->sortby($sort,$dir);
 if ($isLimit) {$c->limit($limit,$start);}
-
-$c->select('id,pagetitle,parent');
 $goods = $modx->getCollection('modResource', $c);
 
 $arr = array();

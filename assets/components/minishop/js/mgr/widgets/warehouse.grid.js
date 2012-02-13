@@ -37,14 +37,17 @@ miniShop.grid.Warehouses = function(config) {
             header: _('ms.address')
             ,dataIndex: 'address'
             ,width: 150
+			,sortable: true
         },{
             header: _('ms.phone')
             ,dataIndex: 'phone'
             ,width: 65
+			,sortable: true
         },{
             header: _('ms.email')
             ,dataIndex: 'email'
             ,width: 100
+			,sortable: true
         },{
             header: _('description')
             ,dataIndex: 'description'

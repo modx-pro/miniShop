@@ -14,10 +14,12 @@ miniShop.grid.Status = function(config) {
             header: _('id')
             ,dataIndex: 'id'
             ,width: 50
+			,sortable: true
         },{
             header: _('ms.status')
             ,dataIndex: 'name'
             ,width: 200
+			,sortable: true
         },{
             header: _('ms.color')
             ,dataIndex: 'color'
@@ -27,11 +29,13 @@ miniShop.grid.Status = function(config) {
             header: _('ms.email2user')
             ,dataIndex: 'email2user'
             ,width: 50
+			,sortable: true
 			,renderer: this.renderBoolean
         },{
             header: _('ms.email2manager')
             ,dataIndex: 'email2manager'
             ,width: 50
+			,sortable: true
 			,renderer: this.renderBoolean
         }]
         ,tbar: [{

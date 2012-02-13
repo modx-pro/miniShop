@@ -19,6 +19,7 @@ miniShop.grid.Goods = function(config) {
             header: _('id')
             ,dataIndex: 'id'
 			,width: 35
+			,sortable: true
 		},{
             header: _('ms.warehouse')
             ,dataIndex: 'wid'
@@ -32,6 +33,7 @@ miniShop.grid.Goods = function(config) {
             header: _('parent')
             ,dataIndex: 'parent'
 			,hidden: true
+			,sortable: true
         },{
             header: _('ms.article')
             ,dataIndex: 'article'
@@ -41,27 +43,19 @@ miniShop.grid.Goods = function(config) {
             header: _('ms.price')
             ,dataIndex: 'price'
             ,width: 50
+			,sortable: true
 		},{
             header: _('ms.img')
             ,dataIndex: 'img'
             ,width: 50
 			,renderer: this.renderImg
+			,sortable: true
 		},{
             header: _('ms.remains')
             ,dataIndex: 'remains'
             ,width: 50
-		}/*,{
-			header: _('ms.change')
-			,dataIndex: 'change'
-			,width: 50
-			,editor: { 
-				xtype: 'numberfield'
-				,autoShow: true
-				,clicksToEdit: 'auto'
-				,renderer: true
-			}
-			
-		},*/]
+			,sortable: true
+		}]
 		,tbar: [
 			'<strong>' + _('ms.warehouse') + ':</strong>&nbsp;'
 		,{
@@ -437,11 +431,12 @@ miniShop.grid.Categories = function(config) {
             header: _('ms.name')
             ,dataIndex: 'name'
             ,width: 150
+			//,sortable: true
         },{
 			header: _('ms.enabled')
 			,dataIndex: 'enabled'
 			,width: 60
-			,sortable: false
+			,sortable: true
 			,editor: { xtype: 'combo-boolean', renderer: 'boolean' }
 		}]
 		/*

@@ -41,20 +41,6 @@ $_SESSION['minishop']['status'] = $status;
 $query = $modx->getOption('query',$_REQUEST, 0);
 $c = $modx->newQuery('ModOrders');
 
-if (empty($warehouse)) {
-	if (!$house_id = $modx->getOption('warehouses_tpl_id')) {
-		$house_id = 6;
-	}
-	$q = $modx->newQuery('modResource');
-	$q->where(array('template' => $house_id, 'deleted' => false));
-	$q->sortby('menuindex', 'ASC');
-	$items = $modx->getCollection('modResource',$q);
-	foreach ($items as $v) {
-		$warehouse = $v->get('id');
-		break;
-	}
-}
-
 if (!empty($status)) {
 	$c->andCondition(array('status' => $status));
 }
