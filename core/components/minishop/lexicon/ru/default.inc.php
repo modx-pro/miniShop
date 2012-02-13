@@ -146,6 +146,7 @@ $_lang['ms.goods.price'] = 'Цена';
 $_lang['ms.goods.name'] = 'Наименование';
 $_lang['ms.goods.num'] = 'Кол-во';
 $_lang['ms.goods.sum'] = 'Сумма';
+$_lang['ms.goods.create'] = 'Создать товар';
 $_lang['ms.goods.change'] = 'Изменить свойства товара';
 $_lang['ms.goods.goto_manager_page'] = 'Открыть страницу товара';
 $_lang['ms.goods.goto_site_page'] = 'Просмотреть товар на сайте';

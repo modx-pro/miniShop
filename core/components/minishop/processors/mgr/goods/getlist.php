@@ -54,7 +54,7 @@ $c->leftJoin('ModGoods', 'ModGoods', array(
 	"ModGoods.wid = ".$_SESSION['minishop']['warehouse']
 ));
 
-$c->where(array('modResource.deleted' => false, 'ModGoods.wid' => $warehouse));
+$c->where(array('modResource.deleted' => false));
 
 // Фильтрация по категории
 if (!empty($category)) {

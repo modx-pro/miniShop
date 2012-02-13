@@ -29,7 +29,6 @@
 if (!$modx->hasPermission('save')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
 
 $id = $modx->getOption('id', $_REQUEST, 0);
-$status = $modx->getOption('status', $_REQUEST, 1);
 $wid = $modx->getOption('wid', $_REQUEST, 0);
 
 if (empty($id)) {
@@ -67,7 +66,10 @@ if ($res = $modx->getObject('modResource', $id)) {
 		$res2->set('img', $_REQUEST['img']);
 		$res2->set('remains', $_REQUEST['remains']);
 		$res2->save();
-		miniShop::Log('status', $id, 'change', $oldstatus, $status);
+		//miniShop::Log('goods', $id, 'change', $res->get('article'), $_REQUEST['article']);
+		//miniShop::Log('goods', $id, 'change', $res->get('price'), $_REQUEST['price']);
+		//miniShop::Log('goods', $id, 'change', $res->get('img'), $_REQUEST['img']);
+		//miniShop::Log('goods', $id, 'change', $res->get('remains'), $_REQUEST['remains']);
 	}
 
 	// Обновляем ресурс в таблице MODX

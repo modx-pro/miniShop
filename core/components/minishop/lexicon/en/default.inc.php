@@ -147,6 +147,7 @@ $_lang['ms.goods.price'] = 'Price';
 $_lang['ms.goods.name'] = 'Name';
 $_lang['ms.goods.num'] = 'Count';
 $_lang['ms.goods.sum'] = 'Sum';
+$_lang['ms.goods.create'] = 'New goods';
 $_lang['ms.goods.change'] = 'Edit goods';
 $_lang['ms.goods.goto_manager_page'] = 'Open goods page';
 $_lang['ms.goods.goto_site_page'] = 'View goods on site';
