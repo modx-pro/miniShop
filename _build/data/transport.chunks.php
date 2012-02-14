@@ -54,7 +54,7 @@ $chunks[2]->fromArray(array(
 $chunks[3]= $modx->newObject('modChunk');
 $chunks[3]->fromArray(array(
     'id' => 0,
-    'name' => 'tpl.msCart',
+    'name' => 'tpl.msCart.outer',
     'description' => 'Shopping cart outer.',
     'snippet' => getSnippetContent($sources['source_core'].'/elements/chunks/msCart.outer.tpl'),
 ),'',true,true);
