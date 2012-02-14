@@ -37,7 +37,7 @@ $snippets[0]->fromArray(array(
     'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/change_warehouse.php'),
 ),'',true,true);
 $snippets[0]->setProperties($properties);
-
+/*
 $snippets[1]= $modx->newObject('modSnippet');
 $snippets[1]->fromArray(array(
     'id' => 0,
@@ -46,7 +46,7 @@ $snippets[1]->fromArray(array(
     'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/getgoods.php'),
 ),'',true,true);
 $snippets[1]->setProperties($properties);
-
+*/
 $snippets[2]= $modx->newObject('modSnippet');
 $snippets[2]->fromArray(array(
     'id' => 0,
