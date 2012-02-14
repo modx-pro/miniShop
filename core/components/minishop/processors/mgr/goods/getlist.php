@@ -54,7 +54,7 @@ $c->leftJoin('ModGoods', 'ModGoods', array(
 	"ModGoods.wid = ".$_SESSION['minishop']['warehouse']
 ));
 
-$c->where(array('modResource.deleted' => false));
+$c->where(array('modResource.deleted' => false, 'modResource.template:IN' => $goods_tpls));
 
 // Фильтрация по категории
 if (!empty($category)) {
@@ -64,9 +64,6 @@ if (!empty($category)) {
 	if (!empty($ids)) {
 		$c->orCondition(array('id:IN' => $ids), '', 1);
 	}
-}
-else {
-	$c->andCondition(array('template:IN' => $goods_tpls), '', 1);
 }
 
 // Фильтрация по строке поиска
@@ -89,7 +86,7 @@ foreach ($goods as $v) {
 		,'pagetitle' => $v->get('pagetitle')
 		,'parent' => $v->get('parent')
 	);
-    $tmp['url'] = $this->modx->makeUrl($v->get('id'), '', '', 'full');
+	$tmp['url'] = $this->modx->makeUrl($v->get('id'), '', '', 'full');
 	if ($tmp2 = $modx->getObject('ModGoods', array('gid' => $tmp['id'], 'wid' => $warehouse)) ) {
 		$tmp2 = $tmp2->toArray();
 		unset($tmp2['id'], $tmp2['gid']);

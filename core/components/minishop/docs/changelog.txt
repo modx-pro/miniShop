@@ -1,5 +1,24 @@
 Changelog for miniShop.
 
+1.0.0 beta3 (14.02.2012)
+==============
+- [#11] В пакете beta2 был неправильно назван чанк tpl.msCart.outer
+- [#10] Исправлена ошибка, при которой в менеджере выводились категории вместе с товарами.
+- [#9] В менеджере, в разделе мультикатегорий товара добавлен поиск.
+- [#8] Удалил сниппет msGetGoods, который просто выдавал id подходящих по категории ресурсов. Его полностью заменяет msGetResources.
+- [#7] msGetResources теперь умеет сортировать по дополнительным параметрам (цена, артикул). Параметр &orderbyMS=``.
+- [#6] Различные мелкие исправления от Mark-H.
+- [#5] Убрал отдельные настройки для путей компонента (minishop.core_path и minishop.assets_path) - это затруднило бы перенос сайта.
+- Улучшена сортировка в таблицах менеджера.
+-----
+- [#11] Fixed incorrect name of chunk tpl.msCart.outer
+- [#10] Fixed a bug in manager where categories showed with goods in grid.
+- [#9] In the manager, added Multicategories search in goods management.
+- [#8] Removed snippet msGetGoods. msGetResources instead.
+- [#7] msGetResources now able to sort by additional parameters (price, product). New parameter &orderbyMS=``.
+- [#6] Various minor fixes from Mark-H
+- [#5] Removed settings minishop.core_path and minishop.assets_path.
+- Improved sorting in manager grids.
 
 
 1.0.0 beta2 (12.02.2012)
