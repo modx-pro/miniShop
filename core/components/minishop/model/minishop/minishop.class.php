@@ -259,12 +259,12 @@ class miniShop {
 	function getGoodsByCategories($parents = array()) {
 		if (empty($parents)) {$parents = array($this->modx->resource->id);}
 		if (!is_array($parents)) {$parents = explode(',', $parents);}
-		
+
 		// Поиск подходящих ресурсов через связи в ModCategories
 		$ids = array();
 		if ($res = $this->modx->getCollection('ModCategories', array('cid:IN' => $parents))) {
 			foreach ($res as $v) {
-				$ids2[] = $v->get('gid');
+				$ids[] = $v->get('gid');
 			}
 		}
 		return $ids;

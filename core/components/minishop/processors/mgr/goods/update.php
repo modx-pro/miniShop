@@ -28,17 +28,27 @@
 /* get board */
 if (!$modx->hasPermission('save')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
 
+// Проверка обязательных полей
+if (empty($_POST['pagetitle'])) {
+	$modx->error->addField('pagetitle',$modx->lexicon('ms.required_field'));
+}
+if (empty($_POST['parent'])) {
+	$modx->error->addField('parent',$modx->lexicon('ms.required_field'));
+}
+if ($modx->error->hasError()) {
+    return $modx->error->failure();
+}
+
 $id = $modx->getOption('id', $_REQUEST, 0);
 $wid = $modx->getOption('wid', $_REQUEST, 0);
 
-if (empty($id)) {
-	return $modx->error->failure($modx->lexicon('ms.goods.err_ns'));
-}
-if (empty($wid)) {
-	return $modx->error->failure($modx->lexicon('ms.goods.wh_err_ns'));
-}
+if ($modx->getCount('modResource', $id) > 0) {
+	// Обновляем ресурс
+	$response = $modx->runProcessor('resource/update', $_POST);
+	if ($response->isError()) {
+		return $modx->error->failure($response->getMessage());
+	}
 
-if ($res = $modx->getObject('modResource', $id)) {
 	$wids = array();
 	// Если обновляем информацию на всех складах сразу - достаем их id
 	if ($_REQUEST['duplicate']) {
@@ -56,7 +66,7 @@ if ($res = $modx->getObject('modResource', $id)) {
 	else {
 		$wids[] = $wid;
 	}
-	
+
 	foreach ($wids as $wid) {
 		if (!$res2 = $modx->getObject('ModGoods', array('wid' => $wid, 'gid' => $id))) {
 			$res2 = $modx->newObject('ModGoods', array('wid' => $wid, 'gid' => $id));
@@ -70,16 +80,6 @@ if ($res = $modx->getObject('modResource', $id)) {
 		//miniShop::Log('goods', $id, 'change', $res->get('price'), $_REQUEST['price']);
 		//miniShop::Log('goods', $id, 'change', $res->get('img'), $_REQUEST['img']);
 		//miniShop::Log('goods', $id, 'change', $res->get('remains'), $_REQUEST['remains']);
-	}
-
-	// Обновляем ресурс в таблице MODX
-	$res->set('pagetitle', $_REQUEST['pagetitle']);
-	$res->set('longtitle', $_REQUEST['longtitle']);
-	$res->set('content', $_REQUEST['content']);
-	$res->set('parent', $_REQUEST['parent']);
-	
-	if ($res->save() == false) {
-		return $modx->error->failure($modx->lexicon('ms.goods.err_save'));
 	}
 	
 	// Защита от дублирования основной и добавочной категории товара

@@ -198,6 +198,30 @@ Ext.extend(MODx.combo.chunk,MODx.combo.ComboBox);
 Ext.reg('minishop-combo-chunk',MODx.combo.chunk);
 ///////////////////////////////////////
 
+// Комбобокс выбора шаблона товара
+MODx.combo.template = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'template'
+        ,hiddenName: 'template'
+        ,displayField: 'name'
+        ,valueField: 'id'
+		//,autoSelect: true
+		//,editable: true
+        ,fields: ['id','name']
+		//,pageSize: 20
+		,emptyText: _('ms.template.select')
+        ,url: miniShop.config.connector_url
+		,baseParams: {
+			action:  'mgr/goods/gettpllist'
+		}
+    });
+    MODx.combo.template.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.template,MODx.combo.ComboBox);
+Ext.reg('minishop-combo-goodstemplate',MODx.combo.template);
+///////////////////////////////////////
+
 
 
 

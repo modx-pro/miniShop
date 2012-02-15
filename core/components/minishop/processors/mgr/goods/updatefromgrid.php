@@ -29,7 +29,7 @@
 if (!$modx->hasPermission('save')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
 
 $tmp = $modx->fromJSON($scriptProperties['data']);
-$cid = $tmp['cid'];
+$cid = $tmp['id'];
 $gid = $tmp['gid'];
 $enabled = $tmp['enabled'];
 

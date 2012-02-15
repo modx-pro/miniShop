@@ -20,7 +20,7 @@
  * @package minishop
  */
 /**
- * Get a list of Goods for cobmobox
+ * Get a list of Goods or Categories for cobmobox
  *
  * @package minishop
  * @subpackage processors

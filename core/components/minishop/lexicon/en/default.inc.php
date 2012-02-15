@@ -193,6 +193,7 @@ $_lang['ms.cart_hash.error'] = 'You have changed the contents of the cart during
 
 $_lang['ms.vieworder'] = 'Details';
 $_lang['ms.chunk.select'] = 'Select chunk';
+$_lang['ms.template.select'] = 'Select template';
 
 
 

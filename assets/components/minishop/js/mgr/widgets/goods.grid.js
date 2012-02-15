@@ -206,13 +206,17 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
     }
 
 	,createGoods: function(e) {
+		gid = 0;
         var w = MODx.load({
             xtype: 'minishop-window-creategoods'
+			,disable_categories: true
+			,close_on_save: true
+			,action: 'mgr/goods/create'
             ,listeners: {
                 'success':{fn:function() {
 					Ext.getCmp('minishop-grid-goods').store.reload();
                 },scope:this}
-                ,'hide':{fn:function() {this.destroy();}}
+                //,'hide':{fn:function() {this.destroy();}}
                 ,'show':{fn:function() {this.center();}}
             }
         });
@@ -244,8 +248,12 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
                     var pr = r.object;
                     
                     var w = MODx.load({
-                        xtype: 'minishop-window-editgoods'
+                        xtype: 'minishop-window-creategoods'
                         ,record: pr
+						,disable_categories: false
+						,activeTab: 1
+						,close_on_save: false
+						,action: 'mgr/goods/update'
                         ,listeners: {
                             //success:{fn:function() {},scope:this}
                             hide: {fn:function() {
@@ -300,14 +308,18 @@ miniShop.window.createGoods = function(config) {
     config = config || {};
     this.ident = config.ident || 'qcr'+Ext.id();
     Ext.applyIf(config,{
-        title: _('quick_create_resource')
+        title: config.disable_categories ? _('ms.goods.create') : _('ms.goods.change')
         ,id: this.ident
         ,width: 700
+		,modal: true
+		,labelAlign: 'left'
+		,labelWidth: 150
         ,url: miniShop.config.connector_url
         ,action: 'mgr/goods/create'
         ,shadow: false
         ,fields: [{
             xtype: 'modx-tabs'
+			,activeTab: config.activeTab || 0
             ,bodyStyle: { background: 'transparent' }
             ,deferredRender: false
             ,autoHeight: true
@@ -317,6 +329,7 @@ miniShop.window.createGoods = function(config) {
                 ,cls: 'modx-panel'
                 ,bodyStyle: { background: 'transparent', padding: '10px' }
                 ,autoHeight: true
+				,labelAlign: 'top'
                 ,labelWidth: 100
                 ,items: [{
                     layout: 'column'
@@ -358,24 +371,14 @@ miniShop.window.createGoods = function(config) {
                         columnWidth: .4
                         ,border: false
                         ,layout: 'form'
-                        ,items: [/*{
-                            xtype: 'modx-combo-template'
-                            ,name: 'template'
+                        ,items: [{
+                            xtype: 'minishop-combo-goodstemplate'
                             ,id: 'modx-'+this.ident+'-template'
                             ,fieldLabel: _('template')
                             ,editable: false
                             ,anchor: '100%'
-                            ,baseParams: {
-                                action: 'getList'
-                                ,combo: '1'
-                                ,limit: 0
-                            }
-                            ,value: MODx.config.default_template
-                        }*/
-						{
-							xtype: 'hidden'
-							,name: 'template'
-						},{
+                            ,value: miniShop.config.ms_goods_tpls[0]
+                        },{
 							xtype: 'minishop-filter-category'
 							,name: 'parent'
 							,fieldLabel: _('ms.category')
@@ -404,7 +407,7 @@ miniShop.window.createGoods = function(config) {
                             ,boxLabel: _('resource_published')
                             ,description: _('resource_published_help')
                             ,inputValue: 1
-                            ,checked: MODx.config.publish_default == '1' ? 1 : 0
+                            ,checked: MODx.config.publish_default == '1' && config.disable_categories ? 1 : 0
                         },{
                             xtype: 'xcheckbox'
                             ,boxLabel: _('resource_hide_from_menus')
@@ -412,7 +415,7 @@ miniShop.window.createGoods = function(config) {
                             ,name: 'hidemenu'
                             ,id: 'modx-'+this.ident+'-hidemenu'
                             ,inputValue: 1
-                            ,checked: MODx.config.hidemenu_default == '1' ? 1 : 0
+                            ,checked: MODx.config.hidemenu_default == '1' && config.disable_categories ? 1 : 0
                         }]
                     }]
                 },{
@@ -425,6 +428,9 @@ miniShop.window.createGoods = function(config) {
 					xtype: 'hidden'
 					,name: 'class_key'
 					,value: 'modDocument'
+				},{
+					xtype: 'hidden'
+					,name: 'context_key'
 				},{
 					xtype: 'hidden'
 					,name: 'content_type' 
@@ -454,25 +460,74 @@ miniShop.window.createGoods = function(config) {
 					,name: 'clearCache' 
 					,value: 1
 				}]
-            }/*,{
-                id: 'modx-'+this.ident+'-settings'
-                ,title: _('settings')
-                ,layout: 'form'
-                ,cls: 'modx-panel'
-                ,autoHeight: true
-                ,forceLayout: true
-                ,labelWidth: 100
-                ,defaults: {autoHeight: true ,border: false}
-                ,style: 'background: transparent;'
-                ,bodyStyle: { background: 'transparent', padding: '10px' }
-                ,items: MODx.getQRSettings(this.ident,config.record)
-            }*/]
+			},{
+				id: 'modx-'+this.ident+'-properties'
+				,title: _('ms.properties')
+				,layout: 'form'
+				,cls: 'modx-panel'
+				,autoHeight: true
+				,forceLayout: true
+				,labelAlign: 'left'
+				,labelWidth: 200
+				,defaults: {autoHeight: true ,border: false}
+				,style: 'background: transparent;'
+				,bodyStyle: { background: 'transparent', padding: '10px' }
+				,items: [{
+					xtype: 'hidden'
+					,name: 'id'
+				},{
+					xtype: 'hidden'
+					,name: 'wid'
+				},{
+					xtype: 'textfield'
+					,name: 'article'
+					,fieldLabel: _('ms.article')
+				},{
+					xtype: 'numberfield'
+					,name: 'price'
+					,fieldLabel: _('ms.price')
+				},{
+					xtype: 'modx-combo-browser'
+					,name: 'img'
+					,fieldLabel: _('ms.img')
+					,anchor: '100%'
+				},{
+					xtype: 'numberfield'
+					,name: 'remains'
+					,fieldLabel: _('ms.remains')
+				},{
+					xtype: 'checkbox'
+					,name: 'duplicate'
+					,value: 1
+					,fieldLabel: _('ms.goods.duplicate')
+					,description: _('ms.goods.duplicate.desc')
+				}]
+			},{
+				title: _('ms.categories')
+				,items: [{
+					xtype: 'minishop-grid-categories'
+					,disabled: config.disable_categories
+					,baseParams: {
+						action: 'mgr/goods/getcatlist'
+						,gid: gid
+					}
+				}]
+			}]
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
             ,shift: true
-            ,fn: this.submit
+            ,fn:  function() {changed = 1; this.submit(config.close_on_save) }
             ,scope: this
+        }]
+        ,buttons: [{
+            text: config.cancelBtnText || _('cancel')
+            ,scope: this
+            ,handler: function() {this.hide(); }
+        },{
+            text: config.saveBtnText || _('save')
+            ,scope: this
+            ,handler: function() {changed = 1; this.submit(config.close_on_save) }
         }]
     });
     miniShop.window.createGoods.superclass.constructor.call(this,config);
@@ -480,7 +535,7 @@ miniShop.window.createGoods = function(config) {
 Ext.extend(miniShop.window.createGoods,MODx.Window);
 Ext.reg('minishop-window-creategoods',miniShop.window.createGoods);
 
-
+/*
 miniShop.window.EditGoods = function(config) {
     config = config || {};
     this.ident = config.ident || 'qur'+Ext.id();
@@ -597,7 +652,7 @@ miniShop.window.EditGoods = function(config) {
 };
 Ext.extend(miniShop.window.EditGoods,MODx.Window);
 Ext.reg('minishop-window-editgoods',miniShop.window.EditGoods);
-
+*/
 
 
 miniShop.grid.Categories = function(config) {
