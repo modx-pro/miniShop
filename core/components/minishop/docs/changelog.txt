@@ -1,5 +1,16 @@
 Changelog for miniShop.
 
+1.0.1 beta1 (15.02.2012)
+==============
+- Добавлено создание и продвинутое редактирование товаров сразу из компонента.
+- Изменение чанка tpl.msGoods.row для использования плейсхолдеров напрямую из msGetResources. 
+- [#12] Исправлена ошибка с отсутствующими товарами при установке с нуля.
+-----
+- Added the creation and advanced editing of goods from the component.
+- Changing the chunk tpl.msGoods.row to use placeholders of msGetResources.
+- [#12] Fixed bug with missing goods on fresh install.
+
+
 1.0.0 beta3 (14.02.2012)
 ==============
 - [#11] В пакете beta2 был неправильно назван чанк tpl.msCart.outer
