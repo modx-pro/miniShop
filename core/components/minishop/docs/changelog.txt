@@ -1,5 +1,18 @@
 Changelog for miniShop.
 
+1.0.1 beta2 (16.02.2012)
+==============
+- Добавил 3 дополнительных поля товара для хранения любых данных. 2 varchar(255) и одно text - можно json массивы хранить.
+- Добавил пример импорта из csv в БД товаров. Файл import_example.php
+- Немного привел в порядок окошки в менеджере.
+- [#13] Исправлена ошибка с пустой карточкой товара при двойном клике на строке таблицы в менеджере.
+-----
+- Added 3 additional product fields to store any data. 2 varchar(255) and 1 text - you may store json arrays.
+- Added an example of importing from csv into the database products. File import_example.php
+- Slightly updated popups code.
+- [#13] Fixed empty goods popup bug.
+
+
 1.0.1 beta1 (15.02.2012)
 ==============
 - Добавлено создание и продвинутое редактирование товаров сразу из компонента.
