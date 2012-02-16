@@ -260,11 +260,11 @@ miniShop.window.EditOrder = function(config) {
     Ext.applyIf(config,{
         title: _('ms.window.editorder')
         ,id: this.ident
-        ,width: 475
+        ,width: 600
         ,url: miniShop.config.connector_url
 		,action: 'mgr/warehouse/create'
 		,labelAlign: 'left'
-		,labelWidth: 150
+		,labelWidth: 200
 		,modal: true
         ,url: miniShop.config.connector_url
         ,action: 'mgr/orders/update'
@@ -311,7 +311,7 @@ miniShop.window.EditOrder = function(config) {
 						,hiddenName: 'wid'
 						,id: this.ident+'-warehouse'
 						,fieldLabel: _('ms.warehouse')
-						,width: 250
+						,anchor: '90%'
 					},{
 						xtype: 'displayfield'
 						,name: 'delivery'
@@ -322,13 +322,14 @@ miniShop.window.EditOrder = function(config) {
 						,name: 'status'
 						,id: this.ident+'-status'
 						,fieldLabel: _('ms.status')
-						//,anchor: '100%'
+						,anchor: '90%'
 					},{
 						xtype: 'textarea'
 						,name: 'comment'
 						,id: this.ident+'-comment'
 						,fieldLabel: _('ms.comment')
-						,anchor: '70%'
+						,anchor: '90%'
+						,autoHeight: false
 						,height: 50
 					}]
 				}]
@@ -364,7 +365,7 @@ miniShop.window.EditOrder = function(config) {
 						,name: 'addr_receiver'
 						,fieldLabel: _('ms.receiver')
 						//,allowBlank: false
-						,anchor: '80%'
+						,anchor: '90%'
 					},{
 						xtype: 'textfield'
 						,name: 'addr_phone'
@@ -412,7 +413,8 @@ miniShop.window.EditOrder = function(config) {
 						,name: 'addr_comment'
 						,id: this.ident+'-addrcomment'
 						,fieldLabel: _('ms.comment')
-						,anchor: '70%'
+						,anchor: '90%'
+						,autoHeight: false
 						,height: 50
 					}]
 				// Четвертый таб

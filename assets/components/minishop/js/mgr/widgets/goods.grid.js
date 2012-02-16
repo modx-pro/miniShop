@@ -210,7 +210,6 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
         var w = MODx.load({
             xtype: 'minishop-window-creategoods'
 			,disable_categories: true
-			,close_on_save: true
 			,action: 'mgr/goods/create'
             ,listeners: {
                 'success':{fn:function() {
@@ -252,7 +251,6 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
                         ,record: pr
 						,disable_categories: false
 						,activeTab: 1
-						,close_on_save: false
 						,action: 'mgr/goods/update'
                         ,listeners: {
                             //success:{fn:function() {},scope:this}
@@ -421,7 +419,7 @@ miniShop.window.createGoods = function(config) {
                 },{
 					xtype: 'textarea'
 					,name: 'content'
-					,fieldLabel: _('ms.content')
+					,fieldLabel: _('content')
 					,anchor: '100%'
 					,height: 100
 				},{
@@ -496,9 +494,27 @@ miniShop.window.createGoods = function(config) {
 					,name: 'remains'
 					,fieldLabel: _('ms.remains')
 				},{
+					xtype: 'textfield'
+					,name: 'add1'
+					,fieldLabel: _('ms.goods.add1')
+					,anchor: '100%'
+				},{
+					xtype: 'textfield'
+					,name: 'add2'
+					,fieldLabel: _('ms.goods.add2')
+					,anchor: '100%'
+				},{
+					xtype: 'textarea'
+					,name: 'add3'
+					,fieldLabel: _('ms.goods.add3')
+					,autoHeight: false
+					,height: 100
+					,anchor: '100%'
+				},{
 					xtype: 'checkbox'
 					,name: 'duplicate'
 					,value: 1
+					,style: 'padding: 10px;'
 					,fieldLabel: _('ms.goods.duplicate')
 					,description: _('ms.goods.duplicate.desc')
 				}]
@@ -517,7 +533,7 @@ miniShop.window.createGoods = function(config) {
        ,keys: [{
             key: Ext.EventObject.ENTER
             ,shift: true
-            ,fn:  function() {changed = 1; this.submit(config.close_on_save) }
+            ,fn:  function() {changed = 1; this.submit() }
             ,scope: this
         }]
         ,buttons: [{
@@ -525,9 +541,9 @@ miniShop.window.createGoods = function(config) {
             ,scope: this
             ,handler: function() {this.hide(); }
         },{
-            text: config.saveBtnText || _('save')
+            text: config.saveBtnText || _('save_and_close')
             ,scope: this
-            ,handler: function() {changed = 1; this.submit(config.close_on_save) }
+            ,handler: function() {changed = 1; this.submit() }
         }]
     });
     miniShop.window.createGoods.superclass.constructor.call(this,config);

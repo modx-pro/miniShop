@@ -137,7 +137,7 @@ Ext.reg('minishop-grid-statuses',miniShop.grid.Status);
 
 
 
-miniShop.window.CreateItem = function(config) {
+miniShop.window.CreateStatus = function(config) {
     config = config || {};
     this.ident = config.ident || 'mecitem'+Ext.id();
 
@@ -225,10 +225,19 @@ miniShop.window.CreateItem = function(config) {
 			,id: 'status-body2manager'
 			,width: 240
 		}]
+        ,buttons: [{
+            text: _('close')
+            ,scope: this
+            ,handler: function() { this.hide(); }
+        },{
+            text: _('save_and_close')
+            ,scope: this
+            ,handler: function() { this.submit(); }
+        }]
     });
-    miniShop.window.CreateItem.superclass.constructor.call(this,config);
+    miniShop.window.CreateStatus.superclass.constructor.call(this,config);
 };
-Ext.extend(miniShop.window.CreateItem,MODx.Window,{
+Ext.extend(miniShop.window.CreateStatus,MODx.Window,{
     hideStatusFields: function(v) {
 		var el = Ext.getCmp('status-email2'+v);
 		if (el.checked) {
@@ -241,4 +250,4 @@ Ext.extend(miniShop.window.CreateItem,MODx.Window,{
 		}
 	}
 });
-Ext.reg('minishop-window-status-create',miniShop.window.CreateItem);
+Ext.reg('minishop-window-status-create',miniShop.window.CreateStatus);

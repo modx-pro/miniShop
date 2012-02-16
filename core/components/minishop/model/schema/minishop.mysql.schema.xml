@@ -44,6 +44,9 @@
 		<field key="price" dbtype="float" precision="10,2" phptype="float" null="false" />
 		<field key="img" dbtype="text" phptype="string" null="false" />
 		<field key="remains" dbtype="int" precision="11" phptype="integer" null="false" />
+		<field key="add1" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="add2" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="add3" dbtype="text" phptype="string" null="false" />
 
 		<index alias="wid" name="wid" primary="false" unique="true" type="BTREE" >
 			<column key="wid" length="" collation="A" null="false" />

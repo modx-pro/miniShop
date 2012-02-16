@@ -161,6 +161,9 @@ $_lang['ms.goods.err_save'] = 'Failure to save goods.';
 $_lang['ms.goods.wh_err_nf'] = 'Warehouse not found.';
 $_lang['ms.goods.duplicate'] = 'Apply to all warehouses.';
 $_lang['ms.goods.duplicate.desc'] = 'This will apply additional goods parameters (price, article etc.) to all warehouses.';
+$_lang['ms.goods.add1'] = 'Additional 1';
+$_lang['ms.goods.add2'] = 'Additional 2';
+$_lang['ms.goods.add3'] = 'Additional 3';
 
 $_lang['ms.log.old'] = 'Old value';
 $_lang['ms.log.new'] = 'New value';

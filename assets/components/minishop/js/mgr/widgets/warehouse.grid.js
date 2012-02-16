@@ -123,7 +123,6 @@ Ext.extend(miniShop.grid.Warehouses,MODx.grid.Grid,{
 				,height: 150
 				,autoHeight: true
 				,record: {}
-				,closeOnSave: true
                 ,listeners: {
                     'success': {fn:function() { this.refresh(); },scope:this}
                 }
@@ -282,9 +281,9 @@ miniShop.window.CreateWarehouse = function(config) {
             ,scope: this
             ,handler: function() { this.hide(); }
         },{
-            text: _('save')
+            text: _('save_and_close')
             ,scope: this
-            ,handler: function() { this.submit(config.closeOnSave || false); }
+            ,handler: function() { this.submit(); }
         }]
     });
     miniShop.window.CreateWarehouse.superclass.constructor.call(this,config);

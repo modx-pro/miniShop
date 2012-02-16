@@ -75,6 +75,9 @@ if ($modx->getCount('modResource', $id) > 0) {
 		$res2->set('price', $_REQUEST['price']);
 		$res2->set('img', $_REQUEST['img']);
 		$res2->set('remains', $_REQUEST['remains']);
+		$res2->set('add1', $_REQUEST['add1']);
+		$res2->set('add2', $_REQUEST['add2']);
+		$res2->set('add3', $_REQUEST['add3']);
 		$res2->save();
 		//miniShop::Log('goods', $id, 'change', $res->get('article'), $_REQUEST['article']);
 		//miniShop::Log('goods', $id, 'change', $res->get('price'), $_REQUEST['price']);

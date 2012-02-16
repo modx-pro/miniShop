@@ -62,7 +62,7 @@ if ($modx->getCount('modResource', $id) > 0) {
 		}
 	}
 	else {
-		$wids[] = $wid;
+		$wids[] = $_SESSION['minishop']['warehouse'];
 	}
 
 	foreach ($wids as $wid) {
@@ -71,6 +71,9 @@ if ($modx->getCount('modResource', $id) > 0) {
 		$res2->set('price', $_REQUEST['price']);
 		$res2->set('img', $_REQUEST['img']);
 		$res2->set('remains', $_REQUEST['article']);
+		$res2->set('add1', $_REQUEST['add1']);
+		$res2->set('add2', $_REQUEST['add2']);
+		$res2->set('add3', $_REQUEST['add3']);
 		$res2->save();
 	}
 

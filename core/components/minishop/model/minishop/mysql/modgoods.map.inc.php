@@ -11,6 +11,9 @@ $xpdo_meta_map['ModGoods']= array (
     'price' => NULL,
     'img' => NULL,
     'remains' => NULL,
+    'add1' => NULL,
+    'add2' => NULL,
+    'add3' => NULL,
   ),
   'fieldMeta' => 
   array (
@@ -54,6 +57,26 @@ $xpdo_meta_map['ModGoods']= array (
       'dbtype' => 'int',
       'precision' => '11',
       'phptype' => 'integer',
+      'null' => false,
+    ),
+    'add1' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '255',
+      'phptype' => 'string',
+      'null' => false,
+    ),
+    'add2' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '255',
+      'phptype' => 'string',
+      'null' => false,
+    ),
+    'add3' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'string',
       'null' => false,
     ),
   ),
