@@ -71,6 +71,10 @@ if ($object->xpdo) {
 			
             break;
         case xPDOTransport::ACTION_UPGRADE:
+  			$gtable = $modx->getTableName('ModGoods');
+			$sql = "ALTER TABLE {$gtable} ADD `add1` VARCHAR(255) NOT NULL, ADD `add2` VARCHAR(255) NOT NULL , ADD `add3` TEXT NOT NULL";
+			$stmt = $modx->prepare($sql);
+			$stmt->execute();
             break;
     }
 }
