@@ -214,7 +214,7 @@ Ext.extend(miniShop.grid.Orders,MODx.grid.Grid,{
 			oid = this.menu.record.id
 		}
 		else {
-			oid = row.id
+			oid = row.data.id
 		}
 		changed = 0;
         MODx.Ajax.request({

@@ -116,11 +116,6 @@
 			<column key="name" length="" collation="A" null="false" />
 		</index>
 	</object>
-	<object class="ModSuggestion" table="modSuggestion" extends="xPDOSimpleObject">
-		<field key="gid" dbtype="int" precision="11" phptype="integer" null="false" />
-		<field key="suggestion" dbtype="text" phptype="string" null="false" />
-		<field key="bought" dbtype="text" phptype="string" null="false" />
-	</object>
 	<object class="ModWarehouse" table="modWarehouse" extends="xPDOSimpleObject">
 		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />
 		<field key="currency" dbtype="varchar" precision="20" phptype="string" null="false" />

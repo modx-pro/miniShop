@@ -14,13 +14,6 @@ $c['page_cart'] = 2;
 //$c['page_address'] = 351;
 //$c['page_confirm'] = 291;
 
-// Сессия и ТВ с ценой
-$c['sess_name'] = 'minishop';
-
-// Текущий склад
-$c['warehouse'] = $_SESSION['minishop']['warehouse'];
-
-
 // Шаблоны оформления
 $c['tplCartOuter'] = $modx->getOption('tplCartOuter', $scriptProperties, 'tpl.msCart.outer');
 $c['tplCartRow'] = $modx->getOption('tplCartRow', $scriptProperties, 'tpl.msCart.row');

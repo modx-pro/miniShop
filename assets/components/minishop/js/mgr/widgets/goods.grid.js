@@ -231,8 +231,8 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
 			wid = this.menu.record.wid
 		}
 		else {
-			gid = row.id
-			wid = row.wid
+			gid = row.data.id
+			wid = row.data.wid
 		}
 		
 		changed = 0;

@@ -44,7 +44,6 @@ if ($object->xpdo) {
             $manager->createObjectContainer('ModOrders');
             $manager->createObjectContainer('ModStatus');
             $manager->createObjectContainer('ModWarehouse');
-            $manager->createObjectContainer('ModSuggestion');
 			
 			$exists = $modx->getCount('ModWarehouse');
 			if ($exists == 0) {
@@ -72,7 +71,6 @@ if ($object->xpdo) {
 			
             break;
         case xPDOTransport::ACTION_UPGRADE:
-            $manager->createObjectContainer('ModSuggestion');
             break;
     }
 }
