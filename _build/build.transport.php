@@ -114,7 +114,7 @@ $attr = array(
                 ),
                 'Chunks' => array(
                     xPDOTransport::PRESERVE_KEYS => false,
-                    xPDOTransport::UPDATE_OBJECT => false,
+                    xPDOTransport::UPDATE_OBJECT => true,
                     xPDOTransport::UNIQUE_KEY => 'name',
                 ),
             ),
@@ -126,7 +126,7 @@ $attr = array(
         ),
         'Chunks' => array (
             xPDOTransport::PRESERVE_KEYS => false,
-            xPDOTransport::UPDATE_OBJECT => false,
+            xPDOTransport::UPDATE_OBJECT => true,
             xPDOTransport::UNIQUE_KEY => 'name',
         ),
     ),
