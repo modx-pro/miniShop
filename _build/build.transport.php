@@ -175,7 +175,7 @@ if (empty($menu)) {
         xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
             'Action' => array (
                 xPDOTransport::PRESERVE_KEYS => false,
-                xPDOTransport::UPDATE_OBJECT => true,
+                xPDOTransport::UPDATE_OBJECT => false,
                 xPDOTransport::UNIQUE_KEY => array ('namespace','controller'),
             ),
         ),
