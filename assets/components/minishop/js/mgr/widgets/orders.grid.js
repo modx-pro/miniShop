@@ -50,7 +50,7 @@ miniShop.grid.Orders = function(config) {
             ,width: 50
 			,hidden: true
         },{
-            header: _('ms.warehousename')
+            header: _('ms.warehouse')
             ,dataIndex: 'warehousename'
             ,width: 50
 			,hidden: true
@@ -549,7 +549,7 @@ miniShop.grid.Log = function(config) {
 		//,preventSaveRefresh: false
 		//,clicksToEdit: 'auto'
 		//,save_action: 'mgr/goods/updatefromgrid'
-        ,fields: ['iid','type','operation','old','new','uid','ip','timestamp']
+        ,fields: ['iid','type','operation','old','new','uid','username','ip','timestamp']
 		,pageSize: 10
         ,autoHeight: true
         ,paging: true
@@ -577,6 +577,12 @@ miniShop.grid.Log = function(config) {
             ,dataIndex: 'uid'
             ,width: 50
 			,sortable: true
+			,hidden: true
+        },{
+            header: _('ms.username')
+            ,dataIndex: 'username'
+            ,width: 50
+			,sortable: false
         },{
             header: _('ms.ip')
             ,dataIndex: 'ip'

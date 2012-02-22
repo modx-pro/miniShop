@@ -115,4 +115,12 @@ $chunks[10]->fromArray(array(
     'snippet' => getSnippetContent($sources['source_core'].'/elements/chunks/msSubmitOrder.success.tpl'),
 ),'',true,true);
 
+$chunks[11]= $modx->newObject('modChunk');
+$chunks[11]->fromArray(array(
+    'id' => 0,
+    'name' => 'tpl.msMyOrdersList',
+    'description' => 'Chunk for rich private office of customer. It uses ExtJS from MODX manager and load ExtJS styles from cdn.',
+    'snippet' => getSnippetContent($sources['source_core'].'/elements/chunks/msMyOrdersList.tpl'),
+),'',true,true);
+
 return $chunks;

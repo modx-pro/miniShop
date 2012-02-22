@@ -1,28 +1,28 @@
 <?php
 /**
- * Warehouse
+ * miniShop
  *
- * Copyright 2010 by Shaun McCormick <shaun+warehouse@modx.com>
+ * Copyright 2010 by Shaun McCormick <shaun+minishop@modx.com>
  *
- * Warehouse is free software; you can redistribute it and/or modify it under the
+ * miniShop is free software; you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
  * Foundation; either version 2 of the License, or (at your option) any later
  * version.
  *
- * Warehouse is distributed in the hope that it will be useful, but WITHOUT ANY
+ * miniShop is distributed in the hope that it will be useful, but WITHOUT ANY
  * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
  * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along with
- * Warehouse; if not, write to the Free Software Foundation, Inc., 59 Temple
+ * miniShop; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA 02111-1307 USA
  *
- * @package warehouse
+ * @package minishop
  */
 /**
- * Get a list of Goods
+ * Get a list of Ordered Goods
  *
- * @package warehouse
+ * @package minishop
  * @subpackage processors
  */
 if (!isset($modx->miniShop) || !is_object($modx->miniShop)) {

@@ -36,6 +36,8 @@ $c['tplOrderEmailRow'] = $modx->getOption('tplOrderEmailRow', $scriptProperties,
 $c['tplSubmitOrderSuccess'] = $modx->getOption('tplSubmitOrderSuccess', $scriptProperties, 'tpl.msSubmitOrder.success');
 //$c['tplSubmitOrderError'] = $modx->getOption('tplSubmitOrderError', $scriptProperties, 'tpl.msSubmitOrder.error');
 
+$c['tplMyOrdersList'] = $modx->getOption('tplMyOrdersList', $scriptProperties, 'tpl.msMyOrdersList');
+
 $miniShop = $modx->getService('minishop','miniShop',$modx->getOption('minishop.core_path',null,$modx->getOption('core_path').'components/minishop/').'model/minishop/',$c);
 if (!($miniShop instanceof miniShop)) return '';
 
@@ -56,6 +58,19 @@ switch ($action) {
 	case 'confirmOrder': $res = $miniShop->confirmOrder(); break;
 	
 	case 'submitOrder': $res = $miniShop->submitOrder($_POST['captcha']); break;
+	
+	case 'getMyOrdersList': $res = $miniShop->getMyOrdersList(); break;
+
+	//ExtJS
+	case 'orders/getlist': echo $modx->runProcessor('web/orders/getlist', array(), array('processors_path' => $miniShop->config['processorsPath']))->response; die;
+	case 'status/getcombo': echo $modx->runProcessor('web/status/getcombo', array(), array('processors_path' => $miniShop->config['processorsPath']))->response; die;
+	case 'orders/get': $res = $modx->runProcessor('web/orders/get', array(), array('processors_path' => $miniShop->config['processorsPath'])); echo json_encode($res->response); die;
+	
+	case 'orderedgoods/getlist': echo $modx->runProcessor('web/orderedgoods/getlist', array(), array('processors_path' => $miniShop->config['processorsPath']))->response; die;
+	case 'log/getlist': echo $modx->runProcessor('web/log/getlist', array(), array('processors_path' => $miniShop->config['processorsPath']))->response; die;
+	//
+	
+	
     default: $res = '';
 }
 

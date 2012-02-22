@@ -53,11 +53,8 @@ $logs = $modx->getCollection('ModLog',$c);
 $arr = array();
 foreach ($logs as $v) {
     $tmp = $v->toArray();
-	if ($res = $modx->getObject('ModStatus', $v->get('new'))) {
-		$tmp['statusname'] = $res->get('name');
-	}
-	//$tmp['username'] = $v->getUserName();
-	//$tmp['statusname'] = $v->getStatusName();
+	$tmp['username'] = $v->getUserName();
+	$tmp['statusname'] = $v->getStatusName();
 	$arr[]= $tmp;
 }
 return $this->outputArray($arr, $count);

@@ -34,10 +34,13 @@ if (empty($id)) {
 }
 
 if ($res = $modx->getObject('ModOrders', $id)) {
-	$arr = $res->toArray();
+	$arr = array();
+	$arr['num'] =  $res->get('num');
 	$arr['created'] =  $res->get('created');
 	$arr['fullname'] =  $res->getFullName();
+	$arr['statusname'] =  $res->getStatusName();
 	$arr['email'] =  $res->getEmail();
+	
 	if ($tmp =  $res->getAddress()) {
 		foreach($tmp as $k => $v) {
 			$arr['addr_'.$k] = $v;

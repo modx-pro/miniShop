@@ -20,50 +20,37 @@
  * @package minishop
  */
 /**
- * Get a list of Orders
+ * Get a list of Ordered Goods
  *
  * @package minishop
  * @subpackage processors
  */
 if (!$modx->hasPermission('view')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
-
+ 
 $isLimit = !empty($_REQUEST['limit']);
 $start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,20);
-$sort = $modx->getOption('sort',$_REQUEST,'created');
-
-$dir = $modx->getOption('dir',$_REQUEST,'DESC');
-$warehouse = $modx->getOption('warehouse', $_REQUEST, $_SESSION['minishop']['warehouse']);
-$status = $modx->getOption('status', $_REQUEST, $_SESSION['minishop']['status']);
-$_SESSION['minishop']['warehouse'] = $warehouse;
-$_SESSION['minishop']['status'] = $status;
+$limit = $modx->getOption('limit',$_REQUEST,10);
+$sort = $modx->getOption('sort',$_REQUEST,'id');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
+$oid = $modx->getOption('oid',$_REQUEST, 0);
 
 $query = $modx->getOption('query',$_REQUEST, 0);
-$c = $modx->newQuery('ModOrders');
 
-if (!empty($status)) {
-	$c->andCondition(array('status' => $status));
-}
-
-if (!empty($query)) {
-	$c->andCondition(array('num:LIKE' => '%'.$query.'%'));
-}
-if (!empty($warehouse)) {
-	$c->andCondition(array('wid' => $warehouse));
-}
-
-$count = $modx->getCount('ModOrders',$c);
+$c = $modx->newQuery('ModOrderedGoods');
+$c->where(array('oid' => $oid));
+$count = $modx->getCount('ModOrderedGoods',$c);
 
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit, $start);
-$orders = $modx->getCollection('ModOrders',$c);
+$orders = $modx->getCollection('ModOrderedGoods',$c);
 
 $arr = array();
 foreach ($orders as $v) {
-    $tmp = $v->toArray();
-	$tmp['fullname'] = $v->getFullName();
-	$tmp['warehousename'] = $v->getWarehouseName();
-	$arr[]= $tmp;
-	
+	$arr[] = array(
+		'name' => $v->getGoodsName()
+		,'num' => $v->get('num')
+		,'price' => $v->get('price')
+		,'sum' => $v->get('sum')
+	);
 }
 return $this->outputArray($arr, $count);

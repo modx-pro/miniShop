@@ -33,13 +33,13 @@ $limit = $modx->getOption('limit',$_REQUEST,20);
 $sort = $modx->getOption('sort',$_REQUEST,'created');
 
 $dir = $modx->getOption('dir',$_REQUEST,'DESC');
-$warehouse = $modx->getOption('warehouse', $_REQUEST, $_SESSION['minishop']['warehouse']);
+//$warehouse = $modx->getOption('warehouse', $_REQUEST, $_SESSION['minishop']['warehouse']);
 $status = $modx->getOption('status', $_REQUEST, $_SESSION['minishop']['status']);
-$_SESSION['minishop']['warehouse'] = $warehouse;
+//$_SESSION['minishop']['warehouse'] = $warehouse;
 $_SESSION['minishop']['status'] = $status;
 
 $query = $modx->getOption('query',$_REQUEST, 0);
-$c = $modx->newQuery('ModOrders');
+$c = $modx->newQuery('ModOrders', array('uid' => $modx->user->id));
 
 if (!empty($status)) {
 	$c->andCondition(array('status' => $status));
@@ -48,9 +48,11 @@ if (!empty($status)) {
 if (!empty($query)) {
 	$c->andCondition(array('num:LIKE' => '%'.$query.'%'));
 }
+/*
 if (!empty($warehouse)) {
 	$c->andCondition(array('wid' => $warehouse));
 }
+*/
 
 $count = $modx->getCount('ModOrders',$c);
 
@@ -60,10 +62,15 @@ $orders = $modx->getCollection('ModOrders',$c);
 
 $arr = array();
 foreach ($orders as $v) {
-    $tmp = $v->toArray();
-	$tmp['fullname'] = $v->getFullName();
-	$tmp['warehousename'] = $v->getWarehouseName();
-	$arr[]= $tmp;
-	
+	$arr[]= array(
+		'id' => $v->get('id')
+		,'num' => $v->get('num')
+		,'sum' => $v->get('sum')
+		,'fullname' => $v->getFullName()
+		,'warehousename' => $v->getWarehouseName()
+		,'status' => $v->get('status')
+		,'created' => $v->get('created')
+		,'updated' => $v->get('updated')
+	);
 }
 return $this->outputArray($arr, $count);

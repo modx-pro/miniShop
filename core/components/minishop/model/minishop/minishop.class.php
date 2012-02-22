@@ -87,15 +87,8 @@ class miniShop {
     public function initialize($ctx = 'web') {
         switch ($ctx) {
             case 'mgr':
-				// Массив статусов для рендера в админке
-				$arr = array();
-				if ($tmp = $this->modx->getCollection('ModStatus')) {
-					foreach ($tmp as $v) {
-						$arr[$v->get('id')] = array('name' => $v->get('name'), 'color' => $v->get('color'));
-					}
-				}
-				$this->config['statuses'] = json_encode($arr);
-				
+				$this->config['statuses'] = json_encode($this->getStatusesArray());
+
                 if (!$this->modx->loadClass('minishop.request.miniShopControllerRequest',$this->config['modelPath'],true,true)) {
                     return 'Could not load controller request handler.';
                 }
@@ -161,6 +154,19 @@ class miniShop {
 		$string = mb_strtoupper(mb_substr($string, 0, 1, "utf-8"), "UTF-8").mb_substr($string, 1, mb_strlen($string), "UTF-8" );  
 		return $string;  
 	}
+
+
+	// Массив статусов для рендера в админке и фронтенде
+	function getStatusesArray() {
+		$arr = array();
+		if ($tmp = $this->modx->getCollection('ModStatus')) {
+			foreach ($tmp as $v) {
+				$arr[$v->get('id')] = array('name' => $v->get('name'), 'color' => $v->get('color'));
+			}
+		}
+		return $arr;
+	}
+
 
 	// Вычисление "склада по-умолчанию"
 	function getDefaultWarehouse() {
@@ -269,8 +275,26 @@ class miniShop {
 		}
 		return $ids;
 	}
-	
-	
+
+
+	// Вывод списка заказов в личный кабинет
+	function getMyOrdersList() {
+		$arr = array(
+			'config' => $this->modx->toJSON(
+				array(
+					'status' => $_SESSION['minishop']['status']
+					,'statuses' => $this->getStatusesArray()
+				)
+			)
+			,'connector_url' => $this->modx->makeUrl($this->modx->resource->id, '', '', 'full')
+			,'connectors_url' => $this->config['connectorsUrl']
+		);
+		
+		
+		return $this->modx->getChunk($this->config['tplMyOrdersList'], $arr);
+	}
+
+
 	// Подсчет состояния корзины
 	function getCartStatus() {
 		$cart = $_SESSION['minishop']['goods'];
