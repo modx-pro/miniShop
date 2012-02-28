@@ -370,6 +370,19 @@ class miniShop {
 		}
 		
 		$pl = $this->renderCart($this->config['tplCartRow']);
+		
+		if ($this->modx->user->isAuthenticated()) {
+			$profile = $this->modx->user->getOne('Profile');
+			$this->modx->setPlaceholders(array(
+				'email' => $profile->get('email')
+				,'receiver' => $profile->get('fullname')
+				,'phone' => $profile->get('phone')
+				,'city' => $profile->get('city')
+				,'region' => $profile->get('state')
+				,'index' => $profile->get('zip')
+			));
+		}
+		
 		return $this->modx->getChunk($this->config['tplCartOuter'], $pl);
 	}
 
@@ -475,7 +488,6 @@ class miniShop {
 	// Вывод формы адреса доставки
 	function getAddrForm($arr = array()) {
 		// Проверка предыдущих шагов заказа
-		
 		if (empty($_SESSION['minishop']['goods'])) {
 			//header('Location: ' . $this->modx->makeUrl($this->config['page_cart'], '', '', $full));
 			return $this->modx->lexicon('ms.Cart.empty');
@@ -564,11 +576,10 @@ class miniShop {
 		// Проверки данных присланной формы
 		// Обязательные поля для всех видов доставки
 		// Email, если есть
-		if ($this->modx->user->isAuthenticated() == false) {
-			if ($email = $this->validate($data['email'], 'email')) {$arr['email'] = $email;}
-			else {$err['email'] = $this->modx->lexicon('ms.validate.email');}
-		}
-		
+		//if ($this->modx->user->isAuthenticated() == false) {
+		if ($email = $this->validate($data['email'], 'email')) {$arr['email'] = $email;}
+		else {$err['email'] = $this->modx->lexicon('ms.validate.email');}
+		//}
 		// Получатель
 		$fio = explode(' ', $data['receiver']);
 		foreach ($fio as $v) {

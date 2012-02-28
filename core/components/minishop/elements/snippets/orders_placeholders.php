@@ -15,24 +15,21 @@ $modx->miniShop->initialize();
 // Плейсхолдеры заказа
 if ($order = $modx->getObject('ModOrders', $oid)) {
 	$tmp = $order->toArray();
-	unset($tmp['id']);
 
-	$modx->setPlaceholders($tmp);
+	$modx->setPlaceholders($tmp,'order.');
 }
 // Плейсхолдеры адреса
 if ($address = $modx->getObject('ModAddress', $order->get('address'))) {
 	$tmp = $address->toArray();
-	unset($tmp['id']);
 
-	$modx->setPlaceholders($tmp);
+	$modx->setPlaceholders($tmp,'addr.');
 }
 
 // Плейсхолдеры склада
 if ($warehouse = $modx->getObject('ModWarehouse', $order->get('wid'))) {
 	$tmp = $warehouse->toArray();
-	unset($tmp['id']);
 
-	$modx->setPlaceholders($tmp);
+	$modx->setPlaceholders($tmp,'wh.');
 }
 
 // Таблица заказов
@@ -60,6 +57,6 @@ foreach ($cart as $v) {
 	}
 }
 
-$modx->setPlaceholders($arr);
+$modx->setPlaceholders($arr,'cart.');
 return '';
 ?>
