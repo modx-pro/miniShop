@@ -1,5 +1,20 @@
 Changelog for miniShop.
 
+1.0.2 beta1 (28.02.2012)
+==============
+- Чанки больше не перезаписываются при обновлении пакета.
+- Личный кабинет покупателя со списком товара. Вызывается: [[!miniShop?action=`getMyOrdersList`]] В новом чанке tpl.msMyOrdersList подключается ExtJS из /manager и стили из cdn.
+- [#14] Добавлены префиксы для плейсхолдеров (addr., order., wh. и cart.) сниппета msGetOrdersPlaceholders, чтобы они не перезаписывали друг друга. Изменены чанки почтовых уведомлений.
+- [#15] При выводе корзины теперь поддерживаются дополнительные свойства товаров ([[+img]], [[+price]] и т.д.)
+- [#16] Поправлено положение заголовка компонента в менеджере.
+-----
+- Chunks are no longer overwritten when you upgrade the package.
+- Private Ofiice of the customer with list of orders. Called by: [[!MiniShop?action = `getMyOrdersList`]] In new chunk tpl.msMyOrdersList loading ExtJS from /manager path and styles from CDN.
+- [#14] Added placeholders for prefixes (addr., order., Wh. And cart.) Snippet msGetOrdersPlaceholders, so they do not overwrite each other. Changed chunks email notifications.
+- [#15] In the cart are now supported additional properties of goods ([[+img]], [[+price]], etc.)
+- [#16] Fixed the position of the header of component in manager.
+
+
 1.0.1 beta2 (16.02.2012)
 ==============
 - Добавил 3 дополнительных поля товара для хранения любых данных. 2 varchar(255) и одно text - можно json массивы хранить.
