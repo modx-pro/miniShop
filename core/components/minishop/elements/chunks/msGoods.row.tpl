@@ -1,18 +1,13 @@
-<tr class="center">
-  <td>
-    <a href="[[~[[+id]]]]" class="imgContainer">
-      <img src="[[+img:phpthumbof=`h=50`]]" alt="" title="" />
-    </a>
-  </td>
-  <td class="left">
-    <a href="[[~[[+id]]]]">[[+pagetitle]]</a>
-  </td>
-  <td class="price">[[+price]] [[+currency:default=`руб.`]]</td>
-  <td class="num">
-    <input type="number" size="3" value="[[+num]]" data-gid="[[+id]]" data-price="[[+price]]" class="center input-small changeCartCount" />
-  </td>
-  <td class="sum"><span>[[+sum]]</span> [[+currency:default=`руб.`]]</td>
-  <td class="remove">
-    <a href="#" class="remFromCartLink" title="Удалить из корзины" data-gid="[[+id]]"><i class="icon-remove"></i></a>
-  </td>
-</tr>
+<p>
+<div class="row show-grid">
+  <div class="span1">
+    <img src="[[+img:phpthumbof=`h=50`]]" alt="" title="" />
+  </div>
+  <div class="span4">
+    <a href="[[~[[+id]]]]"><strong>[[+pagetitle]]</strong></a>
+    [[+remains:gt=`0`:then=` <a href='#' class="addToCartLink" title="Добавить в корзину" data-gid="[[+id]]"><i class="icon-barcode"></i></a>`]]
+    <br/>
+    Цена: [[+price]] [[+currency]]
+  </div>
+</div>
+</p>
