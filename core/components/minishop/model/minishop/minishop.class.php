@@ -404,6 +404,12 @@ class miniShop {
 					$tmp[$v2->get('name')] = $v2->get('value');
 				}
 				
+				if ($tmp2 = $this->modx->getObject('ModGoods', array('gid' => $k, 'wid' => $_SESSION['minishop']['warehouse']))) {
+					$tmp3 = $tmp2->toArray(); 
+					unset($tmp3['id']);
+					$tmp = array_merge($tmp, $tmp3);
+				}
+				
 				$arr['rows'] .= $this->modx->getChunk($tpl, $tmp);
 				
 				$arr['count'] += $tmp['num'];
