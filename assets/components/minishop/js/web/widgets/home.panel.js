@@ -7,7 +7,7 @@ miniShop.panel.Home = function(config) {
 		,baseCls: 'modx-formpanel'
 		,items: [{
 			border: false
-			,cls: 'modx-page-header'
+			,cls: 'modx-page-header container'
 		},{
 			xtype: 'modx-tabs'
 			,bodyStyle: 'padding: 10px'
