@@ -771,7 +771,7 @@ class miniShop {
 		
 		// Получаем номер заказа
 		$td = date('ym');
-		$tmp = $this->modx->query("SELECT `num` FROM {$this->modx->getTableName('ModOrders')} ORDER BY `id` DESC LIMIT 1");
+		$tmp = $this->modx->query("SELECT `num` FROM {$this->modx->getTableName('ModOrders')} WHERE `num` LIKE '{$td}%' ORDER BY `id` DESC LIMIT 1");
 		$tnum = $tmp->fetch(PDO::FETCH_COLUMN);
 		$tmp->closeCursor();
 
