@@ -10,6 +10,7 @@ $xpdo_meta_map['ModOrderedGoods']= array (
     'num' => 1,
     'price' => NULL,
     'sum' => NULL,
+    'data' => NULL,
   ),
   'fieldMeta' => 
   array (
@@ -48,6 +49,12 @@ $xpdo_meta_map['ModOrderedGoods']= array (
       'dbtype' => 'float',
       'precision' => '10,2',
       'phptype' => 'float',
+      'null' => false,
+    ),
+    'data' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'string',
       'null' => false,
     ),
   ),

@@ -77,6 +77,7 @@
 		<field key="num" dbtype="int" precision="11" phptype="integer" null="false" default="1" />
 		<field key="price" dbtype="float" precision="10,2" phptype="float" null="false" />
 		<field key="sum" dbtype="float" precision="10,2" phptype="float" null="false" />
+		<field key="data" dbtype="text" phptype="string" null="false" />
 
 		<index alias="gid" name="gid" primary="false" unique="false" type="BTREE" >
 			<column key="gid" length="" collation="A" null="false" />

@@ -44,14 +44,17 @@ foreach ($cart as $v) {
 		$tmp['num'] = $v->get('num');
 		$tmp['sum'] = $v->get('sum');
 		$tmp['price'] = $v->get('price');
-
-		/*
+		
 		$tvs = $res->getMany('TemplateVars');
 		foreach ($tvs as $v2) {
 			$tmp[$v2->get('name')] = $v2->get('value');
 		}
-		*/
 		
+		$data = json_decode($v->get('data'), 1);
+		foreach ($data as $k2 => $v2) {
+			$tmp['data.'.$k2] = $v2;
+		}
+
 		$arr['rows'] .= $modx->getChunk($tplCartRows, $tmp);
 		$arr['count'] += $tmp['num'];
 		$arr['total'] += $tmp['sum'];

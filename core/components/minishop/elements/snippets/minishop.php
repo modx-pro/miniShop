@@ -44,9 +44,9 @@ if (!($miniShop instanceof miniShop)) return '';
 // Вызов нужного метода
 switch ($action) {
 	case 'getCart': $res = $miniShop->getCart(); break;
-	case 'addToCart': $res = $miniShop->addToCart($_POST['gid']); break;
-	case 'remFromCart': $res = $miniShop->remFromCart($_POST['gid']); break;
-	case 'changeCartCount': $res = $miniShop->changeCartCount($_POST['gid'], $_POST['val']); break;
+	case 'addToCart': $res = $miniShop->addToCart($_POST['gid'], $_POST['num'], $_POST['data']); break;
+	case 'remFromCart': $res = $miniShop->remFromCart($_POST['key']); break;
+	case 'changeCartCount': $res = $miniShop->changeCartCount($_POST['key'], $_POST['val']); break;
 	case 'getCartStatus': $res = $miniShop->getCartStatus(); break;
 	
 	case 'selectDelivery': $res = $miniShop->selectDelivery(); break; 

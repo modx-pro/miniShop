@@ -325,23 +325,26 @@ class miniShop {
 
 
 	// Добавление товара в корзину
-	function addToCart($id) {
-		if (empty($id)) {
-			return $this->error($this->modx->lexicon('ms.addToCart.error'));
-		}
-		
+	function addToCart($id, $num = 1, $data = array()) {
+		if (empty($id)) {return $this->error($this->modx->lexicon('ms.addToCart.error'));}
+		if (empty($num)) {$num = 1;}
+		if (empty($data)) {$data = array();}
+
 		if (empty($_SESSION['minishop'])) {$_SESSION['minishop'] = array();}
 		if (empty($_SESSION['minishop']['goods'])) {$_SESSION['minishop']['goods'] = array();}
-
-		if (array_key_exists($id, $_SESSION['minishop']['goods'])) {
-			$_SESSION['minishop']['goods'][$id]['num'] += 1;
+		
+		$key = md5($id.(json_encode($data)));
+		
+		if (array_key_exists($key, $_SESSION['minishop']['goods'])) {
+			$_SESSION['minishop']['goods'][$key]['num'] += $num;
 			return $this->success('ms.addToCart.success', $this->getCartStatus());
 		}
 		else {
-			$_SESSION['minishop']['goods'][$id] = array(
+			$_SESSION['minishop']['goods'][$key] = array(
 				'id' => $id
 				,'price' => $this->getPrice($id)
-				,'num' => 1
+				,'num' => $num
+				,'data' => $data
 			);
 			
 			return $this->success('ms.addToCart.success', $this->getCartStatus());
@@ -350,9 +353,9 @@ class miniShop {
 
 
 	// Удаление товара из корзины
-	function remFromCart($id) {
-		if (array_key_exists($id, $_SESSION['minishop']['goods'])) {
-			unset($_SESSION['minishop']['goods'][$id]);
+	function remFromCart($key) {
+		if (array_key_exists($key, $_SESSION['minishop']['goods'])) {
+			unset($_SESSION['minishop']['goods'][$key]);
 			return $this->success('ms.remFromCart.success', $this->getCartStatus());
 		}
 		else {
@@ -368,9 +371,9 @@ class miniShop {
 		if (empty($cart)) {
 			return $this->modx->lexicon('ms.Cart.empty');
 		}
-		
+
 		$pl = $this->renderCart($this->config['tplCartRow']);
-		
+
 		if ($this->modx->user->isAuthenticated()) {
 			$profile = $this->modx->user->getOne('Profile');
 			$this->modx->setPlaceholders(array(
@@ -394,22 +397,29 @@ class miniShop {
 		$arr['count'] = $arr['total'] = 0;
 		$cart = $_SESSION['minishop']['goods'];
 		foreach ($cart as $k => $v) {
-			if ($res = $this->modx->getObject('modResource', $k)) {
+			if ($res = $this->modx->getObject('modResource', $v['id'])) {
 				$tmp = $res->toArray();
+				$tmp['key'] = $k;
 				$tmp['num'] = $v['num'];
 				$tmp['sum'] = $v['num'] * $v['price'];
 
+				// ТВ параметры
 				$tvs = $res->getMany('TemplateVars');
 				foreach ($tvs as $v2) {
 					$tmp[$v2->get('name')] = $v2->get('value');
 				}
 				
-				if ($tmp2 = $this->modx->getObject('ModGoods', array('gid' => $k, 'wid' => $_SESSION['minishop']['warehouse']))) {
+				// Свойства товара
+				if ($tmp2 = $this->modx->getObject('ModGoods', array('gid' => $v['id'], 'wid' => $_SESSION['minishop']['warehouse']))) {
 					$tmp3 = $tmp2->toArray(); 
 					unset($tmp3['id']);
 					$tmp = array_merge($tmp, $tmp3);
 				}
 				
+				// Дополнительные свойства выбранного товара
+				foreach ($v['data'] as $k2 => $v2) {
+					$tmp['data.'.$k2] = $v2;
+				}
 				$arr['rows'] .= $this->modx->getChunk($tpl, $tmp);
 				
 				$arr['count'] += $tmp['num'];
@@ -823,14 +833,15 @@ class miniShop {
 		$cart = $_SESSION['minishop']['goods'];
 		
 		$cart_sum = 0;
-		foreach ($cart as $k => $v) {
+		$oid = $order->get('id');
+		foreach ($cart as $v) {
 			$res = $this->modx->newObject('ModOrderedGoods');
-			$res->set('oid', $order->get('id'));
-			//$res->set('name', $order->get('name'));
+			$res->set('oid', $oid);
 			$res->set('gid', $v['id']);
 			$res->set('price', $v['price']);
 			$res->set('sum', $v['price'] * $v['num']);
 			$res->set('num', $v['num']);
+			$res->set('data', json_encode($v['data']));
 			$res->save();
 			$cart_sum += $v['price'] * $v['num'];
 		}

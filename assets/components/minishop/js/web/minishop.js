@@ -11,7 +11,7 @@ $(document).ready(function() {
 	// Добавление товара в корзину
 	$('.addToCartLink').live('click', function() {
 		var gid = $(this).data('gid');
-		$.post(url, {action: 'addToCart', gid: gid}, function(data) {
+		$.post(url, {action: 'addToCart', gid: gid, num: 1, data: {}}, function(data) {
 			data = $.parseJSON(data);
 			showResponse(data);
 			cartStatus(data);
@@ -22,19 +22,19 @@ $(document).ready(function() {
 	
 	// Изменение кол-ва товара в корзине
 	$('.changeCartCount').live('change', function() {
-		var gid = $(this).data('gid');
+		var key = $(this).data('key');
 		var val = $(this).val();
 		
 		if (val <= 0) {
 			$(this).parent().parent().remove();
-			remFromCart(gid);
+			remFromCart(key);
 			return;
 		}
 		
 		var price = $(this).data('price');
 		var parent = $(this).parent();
 		
-		$.post(url, {action: 'changeCartCount', gid: gid, val: val}, function(data) {
+		$.post(url, {action: 'changeCartCount', key: key, val: val}, function(data) {
 			data = $.parseJSON(data);
 			
 			var sum = val * price;
@@ -50,9 +50,9 @@ $(document).ready(function() {
 	
 	// Кнопка удаления из корзины
 	$('.remFromCartLink').live('click', function() {
-		var gid = $(this).data('gid');
+		var key = $(this).data('key');
 		$(this).parent().parent().remove();
-		remFromCart(gid);
+		remFromCart(key);
 		return false;
 	})
 	
@@ -151,8 +151,8 @@ function message(text) {
 
 /*------------------------------------*/
 // Удаление товара из корзины
-function remFromCart(gid) {
-	$.post(url, {action: 'remFromCart', gid: gid}, function(data) {
+function remFromCart(key) {
+	$.post(url, {action: 'remFromCart', key: key}, function(data) {
 		data = $.parseJSON(data);
 		if (data.total <= 0) {
 			document.location.href = document.location.href;
