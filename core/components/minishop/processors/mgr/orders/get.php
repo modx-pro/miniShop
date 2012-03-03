@@ -35,17 +35,17 @@ if (empty($id)) {
 
 if ($res = $modx->getObject('ModOrders', $id)) {
 	$arr = $res->toArray();
+	
 	$arr['created'] =  $res->get('created');
 	$arr['fullname'] =  $res->getFullName();
 	$arr['email'] =  $res->getEmail();
+	$arr['delivery_name'] = $res->getDeliveryName();
+	$arr['delivery_price'] = $res->getDeliveryPrice();
 	if ($tmp =  $res->getAddress()) {
 		foreach($tmp as $k => $v) {
 			$arr['addr_'.$k] = $v;
 		}
 	}
-
-	$arr['delivery'] = $modx->lexicon('ms.delivery.self');
-
 }
 else {
 	return $modx->error->failure($modx->lexicon('ms.order_err_nf'));

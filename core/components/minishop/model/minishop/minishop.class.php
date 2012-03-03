@@ -620,6 +620,8 @@ class miniShop {
 			$arr['comment'] = $data['comment'];
 		}
 		
+		if (!empty($arr['delivery'])) {$_SESSION['minishop']['delivery'] = $arr['delivery'];}
+		
 		if (count($err) > 0) {
 			$this->modx->setPlaceholders($err, 'error.');
 			return $this->getAddrForm($arr);
@@ -810,7 +812,7 @@ class miniShop {
 		$order->set('uid', $uid);
 		$order->set('num', $num);
 		$order->set('wid', $_SESSION['minishop']['warehouse']);
-		//$order->set('delivery', (int) $_SESSION['minishop']['delivery']);
+		$order->set('delivery', $_SESSION['minishop']['delivery']);
 		$order->set('address', $aid);
 		$order->set('status', 0);
 		$order->set('created', date('Y-m-d H:i:s'));

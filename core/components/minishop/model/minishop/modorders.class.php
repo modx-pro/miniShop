@@ -47,5 +47,17 @@ class ModOrders extends xPDOSimpleObject {
 			$this->save();
 		}
 	}
+	
+	function getDeliveryName() {
+		if ($res = $this->xpdo->getObject('ModDelivery', $this->get('delivery'))) {
+			return $res->get('name');
+		}
+	}	
+
+	function getDeliveryPrice() {
+		if ($res = $this->xpdo->getObject('ModDelivery', $this->get('delivery'))) {
+			return $res->get('price');
+		}
+	}
 
 }

@@ -1,4 +1,3 @@
-// Таблица заказов
 miniShop.grid.Orders = function(config) {
 	config = config || {};
 	Ext.applyIf(config,{
@@ -154,7 +153,7 @@ miniShop.window.ViewOrder = function(config) {
 						,{xtype: 'displayfield',name: 'created',id: this.ident+'-created',fieldLabel: _('ms.created')}
 						,{xtype: 'displayfield',name: 'fullname',id: this.ident+'-fullname',fieldLabel: _('ms.fullname')}
 						,{xtype: 'displayfield',name: 'email',id: this.ident+'-email',fieldLabel: _('ms.email')}
-						,{xtype: 'displayfield',name: 'delivery',id: this.ident+'-delivery',fieldLabel: _('ms.delivery')}
+						,{xtype: 'displayfield',name: 'delivery_name',id: this.ident+'-delivery',fieldLabel: _('ms.delivery')}
 						,{xtype: 'displayfield',name: 'statusname',id: this.ident+'-statusname',fieldLabel: _('ms.statusname')}
 					]
 				}]

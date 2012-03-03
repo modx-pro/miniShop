@@ -15,7 +15,8 @@ $modx->miniShop->initialize();
 // Плейсхолдеры заказа
 if ($order = $modx->getObject('ModOrders', $oid)) {
 	$tmp = $order->toArray();
-
+	$tmp['delivery_name'] = $order->getDeliveryName();
+	$tmp['delivery_price'] = $delivery_price = $order->getDeliveryPrice();
 	$modx->setPlaceholders($tmp,'order.');
 }
 // Плейсхолдеры адреса
@@ -56,6 +57,7 @@ foreach ($cart as $v) {
 		$arr['total'] += $tmp['sum'];
 	}
 }
+$arr['total'] += $delivery_price;
 
 $modx->setPlaceholders($arr,'cart.');
 return '';

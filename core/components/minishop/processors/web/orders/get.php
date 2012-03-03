@@ -40,15 +40,14 @@ if ($res = $modx->getObject('ModOrders', $id)) {
 	$arr['fullname'] =  $res->getFullName();
 	$arr['statusname'] =  $res->getStatusName();
 	$arr['email'] =  $res->getEmail();
-	
+	$arr['delivery'] = $res->get('delivery');
+	$arr['delivery_name'] = $res->getDeliveryName();
+	$arr['delivery_price'] = $res->getDeliveryPrice();
 	if ($tmp =  $res->getAddress()) {
 		foreach($tmp as $k => $v) {
 			$arr['addr_'.$k] = $v;
 		}
 	}
-
-	$arr['delivery'] = $modx->lexicon('ms.delivery.self');
-
 }
 else {
 	return $modx->error->failure($modx->lexicon('ms.order_err_nf'));
