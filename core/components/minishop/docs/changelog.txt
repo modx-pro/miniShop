@@ -2,10 +2,15 @@ Changelog for miniShop.
 
 1.0.2 beta2 (06.03.2012)
 =============
-- Добавлены дополнительные свойства товаров корзины. Если помимо id товара и количества прислать массив data - он сохранится json-строкой
+- Добавлены дополнительные свойства товаров корзины. Если помимо id товара и количества прислать массив $_POST['data'] - он сохранится json-строкой
   при заказе в ModOrderedGoods и эти свойства будут доступны в корзине плейсхолдерами с префиксом [[+data.*]]
 - При заказе теперь учитывается доставка (если она есть в $_SESSION['minishop']['delivery'])
 - [#19] Исправлена нумерация заказов
+-----
+- Added additional properties of the goods cart. If in addition to id and quantity of goods you send an array $_POST['data'] - it will save as json-string
+  to ModOrderedGoods and these properties will be available in your cart placeholders with the prefix [[+data.*]]
+- When you submitting order delivery is works (if it is in the $ _SESSION ['minishop'] ['delivery'])
+- [#19] Fixed the numbering order
 
 
 1.0.2 beta1 (28.02.2012)
