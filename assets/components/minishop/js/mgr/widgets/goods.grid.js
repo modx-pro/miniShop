@@ -135,6 +135,7 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
 		gid = 0;
 		var w = MODx.load({
 			xtype: 'minishop-window-creategoods'
+			,title: _('ms.goods.create')
 			,disable_categories: true
 			,action: 'mgr/goods/create'
 			,listeners: {
@@ -168,11 +169,12 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
 			}
 			,listeners: {
 				'success': {fn:function(r) {
-					var pr = r.object;
+					var record = r.object;
 					
 					var w = MODx.load({
 						xtype: 'minishop-window-creategoods'
-						,record: pr
+						,title: record.pagetitle
+						,record: record
 						,disable_categories: false
 						,activeTab: 1
 						,action: 'mgr/goods/update'
@@ -222,7 +224,7 @@ miniShop.window.createGoods = function(config) {
 
 	this.ident = config.ident || 'qcr'+Ext.id();
 	Ext.applyIf(config,{
-		title: config.disable_categories ? _('ms.goods.create') : /*_('ms.goods.change')*/ config.record.pagetitle
+		title: _('ms.goods.create')
 		,id: this.ident
 		,width: 700
 		,modal: true
