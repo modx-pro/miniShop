@@ -818,11 +818,12 @@ class miniShop {
 		
 		
 		// Создание заказа
+		$delivery = !empty($_SESSION['minishop']['delivery']) ? $_SESSION['minishop']['delivery'] : '0';
 		$order = $this->modx->newObject('ModOrders');
 		$order->set('uid', $uid);
 		$order->set('num', $num);
 		$order->set('wid', $_SESSION['minishop']['warehouse']);
-		$order->set('delivery', $_SESSION['minishop']['delivery']);
+		$order->set('delivery', $delivery);
 		$order->set('address', $aid);
 		$order->set('status', 0);
 		$order->set('created', date('Y-m-d H:i:s'));
