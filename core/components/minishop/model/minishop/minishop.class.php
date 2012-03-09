@@ -442,11 +442,6 @@ class miniShop {
 			return $this->success('ms.changeCartCount.success', $this->getCartStatus());
 		}
 		else {
-			$_SESSION['minishop']['goods'][$id] = array(
-				'id' => $id
-				,'price' => $this->getPrice($id)
-				,'num' => 1
-			);
 			return $this->error('ms.changeCartCount.error', $this->getCartStatus());
 		}
 	}
