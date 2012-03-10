@@ -101,5 +101,14 @@ $snippets[7]->fromArray(array(
 ),'',true,true);
 $snippets[7]->setProperties($properties);
 
+$snippets[8]= $modx->newObject('modSnippet');
+$snippets[8]->fromArray(array(
+    'id' => 0,
+    'name' => 'msGetDelivery',
+    'description' => 'This snippet shows enabled warehouse delivery methods.',
+    'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/get_delivery.php'),
+),'',true,true);
+$snippets[8]->setProperties($properties);
+
 unset($properties);
 return $snippets;
