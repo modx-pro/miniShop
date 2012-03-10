@@ -625,7 +625,7 @@ class miniShop {
 			$arr['comment'] = $data['comment'];
 		}
 		
-		if (!empty($arr['delivery'])) {$_SESSION['minishop']['delivery'] = $arr['delivery'];}
+		if (!empty($data['delivery'])) {$_SESSION['minishop']['delivery'] = $arr['delivery'] = $data['delivery'];}
 		
 		if (count($err) > 0) {
 			$this->modx->setPlaceholders($err, 'error.');
