@@ -22,15 +22,19 @@ if ($order = $modx->getObject('ModOrders', $oid)) {
 // Плейсхолдеры адреса
 if ($address = $modx->getObject('ModAddress', $order->get('address'))) {
 	$tmp = $address->toArray();
-
 	$modx->setPlaceholders($tmp,'addr.');
 }
 
 // Плейсхолдеры склада
 if ($warehouse = $modx->getObject('ModWarehouse', $order->get('wid'))) {
 	$tmp = $warehouse->toArray();
-
 	$modx->setPlaceholders($tmp,'wh.');
+}
+
+// Плейсхолдеры юзера
+if ($user = $modx->getObject('modUserProfile', $order->get('uid'))) {
+	$tmp = $user->toArray();
+	$modx->setPlaceholders($tmp,'user.');
 }
 
 // Таблица заказов
@@ -61,7 +65,7 @@ foreach ($cart as $v) {
 	}
 }
 $arr['total'] += $delivery_price;
-
 $modx->setPlaceholders($arr,'cart.');
+
 return '';
 ?>
