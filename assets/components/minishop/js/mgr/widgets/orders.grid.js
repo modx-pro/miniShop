@@ -139,11 +139,11 @@ Ext.extend(miniShop.grid.Orders,MODx.grid.Grid,{
 		this.addContextMenuItem(m);
 	}
 	,editOrder: function(btn, e, row) {
-		if (this.menu.record && this.menu.record.id) {
-			oid = this.menu.record.id
+		if (typeof(row) != 'undefined') {
+			oid = row.data.id
 		}
 		else {
-			oid = row.data.id
+			oid = this.menu.record.id
 		}
 		changed = 0;
 		MODx.Ajax.request({
