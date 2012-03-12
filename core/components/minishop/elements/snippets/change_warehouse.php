@@ -1,6 +1,4 @@
 <?php
-//echo require $modx->getOption('core_path') . 'components/minishop/elements/snippets/change_warehouse.php';
-
 if ($_POST['action'] == 'changeWarehouse' && !empty($_POST['warehouse'])) {
   	$_SESSION['minishop'] = array();
 	$_SESSION['minishop']['warehouse'] = $_POST['warehouse'];
@@ -32,4 +30,3 @@ else {
     return $modx->getChunk('tpl.msChangeWarehouse', array('options' => $options));
   }
 }
-?>

@@ -1,18 +1,10 @@
 <?php
-//echo require $modx->getOption('core_path') . 'components/minishop/elements/snippets/minishop.php';
-
 if (empty($_REQUEST['action'])) {
 	$action = $modx->getOption('action', $scriptProperties, 'getCart');
 }
 else {
 	$action = $_REQUEST['action'];
 }
-
-// Страницы работы с заказом
-$c['page_cart'] = 2;
-//$c['page_delivery'] = 293;
-//$c['page_address'] = 351;
-//$c['page_confirm'] = 291;
 
 // Шаблоны оформления
 $c['tplCartOuter'] = $modx->getOption('tplCartOuter', $scriptProperties, 'tpl.msCart.outer');
@@ -57,7 +49,7 @@ switch ($action) {
 	
 	case 'confirmOrder': $res = $miniShop->confirmOrder(); break;
 	
-	case 'submitOrder': $res = $miniShop->submitOrder($_POST['captcha']); break;
+	case 'submitOrder': $res = $miniShop->submitOrder(); break;
 	
 	case 'getMyOrdersList': $res = $miniShop->getMyOrdersList(); break;
 

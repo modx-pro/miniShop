@@ -1,6 +1,4 @@
 <?php
-//echo require $modx->getOption('core_path') . 'components/minishop/elements/snippets/orders_placeholders.php';
-
 if (empty($oid)) {return false;}
 
 $tplCartRows = $modx->getOption('tplRow', $scriptProperties, 'tpl.msOrderEmail.row');
@@ -68,4 +66,3 @@ $arr['total'] += $delivery_price;
 $modx->setPlaceholders($arr,'cart.');
 
 return '';
-?>

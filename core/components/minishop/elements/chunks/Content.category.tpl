@@ -8,7 +8,7 @@
     &sortbyMS=`price`
     &sortdir=`ASC`
   ]]
-  
+
   <div class="pagination">
     <ul>
       [[!+page.nav]]

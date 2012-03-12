@@ -45,7 +45,7 @@ class miniShop {
             'corePath' => $corePath,
             'modelPath' => $corePath.'model/',
             'chunksPath' => $corePath.'elements/chunks/',
-            'chunkSuffix' => '.chunk.tpl',
+            'chunkSuffix' => '.tpl',
             'snippetsPath' => $corePath.'elements/snippets/',
             'processorsPath' => $corePath.'processors/',
 			'ms_categories_tpls' => explode(',', $this->modx->getOption('minishop.categories_tpl', '', 1)),
@@ -56,63 +56,37 @@ class miniShop {
         $this->modx->addPackage('minishop',$this->config['modelPath'], $this->modx->config['table_prefix'].'ms_');
         $this->modx->lexicon->load('minishop:default');
 
-		// Вывод ошибок
-		ini_set('display_errors', 1); 
-		error_reporting(E_ALL);
-		
+		// Вывод ошибок при отладке
+		if ($this->config['debug']) {
+			ini_set('display_errors', 1); 
+			error_reporting(E_ALL);
+		}
+
 		// Определение дефолтных переменных сессии для работы магазина
-		// Дефолтный склад
-		if (!isset($_SESSION['minishop']['warehouse'])) {
-			// Можно добавить определение склада через $_REQUEST
-			$_SESSION['minishop']['warehouse'] = $this->getDefaultWarehouse();
-		}
-		// Категория товаров
-		if (!isset($_SESSION['minishop']['category'])) {
-			// Можно добавить определение категории через $_REQUEST
-			$_SESSION['minishop']['category'] = 0;
-		}
-		// Статус заказа
-		if (!isset($_SESSION['minishop']['status'])) {
-			// Можно добавить определение категории через $_REQUEST
-			$_SESSION['minishop']['status'] = 0;
-		}
+		if (!isset($_SESSION['minishop']['warehouse'])) {$_SESSION['minishop']['warehouse'] = $this->getDefaultWarehouse();}
+		if (!isset($_SESSION['minishop']['category'])) {$_SESSION['minishop']['category'] = 0;}
+		if (!isset($_SESSION['minishop']['status'])) {$_SESSION['minishop']['status'] = 0;}
     }
 
-    /**
-     * Initializes miniShop into different contexts.
-     *
-     * @access public
-     * @param string $ctx The context to load. Defaults to web.
-     */
-    public function initialize($ctx = 'web') {
-        switch ($ctx) {
-            case 'mgr':
+	/**
+	 * Initializes miniShop into different contexts.
+	 *
+	 * @access public
+	 * @param string $ctx The context to load. Defaults to web.
+	 */
+	public function initialize($ctx = 'web') {
+		switch ($ctx) {
+			case 'mgr':
 				$this->config['statuses'] = json_encode($this->getStatusesArray());
-
-                if (!$this->modx->loadClass('minishop.request.miniShopControllerRequest',$this->config['modelPath'],true,true)) {
-                    return 'Could not load controller request handler.';
-                }
-                $this->request = new miniShopControllerRequest($this);
-
-                return $this->request->handleRequest();
-            break;
-            case 'web':
-                //if (!$this->modx->loadClass('minishop.request.miniShopConnectorRequest',$this->config['modelPath'],true,true)) {
-                //    return 'Could not load connector request handler.';
-                //}
-                //$this->request = new miniShopConnectorRequest($this);
-                //return $this->request->handle();
-            break;
-            default:
-                /* if you wanted to do any generic frontend stuff here.
-                 * For example, if you have a lot of snippets but common code
-                 * in them all at the beginning, you could put it here and just
-                 * call $minishop->initialize($modx->context->get('key'));
-                 * which would run this.
-                 */
-            break;
-        }
-    }
+				if (!$this->modx->loadClass('minishop.request.miniShopControllerRequest',$this->config['modelPath'],true,true)) {
+					return 'Could not load controller request handler.';
+				}
+				$this->request = new miniShopControllerRequest($this);
+				return $this->request->handleRequest();
+			break;
+			default: break;
+		}
+	}
 
  
 	// Распечатка массива
@@ -121,6 +95,7 @@ class miniShop {
 		print_r($arr);
 		echo '</pre>';
 	}
+
 
 	// Создание плейсхолдеров из массива значений
 	function makePlaceholders($arr = array()) {
@@ -131,7 +106,8 @@ class miniShop {
 		}
 		return $tmp;
 	}
-	
+
+
 	// Логирование изменений заказов и товаров в БД
 	function Log($type, $id, $operation, $old, $new) {
 		if ($old == $new) {return;}
@@ -144,15 +120,6 @@ class miniShop {
 		$res->set('new', $new);
 		$res->set('ip', $_SERVER['REMOTE_ADDR']);
 		$res->save();
-	}
-	
-	
-	// ucfirst для utf-8
-	function utf8_ucfirst($string) {
-		$string = mb_ereg_replace("^[\ ]+","", $string);
-		$string = mb_strtolower($string, "utf-8");
-		$string = mb_strtoupper(mb_substr($string, 0, 1, "utf-8"), "UTF-8").mb_substr($string, 1, mb_strlen($string), "UTF-8" );  
-		return $string;  
 	}
 
 
@@ -193,54 +160,6 @@ class miniShop {
 			return 1;
 		}
 	}
-	
-	// Валидатор данных формы
-	function validate($str = 0, $type = 0) {
-		if (empty($str) || empty($type)) {return false;}
-		
-		$str = trim($str);
-		switch ($type) {
-			/*
-			case 'digit':
-				preg_match('/[^0-9$]/', $str, $tmp);
-				$str = $tmp[0];
-				if (empty($str) || !preg_match('/[0-9]/', $str)) {return false;}
-			break;
-			*/
-			case 'email': 
-				if (filter_var($str, FILTER_VALIDATE_EMAIL)) {return $str;}
-				else {return false;}
-			break;
-			case 'index':
-				preg_match('/[0-9]{6,6}/', $str, $tmp);
-				$str = $tmp[0];
-				if (empty($str) || !preg_match('/[0-9]/', $str)) {return false;}
-			break;
-			case 'fio': 
-				$str = preg_replace('/[^-а-яa-z]/iu', '', $str);
-				if (empty($str) || !preg_match('/[-а-яa-z]/iu', $str)) {return false;}
-				else {$str = $this->utf8_ucfirst($str);}
-			break;
-			case 'phone': 
-				$str = preg_replace('/[^0-9+]/', '', $str);
-				if (empty($str) || !preg_match('/[0-9+]/', $str)) {return false;} 
-			break;
-			/*
-			case 'date': 
-				$tmp = explode('.', $str);
-				if (!checkdate($tmp[1], $tmp[0], $tmp[2])) {return false;}
-				$str = strftime($this->date_sql, strtotime($str));
-			break;
-			*/
-			case 'notempty': 
-				if (!empty($str)) {return $str;}
-				else {return false;} 
-			break;
-
-			default: return false;
-		}
-		return $str;
-	}
 
 
 	// Возврат ошибки
@@ -265,7 +184,6 @@ class miniShop {
 	function getGoodsByCategories($parents = array()) {
 		if (empty($parents)) {$parents = array($this->modx->resource->id);}
 		if (!is_array($parents)) {$parents = explode(',', $parents);}
-
 		// Поиск подходящих ресурсов через связи в ModCategories
 		$ids = array();
 		if ($res = $this->modx->getCollection('ModCategories', array('cid:IN' => $parents))) {
@@ -390,6 +308,23 @@ class miniShop {
 	}
 
 
+	// Изменение товаров в корзине
+	function changeCartCount($id, $val = 0) {
+		if (array_key_exists($id, $_SESSION['minishop']['goods'])) {
+			if ($val <= 0) {
+				unset($_SESSION['minishop']['goods'][$id]);
+			}
+			else {
+				$_SESSION['minishop']['goods'][$id]['num'] = $val;
+			}
+			return $this->success('ms.changeCartCount.success', $this->getCartStatus());
+		}
+		else {
+			return $this->error('ms.changeCartCount.error', $this->getCartStatus());
+		}
+	}
+
+
 	// Обработка строк корзины по указанному шаблону
 	function renderCart($tpl) {
 		$arr = array();
@@ -427,23 +362,6 @@ class miniShop {
 			}
 		}
 		return $arr;
-	}
-
-
-	// Изменение товаров в корзине
-	function changeCartCount($id, $val = 0) {
-		if (array_key_exists($id, $_SESSION['minishop']['goods'])) {
-			if ($val <= 0) {
-				unset($_SESSION['minishop']['goods'][$id]);
-			}
-			else {
-				$_SESSION['minishop']['goods'][$id]['num'] = $val;
-			}
-			return $this->success('ms.changeCartCount.success', $this->getCartStatus());
-		}
-		else {
-			return $this->error('ms.changeCartCount.error', $this->getCartStatus());
-		}
 	}
 
 
@@ -486,266 +404,13 @@ class miniShop {
 	*/
 
 
-	// Сохранение выбранной доставки
-	/*
-	function saveDelivery($id) { 
-		$_SESSION['minishop']['delivery'] = $id;
-		unset($_SESSION['minishop']['address']);
-		return $this->success('ms.saveDelivery.success');
-	}
-	*/
-
-
-	// Вывод формы адреса доставки
-	function getAddrForm($arr = array()) {
-		// Проверка предыдущих шагов заказа
-		if (empty($_SESSION['minishop']['goods'])) {
-			//header('Location: ' . $this->modx->makeUrl($this->config['page_cart'], '', '', $full));
+	// Отправка заказа в БД
+	function submitOrder() {
+		// Проверка корзины
+		if (empty($_SESSION['minishop']['goods']) || empty($_SESSION['minishop']['address']['email'])) {
 			return $this->modx->lexicon('ms.Cart.empty');
 		}
-		/*
-		if (empty($_SESSION['minishop']['delivery'])) {
-			header('Location: ' . $this->modx->makeUrl($this->config['page_delivery'], '', '', $full));
-		}
-		// Самовывоз у авторизованного юзера
-		else if ($_SESSION['minishop']['delivery'] == 'self' && $this->modx->user->isAuthenticated()) {
-			header('Location: ' . $this->modx->makeUrl($this->config['page_confirm'], '', '', $full));
-		}
-		// Самовывоз у гостя - даем миниформу
-		else if ($_SESSION['minishop']['delivery'] == 'self') {
-			$tpl = $this->config['tplAddrFormMini'];
-			$mini = true;
-		}
-		// Обычный заказ
-		else {
-			$tpl = $this->config['tplAddrForm'];
-		}
-		*/
-		$tpl = $this->config['tplAddrForm'];
-		
-		/*
-		if (empty($arr) && !empty($_SESSION['minishop']['address']) && is_array($_SESSION['minishop']['address'])) {
-			$arr = $_SESSION['minishop']['address'];
-		}
-		else {
-			$checked = 'checked';
-		}
-		*/
-		
-		// Поиск и вывод сохраненных адресов
-		/*
-		$saved_addresses = '';
-		if ($this->modx->user->isAuthenticated()) {
-			$q = $this->modx->newQuery('ModAddress');
-			$q->where(array('uid' => $this->modx->user->id));
-			if ($res = $this->modx->getCollection('ModAddress', $q)) {
-				foreach ($res as $v) {
-					$addr = array('id' => $v->get('id'));
-					$addr['address_info'] = $v->get('receiver')
-							.', '.$v->get('phone')
-							.', '.$v->get('index')
-							.', '.$v->get('region')
-							.', '.$v->get('city')
-							.', '.$v->get('street')
-							.', '.$v->get('building')
-							.', '.$v->get('room')
-							;
-					$saved_addresses .= $this->modx->getChunk($this->config['tplAddrFormSaved'], $addr);
-					//$this->print_arr($v->toArray());
-				}
-				$saved_addresses .= $this->modx->getChunk($this->config['tplAddrFormSaved'], array('id' => 0, 'address_info' => $this->modx->lexicon('ms.address.createnew'), 'checked' => $checked));
-			}
-			if (empty($arr['receiver'])) {$arr['receiver'] = $this->modx->user->getOne('Profile')->fullname;}
-		}
-		
-		$arr['saved_addresses'] = $saved_addresses;
-		$delivery = $_SESSION['minishop']['delivery'];
-		//return $this->modx->getChunk($this->config['tplAddrForm'], $arr);
-		*/
-		return $this->modx->getChunk($tpl, $arr);
-	}
 
-
-	// Проверка и сохранение адреса доставки в сессию
-	function saveAddrForm() {
-		$data = $_POST;
-		$arr = $tmp = array();
-		
-		/*
-		if ($_SESSION['minishop']['delivery'] == 'self') {
-			$mini = true;
-		}
-		*/
-		
-		/*
-		if ($data['address'] > 0) {
-			$_SESSION['minishop']['address'] = $data['address'];
-			header('Location: ' . $this->modx->makeUrl($this->config['page_confirm'], '', '', 'full'));
-		}
-		*/
-		
-		// Проверки данных присланной формы
-		// Обязательные поля для всех видов доставки
-		// Email, если есть
-		//if ($this->modx->user->isAuthenticated() == false) {
-		if ($email = $this->validate($data['email'], 'email')) {$arr['email'] = $email;}
-		else {$err['email'] = $this->modx->lexicon('ms.validate.email');}
-		//}
-		// Получатель
-		$fio = explode(' ', $data['receiver']);
-		foreach ($fio as $v) {
-			if ($tmp2 = $this->validate($v, 'fio')) {
-				$tmp[] = $tmp2;
-			}
-		}
-		if (count($tmp) > 0) {$arr['receiver'] = implode(' ', $tmp);}
-		else {$err['receiver'] = $this->modx->lexicon('ms.validate.receiver');}
-		// Телефон
-		if ($phone = $this->validate($data['phone'], 'phone')) {$arr['phone'] = $phone;}
-		else {$err['phone'] = $this->modx->lexicon('ms.validate.phone');}
-		
-		// Поля, обязательные только при доставке, а не самовывозе
-		if (!$mini) {
-			// Индекс
-			if ($index = $this->validate($data['index'], 'index')) {$arr['index'] = $index;}
-			else {$err['index'] = $this->modx->lexicon('ms.validate.index');}
-			// Область, город, улица, дом, квартира
-			if ($region = $this->validate($data['region'], 'notempty')) {$arr['region'] = $region;}
-			else {$err['region'] = $this->modx->lexicon('ms.validate.notempty');}
-			if ($city = $this->validate($data['city'], 'notempty')) {$arr['city'] = $city;}
-			else {$err['city'] = $this->modx->lexicon('ms.validate.notempty');}
-			if ($street = $this->validate($data['street'], 'notempty')) {$arr['street'] = $street;}
-			else {$err['street'] = $this->modx->lexicon('ms.validate.notempty');}
-			if ($building = $this->validate($data['building'], 'notempty')) {$arr['building'] = $building;}
-			else {$err['building'] = $this->modx->lexicon('ms.validate.notempty');}
-			if ($room = $this->validate($data['room'], 'notempty')) {$arr['room'] = $room;}
-			else {$err['room'] = $this->modx->lexicon('ms.validate.notempty');}
-			// Метро, комментарий
-			$arr['metro'] = $data['metro'];
-			$arr['comment'] = $data['comment'];
-		}
-		
-		if (!empty($data['delivery'])) {$_SESSION['minishop']['delivery'] = $arr['delivery'] = $data['delivery'];}
-		
-		if (count($err) > 0) {
-			$this->modx->setPlaceholders($err, 'error.');
-			return $this->getAddrForm($arr);
-		}
-		else {
-			$_SESSION['minishop']['address'] = $arr;
-			//header('Location: ' . $this->modx->makeUrl($this->config['page_confirm'], '', '', 'full'));
-			return $this->submitOrder();
-		}
-	}
-
-	// Подтверждение заказа
-	/*
-	function confirmOrder() {
-		// Проверка предыдущих шагов заказа
-		if (empty($_SESSION['minishop']['goods'])) {
-			header('Location: ' . $this->modx->makeUrl($this->config['page_cart'], '', '', $full));
-		}
-		if (empty($_SESSION['minishop']['delivery'])) {
-			header('Location: ' . $this->modx->makeUrl($this->config['page_delivery'], '', '', $full));
-		}
-		if (empty($_SESSION['minishop']['address']) && $_SESSION['minishop']['delivery'] != 'self') {
-			header('Location: ' . $this->modx->makeUrl($this->config['page_address'], '', '', $full));
-		}
-		
-		// Корзина
-		$arr = $this->renderCart($this->config['tplConfirmOrderRow']);
-
-		// Доставка
-		$arr['delivery'] = $_SESSION['minishop']['delivery'];
-		if ($arr['delivery'] == 'self' && $this->modx->user->isAuthenticated()) {
-			$arr['delivery_name'] = $this->modx->lexicon('ms.delivery.self');
-			$address = array(
-				'receiver' => $this->modx->user->getOne('Profile')->fullname
-				,'phone' => $this->modx->user->getOne('Profile')->mobilephone
-				,'email' => $this->modx->user->getOne('Profile')->email
-			);
-			//$address = $_SESSION['minishop']['address'];
-		}
-		else if ($arr['delivery'] == 'self' && !$this->modx->user->isAuthenticated()) {
-			$arr['delivery_name'] = $this->modx->lexicon('ms.delivery.self');
-			$address = $_SESSION['minishop']['address'];
-		}
-		else {
-			$tmp = $this->modx->getObject('modResource', $arr['delivery']);
-			$arr['delivery_name'] = $tmp->get('pagetitle');
-
-			if (is_array($_SESSION['minishop']['address'])) {
-				$address = $_SESSION['minishop']['address'];
-			}
-			else {
-				$res = $this->modx->getObject('ModAddress', array('uid' => $this->modx->user->id, 'id' => $_SESSION['minishop']['address']));
-				$address = $res->toArray();
-			}
-		}
-		
-
-		// Сливаем заказ и адрес
-		$arr = array_merge($arr, $address);
-
-		// Captcha
-		$d1 = rand(10, 100);
-		$d2 = rand(1, 90);
-		$arr['captcha'] = "$d1 + $d2";
-		$_SESSION['minishop']['captcha'] = $d1 + $d2;
-		$_SESSION['minishop']['cart_hash'] = $this->getCartHash();
-		$_SESSION['minishop']['cart_sum'] = $arr['total'];
-		
-		
-		return $this->modx->getChunk($this->config['tplConfirmOrder'], $arr);
-	}
-	*/
-	
-
-	// Контрольная ссума товаров корзины
-	/*
-	function getCartHash() {
-		$cart = $_SESSION['minishop']['goods'];
-		
-		$str = '';
-		foreach ($cart as $v) {
-			$str .= implode(',', $v);
-		}
-		
-		return md5($str);
-	}
-	*/
-
-
-	// Отправка заказа в БД
-	function submitOrder($captcha = '') {
-		// Проверка предыдущих шагов заказа
-		if (empty($_SESSION['minishop']['goods'])) {
-			header('Location: ' . $this->modx->makeUrl($this->config['page_cart'], '', '', $full));
-		}
-		/*
-		if (empty($_SESSION['minishop']['delivery'])) {
-			header('Location: ' . $this->modx->makeUrl($this->config['page_delivery'], '', '', $full));
-		}
-		if (empty($_SESSION['minishop']['address']) && $_SESSION['minishop']['delivery'] != 'self') {
-			header('Location: ' . $this->modx->makeUrl($this->config['page_address'], '', '', $full));
-		}
-		*/
-		// Проверка captcha
-		/*
-		if ((int) $_POST['captcha'] != $_SESSION['minishop']['captcha']) {
-			$this->modx->setPlaceholder('error.captcha', $this->modx->lexicon('ms.captcha.error'));
-			return $this->confirmOrder();
-		}
-		*/
-		// Проверка неизменности содержимого корзины при подтверждении заказа
-		/*
-		$hash = $this->getCartHash();
-		if ($hash != $_SESSION['minishop']['cart_hash']) {
-			$this->modx->setPlaceholder('error.cart_hash', $this->modx->lexicon('ms.cart_hash.error'));
-			return $this->confirmOrder();
-		}
-		*/
-		
 		// Проверка авторизации юзера и регистрация, при необходимости
 		if ($this->modx->user->isAuthenticated()) {
 			$uid = $this->modx->user->id;
@@ -768,12 +433,7 @@ class miniShop {
 			}
 		}
 		
-		
-		
-		
-		
 		// Отправка заказа в базу данных
-		
 		// Получаем номер заказа
 		$td = date('ym');
 		$tmp = $this->modx->query("SELECT `num` FROM {$this->modx->getTableName('ModOrders')} WHERE `num` LIKE '{$td}%' ORDER BY `id` DESC LIMIT 1");
@@ -792,7 +452,6 @@ class miniShop {
 			$address->set('uid', $uid);
 			$address->save();
 			$aid = $address->get('id');
-			//$this->print_arr($address->toArray());
 		}
 		/*
 		else if (!is_array($addr) && $addr > 0) {
@@ -847,7 +506,7 @@ class miniShop {
 		// Изменения статуса и отправка писем
 		if ($this->changeOrderStatus($order->get('id'), $this->config['ms_status_new'])) {
 			unset($_SESSION['minishop']);
-			return $this->modx->getChunk($this->config['tplSubmitOrderSuccess']);
+			return $this->modx->getChunk($this->config['tplSubmitOrderSuccess'], $order->toArray());
 		}
 		else {
 			return 'Error when change order status';
@@ -904,9 +563,7 @@ class miniShop {
 
 	// Отправка почты по указанному адресу, с темой и телом
 	function sendEmail($to, $subject, $message) {
-		if (!is_object($this->modx->mail)) {
-			$this->modx->getService('mail', 'mail.modPHPMailer');
-		}
+		if (!isset($this->modx->mail) && !is_object($this->modx->mail)) {$this->modx->getService('mail', 'mail.modPHPMailer');}
 		$this->modx->mail->set(modMail::MAIL_FROM, $this->modx->getOption('emailsender'));
 		$this->modx->mail->set(modMail::MAIL_FROM_NAME, $this->modx->getOption('site_name'));
 		$this->modx->mail->setHTML(true);
@@ -916,10 +573,9 @@ class miniShop {
 		$tmp = explode(',', $to);
 		foreach ($tmp as $v) {
 		  if (!empty($v) && preg_match('/@/', $v)) {
-			$this->modx->mail->address('to', $v);
+			$this->modx->mail->address('to', trim($v));
 		  }
 		}
-		//$this->modx->mail->attach($tmp_dir.$file, $file);
 		if (!$this->modx->mail->send()) {
 			$this->modx->log(modX::LOG_LEVEL_ERROR,'An error occurred while trying to send the email: '.$this->modx->mail->mailer->ErrorInfo);
 		}
@@ -927,5 +583,28 @@ class miniShop {
 	}
 
 
+
+
+
+
+
+	/*--------------------*/
+	/* DEPRECATED METHODS */
+	/*--------------------*/
+	function getAddrForm($arr = array()) {
+		return 'This method is disabled. You need to use FormIt!';
+	}
+	function saveAddrForm() {
+		return 'This method is disabled. You need to use FormIt!';
+	}
+	function validate($str = 0, $type = 0) {
+		return 'This method is disabled. You need to use FormIt!';
+	}
+	function utf8_ucfirst($string) {
+		$string = mb_ereg_replace("^[\ ]+","", $string);
+		$string = mb_strtolower($string, "utf-8");
+		$string = mb_strtoupper(mb_substr($string, 0, 1, "utf-8"), "UTF-8").mb_substr($string, 1, mb_strlen($string), "UTF-8" );  
+		return $string;  
+	}
 
 }

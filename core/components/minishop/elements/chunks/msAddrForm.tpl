@@ -1,9 +1,19 @@
-<form id="addrForm" method="post" action="[[~[[*id]]]]" class="center ajaxForm" data-target="#addrForm">
+[[!FormIt?
+	&hooks=`hook_msSaveForm,redirect`
+	&redirectTo=`61`
+	&placeholderPrefix=``
+	&validate=`email:email:required,
+		receiver:required,
+		street:required,
+		comment:stripTags`
+]]
+
+<form id="addrForm" method="post" action="[[~[[*id]]]]" class="center" data-target="#addrForm">
   <table id="newAddress">
     <tr>
       <th class="right">Email</th>
       <td>
-      	<input type="text" name="email" value="[[+email]]" />
+        <input type="text" name="email" value="[[+email]]" />
       </td>
       <td class="error">[[+error.email]]</td>
     </tr>
@@ -47,7 +57,7 @@
       <td>
         <input type="text" name="metro" value="[[+metro]]" />
       </td>
-      <td class="error"></td>
+      <td class="error">[[+error.metro]]</td>
     </tr>
     <tr>
       <th class="right">Улица</th>
@@ -75,10 +85,10 @@
       <td>
         <textarea name="comment">[[+comment]]</textarea>
       </td>
-      <td class="error"></td>
+      <td class="error">[[+error.comment]]</td>
     </tr>  
   </table>
   
-  <input type="hidden" name="action" value="saveAddrForm" />
+  <!--<input type="hidden" name="action" value="saveAddrForm" />-->
   <input type="submit" class="btn btn-primary" value="Отправить заказ">
 </form>

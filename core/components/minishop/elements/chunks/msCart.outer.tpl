@@ -21,5 +21,5 @@
 [[+total:gt=`0`:then=`
   <br/><br/>
   <h2>Оформление заказа</h2>
-  [[$tpl.msAddrForm]]
+  [[!$tpl.msAddrForm]]
 `:else=``]]
