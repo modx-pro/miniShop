@@ -65,7 +65,7 @@ foreach ($orders as $v) {
 	$arr[]= array(
 		'id' => $v->get('id')
 		,'num' => $v->get('num')
-		,'sum' => $v->get('sum')
+		,'sum' => $v->get('sum') + $v->getDeliveryPrice()
 		,'fullname' => $v->getFullName()
 		,'warehousename' => $v->getWarehouseName()
 		,'status' => $v->get('status')

@@ -24,6 +24,17 @@
       </td>
       <td class="error">[[+error.receiver]]</td>
     </tr>
+    
+    <tr>
+      <th class="right">Доставка</th>
+      <td>
+      	<select name="delivery" value="[[+delivery]]">
+	  [[!miniShop?action=`getDelivery`]]
+	</select>
+      </td>
+      <td class="error">[[+error.delivery]]</td>
+    </tr>   
+    
     <tr>
       <th class="right">Телефон</th>
       <td>

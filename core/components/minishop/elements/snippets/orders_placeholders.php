@@ -4,17 +4,15 @@ if (empty($oid)) {return false;}
 $tplCartRows = $modx->getOption('tplRow', $scriptProperties, 'tpl.msOrderEmail.row');
 
 if (!isset($modx->miniShop) || !is_object($modx->miniShop)) {
-	$miniShop = $modx->getService('miniShop','miniShop',$modx->getOption('minishop.core_path',null,$modx->getOption('core_path').'components/minishop/').'model/minishop/', $scriptProperties);
-	if (!($miniShop instanceof miniShop)) return '';
+	$modx->miniShop = $modx->getService('minishop','miniShop', $modx->getOption('core_path').'components/minishop/model/minishop/', $scriptProperties);
+	if (!($modx->miniShop instanceof miniShop)) return '';
 }
-
-$modx->miniShop->initialize();
 
 // Плейсхолдеры заказа
 if ($order = $modx->getObject('ModOrders', $oid)) {
 	$tmp = $order->toArray();
-	$tmp['delivery_name'] = $order->getDeliveryName();
-	$tmp['delivery_price'] = $delivery_price = $order->getDeliveryPrice();
+	$tmp['order.delivery_name'] = $order->getDeliveryName();
+	$tmp['order.delivery_price'] = $delivery_price = $order->getDeliveryPrice();
 	$modx->setPlaceholders($tmp,'order.');
 }
 // Плейсхолдеры адреса

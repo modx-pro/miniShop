@@ -123,4 +123,12 @@ $chunks[11]->fromArray(array(
     'snippet' => getSnippetContent($sources['source_core'].'/elements/chunks/msMyOrdersList.tpl'),
 ),'',true,true);
 
+$chunks[12]= $modx->newObject('modChunk');
+$chunks[12]->fromArray(array(
+    'id' => 0,
+    'name' => 'tpl.msDelivery.row',
+    'description' => 'Chunk for one delivery method',
+    'snippet' => getSnippetContent($sources['source_core'].'/elements/chunks/msDelivery.row.tpl'),
+),'',true,true);
+
 return $chunks;

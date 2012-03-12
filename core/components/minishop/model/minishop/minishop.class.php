@@ -365,43 +365,23 @@ class miniShop {
 	}
 
 
-	// Форма выбора доставки
-	/*
-	function selectDelivery() {
-		// Проверка предыдущих шагов заказа
-		if (empty($_SESSION['minishop']['goods'])) {
-			header('Location: ' . $this->modx->makeUrl($this->config['page_cart'], '', '', $full));
-		}
-		$delivery = $_SESSION['minishop']['delivery'];
+	// Вывод методов доставки текущего склада
+	function getDelivery() {
+		$options = '';
 
-		$q = $this->modx->newQuery('modResource');
-		$q->where(array('parent' => $this->config['warehouse']));
-		$q->sortby('menuindex', 'ASC');
-		
-		if ($_SESSION['minishop']['delivery'] == 'self') {$checked = 'checked';}
-		$rows = $this->modx->getChunk($this->config['tplDeliveryRow'], array('id' => 'self', 'pagetitle' => $this->modx->lexicon('ms.delivery.self'), 'checked' => $checked));
-		if ($res = $this->modx->getCollection('modResource', $q)) {
+		$q = $this->modx->newQuery('ModDelivery');
+		$q->where(array('enabled' => 1, 'wid' => $_SESSION['minishop']['warehouse']));
+		$q->sortby('id','ASC');
+
+		if ($res = $this->modx->getCollection('ModDelivery', $q)) {
 			foreach ($res as $v) {
 				$tmp = $v->toArray();
-
-				if ($tmp['id'] == $delivery) {
-					$tmp['checked'] = 'checked';
-				}
-				else {
-					$tmp['checked'] = '';
-				}
-				$rows .= $this->modx->getChunk($this->config['tplDeliveryRow'], $tmp);
+				if ($_POST['delivery'] == $tmp['id'] || $_SESSION['minishop']['delivery'] == $tmp['id']) {$tmp['selected'] = 'selected';} else {$tmp['selected'] = '';}
+				$options .= $this->modx->getChunk($this->config['tplDeliveryRow'], $tmp);
 			}
 		}
-		
-		$pl = array(
-			'rows' => $rows
-			,'delivery' => $delivery
-		);
-
-		return $this->modx->getChunk($this->config['tplDeliveryOuter'], $pl);
+		return $options;
 	}
-	*/
 
 
 	// Отправка заказа в БД
@@ -563,7 +543,7 @@ class miniShop {
 
 	// Отправка почты по указанному адресу, с темой и телом
 	function sendEmail($to, $subject, $message) {
-		if (!isset($this->modx->mail) && !is_object($this->modx->mail)) {$this->modx->getService('mail', 'mail.modPHPMailer');}
+		if (!isset($this->modx->mail) || !is_object($this->modx->mail)) {$this->modx->getService('mail', 'mail.modPHPMailer');}
 		$this->modx->mail->set(modMail::MAIL_FROM, $this->modx->getOption('emailsender'));
 		$this->modx->mail->set(modMail::MAIL_FROM_NAME, $this->modx->getOption('site_name'));
 		$this->modx->mail->setHTML(true);

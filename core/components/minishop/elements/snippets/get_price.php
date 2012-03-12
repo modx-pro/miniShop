@@ -5,3 +5,4 @@
 if (!empty($input)) {$price = $input;}
 
 return $price;
+?>

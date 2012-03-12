@@ -198,7 +198,8 @@ foreach ($parents as $parent) {
 
 // add by bezumkin 22/02.2012
 if (!isset($modx->miniShop) || !is_object($modx->miniShop)) {
-	$modx->getService('miniShop','miniShop',$modx->getOption('minishop.core_path',null,$modx->getOption('core_path').'components/minishop/').'model/minishop/', array());
+	$modx->miniShop = $modx->getService('minishop','miniShop', $modx->getOption('core_path').'components/minishop/model/minishop/', $scriptProperties);
+	if (!($modx->miniShop instanceof miniShop)) return '';
 }
 $incats = $modx->miniShop->getGoodsByCategories($parentArray);
 // eof add

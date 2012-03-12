@@ -6,3 +6,4 @@ if (!empty($data['delivery'])) {$_SESSION['minishop']['delivery'] = $data['deliv
 $_SESSION['minishop']['address'] = $data;
 
 return true;
+?>

@@ -63,6 +63,7 @@ foreach ($orders as $v) {
     $tmp = $v->toArray();
 	$tmp['fullname'] = $v->getFullName();
 	$tmp['warehousename'] = $v->getWarehouseName();
+	$tmp['sum'] += $v->getDeliveryPrice();
 	$arr[]= $tmp;
 	
 }

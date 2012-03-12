@@ -12,15 +12,21 @@
   </tr>
   [[+cart.rows]]
   <tr align="center">
-    <td colspan="2"><b>Итого без стоимости доставки:</b></td>
+    <td colspan="2"><b>Итого с учетом доставки:</b></td>
     <td><b id="cartCount">[[+cart.count]]</b> шт.</td>
     <td><b id="cartTotal">[[+cart.total]]</b> руб.</td>
     <td>&nbsp;</td>
   </tr>
 </table>
 
+<p><b>Способ доставки:</b> [[+order.delivery_name]] ([[+order.delivery_price]]руб.)</p>
+
 <br/><br/>
   <table>
+    <tr>
+      <th>Email</th>
+      <td>[[+user.email]]</td>
+    </tr>
     <tr>
       <th>Ф.И.О. получателя</th>
       <td>[[+addr.receiver]]</td>
