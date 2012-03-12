@@ -17,7 +17,7 @@ $c['tplOrderEmailUser'] = $modx->getOption('tplOrderEmailUser', $scriptPropertie
 $c['tplOrderEmailManager'] = $modx->getOption('tplOrderEmailManager', $scriptProperties, 'tpl.msOrderEmail.manager');
 $c['tplOrderEmailRow'] = $modx->getOption('tplOrderEmailRow', $scriptProperties, 'tpl.msOrderEmail.row');
 $c['tplSubmitOrderSuccess'] = $modx->getOption('tplSubmitOrderSuccess', $scriptProperties, 'tpl.msSubmitOrder.success');
-$c['tplMyOrdersList'] = $modx->getOption('tplMyOrdersList', $scriptProperties, 'tpl.msMyOrdersList');
+$c['tplMyOrdersList'] = $modx->getOption('tplMyOrdersList', $scriptProperties, 'tpl.msMyOrdersList'); 
 
 // Подключение класса
 if (!isset($modx->miniShop) || !is_object($modx->miniShop)) {

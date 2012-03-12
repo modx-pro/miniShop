@@ -231,10 +231,9 @@ class miniShop {
 
 	// Цена товара
 	function getPrice($id) {
-		if ($res = $this->modx->getObject('ModGoods', array('gid' => $id, 'wid' => $_SESSION['minishop']['warehouse']))) {
-			$price = $res->get('price');
-
-			return $this->modx->runSnippet('msGetPrice', array('input' => $price));
+		if ($res = $this->modx->getObject('modResource', $id)) {
+			$snippet = $this->modx->getOption('minishop.getprice_snippet');
+			return $this->modx->runSnippet($snippet, array('resource' => $res));
 		}
 		else {
 			return 0;

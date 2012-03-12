@@ -462,6 +462,7 @@ foreach ($collection as $resourceId => $resource) {
 	$ms_properties = array();
 	if ($msp = $modx->getObject('ModGoods', array('gid' => $resource->get('id'), 'wid' => $_SESSION['minishop']['warehouse']))) {
 		$ms_properties = $msp->toArray();
+		$ms_properties['price'] = $modx->miniShop->getPrice($resource->get('id'));
 		unset($ms_properties['id']);
 	}
 	// eof add

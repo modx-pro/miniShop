@@ -4,18 +4,17 @@ if (!isset($modx->miniShop) || !is_object($modx->miniShop)) {
 	if (!($modx->miniShop instanceof miniShop)) return '';
 }
 
-$wid = $_SESSION['minishop']['warehouse'];
+$result = '';
 
-if ($res = $modx->getObject('ModGoods', array('gid' => $input, 'wid' => $wid))) {
-	if ($options == 'price') {
-		$result = $modx->runSnippet('msGetPrice', array('price' => $res->get('price')));
-	}
-	else {
+if ($options == 'price') {
+	$result =  $modx->miniShop->getPrice($input); 
+}
+else {
+	$wid = $_SESSION['minishop']['warehouse'];
+	if ($res = $modx->getObject('ModGoods', array('gid' => $input, 'wid' => $wid))) {
 		$result = $res->get($options);
 	}
-
-	if (empty($result)) {return ' ';}
-	else {return $result;}
 }
-else {return ' ';}
-?>
+
+if (empty($result)) {return ' ';}
+else {return $result;}

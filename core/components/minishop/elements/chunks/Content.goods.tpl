@@ -13,7 +13,7 @@
       </div>
       <div class="row show-grid">
 	<div class="span2" data-original-title="">Цена:</div>
-	<div class="span4" data-original-title=""><strong>[[+price:default=`0`]]</strong> [[+currency]]</div>
+	<div class="span4" data-original-title=""><strong>[[+price:default=`0`]]</strong> [[+currency:default=`руб.`]]</div>
       </div>
       <div class="row show-grid">
 	<div class="span2" data-original-title="">Текущий склад:</div>

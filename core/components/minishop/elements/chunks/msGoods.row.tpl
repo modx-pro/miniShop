@@ -7,7 +7,7 @@
     <a href="[[~[[+id]]]]"><strong>[[+pagetitle]]</strong></a>
     [[+remains:gt=`0`:then=` <a href='#' class="addToCartLink" title="Добавить в корзину" data-gid="[[+id]]"><i class="icon-barcode"></i></a>`]]
     <br/>
-    Цена: [[+price]] [[+currency]]
+    Цена: [[+price]] [[+currency:default=`руб.`]]
   </div>
 </div>
 </p>

@@ -13,7 +13,7 @@
   <tr align="center">
     <td colspan="3"><b>Итого без стоимости доставки:</b></td>
     <td><b id="cartCount">[[+count]]</b> шт.</td>
-    <td><b id="cartTotal">[[+total]]</b> руб.</td>
+    <td><b id="cartTotal">[[+total]]</b> [[+currency:default=`руб.`]]</td>
     <td>&nbsp;</td>
   </tr>
 </table>

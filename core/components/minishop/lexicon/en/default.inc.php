@@ -199,4 +199,4 @@ $_lang['ms.chunk.select'] = 'Select chunk';
 $_lang['ms.template.select'] = 'Select template';
 
 
-
+$_lang['ms.cart_empty.warning'] = 'Your cart will be cleared! Continue?';

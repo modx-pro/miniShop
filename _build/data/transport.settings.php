@@ -54,4 +54,13 @@ $settings[2]->fromArray(array(
     'area' => 'settings',
 ),'',true,true);
 
+$settings[3]= $modx->newObject('modSystemSetting');
+$settings[3]->fromArray(array(
+    'key' => 'minishop.getprice_snippet',
+    'value' => 'msGetPrice',
+    'xtype' => 'textfield',
+    'namespace' => 'minishop',
+    'area' => 'settings',
+),'',true,true);
+
 return $settings;
