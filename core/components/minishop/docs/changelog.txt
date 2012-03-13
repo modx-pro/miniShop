@@ -2,10 +2,9 @@ Changelog for miniShop.
 
 1.1.0 beta (13.03.2012)
 - Отправка реквизитов для заказа переделана на FormIt, что позволяет более гибко настроить валидацию. Изменен чанк tpl.msAddrForm.
-- Генеральная уборка кода.
 - Новый &action у сниппета miniShop - getDelivery. Выводит методы доставки текущего склада в виде &tplDeliveryRow - чанка оформления. По умолчанию в виде option для тэга select.
 - Доставка полностью работает и учитывается везде (надеюсь). Плейсхолдеры доставки в msGetOrdersPlaceholders. Изменены чанки писем.
-- Новый параметр &userGroups у сниппета miniShop. Розволяет указать через запятую группы регистрируемых при заказе покупателей. По умолчанию - нет.
+- Новый параметр &userGroups у сниппета miniShop. Позволяет указать через запятую группы регистрируемых при заказе покупателей. По умолчанию - нет.
 - Новый системный параметр minishop.getprice_snippet. Сниппет должен принять объект ресурса и вернуть цену. По умолчанию это msGetPrice.
 - Добавлена оплата заказов через платежного агрегатора z-payment.ru, в связи с этим:
 	- Новый системный параметр minishop.status_paid - выставлять этот статус заказу при поступлении оплаты.
@@ -15,8 +14,22 @@ Changelog for miniShop.
 	- Новое действие у сниппета miniShop: redirectCustomer - переправляет покупателя на сайт сервиса для оплаты.
 	- Новое действие у сниппета miniShop: receivePayment - принимает уведомление об оплате заказа и переключает статус (с сохранением в историю и отправкой писем).
 	- Все ошибки платежей в сохраняются в системный лог
-
-
+- Исправление ошибок и генеральная уборка кода.
+-----
+- Change personal details for order submition to FormIt to make flexible validation. Chunk tpl.msAddrForm was changed.
+- Add new &action to miniShop snippet - getDelivery. It outputs methods of the delivery for current warehouse (templating chunk - &tplDeliveryRow). By default it`s the option for select tag.
+- Fix delivery, it works everywhere. Delivery placeholders are in msGetOrdersPlaceholders. Change letter chunks.
+- Add new parameter &userGroups for miniShop snippet. It allows to declare groups (separated by commas) of registered customers when they makes an order. By default - NULL.
+- Add new system parameter minishop.getprice_snippet. It receives Resource object and returns price. By default - msGetPrice.
+- Add new payment system via payment agregator z-payment.ru, considering this:
+	- Add new system parameter minishop.status_paid. This parameter is set when the payment is done.
+	- Add new system parameter minishop.payment_shopid - number of the shop in z-payment.ru system.
+	- Add new system parameter minishop.payment_key - secret Merchant Key of the shop in z-payment.ru system.
+	- Add new chunk tpl.msPayment.form - the form for payment creation at the payment system.
+	- Add new action in miniShop snippet: redirectCustomer - customer redirection to service site for making the payment.
+	- Add new action in miniShop snippet: receivePayment - it receives notification about payment and switch order status (with preserving the history and sending emails).
+	- All payment errors are stored in the system log.
+- Bugfixes and cleaning code.
 
 
 1.0.2 beta2 (06.03.2012)
