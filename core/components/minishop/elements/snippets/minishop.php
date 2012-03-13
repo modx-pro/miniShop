@@ -3,7 +3,7 @@
 if (empty($_REQUEST['action'])) {$action = $modx->getOption('action', $scriptProperties, 'getCart');}
 else {$action = $_REQUEST['action'];}
 
-// Шаблоны оформления
+// Чанки оформления
 $c['tplCartOuter'] = $modx->getOption('tplCartOuter', $scriptProperties, 'tpl.msCart.outer');
 $c['tplCartRow'] = $modx->getOption('tplCartRow', $scriptProperties, 'tpl.msCart.row');
 $c['tplCartStatus'] = $modx->getOption('tplCartStatus', $scriptProperties, 'tpl.msCart.status');
@@ -18,6 +18,10 @@ $c['tplOrderEmailManager'] = $modx->getOption('tplOrderEmailManager', $scriptPro
 $c['tplOrderEmailRow'] = $modx->getOption('tplOrderEmailRow', $scriptProperties, 'tpl.msOrderEmail.row');
 $c['tplSubmitOrderSuccess'] = $modx->getOption('tplSubmitOrderSuccess', $scriptProperties, 'tpl.msSubmitOrder.success');
 $c['tplMyOrdersList'] = $modx->getOption('tplMyOrdersList', $scriptProperties, 'tpl.msMyOrdersList'); 
+$c['tplPaymentForm'] = $modx->getOption('tplPaymentForm', $scriptProperties, 'tpl.msPayment.form');
+
+// Группы для регистрации покупателей
+$c['userGroups'] = $modx->getOption('userGroups', $scriptProperties, 0);
 
 // Подключение класса
 if (!isset($modx->miniShop) || !is_object($modx->miniShop)) {
@@ -35,7 +39,9 @@ switch ($action) {
 	case 'getDelivery': $res = $modx->miniShop->getDelivery(); break; 
 	case 'submitOrder': $res = $modx->miniShop->submitOrder(); break;
 	case 'getMyOrdersList': $res = $modx->miniShop->getMyOrdersList(); break;
-
+	case 'redirectCustomer': $res = $modx->miniShop->redirectCustomer($_REQUEST['oid'], $_REQUEST['email']); break;
+	case 'receivePayment': $res = $modx->miniShop->receivePayment($_REQUEST); break;
+  
 	//ExtJS connectors
 	case 'orders/getlist': echo $modx->runProcessor('web/orders/getlist', array(), array('processors_path' => $modx->miniShop->config['processorsPath']))->response; die;
 	case 'status/getcombo': echo $modx->runProcessor('web/status/getcombo', array(), array('processors_path' => $modx->miniShop->config['processorsPath']))->response; die;

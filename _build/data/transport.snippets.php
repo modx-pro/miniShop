@@ -52,7 +52,7 @@ $snippets[2]->fromArray(array(
     'id' => 0,
     'name' => 'msGetPrice',
     'description' => 'Snippet for modification the goods price. Any rules for changing price will be here.',
-    'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/getprice.php'),
+    'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/get_price.php'),
 ),'',true,true);
 $snippets[2]->setProperties($properties);
 
@@ -104,9 +104,9 @@ $snippets[7]->setProperties($properties);
 $snippets[8]= $modx->newObject('modSnippet');
 $snippets[8]->fromArray(array(
     'id' => 0,
-    'name' => 'msGetDelivery',
-    'description' => 'This snippet shows enabled warehouse delivery methods.',
-    'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/get_delivery.php'),
+    'name' => 'hook_msSaveForm',
+    'description' => 'FormIt hook for submitting orders',
+    'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/hook_saveform.php'),
 ),'',true,true);
 $snippets[8]->setProperties($properties);
 

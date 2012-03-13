@@ -67,6 +67,16 @@ if ($object->xpdo) {
 					,'body2manager' => 'tpl.msOrderEmail.manager'
 				));
 				$tmp->save();
+				$tmp = $modx->newObject('ModStatus', array(
+					'name' => 'Оплачен'
+					,'email2user' => 1
+					,'email2manager' => 1
+					,'subject2user' => 'Вы оплатили заказ №[[+num]]!'
+					,'subject2manager' => 'Заказ №[[+num]] оплачен!'
+					,'body2user' => 'tpl.msOrderEmail.user'
+					,'body2manager' => 'tpl.msOrderEmail.manager'
+				));
+				$tmp->save();
 			}
 			
             break;

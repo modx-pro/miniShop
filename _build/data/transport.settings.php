@@ -63,4 +63,32 @@ $settings[3]->fromArray(array(
     'area' => 'settings',
 ),'',true,true);
 
+$settings[4]= $modx->newObject('modSystemSetting');
+$settings[4]->fromArray(array(
+    'key' => 'minishop.status_paid',
+    'value' => 2,
+    'xtype' => 'numberfield',
+    'namespace' => 'minishop',
+    'area' => 'settings',
+),'',true,true);
+
+$settings[5]= $modx->newObject('modSystemSetting');
+$settings[5]->fromArray(array(
+    'key' => 'minishop.payment_shopid',
+    'value' => '0',
+    'xtype' => 'numberfield',
+    'namespace' => 'minishop',
+    'area' => 'settings',
+),'',true,true);
+
+$settings[6]= $modx->newObject('modSystemSetting');
+$settings[6]->fromArray(array(
+    'key' => 'minishop.payment_key',
+    'value' => '000000',
+    'xtype' => 'text-password',
+    'namespace' => 'minishop',
+    'area' => 'settings',
+),'',true,true);
+
+
 return $settings;

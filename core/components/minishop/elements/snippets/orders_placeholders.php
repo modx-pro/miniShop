@@ -11,8 +11,8 @@ if (!isset($modx->miniShop) || !is_object($modx->miniShop)) {
 // Плейсхолдеры заказа
 if ($order = $modx->getObject('ModOrders', $oid)) {
 	$tmp = $order->toArray();
-	$tmp['order.delivery_name'] = $order->getDeliveryName();
-	$tmp['order.delivery_price'] = $delivery_price = $order->getDeliveryPrice();
+	$tmp['delivery_name'] = $order->getDeliveryName();
+	$tmp['delivery_price'] = $delivery_price = $order->getDeliveryPrice();
 	$modx->setPlaceholders($tmp,'order.');
 }
 // Плейсхолдеры адреса

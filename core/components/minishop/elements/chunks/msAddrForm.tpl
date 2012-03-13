@@ -1,6 +1,7 @@
 [[!FormIt?
 	&hooks=`hook_msSaveForm,redirect`
-	&redirectTo=`61`
+	&redirectTo=`[[*id]]`
+        &redirectParams=`{"action":"submitOrder"}`
 	&placeholderPrefix=``
 	&validate=`email:email:required,
 		receiver:required,

@@ -131,4 +131,12 @@ $chunks[12]->fromArray(array(
     'snippet' => getSnippetContent($sources['source_core'].'/elements/chunks/msDelivery.row.tpl'),
 ),'',true,true);
 
+$chunks[13]= $modx->newObject('modChunk');
+$chunks[13]->fromArray(array(
+    'id' => 0,
+    'name' => 'tpl.msPayment.form',
+    'description' => 'Payment form for z-payment.ru',
+    'snippet' => getSnippetContent($sources['source_core'].'/elements/chunks/msPayment.form.tpl'),
+),'',true,true);
+
 return $chunks;

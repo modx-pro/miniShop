@@ -111,8 +111,9 @@ class miniShop {
 	// Логирование изменений заказов и товаров в БД
 	function Log($type, $id, $operation, $old, $new) {
 		if ($old == $new) {return;}
+		$uid = empty($this->modx->user->id) ? 1 : $this->modx->user->id;
 		$res = $this->modx->newObject('ModLog');
-		$res->set('uid', $this->modx->user->id);
+		$res->set('uid', $uid);
 		$res->set('type', $type);
 		$res->set('iid', $id);
 		$res->set('operation', $operation);
@@ -408,6 +409,15 @@ class miniShop {
 				$profile = $this->modx->newObject('modUserProfile', array('email' => $email, 'fullname' => $_SESSION['minishop']['address']['receiver']));
 				$user->addOne($profile);
 				$user->save();
+				
+				// Если указано - заносим в группы
+				if (!empty($this->config['userGroups'])) {
+					$groups = explode(',', $this->config['userGroups']);
+					foreach ($groups as $group) {
+						$user->joinGroup(trim($group));
+					}
+				}
+				
 				$uid = $user->get('id');
 			}
 		}
@@ -485,7 +495,9 @@ class miniShop {
 		// Изменения статуса и отправка писем
 		if ($this->changeOrderStatus($order->get('id'), $this->config['ms_status_new'])) {
 			unset($_SESSION['minishop']);
-			return $this->modx->getChunk($this->config['tplSubmitOrderSuccess'], $order->toArray());
+			$arr = $order->toArray();
+			$arr['email'] = $profile->get('email');
+			return $this->modx->getChunk($this->config['tplSubmitOrderSuccess'], $arr);
 		}
 		else {
 			return 'Error when change order status';
@@ -562,8 +574,97 @@ class miniShop {
 	}
 
 
+	// Отправка покупателя на оплату
+	function redirectCustomer($oid, $email) {
+		if (empty($oid)) {
+			$this->modx->log(modX::LOG_LEVEL_ERROR,'msPayment ERR: Empty order Id');
+			return $this->modx->lexicon('ms.payment.error');
+		}
+		if (empty($email)) {
+			$this->modx->log(modX::LOG_LEVEL_ERROR,'msPayment ERR: Empty order email');
+			return $this->modx->lexicon('ms.payment.error');
+		}
+
+		if ($tmp = $this->modx->getObject('ModOrders', $oid)) {
+			$order = $tmp->toArray();
+			$order['sum'] += $tmp->getDeliveryPrice();
+
+			if ($tmp2 = $this->modx->getObject('modUserProfile', array('internalKey' => $order['uid']))) {
+				$order['email'] = $tmp2->get('email');
+			}
+		}
+		else {
+			$this->modx->log(modX::LOG_LEVEL_ERROR,'msPayment ERR: Order with Id '.$oid.' not found');
+			return $this->modx->lexicon('ms.payment.error');
+		}
+
+		if (empty($tmp) || $order['email'] != $email) {
+			$this->modx->log(modX::LOG_LEVEL_ERROR,'msPayment ERR: Wrong email '.$email.' for order with Id = '.$oid);
+			return $this->modx->lexicon('ms.payment.error');
+		}
+		else {
+			return $this->modx->getChunk($this->config['tplPaymentForm'], $order);
+		}
+	}
 
 
+	// Прием информации об оплате от z-payment.ru
+	function receivePayment($data) {
+		if (strstr($_SERVER['HTTP_REFERER'], 'z-payment.ru') != false) {
+			$url = $this->modx->getOption('site_url');
+			$this->modx->sendRedirect($url);
+		}
+		if (empty($data)) {$this->paymentError('Empty payment request');}
+
+		$status_paid = $this->modx->getOption('minishop.status_paid');
+		$shop_id = $this->modx->getOption('minishop.payment_shopid');
+		$payment_key = $this->modx->getOption('minishop.payment_key');
+
+		foreach ($data as $Key => $Value) {
+			$$Key = $Value;
+		}
+
+		//Проверяем номер магазина
+		if ($LMI_PAYEE_PURSE != $shop_id) {$this->paymentError('Invalid shop Id '.$LMI_PAYEE_PURSE);}
+		//Проверяем наличие заказа и его сумму
+		if ($res = $this->modx->getObject('ModOrders', array('id' => $LMI_PAYMENT_NO, 'status:!=' => $status_paid))) {
+			$sum = $res->get('sum') + $res->getDeliveryPrice();
+			if ($sum != intval($LMI_PAYMENT_AMOUNT)) {$this->paymentError('Wrong amount of the order');}
+		}
+		else {$this->paymentError('Order with Id = '.$LMI_PAYMENT_NO.' not found or already paid');}
+
+		// Если это предварительный запрос - отвечаем YES
+		if ($LMI_PREREQUEST == 1) {die('YES');}
+
+		// Рабочий запрос - проверяем хэш
+		$CalcHash = md5($LMI_PAYEE_PURSE
+						.$LMI_PAYMENT_AMOUNT
+						.$LMI_PAYMENT_NO
+						.$LMI_MODE
+						.$LMI_SYS_INVS_NO
+						.$LMI_SYS_TRANS_NO
+						.$LMI_SYS_TRANS_DATE
+						.$payment_key
+						.$LMI_PAYER_PURSE
+						.$LMI_PAYER_WM
+					);
+		// Хэш совпадает, проводим платеж у себя
+		if($LMI_HASH == strtoupper($CalcHash)) {
+			//Подтверждение оплаты заказа
+			if ($this->changeOrderStatus($LMI_PAYMENT_NO, $status_paid)) {
+				die('YES');
+			}
+		}
+		else {$this->paymentError('Wrong HASH');}
+	}
+
+
+	// Функция вывода ошибки приема оплаты
+	function paymentError($text) {
+		$this->modx->log(modX::LOG_LEVEL_ERROR,'msPayment ERR: '.$text);
+		header("HTTP/1.0 400 Bad Request");
+		die('ERR: '.$text);
+	}
 
 
 

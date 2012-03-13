@@ -197,5 +197,6 @@ $_lang['ms.vieworder'] = 'Подробности';
 $_lang['ms.chunk.select'] = 'Выберите чанк';
 $_lang['ms.template.select'] = 'Выберите шаблон';
 
-
 $_lang['ms.cart_empty.warning'] = 'При смене склада корзина будет очищена! Продолжить?';
+
+$_lang['ms.payment.error'] = 'Ошибка проведения платежа';
