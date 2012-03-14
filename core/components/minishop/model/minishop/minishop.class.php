@@ -352,8 +352,10 @@ class miniShop {
 				}
 				
 				// Дополнительные свойства выбранного товара
-				foreach ($v['data'] as $k2 => $v2) {
-					$tmp['data.'.$k2] = $v2;
+				if (is_array($v['data']) && !empty($v['data'])) {
+					foreach ($v['data'] as $k2 => $v2) {
+						$tmp['data.'.$k2] = $v2;
+					}
 				}
 				$arr['rows'] .= $this->modx->getChunk($tpl, $tmp);
 				

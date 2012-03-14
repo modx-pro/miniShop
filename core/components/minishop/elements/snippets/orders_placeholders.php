@@ -51,8 +51,10 @@ foreach ($cart as $v) {
 		}
 		
 		$data = json_decode($v->get('data'), 1);
-		foreach ($data as $k2 => $v2) {
-			$tmp['data.'.$k2] = $v2;
+		if (is_array($data) && !empty($data)) {
+			foreach ($data as $k2 => $v2) {
+				$tmp['data.'.$k2] = $v2;
+			}
 		}
 
 		$arr['rows'] .= $modx->getChunk($tplCartRows, $tmp);
