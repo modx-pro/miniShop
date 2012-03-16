@@ -396,6 +396,12 @@ class miniShop {
 		// Проверка авторизации юзера и регистрация, при необходимости
 		if ($this->modx->user->isAuthenticated()) {
 			$uid = $this->modx->user->id;
+			$profile = $this->modx->user->getOne('Profile');
+			$email = $profile->get('email');
+			if (empty($email)) {
+				$profile->set('email', $_SESSION['minishop']['address']['email']);
+				$profile->save();
+			}
 		}
 		// Юзер не авторизован
 		else {
@@ -403,7 +409,6 @@ class miniShop {
 			$email = $_SESSION['minishop']['address']['email'];
 			if ($profile = $this->modx->getObject('modUserProfile', array('email' => $email))) {
 				$uid = $profile->get('internalKey');
-				
 			}
 			// Новый юзер, регистрируем
 			else {
@@ -419,7 +424,6 @@ class miniShop {
 						$user->joinGroup(trim($group));
 					}
 				}
-				
 				$uid = $user->get('id');
 			}
 		}
