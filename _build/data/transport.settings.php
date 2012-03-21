@@ -89,6 +89,32 @@ $settings[6]->fromArray(array(
     'namespace' => 'minishop',
     'area' => 'settings',
 ),'',true,true);
+/*
+$settings[7]= $modx->newObject('modSystemSetting');
+$settings[7]->fromArray(array(
+    'key' => 'minishop.enable_remains',
+    'value' => '0',
+    'xtype' => 'combo-boolean',
+    'namespace' => 'minishop',
+    'area' => 'settings',
+),'',true,true);
 
+$settings[8]= $modx->newObject('modSystemSetting');
+$settings[8]->fromArray(array(
+    'key' => 'minishop.status_final',
+    'value' => '0',
+    'xtype' => 'numberfield',
+    'namespace' => 'minishop',
+    'area' => 'settings',
+),'',true,true);
 
+$settings[9]= $modx->newObject('modSystemSetting');
+$settings[9]->fromArray(array(
+    'key' => 'minishop.status_cancel',
+    'value' => '0',
+    'xtype' => 'numberfield',
+    'namespace' => 'minishop',
+    'area' => 'settings',
+),'',true,true);
+*/
 return $settings;

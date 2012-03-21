@@ -11,7 +11,11 @@ $(document).ready(function() {
 	// Добавление товара в корзину
 	$('.addToCartLink').live('click', function() {
 		var gid = $(this).data('gid');
-		$.post(url, {action: 'addToCart', gid: gid, num: 1, data: {}}, function(data) {
+                var params = {};
+                $('.params').each(function(id, param) {
+                        params[param.name] = param.value;			
+                });
+		$.post(url, {action: 'addToCart', gid: gid, num: 1, data: params}, function(data) {
 			data = $.parseJSON(data);
 			showResponse(data);
 			cartStatus(data);

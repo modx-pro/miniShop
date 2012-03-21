@@ -41,6 +41,8 @@ else {
 	if ($res2 = $modx->getObject('ModGoods', array('gid' => $id))) {
 		$res2->remove();
 	}
+	
+	$modx->removeCollection('ModCategories', array('gid' => $id));
 }
 
 /* output */

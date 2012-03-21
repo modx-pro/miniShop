@@ -66,6 +66,8 @@ $_lang['ms.permission'] = 'Право доступа';
 $_lang['ms.required_field'] = 'Это поле обязательно';
 $_lang['ms.no_permission'] = 'У вас нет прав для выполнения этой операции.';
 $_lang['ms.permission.description'] = 'Разрешение, которое будет требовать объект от пользователя. Права создаются в разделе "Безопасность &rarr; Контроль доступа"';
+$_lang['ms.duplicate'] = 'Сделать копию';
+$_lang['ms.duplicate_confirm'] = 'Сделать копию этого товара?';
 
 $_lang['ms.warehouse.select'] = 'Выберите склад';
 $_lang['ms.warehouse.create'] = 'Создать склад';

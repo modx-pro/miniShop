@@ -100,12 +100,17 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
 			return '';
 		}
 	}
+
 	,getMenu: function() {
 		var m = [];
 		m.push({
 			text: _('ms.goods.change')
 			,handler: this.editGoods
 			,scope: this
+		});
+		m.push({
+			text: _('ms.duplicate')
+			,handler: this.duplicateGoods
 		});
 		m.push('-');
 		m.push({
@@ -116,7 +121,7 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
 			text: _('ms.goods.goto_manager_page')
 			,handler: this.goToGoodsManagerPage
 		});
-		m.push('-');        
+		m.push('-');     
 		m.push({
 			text: _('ms.goods.delete')
 			,handler: this.deleteGoods
@@ -196,6 +201,22 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
 			}
 		});
 	}
+	,duplicateGoods: function(btn,e) {
+		MODx.msg.confirm({
+			title: _('ms.duplicate')
+			,text: _('ms.duplicate_confirm')
+			,url: this.config.url
+			,params: {
+				action: 'mgr/goods/duplicate'
+				,id: this.menu.record.id
+			}
+			,listeners: {
+				'success': {fn:function(r) {
+					this.refresh();
+				},scope:this}
+			}
+		});
+	}
 	,deleteGoods: function(btn,e) {
 		if (!this.menu.record) return false;
 		
@@ -210,7 +231,6 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
 			,listeners: {
 				'success': {fn:function(r) {
 					this.refresh();
-					//Ext.getCmp('modx-resource-tree').refresh();
 				},scope:this}
 			}
 		});
