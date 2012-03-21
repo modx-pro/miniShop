@@ -33,17 +33,17 @@ if ($object->xpdo) {
 
 	$manager = $modx->getManager();
 
-    switch ($options[xPDOTransport::PACKAGE_ACTION]) {
-        case xPDOTransport::ACTION_INSTALL:
-            $manager->createObjectContainer('ModAddress');
-            $manager->createObjectContainer('ModCategories');
-            $manager->createObjectContainer('ModDelivery');
-            $manager->createObjectContainer('ModGoods');
-            $manager->createObjectContainer('ModLog');
-            $manager->createObjectContainer('ModOrderedGoods');
-            $manager->createObjectContainer('ModOrders');
-            $manager->createObjectContainer('ModStatus');
-            $manager->createObjectContainer('ModWarehouse');
+	switch ($options[xPDOTransport::PACKAGE_ACTION]) {
+		case xPDOTransport::ACTION_INSTALL:
+			$manager->createObjectContainer('ModAddress');
+			$manager->createObjectContainer('ModCategories');
+			$manager->createObjectContainer('ModDelivery');
+			$manager->createObjectContainer('ModGoods');
+			$manager->createObjectContainer('ModLog');
+			$manager->createObjectContainer('ModOrderedGoods');
+			$manager->createObjectContainer('ModOrders');
+			$manager->createObjectContainer('ModStatus');
+			$manager->createObjectContainer('ModWarehouse');
 			
 			$exists = $modx->getCount('ModWarehouse');
 			if ($exists == 0) {
@@ -81,17 +81,18 @@ if ($object->xpdo) {
 				$tmp->save();
 			}
 			
-            break;
-        case xPDOTransport::ACTION_UPGRADE:
-  			$gtable = $modx->getTableName('ModGoods');
-  			$ogtable = $modx->getTableName('ModOrderedGoods');
-			$sql = "ALTER TABLE {$gtable} ADD `add1` VARCHAR(255) NOT NULL, ADD `add2` VARCHAR(255) NOT NULL , ADD `add3` TEXT NOT NULL;
-					ALTER TABLE {$gtable} ADD  `reserved` INT NOT NULL DEFAULT '0' AFTER `remains`;
-					ALTER TABLE {$ogtable} ADD `data` TEXT NOT NULL;
-					";
-			$stmt = $modx->prepare($sql);
-			$stmt->execute();
-            break;
-    }
+			break;
+		case xPDOTransport::ACTION_UPGRADE:
+			$gtable = $modx->getTableName('ModGoods');
+			$ogtable = $modx->getTableName('ModOrderedGoods');
+
+			$sql = "ALTER TABLE {$gtable} ADD `add1` VARCHAR(255) NOT NULL, ADD `add2` VARCHAR(255) NOT NULL , ADD `add3` TEXT NOT NULL";
+			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
+			$sql = "ALTER TABLE {$gtable} ADD  `reserved` INT NOT NULL DEFAULT '0' AFTER `remains`";
+			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
+			$sql = "ALTER TABLE {$ogtable} ADD `data` TEXT NOT NULL";
+			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
+			break;
+	}
 }
 return true;
