@@ -67,9 +67,11 @@ class ModOrders extends xPDOSimpleObject {
 		$res = $this->xpdo->getIterator('ModOrderedGoods', array('oid' => $oid));
 		foreach ($res as $v) {
 			$gid = $v->get('gid');
+			$num = $v->get('num');
+			
 			if ($res2 = $this->xpdo->getObject('ModGoods', array('gid' => $gid, 'wid' => $wid))) {
-				$reserved = $res2->get('reserved');
-				$res2->set('reserved', '0');
+				$reserved = $res2->get('reserved') - $num;
+				$res2->set('reserved', $reserved);
 				$res2->save();
 			}
 		}
@@ -78,16 +80,24 @@ class ModOrders extends xPDOSimpleObject {
 	function releaseReserved() {
 		$oid = $this->get('id');
 		$wid = $this->get('wid');
+		$miniShop = new miniShop($this->xpdo);
 		
 		$res = $this->xpdo->getIterator('ModOrderedGoods', array('oid' => $oid));
 		foreach ($res as $v) {
 			$gid = $v->get('gid');
+			$num = $v->get('num');
+			$uid = empty($this->xpdo->user->id) ? 1 : $this->xpdo->user->id;
+			
 			if ($res2 = $this->xpdo->getObject('ModGoods', array('gid' => $gid, 'wid' => $wid))) {
-				$reserved = $res2->get('reserved');
-				$remains = $res2->get('remains') + $reserved;
-				$res2->set('reserved', '0');
+				$old = $res2->get('remains');
+				$remains = $old + $num;
+				$reserved = $res2->get('reserved') - $num;
+				$res2->set('reserved', $reserved);
 				$res2->set('remains', $remains);
-				$res2->save();
+				
+				if ($res2->save()) {
+					$miniShop->Log('goods', $gid, 'remains', $old, $remains);
+				}
 			}
 		}
 	}

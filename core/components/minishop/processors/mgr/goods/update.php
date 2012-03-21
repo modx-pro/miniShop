@@ -67,10 +67,15 @@ if ($modx->getCount('modResource', $id) > 0) {
 		$wids[] = $wid;
 	}
 
+	$miniShop = new miniShop($modx);
+
 	foreach ($wids as $wid) {
+		$nolog = 0;
 		if (!$res2 = $modx->getObject('ModGoods', array('wid' => $wid, 'gid' => $id))) {
 			$res2 = $modx->newObject('ModGoods', array('wid' => $wid, 'gid' => $id));
+			$nolog = 1;
 		}
+		$old =  $res2->get('remains');
 		$res2->set('article', $_REQUEST['article']);
 		$res2->set('price', $_REQUEST['price']);
 		$res2->set('img', $_REQUEST['img']);
@@ -78,11 +83,12 @@ if ($modx->getCount('modResource', $id) > 0) {
 		$res2->set('add1', $_REQUEST['add1']);
 		$res2->set('add2', $_REQUEST['add2']);
 		$res2->set('add3', $_REQUEST['add3']);
-		$res2->save();
-		//miniShop::Log('goods', $id, 'change', $res->get('article'), $_REQUEST['article']);
-		//miniShop::Log('goods', $id, 'change', $res->get('price'), $_REQUEST['price']);
-		//miniShop::Log('goods', $id, 'change', $res->get('img'), $_REQUEST['img']);
-		//miniShop::Log('goods', $id, 'change', $res->get('remains'), $_REQUEST['remains']);
+		
+		if ($res2->save()) {
+			if (!$nolog) {
+				$miniShop->Log('goods', $res2->get('id'), 'remains', $old, $_REQUEST['remains']);
+			}
+		}
 	}
 	
 	// Защита от дублирования основной и добавочной категории товара

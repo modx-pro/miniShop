@@ -1,6 +1,26 @@
 Changelog for miniShop.
 
+1.2.0 beta (21.03.2012)
+=============
+- Полностью работают остатки товаров, в связи с этим:
+	- В таблице ModGoods добавлен столбец "reserved" INT(11), для резервирования товара при заказе.
+	- Новый системный параметр minishop.enable_remains - включает учет остатков при различных операциях. Ставит товар в резерв.
+	- Новый системный параметр minishop.status_final - статус завершения заказа. Снимает товар с резерва.
+	- Новый системный параметр minishop.status_cancel - статус отмены заказа. Резерв возвращается в остаток.
+	- Изменения остатков пишутся в таблицу ModLog.
+- [#23] Добавлена проверка на добавление в корзину товара больше 1000000 штук.
+-----
+- Remains are now works, considering this:
+	- Add field "reserved" INT(11) in ModGoods for reserving goods.
+	- Add new system parameter minishop.enable_remains - enabling work with remains. Add goods to reserve.
+	- Add new system parameter minishop.status_final - status for end or order processing. Remove goods from reserve.
+	- Add new system parameter minishop.status_cancel - status for cancel order. Move goods from reserve back to remains.
+	- Changing of remains are written in ModLog table.
+- [#23] Added check to add items to the cart more than 1000000 units.
+
+
 1.1.0 beta (13.03.2012)
+=============
 - Отправка реквизитов для заказа переделана на FormIt, что позволяет более гибко настроить валидацию. Изменен чанк tpl.msAddrForm.
 - Новый &action у сниппета miniShop - getDelivery. Выводит методы доставки текущего склада в виде &tplDeliveryRow - чанка оформления. По умолчанию в виде option для тэга select.
 - Доставка полностью работает и учитывается везде (надеюсь). Плейсхолдеры доставки в msGetOrdersPlaceholders. Изменены чанки писем.

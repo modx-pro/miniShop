@@ -22,5 +22,5 @@
 <p>Через <strong><span id="time">5</span></strong> сек. вы будуте отправлены на сайт платежного агрегатора <a href="http://z-payment.ru" target="_blank">z-payment.tu</a> для оплаты заказа.
 <br/>Ссылка на оплату заказа также есть в почтовом уведомлении о новом заказе.</p>
 
-<p>Кликните по <a href="[[~[[*id]]]]?action=redirectCustomer&oid=[[+oid]]&email=[[+email]]">ссылке</a>, если надоело ждать.</p>
+<p>Кликните по <a href="[[~[[*id]]]]?action=redirectCustomer&oid=[[+id]]&email=[[+email]]">ссылке</a>, если надоело ждать.</p>
 
