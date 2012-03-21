@@ -5,12 +5,13 @@ $xpdo_meta_map['ModGoods']= array (
   'table' => 'modGoods',
   'fields' => 
   array (
-    'wid' => NULL,
-    'gid' => NULL,
-    'article' => NULL,
-    'price' => NULL,
+    'wid' => 0,
+    'gid' => 0,
+    'article' => '0',
+    'price' => 0,
     'img' => NULL,
-    'remains' => NULL,
+    'remains' => 0,
+    'reserved' => 0,
     'add1' => NULL,
     'add2' => NULL,
     'add3' => NULL,
@@ -23,6 +24,7 @@ $xpdo_meta_map['ModGoods']= array (
       'precision' => '11',
       'phptype' => 'integer',
       'null' => false,
+      'default' => 0,
       'index' => 'index',
     ),
     'gid' => 
@@ -31,6 +33,7 @@ $xpdo_meta_map['ModGoods']= array (
       'precision' => '11',
       'phptype' => 'integer',
       'null' => false,
+      'default' => 0,
     ),
     'article' => 
     array (
@@ -38,6 +41,7 @@ $xpdo_meta_map['ModGoods']= array (
       'precision' => '50',
       'phptype' => 'string',
       'null' => false,
+      'default' => '0',
     ),
     'price' => 
     array (
@@ -45,6 +49,7 @@ $xpdo_meta_map['ModGoods']= array (
       'precision' => '10,2',
       'phptype' => 'float',
       'null' => false,
+      'default' => 0,
     ),
     'img' => 
     array (
@@ -58,6 +63,15 @@ $xpdo_meta_map['ModGoods']= array (
       'precision' => '11',
       'phptype' => 'integer',
       'null' => false,
+      'default' => 0,
+    ),
+    'reserved' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '11',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
     ),
     'add1' => 
     array (

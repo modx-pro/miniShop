@@ -13,7 +13,7 @@ miniShop.grid.Goods = function(config) {
 		,remoteSort: true
 		,clicksToEdit: 'auto'
 		//,preventSaveRefresh: false
-		,fields: ['id','pagetitle','parent','wid','article','price','img','remains','url']
+		,fields: ['id','pagetitle','parent','wid','article','price','img','remains','reserved','url']
 		,columns: [
 			{header: _('id'), dataIndex: 'id', sortable: true, width: 35}
 			,{header: _('ms.warehouse'), dataIndex: 'wid', hidden: true}
@@ -23,6 +23,7 @@ miniShop.grid.Goods = function(config) {
 			,{header: _('ms.price'),dataIndex: 'price',sortable: true, width: 50}
 			,{header: _('ms.img'),dataIndex: 'img',renderer: this.renderImg,sortable: true,width: 50}
 			,{header: _('ms.remains'),dataIndex: 'remains',sortable: true, width: 50}
+			,{header: _('ms.reserved'),dataIndex: 'reserved',sortable: true, width: 50}
 		]
 		,tbar: [{
 			text: _('ms.goods.create')
@@ -354,48 +355,17 @@ miniShop.window.createGoods = function(config) {
 							,checked: MODx.config.hidemenu_default == '1' && config.disable_categories ? 1 : 0
 						}]
 					}]
-				},{
-					xtype: 'textarea'
-					,name: 'content'
-					,fieldLabel: _('content')
-					,anchor: '100%'
-					,height: 100
-				},{
-					xtype: 'hidden'
-					,name: 'class_key'
-					,value: 'modDocument'
-				},{
-					xtype: 'hidden'
-					,name: 'context_key'
-				},{
-					xtype: 'hidden'
-					,name: 'content_type' 
-					,value: 1
-				},{
-					xtype: 'hidden'
-					,name: 'content_dispo'
-					,value: 0
-				},{
-					xtype: 'hidden'
-					,name: 'isfolder' 
-					,value: 0
-				},{
-					xtype: 'hidden'
-					,name: 'richtext' 
-					,value: 1
-				},{
-					xtype: 'hidden'
-					,name: 'searchable' 
-					,value: 1
-				},{
-					xtype: 'hidden'
-					,name: 'cacheable' 
-					,value: 1
-				},{
-					xtype: 'hidden'
-					,name: 'clearCache' 
-					,value: 1
-				}]
+				},{xtype: 'textarea',name: 'content',fieldLabel: _('content'),anchor: '100%',height: 100}
+					,{xtype: 'hidden',name: 'class_key',value: 'modDocument'}
+					,{xtype: 'hidden',name: 'context_key'}
+					,{xtype: 'hidden',name: 'content_type' ,value: 1}
+					,{xtype: 'hidden',name: 'content_dispo',value: 0}
+					,{xtype: 'hidden',name: 'isfolder' ,value: 0}
+					,{xtype: 'hidden',name: 'richtext' ,value: 1}
+					,{xtype: 'hidden',name: 'searchable' ,value: 1}
+					,{xtype: 'hidden',name: 'cacheable' ,value: 1}
+					,{xtype: 'hidden',name: 'clearCache' ,value: 1}
+			]
 			},{
 				id: 'modx-'+this.ident+'-properties'
 				,title: _('ms.properties')
@@ -408,54 +378,19 @@ miniShop.window.createGoods = function(config) {
 				,defaults: {autoHeight: true ,border: false}
 				,style: 'background: transparent;'
 				,bodyStyle: { background: 'transparent', padding: '10px' }
-				,items: [{
-					xtype: 'hidden'
-					,name: 'id'
-				},{
-					xtype: 'hidden'
-					,name: 'wid'
-				},{
-					xtype: 'textfield'
-					,name: 'article'
-					,fieldLabel: _('ms.article')
-				},{
-					xtype: 'numberfield'
-					,name: 'price'
-					,fieldLabel: _('ms.price')
-				},{
-					xtype: 'modx-combo-browser'
-					,name: 'img'
-					,fieldLabel: _('ms.img')
-					,anchor: '100%'
-				},{
-					xtype: 'numberfield'
-					,name: 'remains'
-					,fieldLabel: _('ms.remains')
-				},{
-					xtype: 'textfield'
-					,name: 'add1'
-					,fieldLabel: _('ms.goods.add1')
-					,anchor: '100%'
-				},{
-					xtype: 'textfield'
-					,name: 'add2'
-					,fieldLabel: _('ms.goods.add2')
-					,anchor: '100%'
-				},{
-					xtype: 'textarea'
-					,name: 'add3'
-					,fieldLabel: _('ms.goods.add3')
-					,autoHeight: false
-					,height: 100
-					,anchor: '100%'
-				},{
-					xtype: 'checkbox'
-					,name: 'duplicate'
-					,value: 1
-					,style: 'padding: 10px;'
-					,fieldLabel: _('ms.goods.duplicate')
-					,description: _('ms.goods.duplicate.desc')
-				}]
+				,items: [
+					{xtype: 'hidden',name: 'id'}
+					,{xtype: 'hidden',name: 'wid'}
+					,{xtype: 'textfield',name: 'article',fieldLabel: _('ms.article')}
+					,{xtype: 'numberfield',name: 'price',fieldLabel: _('ms.price')}
+					,{xtype: 'modx-combo-browser',name: 'img',fieldLabel: _('ms.img'),anchor: '100%'}
+					,{xtype: 'numberfield',name: 'remains',fieldLabel: _('ms.remains')}
+					,{xtype: 'displayfield',name: 'reserved',fieldLabel: _('ms.reserved')}
+					,{xtype: 'textfield',name: 'add1',fieldLabel: _('ms.goods.add1'),anchor: '100%'}
+					,{xtype: 'textfield',name: 'add2',fieldLabel: _('ms.goods.add2'),anchor: '100%'}
+					,{xtype: 'textarea',name: 'add3',fieldLabel: _('ms.goods.add3'),autoHeight: false,anchor: '100%',height: 100}
+					,{xtype: 'checkbox',name: 'duplicate',value: 1,style: 'padding: 10px;',fieldLabel: _('ms.goods.duplicate'),description: _('ms.goods.duplicate.desc')}
+				]
 			},{
 				title: _('ms.categories')
 				,items: [{

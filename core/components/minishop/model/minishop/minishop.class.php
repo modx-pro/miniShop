@@ -245,8 +245,11 @@ class miniShop {
 	// Добавление товара в корзину
 	function addToCart($id, $num = 1, $data = array()) {
 		if (empty($id)) {return $this->error($this->modx->lexicon('ms.addToCart.error'));}
+		$num = intval($num);
 		if (empty($num)) {$num = 1;}
 		if (empty($data)) {$data = array();}
+
+		if ($num > 1000000) {return $this->error('ms.addToCart.error', $this->getCartStatus());}
 
 		if (empty($_SESSION['minishop'])) {$_SESSION['minishop'] = array();}
 		if (empty($_SESSION['minishop']['goods'])) {$_SESSION['minishop']['goods'] = array();}
@@ -481,7 +484,8 @@ class miniShop {
 
 		// Сохранение товаров корзины
 		$cart = $_SESSION['minishop']['goods'];
-		
+		$enable_remains = $this->modx->getOption('minishop.enable_remains');
+
 		$cart_sum = 0;
 		$oid = $order->get('id');
 		foreach ($cart as $v) {
@@ -494,6 +498,19 @@ class miniShop {
 			$res->set('data', json_encode($v['data']));
 			$res->save();
 			$cart_sum += $v['price'] * $v['num'];
+			// Если включена работа с остатками - резервируем товар на складе.
+			if ($enable_remains) {
+				if ($tmp = $this->modx->getObject('ModGoods', array('gid' => $v['id'], 'wid' => $_SESSION['minishop']['warehouse']))) {
+					$tmp_reserved = $tmp->get('reserved') + $v['num'];
+					$tmp_remains = $tmp->get('remains') - $v['num'];
+
+					if ($tmp_remains <= 0) {$this->modx->log(modX::LOG_LEVEL_ERROR,'The negative balance of goods #'.$v['id'].' in warehouse #'.$_SESSION['minishop']['warehouse']);}
+
+					$tmp->set('reserved', $tmp_reserved);
+					$tmp->set('remains', $tmp_remains);
+					$tmp->save();
+				}
+			}
 		}
 		$order->set('sum', $cart_sum);
 		$order->save();
@@ -522,6 +539,15 @@ class miniShop {
 			$order->set('status', $new);
 			if ($order->save()) {
 				$this->Log('status', $order->get('id'), 'change', $old, $new);
+				
+				if ($this->modx->getOption('minishop.enable_remains')) {
+					if ($new == $this->modx->getOption('minishop.status_final')) {
+						$order->unReserve();
+					}
+					else if ($new == $this->modx->getOption('minishop.status_cancel')) {
+						$order->releaseReserved();
+					}
+				}
 			}
 			// Письмо покупателю
 			if ($status->get('email2user')) {

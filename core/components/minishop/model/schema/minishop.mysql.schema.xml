@@ -38,12 +38,13 @@
 		</index>
 	</object>
 	<object class="ModGoods" table="modGoods" extends="xPDOSimpleObject">
-		<field key="wid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
-		<field key="gid" dbtype="int" precision="11" phptype="integer" null="false" />
-		<field key="article" dbtype="varchar" precision="50" phptype="string" null="false" />
-		<field key="price" dbtype="float" precision="10,2" phptype="float" null="false" />
+		<field key="wid" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
+		<field key="gid" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
+		<field key="article" dbtype="varchar" precision="50" phptype="string" null="false" default="0" />
+		<field key="price" dbtype="float" precision="10,2" phptype="float" null="false" default="0.00" />
 		<field key="img" dbtype="text" phptype="string" null="false" />
-		<field key="remains" dbtype="int" precision="11" phptype="integer" null="false" />
+		<field key="remains" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
+		<field key="reserved" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
 		<field key="add1" dbtype="varchar" precision="255" phptype="string" null="false" />
 		<field key="add2" dbtype="varchar" precision="255" phptype="string" null="false" />
 		<field key="add3" dbtype="text" phptype="string" null="false" />

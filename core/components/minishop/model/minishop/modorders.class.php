@@ -60,4 +60,36 @@ class ModOrders extends xPDOSimpleObject {
 		}
 	}
 
+	function unReserve() {
+		$oid = $this->get('id');
+		$wid = $this->get('wid');
+		
+		$res = $this->xpdo->getIterator('ModOrderedGoods', array('oid' => $oid));
+		foreach ($res as $v) {
+			$gid = $v->get('gid');
+			if ($res2 = $this->xpdo->getObject('ModGoods', array('gid' => $gid, 'wid' => $wid))) {
+				$reserved = $res2->get('reserved');
+				$res2->set('reserved', '0');
+				$res2->save();
+			}
+		}
+	}
+
+	function releaseReserved() {
+		$oid = $this->get('id');
+		$wid = $this->get('wid');
+		
+		$res = $this->xpdo->getIterator('ModOrderedGoods', array('oid' => $oid));
+		foreach ($res as $v) {
+			$gid = $v->get('gid');
+			if ($res2 = $this->xpdo->getObject('ModGoods', array('gid' => $gid, 'wid' => $wid))) {
+				$reserved = $res2->get('reserved');
+				$remains = $res2->get('remains') + $reserved;
+				$res2->set('reserved', '0');
+				$res2->set('remains', $remains);
+				$res2->save();
+			}
+		}
+	}
+
 }

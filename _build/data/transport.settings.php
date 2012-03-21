@@ -89,7 +89,7 @@ $settings[6]->fromArray(array(
     'namespace' => 'minishop',
     'area' => 'settings',
 ),'',true,true);
-/*
+
 $settings[7]= $modx->newObject('modSystemSetting');
 $settings[7]->fromArray(array(
     'key' => 'minishop.enable_remains',
@@ -116,5 +116,5 @@ $settings[9]->fromArray(array(
     'namespace' => 'minishop',
     'area' => 'settings',
 ),'',true,true);
-*/
+
 return $settings;

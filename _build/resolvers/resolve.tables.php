@@ -86,7 +86,9 @@ if ($object->xpdo) {
   			$gtable = $modx->getTableName('ModGoods');
   			$ogtable = $modx->getTableName('ModOrderedGoods');
 			$sql = "ALTER TABLE {$gtable} ADD `add1` VARCHAR(255) NOT NULL, ADD `add2` VARCHAR(255) NOT NULL , ADD `add3` TEXT NOT NULL;
-				ALTER TABLE {$ogtable} ADD `data` TEXT NOT NULL;";
+					ALTER TABLE {$gtable} ADD  `reserved` INT NOT NULL DEFAULT '0' AFTER `remains`;
+					ALTER TABLE {$ogtable} ADD `data` TEXT NOT NULL;
+					";
 			$stmt = $modx->prepare($sql);
 			$stmt->execute();
             break;

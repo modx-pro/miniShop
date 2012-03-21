@@ -68,6 +68,7 @@ $_lang['ms.no_permission'] = 'You don\'t have permission for this action.';
 $_lang['ms.permission.description'] = 'Required permission for edit this object.';
 $_lang['ms.duplicate'] = 'Duplicate';
 $_lang['ms.duplicate_confirm'] = 'Duplicate this item?';
+$_lang['ms.reserved'] = 'Reserved';
 
 $_lang['ms.warehouse.select'] = 'Select warehouse';
 $_lang['ms.warehouse.create'] = 'New warehouse';
