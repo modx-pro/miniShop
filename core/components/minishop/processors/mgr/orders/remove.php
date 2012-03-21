@@ -33,6 +33,8 @@ if (!$res = $modx->getObject('ModOrders', $id)) {
 	return $modx->error->failure($modx->lexicon('ms.orders.err_nf'));
 }
 
+$res->releaseReserved();
+
 if ($res->remove() == false) {
     return $modx->error->failure($modx->lexicon('ms.orders.err_remove'));
 }
