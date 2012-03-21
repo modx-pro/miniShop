@@ -86,18 +86,9 @@ class ModOrders extends xPDOSimpleObject {
 		foreach ($res as $v) {
 			$gid = $v->get('gid');
 			$num = $v->get('num');
-			$uid = empty($this->xpdo->user->id) ? 1 : $this->xpdo->user->id;
 			
 			if ($res2 = $this->xpdo->getObject('ModGoods', array('gid' => $gid, 'wid' => $wid))) {
-				$old = $res2->get('remains');
-				$remains = $old + $num;
-				$reserved = $res2->get('reserved') - $num;
-				$res2->set('reserved', $reserved);
-				$res2->set('remains', $remains);
-				
-				if ($res2->save()) {
-					$miniShop->Log('goods', $gid, 'remains', $old, $remains);
-				}
+				$res2->release($num);
 			}
 		}
 	}

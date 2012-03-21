@@ -501,17 +501,7 @@ class miniShop {
 			// Если включена работа с остатками - резервируем товар на складе.
 			if ($enable_remains) {
 				if ($tmp = $this->modx->getObject('ModGoods', array('gid' => $v['id'], 'wid' => $_SESSION['minishop']['warehouse']))) {
-					$tmp_old = $tmp->get('remains');
-					$tmp_remains = $tmp_old - $v['num'];
-					$tmp_reserved = $tmp->get('reserved') + $v['num'];
-
-					if ($tmp_remains <= 0) {$this->modx->log(modX::LOG_LEVEL_ERROR,'The negative balance of goods #'.$v['id'].' in warehouse #'.$_SESSION['minishop']['warehouse']);}
-
-					$tmp->set('reserved', $tmp_reserved);
-					$tmp->set('remains', $tmp_remains);
-					if ($tmp->save()) {
-						$this->Log('goods', $v['id'], 'remains', $tmp_old, $tmp_remains);
-					}
+					$tmp->reserve($v['num']);
 				}
 			}
 		}
