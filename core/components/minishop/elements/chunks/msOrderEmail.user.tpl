@@ -20,7 +20,7 @@
 </table>
 
 <br/>
-<p><b>Если возник сбой при оплате, или вы еще по какой то причине не смогли оплатить заказ -   продолжите процесс покупки <a href="[[++site_url]]cart.html?action=redirectCustomer&oid=[[+order.id]]&email=[[+user.email]]">по этой ссылке</a></b></p>
+<p><b>Если возник сбой при оплате, или вы еще по какой-то причине не смогли оплатить заказ &mdash; продолжите процесс покупки <a href="[[++site_url]]cart.html?action=redirectCustomer&oid=[[+order.id]]&email=[[+user.email]]">по этой ссылке</a></b>.</p>
 <br/>
 
 <p><b>Способ доставки:</b> [[+order.delivery_name]] ([[+order.delivery_price]]руб.)</p>
@@ -28,7 +28,7 @@
 <br/><br/>
   <table>
     <tr>
-      <th>Email</th>
+      <th>E-mail</th>
       <td>[[+user.email]]</td>
     </tr>
     <tr>
