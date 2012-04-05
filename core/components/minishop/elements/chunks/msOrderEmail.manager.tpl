@@ -24,7 +24,7 @@
 <br/><br/>
   <table>
     <tr>
-      <th>Email</th>
+      <th>E-mail</th>
       <td>[[+user.email]]</td>
     </tr>
     <tr>
