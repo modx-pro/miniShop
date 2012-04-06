@@ -20,6 +20,9 @@ $c['tplSubmitOrderSuccess'] = $modx->getOption('tplSubmitOrderSuccess', $scriptP
 $c['tplMyOrdersList'] = $modx->getOption('tplMyOrdersList', $scriptProperties, 'tpl.msMyOrdersList'); 
 $c['tplPaymentForm'] = $modx->getOption('tplPaymentForm', $scriptProperties, 'tpl.msPayment.form');
 
+// Debug
+$c['debug'] = $modx->getOption('debug', $scriptProperties, 0);
+
 // Группы для регистрации покупателей
 $c['userGroups'] = $modx->getOption('userGroups', $scriptProperties, 0);
 

@@ -92,6 +92,9 @@ if ($object->xpdo) {
 			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
 			$sql = "ALTER TABLE {$ogtable} ADD `data` TEXT NOT NULL";
 			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
+			$sql = "ALTER TABLE {$gtable} ADD `weight` FLOAT(10,2) NOT NULL DEFAULT '0.00' AFTER `price`;
+					ALTER TABLE {$ogtable} ADD `weight` FLOAT(10,2) NOT NULL DEFAULT '0.00' AFTER `price`;";
+			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
 			break;
 	}
 }

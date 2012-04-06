@@ -3,6 +3,7 @@ $xpdo_meta_map['ModAddress']= array (
   'package' => 'minishop',
   'version' => '1.1',
   'table' => 'modAddress',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'uid' => NULL,

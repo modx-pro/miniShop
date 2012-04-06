@@ -3,6 +3,7 @@
       <td>&nbsp;</td>
       <td>Наименование</td>
       <td>Цена</td>
+      <td>Вес</td>
       <td>Кол-во</td>
       <td>Стоимость</td>
       <td>&nbsp;</td>
@@ -12,6 +13,7 @@
   
   <tr align="center">
     <td colspan="3"><b>Итого без стоимости доставки:</b></td>
+    <td><b id="cartWeight">[[+weight]]</b> кг.</td>
     <td><b id="cartCount">[[+count]]</b> шт.</td>
     <td><b id="cartTotal">[[+total]]</b> [[+currency:default=`руб.`]]</td>
     <td>&nbsp;</td>

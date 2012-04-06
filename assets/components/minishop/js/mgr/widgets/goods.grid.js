@@ -13,7 +13,7 @@ miniShop.grid.Goods = function(config) {
 		,remoteSort: true
 		,clicksToEdit: 'auto'
 		//,preventSaveRefresh: false
-		,fields: ['id','pagetitle','parent','wid','article','price','img','remains','reserved','url']
+		,fields: ['id','pagetitle','parent','wid','article','price','weight','img','remains','reserved','url']
 		,columns: [
 			{header: _('id'), dataIndex: 'id', sortable: true, width: 35}
 			,{header: _('ms.warehouse'), dataIndex: 'wid', hidden: true}
@@ -21,6 +21,7 @@ miniShop.grid.Goods = function(config) {
 			,{header: _('parent'),dataIndex: 'parent',hidden: true,sortable: true}
 			,{header: _('ms.article'),dataIndex: 'article',sortable: true, width: 50}
 			,{header: _('ms.price'),dataIndex: 'price',sortable: true, width: 50}
+			,{header: _('ms.weight'),dataIndex: 'weight',sortable: true, width: 50}
 			,{header: _('ms.img'),dataIndex: 'img',renderer: this.renderImg,sortable: true,width: 50}
 			,{header: _('ms.remains'),dataIndex: 'remains',sortable: true, width: 50}
 			,{header: _('ms.reserved'),dataIndex: 'reserved',sortable: true, width: 50}
@@ -383,6 +384,7 @@ miniShop.window.createGoods = function(config) {
 					,{xtype: 'hidden',name: 'wid'}
 					,{xtype: 'textfield',name: 'article',fieldLabel: _('ms.article')}
 					,{xtype: 'numberfield',name: 'price',fieldLabel: _('ms.price')}
+					,{xtype: 'numberfield',name: 'weight',fieldLabel: _('ms.weight')}
 					,{xtype: 'modx-combo-browser',name: 'img',fieldLabel: _('ms.img'),anchor: '100%'}
 					,{xtype: 'numberfield',name: 'remains',fieldLabel: _('ms.remains')}
 					,{xtype: 'displayfield',name: 'reserved',fieldLabel: _('ms.reserved')}

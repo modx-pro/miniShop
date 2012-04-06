@@ -78,6 +78,7 @@ if ($modx->getCount('modResource', $id) > 0) {
 		$old =  $res2->get('remains');
 		$res2->set('article', $_REQUEST['article']);
 		$res2->set('price', $_REQUEST['price']);
+		$res2->set('weight', $_REQUEST['weight']);
 		$res2->set('img', $_REQUEST['img']);
 		$res2->set('remains', $_REQUEST['remains']);
 		$res2->set('add1', $_REQUEST['add1']);

@@ -44,6 +44,7 @@ foreach ($cart as $v) {
 		$tmp['num'] = $v->get('num');
 		$tmp['sum'] = $v->get('sum');
 		$tmp['price'] = $v->get('price');
+		$tmp['weight'] = $v->get('weight');
 		
 		$tvs = $res->getMany('TemplateVars');
 		foreach ($tvs as $v2) {
@@ -60,6 +61,7 @@ foreach ($cart as $v) {
 		$arr['rows'] .= $modx->getChunk($tplCartRows, $tmp);
 		$arr['count'] += $tmp['num'];
 		$arr['total'] += $tmp['sum'];
+		$arr['weight'] += $tmp['weight'];
 	}
 }
 $arr['total'] += $delivery_price;

@@ -46,6 +46,7 @@ $(document).ready(function() {
 			
 			$('#cartCount').text(data.count);
 			$('#cartTotal').text(data.total);
+			$('#cartWeight').text(data.weight);
 			
 			showResponse(data);
 			cartStatus(data);

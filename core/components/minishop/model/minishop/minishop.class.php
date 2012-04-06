@@ -59,7 +59,7 @@ class miniShop {
 		// Вывод ошибок при отладке
 		if ($this->config['debug']) {
 			ini_set('display_errors', 1); 
-			error_reporting(E_ALL);
+			error_reporting(E_ALL ^ E_NOTICE);
 		}
 
 		// Определение дефолтных переменных сессии для работы магазина
@@ -222,9 +222,11 @@ class miniShop {
 		$arr = array();
 		$arr['total'] = 0;
 		$arr['count'] = 0;
+		$arr['weight'] = 0;
 		foreach ($cart as $v) {
 			$arr['count'] += $v['num'];
 			$arr['total'] += $v['price'] * $v['num'];
+			$arr['weight'] += $v['weight'] * $v['num'];
 		}
 		return $arr;
 	}
@@ -239,6 +241,24 @@ class miniShop {
 		else {
 			return 0;
 		}
+	}	
+	// Вес товара
+	function getWeight($id) {
+		$snippet = $this->modx->getOption('minishop.getweight_snippet');
+		if (!empty($snippet)) {
+			if ($res = $this->modx->getObject('modResource', $id)) {
+				$weight = $this->modx->runSnippet($snippet, array('resource' => $res));
+			}
+			else {$weight = 0;}
+		}
+		else {
+			if ($res = $this->modx->getObject('ModGoods', array('gid' => $id, 'wid' => $_SESSION['minishop']['warehouse']))) {
+				$weight = $res->get('weight');
+			}
+			else {$weight = 0;}
+		}
+		
+		return $weight;
 	}
 
 
@@ -264,6 +284,7 @@ class miniShop {
 			$_SESSION['minishop']['goods'][$key] = array(
 				'id' => $id
 				,'price' => $this->getPrice($id)
+				,'weight' => $this->getWeight($id)
 				,'num' => $num
 				,'data' => $data
 			);
@@ -332,7 +353,7 @@ class miniShop {
 	function renderCart($tpl) {
 		$arr = array();
 		$arr['rows'] = '';
-		$arr['count'] = $arr['total'] = 0;
+		$arr['count'] = $arr['total'] = $arr['weight'] = 0;
 		$cart = $_SESSION['minishop']['goods'];
 		foreach ($cart as $k => $v) {
 			if ($res = $this->modx->getObject('modResource', $v['id'])) {
@@ -340,6 +361,7 @@ class miniShop {
 				$tmp['key'] = $k;
 				$tmp['num'] = $v['num'];
 				$tmp['sum'] = $v['num'] * $v['price'];
+				$tmp['tmp_weight'] = $v['num'] * $v['weight'];
 
 				// ТВ параметры
 				$tvs = $res->getMany('TemplateVars');
@@ -364,6 +386,7 @@ class miniShop {
 				
 				$arr['count'] += $tmp['num'];
 				$arr['total'] += $tmp['sum'];
+				$arr['weight'] += $tmp['tmp_weight'];
 			}
 		}
 		return $arr;
@@ -494,6 +517,7 @@ class miniShop {
 			$res->set('gid', $v['id']);
 			$res->set('price', $v['price']);
 			$res->set('sum', $v['price'] * $v['num']);
+			$res->set('weight', $v['weight'] * $v['num']);
 			$res->set('num', $v['num']);
 			$res->set('data', json_encode($v['data']));
 			$res->save();

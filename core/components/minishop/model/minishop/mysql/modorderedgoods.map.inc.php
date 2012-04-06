@@ -3,12 +3,14 @@ $xpdo_meta_map['ModOrderedGoods']= array (
   'package' => 'minishop',
   'version' => '1.1',
   'table' => 'modOrderedGoods',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'gid' => NULL,
     'oid' => NULL,
     'num' => 1,
     'price' => NULL,
+    'weight' => 0,
     'sum' => NULL,
     'data' => NULL,
   ),
@@ -43,6 +45,14 @@ $xpdo_meta_map['ModOrderedGoods']= array (
       'precision' => '10,2',
       'phptype' => 'float',
       'null' => false,
+    ),
+    'weight' => 
+    array (
+      'dbtype' => 'float',
+      'precision' => '10,2',
+      'phptype' => 'float',
+      'null' => false,
+      'default' => 0,
     ),
     'sum' => 
     array (

@@ -51,6 +51,7 @@ $_lang['ms.room'] = 'Room';
 $_lang['ms.description'] = 'Description';
 $_lang['ms.main'] = 'Main';
 $_lang['ms.price'] = 'Price';
+$_lang['ms.weight'] = 'Weight';
 $_lang['ms.name'] = 'Name';
 $_lang['ms.article'] = 'Article';
 $_lang['ms.remains'] = 'Remains';

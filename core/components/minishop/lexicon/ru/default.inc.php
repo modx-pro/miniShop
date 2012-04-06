@@ -51,6 +51,7 @@ $_lang['ms.room'] = 'Офис/квартира';
 $_lang['ms.description'] = 'Описание';
 $_lang['ms.main'] = 'Основное';
 $_lang['ms.price'] = 'Цена';
+$_lang['ms.weight'] = 'Вес';
 $_lang['ms.name'] = 'Название';
 $_lang['ms.article'] = 'Артикул';
 $_lang['ms.remains'] = 'Остаток';

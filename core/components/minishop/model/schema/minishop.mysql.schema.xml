@@ -42,6 +42,7 @@
 		<field key="gid" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
 		<field key="article" dbtype="varchar" precision="50" phptype="string" null="false" default="0" />
 		<field key="price" dbtype="float" precision="10,2" phptype="float" null="false" default="0.00" />
+		<field key="weight" dbtype="float" precision="10,2" phptype="float" null="false" default="0.00" />
 		<field key="img" dbtype="text" phptype="string" null="false" />
 		<field key="remains" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
 		<field key="reserved" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
@@ -77,6 +78,7 @@
 		<field key="oid" dbtype="int" precision="11" phptype="integer" null="false" />
 		<field key="num" dbtype="int" precision="11" phptype="integer" null="false" default="1" />
 		<field key="price" dbtype="float" precision="10,2" phptype="float" null="false" />
+		<field key="weight" dbtype="float" precision="10,2" phptype="float" null="false" default="0.00" />
 		<field key="sum" dbtype="float" precision="10,2" phptype="float" null="false" />
 		<field key="data" dbtype="text" phptype="string" null="false" />
 
