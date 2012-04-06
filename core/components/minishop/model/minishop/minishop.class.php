@@ -234,14 +234,23 @@ class miniShop {
 
 	// Цена товара
 	function getPrice($id) {
-		if ($res = $this->modx->getObject('modResource', $id)) {
-			$snippet = $this->modx->getOption('minishop.getprice_snippet');
-			return $this->modx->runSnippet($snippet, array('resource' => $res));
+		$snippet = $this->modx->getOption('minishop.getprice_snippet');
+		if (!empty($snippet)) {
+			if ($res = $this->modx->getObject('modResource', $id)) {
+				$price = $this->modx->runSnippet($snippet, array('resource' => $res));
+			}
+			else {$price = 0;}
 		}
 		else {
-			return 0;
+			if ($res = $this->modx->getObject('ModGoods', array('gid' => $id, 'wid' => $_SESSION['minishop']['warehouse']))) {
+				$price = $res->get('price');
+			}
+			else {$price = 0;}
 		}
-	}	
+		return $price;
+	}
+
+
 	// Вес товара
 	function getWeight($id) {
 		$snippet = $this->modx->getOption('minishop.getweight_snippet');
@@ -257,7 +266,6 @@ class miniShop {
 			}
 			else {$weight = 0;}
 		}
-		
 		return $weight;
 	}
 

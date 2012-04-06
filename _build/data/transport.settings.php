@@ -117,4 +117,13 @@ $settings[9]->fromArray(array(
     'area' => 'settings',
 ),'',true,true);
 
+$settings[10]= $modx->newObject('modSystemSetting');
+$settings[10]->fromArray(array(
+    'key' => 'minishop.getweight_snippet',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'minishop',
+    'area' => 'settings',
+),'',true,true);
+
 return $settings;
