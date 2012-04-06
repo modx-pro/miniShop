@@ -34,7 +34,7 @@ set_time_limit(0);
 /* define package */
 define('PKG_NAME','miniShop');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
-define('PKG_VERSION','1.2.0');
+define('PKG_VERSION','1.3.0');
 define('PKG_RELEASE','beta');
 
 /* define sources */
@@ -114,7 +114,7 @@ $attr = array(
                 ),
                 'Chunks' => array(
                     xPDOTransport::PRESERVE_KEYS => false,
-                    xPDOTransport::UPDATE_OBJECT => true,
+                    xPDOTransport::UPDATE_OBJECT => false,
                     xPDOTransport::UNIQUE_KEY => 'name',
                 ),
             ),
@@ -126,7 +126,7 @@ $attr = array(
         ),
         'Chunks' => array (
             xPDOTransport::PRESERVE_KEYS => false,
-            xPDOTransport::UPDATE_OBJECT => true,
+            xPDOTransport::UPDATE_OBJECT => false,
             xPDOTransport::UNIQUE_KEY => 'name',
         ),
     ),
@@ -175,7 +175,7 @@ if (empty($menu)) {
         xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
             'Action' => array (
                 xPDOTransport::PRESERVE_KEYS => false,
-                xPDOTransport::UPDATE_OBJECT => false,
+                xPDOTransport::UPDATE_OBJECT => true,
                 xPDOTransport::UNIQUE_KEY => array ('namespace','controller'),
             ),
         ),
