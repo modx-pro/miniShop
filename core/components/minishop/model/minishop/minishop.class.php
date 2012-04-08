@@ -435,7 +435,7 @@ class miniShop {
 			foreach ($res as $v) {
 				$tmp = $v->toArray();
 				if ($_POST['payment'] == $tmp['id'] || $_SESSION['minishop']['payments'] == $tmp['id']) {$tmp['selected'] = 'selected';} else {$tmp['selected'] = '';}
-				$options .= $this->modx->getChunk($this->config['tplPaymentsRow'], $tmp);
+				$options .= $this->modx->getChunk($this->config['tplPaymentRow'], $tmp);
 			}
 		}
 		return $options;
