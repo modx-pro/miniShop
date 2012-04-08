@@ -13,7 +13,7 @@ Changelog for miniShop.
 -----
 - New goods parameter - "weight"
 	- New system setting getweight_snippet. You may set snippet as msGetPrice for weight correction.
-	- Changed chinks for new parameter support
+	- Changed chunks for new parameter support
 - Snippet in system setting getprice_snippet is not required anymore. If it empty, then will return price from ModGoods without any changing.
 - Added ability to create a variety of payment methods
 	- Linking of payment methods to the methods of delivery in the warehouses settings.

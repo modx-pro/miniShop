@@ -236,7 +236,7 @@ miniShop.grid.Goods = function(config) {
 		id: this.ident+'-grid-goods'
 		,url: miniShop.config.connector_url
 		,baseParams: {action: 'goods/getlist'}
-		,fields: ['id','gid','oid','name','num','price','sum']
+		,fields: ['id','gid','oid','name','num','price','sum','data']
 		,pageSize: 10
 		,autoHeight: true
 		,paging: true
