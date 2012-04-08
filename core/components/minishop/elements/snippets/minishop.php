@@ -8,7 +8,7 @@ $c['tplCartOuter'] = $modx->getOption('tplCartOuter', $scriptProperties, 'tpl.ms
 $c['tplCartRow'] = $modx->getOption('tplCartRow', $scriptProperties, 'tpl.msCart.row');
 $c['tplCartStatus'] = $modx->getOption('tplCartStatus', $scriptProperties, 'tpl.msCart.status');
 $c['tplDeliveryRow'] = $modx->getOption('tplDeliveryRow', $scriptProperties, 'tpl.msDelivery.row');
-$c['tplPaymentsRow'] = $modx->getOption('tplPaymentsRow', $scriptProperties, 'tpl.msDelivery.row');
+$c['tplPaymentRow'] = $modx->getOption('tplPaymentRow', $scriptProperties, 'tpl.msDelivery.row');
 $c['tplAddrForm'] = $modx->getOption('tplAddrForm', $scriptProperties, 'tpl.msAddrForm');
 $c['tplAddrFormMini'] = $modx->getOption('tplAddrFormMini', $scriptProperties, 'tpl.msAddrForm.mini');
 $c['tplAddrFormSaved'] = $modx->getOption('tplAddrFormSaved', $scriptProperties, 'tpl.msAddrForm.saved');
@@ -70,6 +70,7 @@ if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest' && !empty($res)) {
 	}
 	die;
 }
+if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest' && empty($res)) {}
 else {
 	return $res;
 }
