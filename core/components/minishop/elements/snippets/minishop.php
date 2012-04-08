@@ -70,7 +70,7 @@ if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest' && !empty($res)) {
 	}
 	die;
 }
-if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest' && empty($res)) {}
+else if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest' && empty($res)) {}
 else {
 	return $res;
 }
