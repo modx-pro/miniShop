@@ -15,6 +15,7 @@ $xpdo_meta_map['ModOrders']= array (
     'updated' => '0000-00-00 00:00:00',
     'comment' => NULL,
     'delivery' => 0,
+    'payment' => 0,
     'address' => 0,
   ),
   'fieldMeta' => 
@@ -80,6 +81,14 @@ $xpdo_meta_map['ModOrders']= array (
       'null' => false,
     ),
     'delivery' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '11',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+    ),
+    'payment' => 
     array (
       'dbtype' => 'int',
       'precision' => '11',

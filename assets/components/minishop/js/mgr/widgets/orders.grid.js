@@ -22,7 +22,7 @@ miniShop.grid.Orders = function(config) {
 		,remoteSort: true
 		,clicksToEdit: 'auto'
 		//,preventSaveRefresh: false
-		,fields: ['id','uid','fullname','num','wid','warehousename','status','statusname','sum','created','updated', 'comment']
+		,fields: ['id','uid','fullname','num','wid','warehousename','status','statusname','sum','created','updated','comment']
 		,columns: [this.exp
 			,{header: _('id'),dataIndex: 'id',hidden: true,sortable: true,width: 50}
 			,{header: _('ms.uid'),dataIndex: 'uid',hidden: true,width: 50}
@@ -218,6 +218,7 @@ miniShop.window.EditOrder = function(config) {
 						,{xtype: 'displayfield',name: 'email',id: this.ident+'-email',fieldLabel: _('ms.email')}
 						,{xtype: 'minishop-filter-warehouse',name: 'wid',hiddenName: 'wid',id: this.ident+'-warehouse',fieldLabel: _('ms.warehouse'),anchor: '90%'}
 						,{xtype: 'displayfield',name: 'delivery_name',id: this.ident+'-delivery',fieldLabel: _('ms.delivery')}
+						,{xtype: 'displayfield',name: 'payment_name',id: this.ident+'-payment',fieldLabel: _('ms.payment')}
 						,{xtype: 'minishop-filter-status',name: 'status',id: this.ident+'-status',fieldLabel: _('ms.status'),anchor: '90%'}
 						,{xtype: 'textarea',name: 'comment',id: this.ident+'-comment',fieldLabel: _('ms.comment'),anchor: '90%',autoHeight: false,height: 50}
 					]

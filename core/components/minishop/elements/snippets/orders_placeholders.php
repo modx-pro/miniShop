@@ -12,6 +12,7 @@ if (!isset($modx->miniShop) || !is_object($modx->miniShop)) {
 if ($order = $modx->getObject('ModOrders', $oid)) {
 	$tmp = $order->toArray();
 	$tmp['delivery_name'] = $order->getDeliveryName();
+	$tmp['payment_name'] = $order->getPaymentName();
 	$tmp['delivery_price'] = $delivery_price = $order->getDeliveryPrice();
 	$modx->setPlaceholders($tmp,'order.');
 }

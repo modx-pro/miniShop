@@ -14,14 +14,11 @@ miniShop.grid.Warehouses = function(config) {
 		,baseParams: {
 			action: 'mgr/warehouse/getlist'
 		}
-		//,save_action: 'mgr/warehouse/updatefromgrid'
-		//,autosave: true
 		,plugins: this.exp
 		,autoHeight: true
 		,paging: true
 		,remoteSort: true
 		,clicksToEdit: 'auto'
-		//,preventSaveRefresh: false
 		,fields: ['id','name','currency','address','phone','email','description','permission']
 		,columns: [this.exp, 
 			{header: _('id'),dataIndex: 'id',sortable: true,width: 35}
@@ -149,7 +146,7 @@ miniShop.window.CreateWarehouse = function(config) {
 	Ext.applyIf(config,{
 		title: _('ms.warehouse.create_change')
 		,id: this.ident
-		,width: 475
+		,width: 600
 		,url: miniShop.config.connector_url
 		,action: 'mgr/warehouse/create'
 		,labelAlign: 'left'
@@ -166,70 +163,23 @@ miniShop.window.CreateWarehouse = function(config) {
 				,bodyStyle: 'padding-top: 10px;'
 				,labelWidth: 110
 				// Поля основных параметров склада
-				,items: [{
-					xtype: 'hidden'
-					,name: 'id'
-					,id: 'minishop-'+this.ident+'-id'
-				},{
-					xtype: 'textfield'
-					,fieldLabel: _('ms.name')
-					,name: 'name'
-					,id: 'minishop-'+this.ident+'-name'
-					,width: 300
-					,allowBlank: false
-				},{
-					xtype: 'textfield'
-					,fieldLabel: _('ms.currency')
-					,name: 'currency'
-					,id: 'minishop-'+this.ident+'-currency'
-					,description: _('ms.warehouses.desc.currency')
-					,width: 100
-				},{
-					xtype: 'textarea'
-					,fieldLabel: _('ms.address')
-					,name: 'address'
-					,id: 'minishop-'+this.ident+'-address'
-					,width: 300
-				},{
-					xtype: 'textfield'
-					,fieldLabel: _('ms.phone')
-					,name: 'phone'
-					,id: 'minishop-'+this.ident+'-phone'
-					,width: 150
-				},{
-					xtype: 'textfield'
-					,fieldLabel: _('ms.email')
-					,name: 'email'
-					,id: 'minishop-'+this.ident+'-email'
-					,width: 200
-				},{
-					xtype: 'textfield'
-					,fieldLabel: _('ms.permission')
-					,name: 'permission'
-					,id: 'minishop-'+this.ident+'-permission'
-					,description: _('ms.permission.description')
-					,width: 200
-				},{
-					xtype: 'textarea'
-					,fieldLabel: _('ms.description')
-					,name: 'description'
-					,id: 'minishop-'+this.ident+'-description'
-					,width: 300
-				}]
+				,items: [
+					{xtype: 'hidden',name: 'id',id: 'minishop-'+this.ident+'-id'}
+					,{xtype: 'textfield',fieldLabel: _('ms.name'),name: 'name',id: 'minishop-'+this.ident+'-name',allowBlank: false,width: 300}
+					,{xtype: 'textfield',fieldLabel: _('ms.currency'),name: 'currency',id: 'minishop-'+this.ident+'-currency',description: _('ms.warehouses.desc.currency'),width: 100}
+					,{xtype: 'textarea',fieldLabel: _('ms.address'),name: 'address',id: 'minishop-'+this.ident+'-address',width: 300}
+					,{xtype: 'textfield',fieldLabel: _('ms.phone'),name: 'phone',id: 'minishop-'+this.ident+'-phone',width: 150}
+					,{xtype: 'textfield',fieldLabel: _('ms.email'),name: 'email',id: 'minishop-'+this.ident+'-email',width: 200}
+					,{xtype: 'textfield',fieldLabel: _('ms.permission'),name: 'permission',id: 'minishop-'+this.ident+'-permission',description: _('ms.permission.description'),width: 200}
+					,{xtype: 'textarea',fieldLabel: _('ms.description'),name: 'description',id: 'minishop-'+this.ident+'-description',width: 300}
+				]
 			},{
 				title: _('ms.delivery')
-				,layout: 'form'
-				//,disabled: config.delivery_disabled || false
 				,items: [{
 					xtype: 'minishop-grid-warehouse-delivery'
 					,disabled: config.delivery_disabled || false
 					,warehouse: config.record
 				}]
-				,listeners:{
-					activate: function(panel){
-						//Ext.getCmp('minishop-grid-warehouse-delivery').refresh();
-					}
-				}
 			}]
 		}]
 		,keys: [{
@@ -278,41 +228,27 @@ miniShop.grid.WarehouseDelivery = function(config) {
 		,paging: true
 		,plugins: this.exp
 		,remoteSort: true
-		,columns: [this.exp, {
-			header: _('id')
-			,dataIndex: 'id'
-			,hidden: true
-		},{
-			header: _('wid')
-			,dataIndex: 'wid'
-			,hidden: true
-		},{
-			header: _('ms.name')
-			,dataIndex: 'name'
-			,width: 200
-			,sortable: true
-		},{
-			header: _('ms.description')
-			,dataIndex: 'description'
-			,hidden: true
-		},{
-			header: _('ms.price')
-			,dataIndex: 'price'
-			,width: 50
-			,sortable: true
-			,editor: { xtype: 'numberfield' }
-		},{
-			header: _('ms.enabled')
-			,dataIndex: 'enabled'
-			,width: 50
-			,sortable: true
-			,editor: { xtype: 'combo-boolean', renderer: 'boolean' }
-		}]
+		,columns: [this.exp, 
+			{header: _('id'),dataIndex: 'id',hidden: true}
+			,{header: _('wid'),dataIndex: 'wid',hidden: true}
+			,{header: _('ms.name'),dataIndex: 'name',width: 200,sortable: true}
+			,{header: _('ms.description'),dataIndex: 'description',hidden: true}
+			//,{header: _('ms.price'),dataIndex: 'price',width: 50,sortable: true,editor: { xtype: 'numberfield' }}
+			,{header: _('ms.price'),dataIndex: 'price',width: 75,sortable: true}
+			//,{header: _('ms.enabled'),dataIndex: 'enabled',width: 50,sortable: true,editor: { xtype: 'combo-boolean', renderer: 'boolean' }}
+			,{header: _('ms.enabled'),dataIndex: 'enabled',width: 75, sortable: true, renderer: this.renderBoolean}
+		]
 		,tbar: [{
 			text: _('create')
 			,handler: this.createDelivery
 			,scope: this
 		}]
+		,listeners: {
+			rowDblClick: function(grid, rowIndex, e) {
+				var row = grid.store.getAt(rowIndex);
+				this.updateDelivery(grid, e, row);
+			}
+		}
 	});
 	miniShop.grid.WarehouseDelivery.superclass.constructor.call(this,config);
 };
@@ -331,6 +267,10 @@ Ext.extend(miniShop.grid.WarehouseDelivery,MODx.grid.Grid, {
 		});
 		this.addContextMenuItem(m);
 	}
+	,renderBoolean: function(value) {
+		if (value == 1) {return _('yes');}
+		else {return _('no');}
+	}
 	,createDelivery: function(btn,e) {
 		//if (!this.windows.createDelivery) {
 			this.windows.createDelivery = MODx.load({
@@ -339,6 +279,7 @@ Ext.extend(miniShop.grid.WarehouseDelivery,MODx.grid.Grid, {
 				,height: 150
 				,autoHeight: true
 				,record: {}
+				,payment_disabled: true
 				,listeners: {
 					'success': {fn:function() { this.refresh(); },scope:this}
 				}
@@ -347,10 +288,13 @@ Ext.extend(miniShop.grid.WarehouseDelivery,MODx.grid.Grid, {
 		//this.windows.createDelivery.fp.getForm().reset();
 		this.windows.createDelivery.show(e.target);
 	}
-	,updateDelivery: function(btn,e) {
-		if (!this.menu.record || !this.menu.record.id) return false;
-		var record = this.menu.record;
-
+	,updateDelivery: function(btn,e,row) {
+		if (typeof(row) != 'undefined') {
+			var record = row.data;
+		}
+		else {
+			var record = this.menu.record;
+		}
 		//if (!this.windows.updateWarehouse) {
 			this.windows.updateDelivery = MODx.load({
 				xtype: 'minishop-window-delivery-create'
@@ -398,40 +342,38 @@ miniShop.window.CreateDelivery = function(config) {
 	Ext.applyIf(config,{
 		title: _('ms.delivery.create')
 		,id: this.ident
-		,height: 150
-		,width: 350
+		,width: 500
 		,url: miniShop.config.connector_url
 		,action: 'mgr/delivery/create'
 		,labelAlign: 'left'
 		,labelWidth: 100
 		,fields: [{
-			xtype: 'hidden'
-			,name: 'id'
-			,value: id
-		},{
-			xtype: 'hidden'
-			,name: 'wid'
-			,value: wid
-		},{
-			xtype: 'textfield'
-			,fieldLabel: _('ms.name')
-			,name: 'name'
-			,id: 'minishop-'+this.ident+'-name'
-			,width: 200
-			,allowBlank: false
-		},{
-			xtype: 'numberfield'
-			,fieldLabel: _('ms.price')
-			,name: 'price'
-			,id: 'minishop-'+this.ident+'-price'
-			,width: 100
-		},{
-			xtype: 'textarea'
-			,fieldLabel: _('ms.description')
-			,name: 'description'
-			,id: 'minishop-'+this.ident+'-description'
-			,width: 200
-			,height: 50
+			xtype: 'modx-tabs'
+			,autoHeight: true
+			,deferredRender: false
+			,items: [{
+				title: _('ms.main')
+				,layout: 'form'
+				,style: 'padding: 0 5px;'
+				,bodyStyle: 'padding-top: 10px;'
+				,labelWidth: 110
+				// Поля основных параметров доставки
+				,items: [
+					{xtype: 'hidden',name: 'id',id: 'minishop-'+this.ident+'-id', value: id}
+					,{xtype: 'hidden',name: 'wid',id: 'minishop-'+this.ident+'-wid',value: wid}
+					,{xtype: 'textfield',fieldLabel: _('ms.name'),name: 'name',id: 'minishop-'+this.ident+'-name',width: 250,allowBlank: false}
+					,{xtype: 'numberfield',fieldLabel: _('ms.price'),name: 'price',id: 'minishop-'+this.ident+'-price',width: 100}
+					,{xtype: 'textarea',fieldLabel: _('ms.description'),name: 'description',id: 'minishop-'+this.ident+'-description',width: 250,height: 50}
+					,{xtype: 'combo-boolean',fieldLabel: _('ms.enabled'),name: 'enabled',id: 'minishop-'+this.ident+'-enabled', hiddenName: 'enabled', width: 75}
+				]
+			},{
+				title: _('ms.payments')
+				,items: [{
+					xtype: 'minishop-grid-warehouse-payments'
+					,disabled: config.payment_disabled || false
+					,delivery: config.record
+				}]
+			}]
 		}]
 
 	});
@@ -439,3 +381,42 @@ miniShop.window.CreateDelivery = function(config) {
 };
 Ext.extend(miniShop.window.CreateDelivery,MODx.Window);
 Ext.reg('minishop-window-delivery-create',miniShop.window.CreateDelivery);
+
+
+miniShop.grid.WarehousePayments = function(config) {
+	config = config || {};
+
+	this.exp = new Ext.grid.RowExpander({
+		expandOnDblClick: false
+		,tpl : new Ext.Template(
+			'<p class="desc">{description}</p>'
+		)
+	});
+
+	Ext.applyIf(config,{
+		id: 'minishop-grid-warehouse-payments'
+		,url: miniShop.config.connector_url
+		,pageSize: 5
+		,baseParams: {
+			action: 'mgr/warehouse/getpaymentslist'
+			,delivery: config.delivery.id
+		}
+		,autosave: true
+		,save_action: 'mgr/warehouse/updatepayment'
+		,saveParams: {delivery: config.delivery.id}
+		,fields: ['id','delivery','name','description','snippet','enabled']
+		,paging: true
+		,plugins: this.exp
+		,remoteSort: true
+		,columns: [this.exp, 
+			{header: _('id'),dataIndex: 'id',hidden: true}
+			,{header: _('ms.name'),dataIndex: 'name',width: 200,sortable: true}
+			,{header: _('ms.description'),dataIndex: 'description',hidden: true}
+			,{header: _('snippet'),dataIndex: 'snippet'}
+			,{header: _('ms.enabled'),dataIndex: 'enabled',width: 75,sortable: true,editor: { xtype: 'combo-boolean', renderer: 'boolean' }}
+		]
+	});
+	miniShop.grid.WarehousePayments.superclass.constructor.call(this,config);
+};
+Ext.extend(miniShop.grid.WarehousePayments,MODx.grid.Grid);
+Ext.reg('minishop-grid-warehouse-payments',miniShop.grid.WarehousePayments);

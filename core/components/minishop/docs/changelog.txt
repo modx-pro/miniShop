@@ -1,17 +1,22 @@
 Changelog for miniShop.
 
-1.3.0 beta (07.03.2012)
+1.3.1 beta (07.03.2012)
 =============
 - Товарам добавлено свойство "вес".
 	- Новый системный параметр getweight_snippet. Можно указать сниппет (по типу msGetPrice), который примет объект ресурса и выдаст его вес. По умолчанию - нет, выдается вес из ModGoods.
 	- Изменены чанки корзины и песем для поддержки нового свойства товаров.
 - Указание сниппета в системной настройке getprice_snippet больше не обязательно. В таком случае будет просто возвращена цена из ModGoods, без дополнительной обработки.
+- Добавлена возможность создавать различные методы оплаты
+	- Привязка методов оплаты к способам доставки в настройках складов.
+	- Если в методе оплаты указан сниппет - после создания заказа ему передаются объекты заказа, профиля и адреса для дальнейшей обработки заказа.
 -----
 - New goods parameter - "weight"
 	- New system setting getweight_snippet. You may set snippet as msGetPrice for weight correction.
 	- Changed chinks for new parameter support
 - Snippet in system setting getprice_snippet is not required anymore. If it empty, then will return price from ModGoods without any changing.
-
+- Added ability to create a variety of payment methods
+	- Linking of payment methods to the methods of delivery in the warehouses settings.
+	- If in the payment method specified snippet - after creation of order its runs with 3 objects (order,profile,address) for further processing of the order.
 
 1.2.0 beta (21.03.2012)
 =============

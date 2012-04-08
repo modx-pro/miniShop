@@ -52,7 +52,13 @@ class ModOrders extends xPDOSimpleObject {
 		if ($res = $this->xpdo->getObject('ModDelivery', $this->get('delivery'))) {
 			return $res->get('name');
 		}
-	}	
+	}
+
+	function getPaymentName() {
+		if ($res = $this->xpdo->getObject('ModPayment', $this->get('payment'))) {
+			return $res->get('name');
+		}
+	}
 
 	function getDeliveryPrice() {
 		if ($res = $this->xpdo->getObject('ModDelivery', $this->get('delivery'))) {

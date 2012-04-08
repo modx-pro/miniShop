@@ -11,6 +11,7 @@ $xpdo_meta_map['ModDelivery']= array (
     'description' => NULL,
     'price' => 0,
     'enabled' => 1,
+    'payments' => '[]',
   ),
   'fieldMeta' => 
   array (
@@ -51,6 +52,15 @@ $xpdo_meta_map['ModDelivery']= array (
       'null' => false,
       'default' => 1,
     ),
+    'payments' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '255',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '[]',
+      'index' => 'index',
+    ),
   ),
   'indexes' => 
   array (
@@ -63,6 +73,22 @@ $xpdo_meta_map['ModDelivery']= array (
       'columns' => 
       array (
         'wid' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'payments' => 
+    array (
+      'alias' => 'payments',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'payments' => 
         array (
           'length' => '',
           'collation' => 'A',

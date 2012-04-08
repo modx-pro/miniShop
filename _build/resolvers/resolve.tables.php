@@ -44,6 +44,7 @@ if ($object->xpdo) {
 			$manager->createObjectContainer('ModOrders');
 			$manager->createObjectContainer('ModStatus');
 			$manager->createObjectContainer('ModWarehouse');
+			$manager->createObjectContainer('ModPayment');
 			
 			$exists = $modx->getCount('ModWarehouse');
 			if ($exists == 0) {
@@ -83,8 +84,12 @@ if ($object->xpdo) {
 			
 			break;
 		case xPDOTransport::ACTION_UPGRADE:
+			$manager->createObjectContainer('ModPayment');
+			
 			$gtable = $modx->getTableName('ModGoods');
 			$ogtable = $modx->getTableName('ModOrderedGoods');
+			$dtable = $modx->getTableName('ModDelivery');
+			$otable = $modx->getTableName('ModOrders');
 
 			$sql = "ALTER TABLE {$gtable} ADD `add1` VARCHAR(255) NOT NULL, ADD `add2` VARCHAR(255) NOT NULL , ADD `add3` TEXT NOT NULL";
 			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
@@ -94,6 +99,10 @@ if ($object->xpdo) {
 			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
 			$sql = "ALTER TABLE {$gtable} ADD `weight` FLOAT(10,2) NOT NULL DEFAULT '0.00' AFTER `price`;
 					ALTER TABLE {$ogtable} ADD `weight` FLOAT(10,2) NOT NULL DEFAULT '0.00' AFTER `price`;";
+			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
+			$sql = "ALTER TABLE {$dtable} ADD `payments` VARCHAR(255) NOT NULL DEFAULT '[]', ADD INDEX (`payments`)";
+			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
+			$sql = "ALTER TABLE {$otable} ADD `payment` INT NOT NULL DEFAULT '0' AFTER `delivery`";
 			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
 			break;
 	}

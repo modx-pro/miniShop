@@ -77,6 +77,20 @@ miniShop.panel.Home = function(config) {
 						//Ext.getCmp('minishop-grid-statuses').refresh();
 					}
 				}
+            },{
+                title: _('ms.payments')
+                ,items: [{
+                    html: '<p>'+_('ms.payments.intro_msg')+'</p><br />'
+                    ,border: false
+                },{
+                    xtype: 'minishop-grid-payments'
+                    ,preventRender: true
+                }]
+				,listeners: {
+					activate : function(panel){
+						//Ext.getCmp('minishop-grid-payments').refresh();
+					}
+				}
             }]
         }]
     });
@@ -222,7 +236,27 @@ Ext.extend(MODx.combo.template,MODx.combo.ComboBox);
 Ext.reg('minishop-combo-goodstemplate',MODx.combo.template);
 ///////////////////////////////////////
 
-
+// Комбобокс выбора сниппета
+MODx.combo.snippet = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'snippet'
+        ,hiddenName: 'snippet'
+        ,displayField: 'name'
+        ,valueField: 'id'
+        ,fields: ['id','name']
+		,pageSize: 20
+		,emptyText: _('ms.snippet.select')
+        ,url: MODx.config.connectors_url+'element/snippet.php'
+        ,baseParams: {
+            action: 'getList'
+        }
+    });
+    MODx.combo.snippet.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.snippet,MODx.combo.ComboBox);
+Ext.reg('minishop-combo-snippet',MODx.combo.snippet);
+///////////////////////////////////////
 
 
 

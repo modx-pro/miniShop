@@ -57,7 +57,7 @@ class miniShop {
         $this->modx->lexicon->load('minishop:default');
 
 		// Вывод ошибок при отладке
-		if ($this->config['debug']) {
+		if (isset($this->config['debug']) && $this->config['debug'] != 0) {
 			ini_set('display_errors', 1); 
 			error_reporting(E_ALL ^ E_NOTICE);
 		}
@@ -403,8 +403,6 @@ class miniShop {
 
 	// Вывод методов доставки текущего склада
 	function getDelivery() {
-		$options = '';
-
 		$q = $this->modx->newQuery('ModDelivery');
 		$q->where(array('enabled' => 1, 'wid' => $_SESSION['minishop']['warehouse']));
 		$q->sortby('id','ASC');
@@ -414,6 +412,30 @@ class miniShop {
 				$tmp = $v->toArray();
 				if ($_POST['delivery'] == $tmp['id'] || $_SESSION['minishop']['delivery'] == $tmp['id']) {$tmp['selected'] = 'selected';} else {$tmp['selected'] = '';}
 				$options .= $this->modx->getChunk($this->config['tplDeliveryRow'], $tmp);
+			}
+		}
+		return $options;
+	}
+
+
+	// Вывод способов оплаты в зависимости от текущего метода доставки
+	function getPayments() {
+		$q = $this->modx->newQuery('ModPayment');
+	
+		$did = $_SESSION['minishop']['delivery'];
+		if ($delivery = $this->modx->getObject('ModDelivery', $did)) {
+			$payments = $delivery->getPayments();
+			if (count($payments)) {
+				$q->where(array('id:IN' => $payments));
+			}
+		}
+		$q->sortby('id','ASC');
+
+		if ($res = $this->modx->getCollection('ModPayment', $q)) {
+			foreach ($res as $v) {
+				$tmp = $v->toArray();
+				if ($_POST['payment'] == $tmp['id'] || $_SESSION['minishop']['payments'] == $tmp['id']) {$tmp['selected'] = 'selected';} else {$tmp['selected'] = '';}
+				$options .= $this->modx->getChunk($this->config['tplPaymentsRow'], $tmp);
 			}
 		}
 		return $options;
@@ -502,11 +524,14 @@ class miniShop {
 		
 		// Создание заказа
 		$delivery = !empty($_SESSION['minishop']['delivery']) ? $_SESSION['minishop']['delivery'] : '0';
+		$payment = !empty($_SESSION['minishop']['payment']) ? $_SESSION['minishop']['payment'] : '0';
+		
 		$order = $this->modx->newObject('ModOrders');
 		$order->set('uid', $uid);
 		$order->set('num', $num);
 		$order->set('wid', $_SESSION['minishop']['warehouse']);
 		$order->set('delivery', $delivery);
+		$order->set('payment', $payment);
 		$order->set('address', $aid);
 		$order->set('status', 0);
 		$order->set('created', date('Y-m-d H:i:s'));
@@ -543,6 +568,11 @@ class miniShop {
 		// Изменения статуса и отправка писем
 		if ($this->changeOrderStatus($order->get('id'), $this->config['ms_status_new'])) {
 			unset($_SESSION['minishop']);
+			if (!empty($payment) && $tmp = $this->modx->getObject('ModPayment', $payment)) {
+				if ($snippet = $tmp->getSnippetName()) {
+					return $this->modx->runSnippet($snippet, array('order' => $order, 'profile' => $profile, 'address' => $address));
+				}
+			}
 			$arr = $order->toArray();
 			$arr['email'] = $profile->get('email');
 			return $this->modx->getChunk($this->config['tplSubmitOrderSuccess'], $arr);

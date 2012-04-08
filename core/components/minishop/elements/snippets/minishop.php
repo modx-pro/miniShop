@@ -8,6 +8,7 @@ $c['tplCartOuter'] = $modx->getOption('tplCartOuter', $scriptProperties, 'tpl.ms
 $c['tplCartRow'] = $modx->getOption('tplCartRow', $scriptProperties, 'tpl.msCart.row');
 $c['tplCartStatus'] = $modx->getOption('tplCartStatus', $scriptProperties, 'tpl.msCart.status');
 $c['tplDeliveryRow'] = $modx->getOption('tplDeliveryRow', $scriptProperties, 'tpl.msDelivery.row');
+$c['tplPaymentsRow'] = $modx->getOption('tplPaymentsRow', $scriptProperties, 'tpl.msDelivery.row');
 $c['tplAddrForm'] = $modx->getOption('tplAddrForm', $scriptProperties, 'tpl.msAddrForm');
 $c['tplAddrFormMini'] = $modx->getOption('tplAddrFormMini', $scriptProperties, 'tpl.msAddrForm.mini');
 $c['tplAddrFormSaved'] = $modx->getOption('tplAddrFormSaved', $scriptProperties, 'tpl.msAddrForm.saved');
@@ -40,6 +41,7 @@ switch ($action) {
 	case 'changeCartCount': $res = $modx->miniShop->changeCartCount($_POST['key'], $_POST['val']); break;
 	case 'getCartStatus': $res = $modx->miniShop->getCartStatus(); break;
 	case 'getDelivery': $res = $modx->miniShop->getDelivery(); break; 
+	case 'getPayments': $res = $modx->miniShop->getPayments(); break; 
 	case 'submitOrder': $res = $modx->miniShop->submitOrder(); break;
 	case 'getMyOrdersList': $res = $modx->miniShop->getMyOrdersList(); break;
 	case 'redirectCustomer': $res = $modx->miniShop->redirectCustomer($_REQUEST['oid'], $_REQUEST['email']); break;

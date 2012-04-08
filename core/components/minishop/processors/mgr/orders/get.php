@@ -40,6 +40,7 @@ if ($res = $modx->getObject('ModOrders', $id)) {
 	$arr['fullname'] =  $res->getFullName();
 	$arr['email'] =  $res->getEmail();
 	$arr['delivery_name'] = $res->getDeliveryName();
+	$arr['payment_name'] = $res->getPaymentName();
 	$arr['delivery_price'] = $res->getDeliveryPrice();
 	if ($tmp =  $res->getAddress()) {
 		foreach($tmp as $k => $v) {

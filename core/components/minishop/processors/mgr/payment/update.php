@@ -20,33 +20,28 @@
  * @package modextra
  */
 /**
- * Update an Warehouse
+ * Update an Payment
  * 
  * @package modextra
  * @subpackage processors
  */
 if (!$modx->hasPermission('save')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
  
-if($modx->getObject('ModWarehouse',array('name' => $_POST['name'], 'id:!=' => $_POST['id'] ))) {
-    $modx->error->addField('name',$modx->lexicon('ms.warehouse.err_ae'));
+if($modx->getObject('ModPayment',array('name' => $_POST['name'], 'id:!=' => $_POST['id'] ))) {
+    $modx->error->addField('name',$modx->lexicon('ms.payment.err_ae'));
 } 
 if ($modx->error->hasError()) {
     return $modx->error->failure();
 } 
 
-if (!$res = $modx->getObject('ModWarehouse', $_POST['id'])) {
-    $modx->error->failure($modx->lexicon('ms.warehouse.err_nf'));
-}
-
-$permission = $res->get('permission');
-if (!empty($permission) && !$modx->hasPermission($permission)) {
-	return $modx->error->failure($modx->lexicon('ms.no_permission'));
+if (!$res = $modx->getObject('ModPayment', $_POST['id'])) {
+    $modx->error->failure($modx->lexicon('ms.payment.err_nf'));
 }
 
 $res->fromArray($_POST);
 
 if ($res->save() == false) {
-    return $modx->error->failure($modx->lexicon('ms.warehouse.err_save'));
+    return $modx->error->failure($modx->lexicon('ms.payment.err_save'));
 }
 
 return $modx->error->success('',$res);

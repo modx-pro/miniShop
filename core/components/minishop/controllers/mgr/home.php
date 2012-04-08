@@ -29,6 +29,7 @@
  **/
 $modx->regClientStartupScript($modx->config['manager_url'].'assets/modext/util/datetime.js');
 $modx->regClientStartupScript($miniShop->config['jsUrl'].'mgr/widgets/statuses.grid.js');
+$modx->regClientStartupScript($miniShop->config['jsUrl'].'mgr/widgets/payments.grid.js');
 $modx->regClientStartupScript($miniShop->config['jsUrl'].'mgr/widgets/warehouse.grid.js');
 $modx->regClientStartupScript($miniShop->config['jsUrl'].'mgr/widgets/goods.grid.js');
 $modx->regClientStartupScript($miniShop->config['jsUrl'].'mgr/widgets/orders.grid.js');

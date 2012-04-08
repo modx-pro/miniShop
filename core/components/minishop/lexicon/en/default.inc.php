@@ -31,7 +31,9 @@ $_lang['ms.order'] = 'Order';
 $_lang['ms.orders'] = 'Orders';
 $_lang['ms.goods'] = 'Goods';
 $_lang['ms.warehouse'] = 'Warehouse';
+$_lang['ms.payment'] = 'Payment';
 $_lang['ms.warehouses'] = 'Warehouses';
+$_lang['ms.payments'] = 'Payments';
 $_lang['ms.category'] = 'Category';
 $_lang['ms.categories'] = 'Categories';
 $_lang['ms.address'] = 'Address';
@@ -82,6 +84,15 @@ $_lang['ms.warehouse.err_ae'] = 'Warehouse with the same name already exists.';
 $_lang['ms.warehouse.err_nf'] = 'Warehouse not found.';
 $_lang['ms.warehouses.desc.currency'] = 'Any currency type. RUR or $, for example.';
 
+$_lang['ms.payment.select'] = 'Select payment';
+$_lang['ms.payment.create'] = 'Create payment';
+$_lang['ms.payment.update'] = 'Update payment';
+$_lang['ms.payment.remove'] = 'Remove payment';
+$_lang['ms.payment.remove_confirm'] = 'Are you sure to remove this payment?';
+$_lang['ms.payment.err_save'] = 'Failed to save the payment.';
+$_lang['ms.payment.err_remove'] = 'Failed to remove the payement.';
+$_lang['ms.payment.err_ae'] = 'Payment with the same name already exists.';
+$_lang['ms.payment.err_nf'] = 'Payment not found.';
 
 $_lang['ms.delivery.create'] = 'New delivery';
 $_lang['ms.delivery.remove'] = 'Remove delivery';
@@ -127,6 +138,7 @@ $_lang['ms.comment'] = 'Comment';
 $_lang['ms.orders.intro_msg'] = 'Orders management section';
 $_lang['ms.goods.intro_msg'] = 'Goods management section';
 $_lang['ms.warehouses.intro_msg'] = 'Warehouses management section';
+$_lang['ms.paymets.intro_msg'] = 'Payment management section. You must create methods of payments and set their properties, and then link these payments to delivery methods (in section "Warehouses")';
 $_lang['ms.status.intro_msg'] = 'Statuses management section';
 
 $_lang['ms.orders.item_err_save'] = 'Order not found.';

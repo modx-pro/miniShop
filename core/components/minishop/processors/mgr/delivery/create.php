@@ -36,6 +36,7 @@ if ($modx->error->hasError()) {
 }
 
 $res = $modx->newObject('ModDelivery');
+$_POST['enabled'] = $_POST['enabled'] == 'true' || $_POST['enabled'] == '1' ? 1 : 0;
 $res->fromArray($_POST);
 
 if ($res->save() == false) {

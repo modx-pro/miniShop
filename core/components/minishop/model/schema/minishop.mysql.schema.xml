@@ -32,9 +32,13 @@
 		<field key="description" dbtype="text" phptype="string" null="false" />
 		<field key="price" dbtype="float" precision="10,2" phptype="float" null="false" default="0.00" />
 		<field key="enabled" dbtype="tinyint" precision="1" phptype="integer" null="false" default="1" />
+		<field key="payments" dbtype="varchar" precision="255" phptype="string" null="false" default="[]" index="index" />
 
 		<index alias="wid" name="wid" primary="false" unique="false" type="BTREE" >
 			<column key="wid" length="" collation="A" null="false" />
+		</index>
+		<index alias="payments" name="payments" primary="false" unique="false" type="BTREE" >
+			<column key="payments" length="" collation="A" null="false" />
 		</index>
 	</object>
 	<object class="ModGoods" table="modGoods" extends="xPDOSimpleObject">
@@ -97,6 +101,7 @@
 		<field key="updated" dbtype="timestamp" phptype="timestamp" null="false" default="0000-00-00 00:00:00"  extra="on update current_timestamp" />
 		<field key="comment" dbtype="text" phptype="string" null="false" />
 		<field key="delivery" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
+		<field key="payment" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
 		<field key="address" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
 
 		<index alias="status" name="status" primary="false" unique="false" type="BTREE" >
@@ -108,6 +113,11 @@
 		<index alias="warehouse" name="warehouse" primary="false" unique="false" type="BTREE" >
 			<column key="wid" length="" collation="A" null="false" />
 		</index>
+	</object>
+	<object class="ModPayment" table="modPayment" extends="xPDOSimpleObject">
+		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="description" dbtype="text" phptype="string" null="true" />
+		<field key="snippet" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
 	</object>
 	<object class="ModStatus" table="modStatus" extends="xPDOSimpleObject">
 		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />
