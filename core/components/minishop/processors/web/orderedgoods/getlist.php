@@ -50,8 +50,8 @@ foreach ($orders as $v) {
 	else {
 		$tmp = json_decode($v->get('data'), true);
 		$data = '<ul>';
-		foreach ($tmp as $k => $v) {
-			$data .= "<li>".$modx->lexicon('ms.'.$k)." &mdash; $v</li>";
+		foreach ($tmp as $k2 => $v2) {
+			$data .= "<li>".$modx->lexicon('ms.'.$k2)." &mdash; $v2</li>";
 		}
 		$data .= '</ul>';
 	}
