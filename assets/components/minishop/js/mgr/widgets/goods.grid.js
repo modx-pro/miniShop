@@ -96,7 +96,12 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
 	}
 	,renderImg: function(img) {
 		if (img.length > 0) {
-			return '<img src="/'+img+'" height="30" alt="" title="" />';
+			if (/^(http|https)/.test(img)) {
+				return '<img src="'+img+'" height="30" alt="" title="" />';	
+			}
+			else {
+				return '<img src="/'+img+'" height="30" alt="" title="" />';
+			}
 		}
 		else {
 			return '';
