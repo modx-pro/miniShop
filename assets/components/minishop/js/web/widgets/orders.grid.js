@@ -224,6 +224,14 @@ Ext.reg('minishop-window-vieworder',miniShop.window.ViewOrder);
 // Таблица с заказанными товарами
 miniShop.grid.Goods = function(config) {
 	config = config || {};
+	
+	this.exp = new Ext.grid.RowExpander({
+		expandOnDblClick: false
+		,tpl : new Ext.Template(
+			'<p class="desc">{data}</p>'
+		)
+	});
+	
 	Ext.applyIf(config,{
 		id: this.ident+'-grid-goods'
 		,url: miniShop.config.connector_url
@@ -232,12 +240,14 @@ miniShop.grid.Goods = function(config) {
 		,pageSize: 10
 		,autoHeight: true
 		,paging: true
+		,plugins: this.exp
 		,remoteSort: true
-		,columns: [
-			{header: _('ms.goods.name'),dataIndex: 'name',width: 100}
+		,columns: [this.exp
+			,{header: _('ms.goods.name'),dataIndex: 'name',width: 100}
 			,{header: _('ms.goods.num'),dataIndex: 'num',width: 50,sortable: true}
 			,{header: _('ms.goods.price'),dataIndex: 'price',width: 50,sortable: true}
 			,{header: _('ms.goods.sum'),dataIndex: 'sum',width: 50}
+			,{header: _('ms.goods.data'),dataIndex: 'data',hidden: true}
 		]
 	});
 	miniShop.grid.Goods.superclass.constructor.call(this,config);

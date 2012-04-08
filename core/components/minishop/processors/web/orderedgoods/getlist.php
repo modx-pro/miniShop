@@ -46,11 +46,22 @@ $orders = $modx->getCollection('ModOrderedGoods',$c);
 
 $arr = array();
 foreach ($orders as $v) {
+	if ($v->get(data) == '[]') {$data = '';}
+	else {
+		$tmp = json_decode($v->get('data'), true);
+		$data = '<ul>';
+		foreach ($tmp as $k => $v) {
+			$data .= "<li>".$modx->lexicon('ms.'.$k)." &mdash; $v</li>";
+		}
+		$data .= '</ul>';
+	}
 	$arr[] = array(
 		'name' => $v->getGoodsName()
 		,'num' => $v->get('num')
 		,'price' => $v->get('price')
 		,'sum' => $v->get('sum')
+		,'data' => $data
 	);
+
 }
 return $this->outputArray($arr, $count);

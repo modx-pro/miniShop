@@ -51,6 +51,16 @@ foreach ($orders as $v) {
 	if ($res = $modx->getObject('modResource', $tmp['gid'])) {
 		$tmp['name'] = $res->get('pagetitle');
 	}
+	if ($tmp['data'] == '[]') {$tmp['data'] = '';}
+	else {
+		$tmp2 = json_decode($tmp['data'], true);
+		$tmp['data'] = '<ul>';
+		foreach ($tmp2 as $k => $v2) {
+			$tmp['data'] .= "<li>".$modx->lexicon('ms.'.$k)." &mdash; $v2</li>";
+		}
+		$tmp['data'] .= '</ul>';
+	}
+	
 	$arr[] = $tmp;
 }
 return $this->outputArray($arr, $count);
