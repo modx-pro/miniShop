@@ -1,7 +1,6 @@
 --------------------
 miniShop
 --------------------
-Version: 1.0.0 beta1
 Author: Vasiliy Naumkin <bezumkin@yandex.ru>
 Homepage: http://minishop.bezumkin.ru
 --------------------
