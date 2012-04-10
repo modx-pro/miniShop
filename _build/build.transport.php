@@ -34,7 +34,7 @@ set_time_limit(0);
 /* define package */
 define('PKG_NAME','miniShop');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
-define('PKG_VERSION','1.3.2');
+define('PKG_VERSION','1.3.3');
 define('PKG_RELEASE','beta');
 
 /* define sources */
