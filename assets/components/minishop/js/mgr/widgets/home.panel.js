@@ -1,100 +1,100 @@
 miniShop.panel.Home = function(config) {
-    config = config || {};
-    Ext.apply(config,{
-        border: false
-        ,baseCls: 'modx-formpanel'
-        ,items: [{
-            html: '<h2>'+_('minishop')+'</h2>'
-            ,border: false
-            ,cls: 'modx-page-header container'
-        },{
-            xtype: 'modx-tabs'
-            ,bodyStyle: 'padding: 10px'
-            ,cls: 'container'
-            ,defaults: { border: false ,autoHeight: true }
-            ,border: true
-            //,activeItem: 0
-            ,hideMode: 'offsets'
+	config = config || {};
+	Ext.apply(config,{
+		border: false
+		,deferredRender: true
+		,baseCls: 'modx-formpanel'
+		,items: [{
+			html: '<h2>'+_('minishop')+'</h2>'
+			,border: false
+			,cls: 'modx-page-header container'
+		},{
+			xtype: 'modx-tabs'
+			,bodyStyle: 'padding: 10px'
+			,cls: 'container'
+			,defaults: { border: false ,autoHeight: true }
+			,border: true
+			,hideMode: 'offsets'
 			,stateful: true
 			,stateId: 'ms-tabpanel-home'
 			,stateEvents: ['tabchange']
 			,getState:function() {
 				return { activeTab:this.items.indexOf(this.getActiveTab()) };
 			}
-            ,items: [{
-                title: _('ms.orders')
-                ,items: [{
-                    html: '<p>'+_('ms.orders.intro_msg')+'</p><br />'
-                    ,border: false
-                },{
-                    xtype: 'minishop-grid-orders'
+			,items: [{
+				title: _('ms.orders')
+				,items: [{
+					html: '<p>'+_('ms.orders.intro_msg')+'</p><br />'
+					,border: false
+				},{
+					xtype: 'minishop-grid-orders'
 					,preventRender: true
-                }]
+				}]
 				,listeners: {
 					activate : function(panel){
 						//Ext.getCmp('minishop-grid-warehouses').refresh();
 					}
 				}
-            },{
-                title: _('ms.goods')
-                ,items: [{
-                    html: '<p>'+_('ms.goods.intro_msg')+'</p><br />'
-                    ,border: false
-                },{
-                    xtype: 'minishop-grid-goods'
-                    ,preventRender: true
-                }]
+			},{
+				title: _('ms.goods')
+				,items: [{
+					html: '<p>'+_('ms.goods.intro_msg')+'</p><br />'
+					,border: false
+				},{
+					xtype: 'minishop-grid-goods'
+					,preventRender: true
+				}]
 				,listeners: {
 					activate : function(panel){
 						//Ext.getCmp('minishop-grid-goods').refresh();
 					}
 				}
-            },{
-                title: _('ms.warehouses')
-                ,items: [{
-                    html: '<p>'+_('ms.warehouses.intro_msg')+'</p><br />'
-                    ,border: false
-                },{
-                    xtype: 'minishop-grid-warehouses'
-                    ,preventRender: true
-                }]
+			},{
+				title: _('ms.warehouses')
+				,items: [{
+					html: '<p>'+_('ms.warehouses.intro_msg')+'</p><br />'
+					,border: false
+				},{
+					xtype: 'minishop-grid-warehouses'
+					,preventRender: true
+				}]
 				,listeners: {
 					activate : function(panel){
 						//Ext.getCmp('minishop-grid-warehouses').refresh();
 					}
 				}
-            },{
-                title: _('ms.statuses')
-                ,items: [{
-                    html: '<p>'+_('ms.status.intro_msg')+'</p><br />'
-                    ,border: false
-                },{
-                    xtype: 'minishop-grid-statuses'
-                    ,preventRender: true
-                }]
+			},{
+				title: _('ms.statuses')
+				,items: [{
+					html: '<p>'+_('ms.status.intro_msg')+'</p><br />'
+					,border: false
+				},{
+					xtype: 'minishop-grid-statuses'
+					,preventRender: true
+				}]
 				,listeners: {
 					activate : function(panel){
 						//Ext.getCmp('minishop-grid-statuses').refresh();
 					}
 				}
-            },{
-                title: _('ms.payments')
-                ,items: [{
-                    html: '<p>'+_('ms.payments.intro_msg')+'</p><br />'
-                    ,border: false
-                },{
-                    xtype: 'minishop-grid-payments'
-                    ,preventRender: true
-                }]
+			},{
+				title: _('ms.payments')
+				,items: [{
+					html: '<p>'+_('ms.payments.intro_msg')+'</p><br />'
+					,border: false
+				},{
+					xtype: 'minishop-grid-payments'
+					,preventRender: true
+				}]
 				,listeners: {
 					activate : function(panel){
 						//Ext.getCmp('minishop-grid-payments').refresh();
 					}
 				}
-            }]
-        }]
-    });
-    miniShop.panel.Home.superclass.constructor.call(this,config);
+			}]
+		}]
+	});
+	miniShop.panel.Home.superclass.constructor.call(this,config);
 };
 Ext.extend(miniShop.panel.Home,MODx.Panel);
 Ext.reg('minishop-panel-home',miniShop.panel.Home);
@@ -185,6 +185,52 @@ MODx.combo.warehouse = function(config) {
 };
 Ext.extend(MODx.combo.warehouse,MODx.combo.ComboBox);
 Ext.reg('minishop-filter-warehouse',MODx.combo.warehouse);
+
+MODx.combo.delivery = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'delivery'
+        ,hiddenName: 'delivery'
+        ,displayField: 'name'
+        ,valueField: 'id'
+		//,autoSelect: true
+		//,editable: true
+        ,fields: ['name','id']
+        ,pageSize: 10
+		,value: miniShop.config.warehouse
+		,emptyText: _('ms.delivery.select')
+        ,url: miniShop.config.connector_url
+		,baseParams: {
+			action:  'mgr/delivery/getcombo'
+		}
+    });
+    MODx.combo.delivery.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.delivery,MODx.combo.ComboBox);
+Ext.reg('minishop-filter-delivery',MODx.combo.delivery);
+
+MODx.combo.payment = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'payment'
+        ,hiddenName: 'payment'
+        ,displayField: 'name'
+        ,valueField: 'id'
+		//,autoSelect: true
+		//,editable: true
+        ,fields: ['name','id']
+        ,pageSize: 10
+		,value: miniShop.config.payment
+		,emptyText: _('ms.payment.select')
+        ,url: miniShop.config.connector_url
+		,baseParams: {
+			action:  'mgr/payment/getcombo'
+		}
+    });
+    MODx.combo.payment.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.payment,MODx.combo.ComboBox);
+Ext.reg('minishop-filter-payment',MODx.combo.payment);
 /////////////////////////////////////////
 
 

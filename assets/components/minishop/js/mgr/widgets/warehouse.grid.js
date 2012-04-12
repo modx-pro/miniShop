@@ -156,6 +156,12 @@ miniShop.window.CreateWarehouse = function(config) {
 			xtype: 'modx-tabs'
 			,autoHeight: true
 			,deferredRender: false
+			,stateful: true
+			,stateId: 'ms-tabs-warehouse'
+			,stateEvents: ['tabchange']
+			,getState:function() {
+				return { activeTab:this.items.indexOf(this.getActiveTab()) };
+			}
 			,items: [{
 				title: _('ms.main')
 				,layout: 'form'

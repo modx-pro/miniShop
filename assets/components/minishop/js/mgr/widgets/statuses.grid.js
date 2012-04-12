@@ -113,7 +113,7 @@ miniShop.window.CreateStatus = function(config) {
 		title: _('ms.status.create')
 		,id: this.ident
 		,height: 150
-		,width: 475
+		,width: 600
 		,labelAlign: 'left'
 		,labelWidth: 200
 		,url: miniShop.config.connector_url

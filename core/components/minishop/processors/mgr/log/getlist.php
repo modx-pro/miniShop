@@ -54,7 +54,8 @@ $arr = array();
 foreach ($logs as $v) {
     $tmp = $v->toArray();
 	$tmp['username'] = $v->getUserName();
-	$tmp['statusname'] = $v->getStatusName();
+	$tmp['type'] = $modx->lexicon('ms.'.$tmp['type']);
+	$tmp['name'] = ($v->get('new') == 0) ? $modx->lexicon('no') : $v->getName();
 	$arr[]= $tmp;
 }
 return $this->outputArray($arr, $count);

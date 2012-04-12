@@ -189,7 +189,7 @@ miniShop.window.EditOrder = function(config) {
 	Ext.applyIf(config,{
 		title: _('ms.window.editorder')
 		,id: this.ident
-		,width: 600
+		,width: 700
 		,url: miniShop.config.connector_url
 		,action: 'mgr/warehouse/create'
 		,labelAlign: 'left'
@@ -203,6 +203,12 @@ miniShop.window.EditOrder = function(config) {
 			,deferredRender: false
 			,style: 'padding: 0 5px;'
 			,bodyStyle: 'padding-top: 10px;'
+			,stateful: true
+			,stateId: 'ms-tabs-orders'
+			,stateEvents: ['tabchange']
+			,getState:function() {
+				return { activeTab:this.items.indexOf(this.getActiveTab()) };
+			}
 			,items: [{
 				title: _('ms.order')
 				,layout: 'form'
@@ -216,10 +222,12 @@ miniShop.window.EditOrder = function(config) {
 						,{xtype: 'displayfield',name: 'created',id: this.ident+'-created',fieldLabel: _('ms.created')}
 						,{xtype: 'displayfield',name: 'fullname',id: this.ident+'-fullname',fieldLabel: _('ms.fullname')}
 						,{xtype: 'displayfield',name: 'email',id: this.ident+'-email',fieldLabel: _('ms.email')}
-						,{xtype: 'minishop-filter-warehouse',name: 'wid',hiddenName: 'wid',id: this.ident+'-warehouse',fieldLabel: _('ms.warehouse'),anchor: '90%'}
-						,{xtype: 'displayfield',name: 'delivery_name',id: this.ident+'-delivery',fieldLabel: _('ms.delivery')}
-						,{xtype: 'displayfield',name: 'payment_name',id: this.ident+'-payment',fieldLabel: _('ms.payment')}
-						,{xtype: 'minishop-filter-status',name: 'status',id: this.ident+'-status',fieldLabel: _('ms.status'),anchor: '90%'}
+						,{xtype: 'minishop-filter-warehouse',name: 'wid',hiddenName: 'wid',id: this.ident+'-warehouse',fieldLabel: _('ms.warehouse'),anchor: '70%'}
+						,{xtype: 'minishop-filter-delivery',name: 'delivery',hiddenName: 'delivery',id: this.ident+'-delivery',fieldLabel: _('ms.delivery'),anchor: '70%'}
+						,{xtype: 'minishop-filter-payment',name: 'payment',hiddenName: 'payment',id: this.ident+'-payment',fieldLabel: _('ms.payment'),anchor: '70%'}
+						,{xtype: 'minishop-filter-status',name: 'status',hiddenName: 'status',id: this.ident+'-status',fieldLabel: _('ms.status'),anchor: '70%'}
+						//,{xtype: 'displayfield',name: 'delivery_name',id: this.ident+'-delivery',fieldLabel: _('ms.delivery')}
+						//,{xtype: 'displayfield',name: 'payment_name',id: this.ident+'-payment',fieldLabel: _('ms.payment')}
 						,{xtype: 'textarea',name: 'comment',id: this.ident+'-comment',fieldLabel: _('ms.comment'),anchor: '90%',autoHeight: false,height: 50}
 					]
 				}]
@@ -343,15 +351,17 @@ miniShop.grid.Log = function(config) {
 		id: this.ident+'-grid-log'
 		,url: miniShop.config.connector_url
 		,baseParams: {action: 'mgr/log/getlist',type: 'status',operation: 'change'}
-		,fields: ['iid','type','operation','old','new','uid','username','ip','timestamp']
+		,fields: ['iid','type','old','new','name','uid','username','ip','timestamp']
 		,pageSize: 10
 		,autoHeight: true
 		,paging: true
 		,remoteSort: true
 		,columns: [
 			{header: _('ms.iid'),dataIndex: 'iid',hidden: true}
-			,{header: _('ms.log.old'),dataIndex: 'old',hidden: true,sortable: true,renderer: this.renderStatus,width: 50}
-			,{header: _('ms.log.new'),dataIndex: 'new',sortable: true,renderer: this.renderStatus,width: 50}
+			,{header: _('ms.type'),dataIndex: 'type',width: 50}
+			,{header: _('ms.log.old'),dataIndex: 'old',sortable: true,hidden: true,width: 50}
+			,{header: _('ms.log.new'),dataIndex: 'new',sortable: true,hidden: true,width: 50}
+			,{header: _('ms.name'),dataIndex: 'name',width: 100}
 			,{header: _('ms.uid'),dataIndex: 'uid',sortable: true,hidden: true,width: 50}
 			,{header: _('ms.username'),dataIndex: 'username',sortable: false,width: 50}
 			,{header: _('ms.ip'),dataIndex: 'ip',hidden: true,sortable: true,width: 50}
@@ -360,13 +370,5 @@ miniShop.grid.Log = function(config) {
 	});
 	miniShop.grid.Log.superclass.constructor.call(this,config);
 };
-Ext.extend(miniShop.grid.Log,MODx.grid.Grid,{
-	renderStatus: function(v) {
-		if (miniShop.config.statuses[v]) {
-			var name = miniShop.config.statuses[v].name;
-			var color = miniShop.config.statuses[v].color;
-			return '<span style="color: #'+color+'">'+name+'</span>';
-		}
-	}
-});
+Ext.extend(miniShop.grid.Log,MODx.grid.Grid);
 Ext.reg('minishop-grid-log',miniShop.grid.Log);

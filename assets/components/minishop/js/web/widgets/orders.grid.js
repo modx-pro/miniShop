@@ -263,14 +263,16 @@ miniShop.grid.History = function(config) {
 		id: this.ident+'-grid-history'
 		,url: miniShop.config.connector_url
 		,baseParams: {action: 'history/getlist'}
-		,fields: ['id','oid','statusname','timestamp']
+		,fields: ['id','type','name','timestamp']
 		,pageSize: 10
 		,autoHeight: true
 		,paging: true
 		,remoteSort: true
 		,columns: [
-			{header: _('ms.status'),dataIndex: 'statusname',width: 50,sortable: true}
-			,{header: _('ms.timestamp'),dataIndex: 'timestamp',width: 100,sortable: true}
+			{header: _('ms.iid'),dataIndex: 'iid',hidden: true}
+			,{header: _('ms.type'),dataIndex: 'type',width: 50}
+			,{header: _('ms.name'),dataIndex: 'name',width: 100}
+			,{header: _('ms.timestamp'),dataIndex: 'timestamp',sortable: true,width: 100}
 		]
 	});
 	miniShop.grid.History.superclass.constructor.call(this,config);

@@ -7,10 +7,24 @@ class ModLog extends xPDOSimpleObject {
 		}
 	}
 
-	function getStatusName($val = 'new') {
-		if ($res = $this->xpdo->getObject('ModStatus', $this->get($val))) {
+	function getName($val = 'new') {
+		$type = $this->get('type');
+		$val = $this->get($val);
+		switch ($type) {
+			case 'status': $obj = 'ModStatus'; break;
+			case 'delivery': $obj = 'ModDelivery'; break;
+			case 'payment': $obj = 'ModPayment'; break;
+			case 'warehouse': $obj = 'ModWarehouse'; break;
+			default: $obj = ''; 
+		}
+		if (empty($obj)) {return $val;}
+		if ($res = $this->xpdo->getObject($obj, $val)) {
 			return $res->get('name');
 		}
+	}
+	
+	function getStatusName($val = 'new') {
+		return $this->getName($val);
 	}
 
 }

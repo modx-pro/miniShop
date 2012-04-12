@@ -53,7 +53,8 @@ $logs = $modx->getCollection('ModLog',$c);
 $arr = array();
 foreach ($logs as $v) {
 	$arr[] = array(
-		'statusname' => $v->getStatusName()
+		'type' => $modx->lexicon('ms.'.$v->get('type'))
+		,'name' => ($v->get('new') == 0) ? $modx->lexicon('no') : $v->getName()
 		,'timestamp' => $v->get('timestamp')
 	);
 }

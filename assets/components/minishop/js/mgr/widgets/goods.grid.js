@@ -266,6 +266,13 @@ miniShop.window.createGoods = function(config) {
 			,bodyStyle: { background: 'transparent' }
 			,deferredRender: false
 			,autoHeight: true
+			,stateful: true
+			,stateId: 'ms-tabs-goods'
+			,stateEvents: ['tabchange']
+			,getState:function() {
+				return { activeTab:this.items.indexOf(this.getActiveTab()) };
+			}
+
 			,items: [{
 				title: _('ms.goods')
 				,layout: 'form'

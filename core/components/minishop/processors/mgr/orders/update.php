@@ -32,6 +32,8 @@ $id = $modx->getOption('id', $_REQUEST, 0);
 $status = $modx->getOption('status', $_REQUEST, 1);
 $comment = $modx->getOption('comment', $_REQUEST, '');
 $warehouse = $modx->getOption('wid', $_REQUEST, 0);
+$delivery = $modx->getOption('delivery', $_REQUEST, 0);
+$payment = $modx->getOption('payment', $_REQUEST, 0);
 
 $addr = array();
 foreach ($_REQUEST as $k => $v) {
@@ -45,17 +47,63 @@ if (empty($id)) {
 	return $modx->error->failure($modx->lexicon('ms.orders.item_err_save'));
 }
 
+$miniShop = new miniShop($modx);
+
 if ($res = $modx->getObject('ModOrders', $id)) {
 	$oldstatus = $res->get('status');
+	$olddelivery = $res->get('delivery');
+	$oldpayment = $res->get('payment');
+	$oldwarehouse = $res->get('warehouse');
+	
+	// Смена склада
+	if ($delivery > 0 && $warehouse != $oldwarehouse) {
+		if ($tmp = $modx->getObject('ModWarehouse', $warehouse)) {
+			$deliveries = $tmp->getDeliveries();
+			if ($delivery > 0 && !in_array($delivery, $deliveries)) {
+				return $modx->error->failure($modx->lexicon('ms.delivery.err_save'));
+			}
+			
+		}
+		else {
+			return $modx->error->failure($modx->lexicon('ms.warehouse.err_nf'));
+		}
+	}
+	if ($warehouse != $oldwarehouse) {
+		$change_warehouse = 1;
+		$res->set('wid', $warehouse);
+	}
+	// Смена способа доставки и проверка метода оплаты
+	if ($delivery > 0) {
+		if ($tmp = $modx->getObject('ModDelivery', $delivery)) {
+			$payments = $tmp->getPayments();
+			if (!in_array($payment, $payments)) {
+				return $modx->error->failure($modx->lexicon('ms.payment.err_save'));
+			}
+		}
+		else {
+			return $modx->error->failure($modx->lexicon('ms.delivery.err_nf'));
+		}
+	}
+	if ($delivery != $olddelivery) {
+		$change_delivery = 1;
+		$res->set('delivery', $delivery);
+	}
+	// Смена способа платежа
+	if ($payment != $oldpayment) {
+		$change_payment = 1;
+		$res->set('payment', $payment);
+	}
+	// Смена статуса
 	if ($oldstatus != $status) {
-		// Сохраняем изменение статуса
-		$miniShop = new miniShop($modx);
 		$miniShop->changeOrderStatus($id, $status);
 	}
 	// Пишем поля и сохраняем заказ
 	$res->set('comment', $comment);
-	$res->set('wid', $warehouse);
-	$res->save();
+	if  ($res->save()) {
+		if ($change_warehouse) {$miniShop->Log('warehouse', $id, 'change', $oldwarehouse, $warehouse);}
+		if ($change_delivery) {$miniShop->Log('delivery', $id, 'change', $oldelivery, $delivery);}
+		if ($change_payment) {$miniShop->Log('payment', $id, 'change', $oldpayment, $payment);}
+	}
 	
 	if ($address = $modx->getObject('ModAddress', $addr['id'])) {
 		$address->fromArray($addr);

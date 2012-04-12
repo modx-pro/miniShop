@@ -20,7 +20,7 @@
  * @package minishop
  */
 /**
- * Get a list of Warehouses for cobmobox
+ * Get a list of Payments for cobmobox
  *
  * @package minishop
  * @subpackage processors
@@ -33,35 +33,24 @@ $limit = $modx->getOption('limit',$_REQUEST,5);
 $sort = $modx->getOption('sort',$_REQUEST,'id');
 $dir = $modx->getOption('dir',$_REQUEST,'ASC');
 $query = $modx->getOption('query', $_REQUEST, 0);
-$addall = $modx->getOption('addall',$_REQUEST, 0);
 
-$c = $modx->newQuery('ModWarehouse');
+$c = $modx->newQuery('ModPayment');
 
 if (!empty($query)) {
 	$c->andCondition(array('name:LIKE' => '%'.$query.'%'));
 }
 
-$count = $modx->getCount('ModWarehouse',$c);
+$count = $modx->getCount('ModPayment',$c);
 $c->sortby($sort,$dir);
-
+$c->select('ModPayment.id,ModPayment.name');
 if ($isLimit) $c->limit($limit,$start);
 
-$res = $modx->getCollection('ModWarehouse',$c);
-/*
-if (!empty($addall)) {
-	$list = array(array('id' => 0, 'name' => $modx->lexicon('ms.combo.all')));
-}
-else {
-	$list = array();
-}
-*/
+$res = $modx->getCollection('ModPayment',$c);
+$arr = array(array(
+	'id' => '0'
+	,'name' => $modx->lexicon('no')
+));
 foreach ($res as $v) {
-	$permission = $v->get('permission');
-	if (!empty($permission) && !$modx->hasPermission($permission)) {
-		continue;
-	}
-    $tmp = $v->toArray();
-	
-	$arr[]= $tmp;
+	$arr[]= $v->toArray();
 }
 return $this->outputArray($arr,$count);

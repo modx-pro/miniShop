@@ -35,6 +35,7 @@ $modx->regClientStartupScript($miniShop->config['jsUrl'].'mgr/widgets/goods.grid
 $modx->regClientStartupScript($miniShop->config['jsUrl'].'mgr/widgets/orders.grid.js');
 $modx->regClientStartupScript($miniShop->config['jsUrl'].'mgr/widgets/home.panel.js');
 $modx->regClientStartupScript($miniShop->config['jsUrl'].'mgr/sections/home.js');
+$modx->regClientCss($miniShop->config['cssUrl'].'mgr/main.css');
 $output = '<div id="minishop-panel-home-div"></div>';
 
 return $output;
