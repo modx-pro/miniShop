@@ -26,6 +26,7 @@
  * @subpackage processors
  */
 /* get board */
+/*
 if (!$modx->hasPermission('save')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
 
 $tmp = $modx->fromJSON($scriptProperties['data']);
@@ -67,7 +68,8 @@ else {
 	return $modx->error->failure($modx->lexicon('ms.orders.item_err_save'));
 }
 
-/* output */
+
 $itemArray = $item->toArray('',true);
 //$itemArray = $modx->getObject('ModOrders', $tmp['id'])->toArray();
 return $modx->error->success('',$itemArray);
+*/

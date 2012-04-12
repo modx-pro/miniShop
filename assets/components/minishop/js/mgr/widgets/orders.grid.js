@@ -237,12 +237,8 @@ miniShop.window.EditOrder = function(config) {
 					,title: _('ms.goods')
 					,items: [{
 						xtype: 'minishop-grid-orderedgoods'
+						,oid: oid
 						,baseParams: {action: 'mgr/orderedgoods/getlist',oid: oid}
-						,listeners: {
-							afterAutoSave: function() {
-								changed = 1;
-							}
-						}
 					}]
 				// Третий таб
 				},{
@@ -303,47 +299,6 @@ Ext.extend(miniShop.window.EditOrder,MODx.Window);
 Ext.reg('minishop-window-editorder',miniShop.window.EditOrder);
 
 
-// Таблица с заказанными товарами
-miniShop.grid.Goods = function(config) {
-	config = config || {};
-	
-	this.exp = new Ext.grid.RowExpander({
-		expandOnDblClick: false
-		,tpl : new Ext.Template(
-			'<p class="desc">{data}</p>'
-		)
-	});
-	
-	Ext.applyIf(config,{
-		id: this.ident+'-grid-goods'
-		,url: miniShop.config.connector_url
-		,baseParams: {action: 'mgr/orderedgoods/getlist'}
-		,autosave: true
-		,preventSaveRefresh: false
-		,clicksToEdit: 'auto'
-		,save_action: 'mgr/orderedgoods/updatefromgrid'
-		,fields: ['id','gid','oid','name','num','price','sum','data']
-		,pageSize: 10
-		,autoHeight: true
-		,paging: true
-		,plugins: this.exp
-		,remoteSort: true
-		,columns: [this.exp
-			,{header: _('id'),dataIndex: 'id',hidden: true,sortable: true,width: 35}
-			,{header: _('ms.gid'),dataIndex: 'gid',hidden: true,sortable: true,width: 35}
-			,{header: _('ms.goods.name'),dataIndex: 'name',width: 100}
-			,{header: _('ms.goods.num'),dataIndex: 'num',editor: {xtype: 'numberfield'},sortable: true,width: 50}
-			,{header: _('ms.goods.price'),dataIndex: 'price',sortable: true,width: 50}
-			,{header: _('ms.goods.sum'),dataIndex: 'sum',sortable: true,width: 50}
-			,{header: _('ms.goods.data'),dataIndex: 'data',hidden: true}
-		]
-	});
-	miniShop.grid.Goods.superclass.constructor.call(this,config);
-};
-Ext.extend(miniShop.grid.Goods,MODx.grid.Grid);
-Ext.reg('minishop-grid-orderedgoods',miniShop.grid.Goods);
-
-
 // История изменения статусов заказов
 miniShop.grid.Log = function(config) {
 	config = config || {};
@@ -372,3 +327,170 @@ miniShop.grid.Log = function(config) {
 };
 Ext.extend(miniShop.grid.Log,MODx.grid.Grid);
 Ext.reg('minishop-grid-log',miniShop.grid.Log);
+
+
+
+// Таблица с заказанными товарами
+miniShop.grid.Goods = function(config) {
+	config = config || {};
+	
+	this.exp = new Ext.grid.RowExpander({
+		expandOnDblClick: false
+		,tpl : new Ext.Template(
+			'<p class="desc">{data}</p>'
+		)
+	});
+	
+	Ext.applyIf(config,{
+		id: this.ident+'-grid-goods'
+		,url: miniShop.config.connector_url
+		//,baseParams: {action: 'mgr/orderedgoods/getlist'}
+		//,autosave: true
+		//,preventSaveRefresh: false
+		//,clicksToEdit: 'auto'
+		//,save_action: 'mgr/orderedgoods/updatefromgrid'
+		,fields: ['id','gid','oid','name','num','price','weight','sum','data']
+		,pageSize: 10
+		,autoHeight: true
+		,paging: true
+		,plugins: this.exp
+		,remoteSort: true
+		,columns: [this.exp
+			,{header: _('id'),dataIndex: 'id',hidden: true,sortable: true,width: 35}
+			,{header: _('ms.gid'),dataIndex: 'gid',hidden: true,sortable: true,width: 35}
+			,{header: _('ms.goods.name'),dataIndex: 'name',width: 100}
+			,{header: _('ms.goods.num'),dataIndex: 'num',sortable: true,width: 50}
+			,{header: _('ms.price'),dataIndex: 'price',sortable: true,width: 50}
+			,{header: _('ms.weight'),dataIndex: 'weight',sortable: true,width: 50}
+			,{header: _('ms.goods.sum'),dataIndex: 'sum',sortable: true,width: 50}
+			,{header: _('ms.goods.data'),dataIndex: 'data',hidden: true}
+		]
+		,tbar: [{
+			text: _('ms.orderedgoods.add')
+			,handler: this.addGoods
+			,scope: this
+		}]
+		,listeners: {
+			rowDblClick: function(grid, rowIndex, e) {
+				var row = grid.store.getAt(rowIndex);
+				this.updateGoods(grid, e, row);
+			}
+		}
+	});
+	miniShop.grid.Goods.superclass.constructor.call(this,config);
+};
+Ext.extend(miniShop.grid.Goods,MODx.grid.Grid, {
+	windows: {}
+	,getMenu: function() {
+		var m = [];
+		m.push({
+			text: _('ms.orderedgoods.update')
+			,handler: this.updateGoods
+		});
+		m.push('-');
+		m.push({
+			text: _('ms.orderedgoods.remove')
+			,handler: this.removeGoods
+		});
+		this.addContextMenuItem(m);
+	}
+	,addGoods: function(btn,e) {
+		this.windows.addOrderedGoods = MODx.load({
+			xtype: 'minishop-window-orderedgoods'
+			,title: _('ms.orderedgoods.add')
+			,oid: this.oid
+			,newrecord: 1
+			,listeners: {
+				'success': {fn:function() { this.refresh(); },scope:this}
+			}
+		});
+		this.windows.addOrderedGoods.show(e.target);
+	}
+	,updateGoods: function(btn,e,row) {
+		if (typeof(row) != 'undefined') {
+			var record = row.data;
+		}
+		else {
+			var record = this.menu.record;
+		}
+		this.windows.addOrderedGoods = MODx.load({
+			xtype: 'minishop-window-orderedgoods'
+			,title: record.name
+			,action: 'mgr/orderedgoods/update'
+			,oid: this.oid
+			,newrecord: 0
+			,listeners: {
+				'success': {fn:function() { this.refresh(); },scope:this}
+			}
+		});
+		this.windows.addOrderedGoods.fp.getForm().reset();
+		this.windows.addOrderedGoods.fp.getForm().setValues(record);
+		this.windows.addOrderedGoods.show(e.target);
+	}
+	,removeGoods: function(btn,e) {
+		if (!this.menu.record) return false;
+		
+		MODx.msg.confirm({
+			title: _('ms.orderedgoods.remove')
+			,text: _('ms.orderedgoods.remove_confirm')
+			,url: this.config.url
+			,params: {
+				action: 'mgr/orderedgoods/remove'
+				,id: this.menu.record.id
+			}
+			,listeners: {
+				'success': {fn:function(r) { this.refresh(); },scope:this}
+			}
+		});
+	}
+});
+
+Ext.reg('minishop-grid-orderedgoods',miniShop.grid.Goods);
+
+
+miniShop.window.addOrderedGoods = function(config) {
+	config = config || {};
+	this.ident = config.ident || 'mecitem'+Ext.id();
+
+	Ext.applyIf(config,{
+		title: _('ms.orderedgoods.add')
+		,id: this.ident
+		,width: 500
+		,url: miniShop.config.connector_url
+		,action: 'mgr/orderedgoods/add'
+		,labelAlign: 'left'
+		,labelWidth: 150
+		,height: 150
+		,autoHeight: true
+		,bodyStyle: "padding: 5px;"
+		,html: _('ms.orderedgoods.add_desc')
+		,modal: true
+		,fields: [
+			{xtype: 'hidden',name: 'id',id: 'minishop-'+this.ident+'-id'}
+			,{xtype: 'hidden',name: 'oid',value: config.oid,id: 'minishop-'+this.ident+'-oid'}
+			,{xtype: 'minishop-combo-goods',fieldLabel: _('ms.goods'),hiddenName: 'gid',name: 'gid',id: 'minishop-'+this.ident+'-goods',allowBlank:false,width: 300}
+			,{xtype: 'numberfield',fieldLabel: _('ms.goods.num'),name: 'num',id: 'minishop-'+this.ident+'-num',allowBlank:false,width: 50}
+			,{xtype: 'numberfield',fieldLabel: _('ms.price'),name: 'price',id: 'minishop-'+this.ident+'-price',width: 50}
+			,{xtype: 'numberfield',fieldLabel: _('ms.weight'),name: 'weight',id: 'minishop-'+this.ident+'-weight',width: 50}
+			,{xtype: 'textarea',fieldLabel: _('ms.goods.data'),name: 'data',id: 'minishop-'+this.ident+'-data',width: 300}
+		]
+		,keys: [{
+			key: Ext.EventObject.ENTER
+			,shift: true
+			,fn: this.submit
+			,scope: this
+		}]
+		,buttons: [{
+			text: _('close')
+			,scope: this
+			,handler: function() { this.hide(); }
+		},{
+			text: _('save_and_close')
+			,scope: this
+			,handler: function() { this.submit(); }
+		}]
+	});
+	miniShop.window.addOrderedGoods.superclass.constructor.call(this,config);
+};
+Ext.extend(miniShop.window.addOrderedGoods,MODx.Window);
+Ext.reg('minishop-window-orderedgoods',miniShop.window.addOrderedGoods);

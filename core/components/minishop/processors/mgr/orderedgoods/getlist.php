@@ -51,6 +51,7 @@ foreach ($orders as $v) {
 	if ($res = $modx->getObject('modResource', $tmp['gid'])) {
 		$tmp['name'] = $res->get('pagetitle');
 	}
+	/*
 	if ($tmp['data'] == '[]') {$tmp['data'] = '';}
 	else {
 		$tmp2 = json_decode($tmp['data'], true);
@@ -60,7 +61,7 @@ foreach ($orders as $v) {
 		}
 		$tmp['data'] .= '</ul>';
 	}
-	
+	*/
 	$arr[] = $tmp;
 }
 return $this->outputArray($arr, $count);

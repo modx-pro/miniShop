@@ -236,7 +236,7 @@ miniShop.grid.Goods = function(config) {
 		id: this.ident+'-grid-goods'
 		,url: miniShop.config.connector_url
 		,baseParams: {action: 'goods/getlist'}
-		,fields: ['id','gid','oid','name','num','price','sum','data']
+		,fields: ['id','gid','oid','name','num','price','weight','sum','data']
 		,pageSize: 10
 		,autoHeight: true
 		,paging: true
@@ -245,7 +245,8 @@ miniShop.grid.Goods = function(config) {
 		,columns: [this.exp
 			,{header: _('ms.goods.name'),dataIndex: 'name',width: 100}
 			,{header: _('ms.goods.num'),dataIndex: 'num',width: 50,sortable: true}
-			,{header: _('ms.goods.price'),dataIndex: 'price',width: 50,sortable: true}
+			,{header: _('ms.price'),dataIndex: 'price',width: 50,sortable: true}
+			,{header: _('ms.weight'),dataIndex: 'weight',width: 50,sortable: true}
 			,{header: _('ms.goods.sum'),dataIndex: 'sum',width: 50}
 			,{header: _('ms.goods.data'),dataIndex: 'data',hidden: true}
 		]

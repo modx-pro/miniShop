@@ -163,6 +163,30 @@ MODx.combo.category = function(config) {
 Ext.extend(MODx.combo.category,MODx.combo.ComboBox);
 Ext.reg('minishop-filter-category',MODx.combo.category);
 
+MODx.combo.goods = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'goods'
+        ,hiddenName: 'goods'
+        ,displayField: 'pagetitle'
+        ,valueField: 'id'
+		//,autoSelect: true
+		,editable: true
+        ,fields: ['pagetitle','id']
+        ,pageSize: 10
+		,value: miniShop.config.goods
+		,emptyText: _('ms.goods.select')
+        ,url: miniShop.config.connector_url
+		,baseParams: {
+			action:  'mgr/goods/getcombo'
+			,mode: 'goods'
+		}
+    });
+    MODx.combo.goods.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.goods,MODx.combo.ComboBox);
+Ext.reg('minishop-combo-goods',MODx.combo.goods);
+
 MODx.combo.warehouse = function(config) {
     config = config || {};
     Ext.applyIf(config,{

@@ -38,7 +38,7 @@ class ModOrders extends xPDOSimpleObject {
 	}
 
 	function updateSum() {
-		if ($res = $this->xpdo->getCollection('ModOrdersGoods', array('oid' => $this->get('id')))) {
+		if ($res = $this->xpdo->getCollection('ModOrderedGoods', array('oid' => $this->get('id')))) {
 			$sum = 0;
 			foreach ($res as $v) {
 				$sum += $v->get('sum');
