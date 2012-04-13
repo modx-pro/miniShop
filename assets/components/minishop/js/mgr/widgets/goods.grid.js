@@ -97,10 +97,10 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
 	,renderImg: function(img) {
 		if (img.length > 0) {
 			if (/^(http|https)/.test(img)) {
-				return '<img src="'+img+'" height="30" alt="" title="" />';	
+				return '<img src="'+MODx.config.connectors_url+'system/phpthumb.php?h=30&src='+img+'&wctx=web&source=1" alt="" />'
 			}
 			else {
-				return '<img src="/'+img+'" height="30" alt="" title="" />';
+				return '<img src="'+MODx.config.connectors_url+'system/phpthumb.php?h=30&src=/'+img+'&wctx=web&source=1" alt="" />'
 			}
 		}
 		else {
@@ -438,7 +438,7 @@ miniShop.grid.TVs = function(config) {
 		id: this.ident+'-grid-tvs'
 		,url: miniShop.config.connector_url
 		,action: 'mgr/goods/tv/getlist'
-		,fields: ['id','resourceId','name','caption','value']
+		,fields: ['id','resourceId','name','caption','value','input_properties','type']
 		,pageSize: 10
 		,autoHeight: true
 		,paging: true
@@ -478,10 +478,35 @@ Ext.extend(miniShop.grid.TVs,MODx.grid.Grid, {
 		}
 		this.windows.updateTV = MODx.load({
 			xtype: 'minishop-window-goods-tv'
+			,props: record
 			,title: record.name
-			,listeners: {'success': {fn:function() { this.refresh(); },scope:this}}
+			,listeners: {
+				'success': {fn:function() { this.refresh(); },scope:this}
+				,'hide': {fn:function() { this.destroy(); }}
+			}
 		});
 		this.windows.updateTV.fp.getForm().reset();
+
+		var vf = {fieldLabel: _('value'),name: 'value',id: 'minishop-'+this.ident+'-value', anchor: '95%'};
+		var def = 0;
+		switch (record.type) {
+			case 'number': vf.xtype = 'numberfield'; break;
+			case 'text': vf.xtype = 'textfield'; break;
+			case 'image': vf.xtype = 'modx-combo-browser'; break;
+			case 'file': vf.xtype = 'modx-combo-browser'; break;
+			case 'date': vf.xtype = 'xdatetime'; break;
+			case 'text': vf.xtype = 'textarea'; break;
+			case 'checkbox': vf.xtype = 'textfield'; break;
+			case 'option': vf.xtype = 'textfield'; break;
+			case 'richtext': vf.xtype = 'htmleditor'; vf.height = 100; break;
+			case 'textarea': vf.xtype = 'textarea'; vf.height = 100; break;
+			default: vf.xtype = 'textarea'; vf.height = 75; var def = 1;
+		}
+		if (def != 1) {
+			Ext.applyIf(vf,record.input_properties);
+		}
+
+		this.windows.updateTV.fp.add(vf);
 		this.windows.updateTV.fp.getForm().setValues(record);
 		this.windows.updateTV.show(e.target);
 	}
@@ -498,7 +523,7 @@ miniShop.window.updateTV = function(config) {
 	Ext.applyIf(config,{
 		title: _('ms.orderedgoods.add')
 		,id: this.ident
-		,width: 500
+		,width: 600
 		,url: miniShop.config.connector_url
 		,action: 'mgr/goods/tv/update'
 		,labelAlign: 'left'
@@ -508,9 +533,9 @@ miniShop.window.updateTV = function(config) {
 		,fields: [
 			{xtype: 'hidden',name: 'id',id: 'minishop-'+this.ident+'-id'}
 			,{xtype: 'hidden',name: 'resourceId',id: 'minishop-'+this.ident+'-resourceId'}
+			,{xtype: 'displayfield',fieldLabel: _('type'),name: 'type',id: 'minishop-'+this.ident+'-type'}
 			,{xtype: 'displayfield',fieldLabel: _('name'),name: 'name',id: 'minishop-'+this.ident+'-name'}
 			,{xtype: 'displayfield',fieldLabel: _('caption'),name: 'caption',id: 'minishop-'+this.ident+'-caption'}
-			,{xtype: 'textarea',fieldLabel: _('value'),name: 'value',id: 'minishop-'+this.ident+'-value',width: 300, height: 75}
 		]
 		,keys: [{
 			key: Ext.EventObject.ENTER
