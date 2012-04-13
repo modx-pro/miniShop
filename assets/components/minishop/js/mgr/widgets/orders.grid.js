@@ -464,7 +464,6 @@ miniShop.window.addOrderedGoods = function(config) {
 		,autoHeight: true
 		,bodyStyle: "padding: 5px;"
 		,html: _('ms.orderedgoods.add_desc')
-		,modal: true
 		,fields: [
 			{xtype: 'hidden',name: 'id',id: 'minishop-'+this.ident+'-id'}
 			,{xtype: 'hidden',name: 'oid',value: config.oid,id: 'minishop-'+this.ident+'-oid'}
@@ -483,11 +482,11 @@ miniShop.window.addOrderedGoods = function(config) {
 		,buttons: [{
 			text: _('close')
 			,scope: this
-			,handler: function() { this.hide(); }
+			,handler: function() { this.hide();}
 		},{
 			text: _('save_and_close')
 			,scope: this
-			,handler: function() { this.submit(); }
+			,handler: function() { this.submit();}
 		}]
 	});
 	miniShop.window.addOrderedGoods.superclass.constructor.call(this,config);

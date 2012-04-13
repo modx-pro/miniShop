@@ -113,145 +113,137 @@ Ext.reg('minishop-panel-home',miniShop.panel.Home);
 
 // Комбобоксы статусов, складов и категорий товаров
 MODx.combo.status = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        name: 'status'
-        ,hiddenName: 'status'
-        ,displayField: 'name'
-        ,valueField: 'id'
-        ,fields: ['id','name']
-        ,pageSize: 10
+	config = config || {};
+	Ext.applyIf(config,{
+		name: 'status'
+		,hiddenName: 'status'
+		,displayField: 'name'
+		,valueField: 'id'
+		,fields: ['id','name']
+		,pageSize: 10
 		,value: miniShop.config.status
 		,emptyText: _('ms.combo.select')
-        ,url: miniShop.config.connector_url
+		,url: miniShop.config.connector_url
 		,baseParams: {
 			action:  'mgr/status/getcombo'
 		}
-		//,onRender: function(tf) {
-			//this.readOnly = true;
-			//this.disabled = !this.initialConfig.submitValue;
-			//MODx.StaticBoolean.superclass.onRender.apply(this, arguments);
-			//this.on('change',this.onChange,this);
-		//}
-    });
-    MODx.combo.status.superclass.constructor.call(this,config);
+	});
+	MODx.combo.status.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.combo.status,MODx.combo.ComboBox);
 Ext.reg('minishop-filter-status',MODx.combo.status);
 
 MODx.combo.category = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        name: 'category'
-        ,hiddenName: 'category'
-        ,displayField: 'pagetitle'
-        ,valueField: 'id'
-		//,autoSelect: true
+	config = config || {};
+	Ext.applyIf(config,{
+		name: 'category'
+		,hiddenName: 'category'
+		,displayField: 'pagetitle'
+		,valueField: 'id'
 		,editable: true
-        ,fields: ['pagetitle','id']
-        ,pageSize: 10
+		,fields: ['pagetitle','id']
+		,pageSize: 10
 		,value: miniShop.config.category
 		,emptyText: _('ms.category.select')
-        ,url: miniShop.config.connector_url
+		,url: miniShop.config.connector_url
 		,baseParams: {
 			action:  'mgr/goods/getcombo'
 			,addall: 1
 		}
-    });
-    MODx.combo.category.superclass.constructor.call(this,config);
+	});
+	MODx.combo.category.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.combo.category,MODx.combo.ComboBox);
 Ext.reg('minishop-filter-category',MODx.combo.category);
 
 MODx.combo.goods = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        name: 'goods'
-        ,hiddenName: 'goods'
-        ,displayField: 'pagetitle'
-        ,valueField: 'id'
-		//,autoSelect: true
+	config = config || {};
+	Ext.applyIf(config,{
+		name: 'goods'
+		,hiddenName: 'goods'
+		,displayField: 'pagetitle'
+		,valueField: 'id'
 		,editable: true
-        ,fields: ['pagetitle','id']
-        ,pageSize: 10
+		,fields: ['pagetitle','id']
+		,pageSize: 10
 		,value: miniShop.config.goods
 		,emptyText: _('ms.goods.select')
-        ,url: miniShop.config.connector_url
+		,url: miniShop.config.connector_url
 		,baseParams: {
 			action:  'mgr/goods/getcombo'
 			,mode: 'goods'
 		}
-    });
-    MODx.combo.goods.superclass.constructor.call(this,config);
+	});
+	MODx.combo.goods.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.combo.goods,MODx.combo.ComboBox);
 Ext.reg('minishop-combo-goods',MODx.combo.goods);
 
 MODx.combo.warehouse = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        name: 'warehouse'
-        ,hiddenName: 'warehouse'
-        ,displayField: 'name'
-        ,valueField: 'id'
+	config = config || {};
+	Ext.applyIf(config,{
+		name: 'warehouse'
+		,hiddenName: 'warehouse'
+		,displayField: 'name'
+		,valueField: 'id'
 		//,autoSelect: true
 		//,editable: true
-        ,fields: ['name','id']
-        ,pageSize: 10
+		,fields: ['name','id']
+		,pageSize: 10
 		,value: miniShop.config.warehouse
 		,emptyText: _('ms.warehouse.select')
-        ,url: miniShop.config.connector_url
+		,url: miniShop.config.connector_url
 		,baseParams: {
 			action:  'mgr/warehouse/getcombo'
 		}
-    });
-    MODx.combo.warehouse.superclass.constructor.call(this,config);
+	});
+	MODx.combo.warehouse.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.combo.warehouse,MODx.combo.ComboBox);
 Ext.reg('minishop-filter-warehouse',MODx.combo.warehouse);
 
 MODx.combo.delivery = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        name: 'delivery'
-        ,hiddenName: 'delivery'
-        ,displayField: 'name'
-        ,valueField: 'id'
+	config = config || {};
+	Ext.applyIf(config,{
+		name: 'delivery'
+		,hiddenName: 'delivery'
+		,displayField: 'name'
+		,valueField: 'id'
 		//,autoSelect: true
 		//,editable: true
-        ,fields: ['name','id']
-        ,pageSize: 10
+		,fields: ['name','id']
+		,pageSize: 10
 		,value: miniShop.config.warehouse
 		,emptyText: _('ms.delivery.select')
-        ,url: miniShop.config.connector_url
+		,url: miniShop.config.connector_url
 		,baseParams: {
 			action:  'mgr/delivery/getcombo'
 		}
-    });
-    MODx.combo.delivery.superclass.constructor.call(this,config);
+	});
+	MODx.combo.delivery.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.combo.delivery,MODx.combo.ComboBox);
 Ext.reg('minishop-filter-delivery',MODx.combo.delivery);
 
 MODx.combo.payment = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        name: 'payment'
-        ,hiddenName: 'payment'
-        ,displayField: 'name'
-        ,valueField: 'id'
+	config = config || {};
+	Ext.applyIf(config,{
+		name: 'payment'
+		,hiddenName: 'payment'
+		,displayField: 'name'
+		,valueField: 'id'
 		//,autoSelect: true
 		//,editable: true
-        ,fields: ['name','id']
-        ,pageSize: 10
+		,fields: ['name','id']
+		,pageSize: 10
 		,value: miniShop.config.payment
 		,emptyText: _('ms.payment.select')
-        ,url: miniShop.config.connector_url
+		,url: miniShop.config.connector_url
 		,baseParams: {
 			action:  'mgr/payment/getcombo'
 		}
-    });
-    MODx.combo.payment.superclass.constructor.call(this,config);
+	});
+	MODx.combo.payment.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.combo.payment,MODx.combo.ComboBox);
 Ext.reg('minishop-filter-payment',MODx.combo.payment);
@@ -260,23 +252,22 @@ Ext.reg('minishop-filter-payment',MODx.combo.payment);
 
 // Комбобокс выбора чанка
 MODx.combo.chunk = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        name: 'chunk'
-        ,hiddenName: 'chunk'
-        ,displayField: 'name'
-        ,valueField: 'name'
-		//,autoSelect: true
+	config = config || {};
+	Ext.applyIf(config,{
+		name: 'chunk'
+		,hiddenName: 'chunk'
+		,displayField: 'name'
+		,valueField: 'name'
 		//,editable: true
-        ,fields: ['id','name']
+		,fields: ['id','name']
 		,pageSize: 20
 		,emptyText: _('ms.chunk.select')
-        ,url: MODx.config.connectors_url+'element/chunk.php'
-        ,baseParams: {
-            action: 'getList'
-        }
-    });
-    MODx.combo.chunk.superclass.constructor.call(this,config);
+		,url: MODx.config.connectors_url+'element/chunk.php'
+		,baseParams: {
+			action: 'getList'
+		}
+	});
+	MODx.combo.chunk.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.combo.chunk,MODx.combo.ComboBox);
 Ext.reg('minishop-combo-chunk',MODx.combo.chunk);
@@ -284,23 +275,22 @@ Ext.reg('minishop-combo-chunk',MODx.combo.chunk);
 
 // Комбобокс выбора шаблона товара
 MODx.combo.template = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        name: 'template'
-        ,hiddenName: 'template'
-        ,displayField: 'name'
-        ,valueField: 'id'
-		//,autoSelect: true
+	config = config || {};
+	Ext.applyIf(config,{
+		name: 'template'
+		,hiddenName: 'template'
+		,displayField: 'name'
+		,valueField: 'id'
 		//,editable: true
-        ,fields: ['id','name']
+		,fields: ['id','name']
 		//,pageSize: 20
 		,emptyText: _('ms.template.select')
-        ,url: miniShop.config.connector_url
+		,url: miniShop.config.connector_url
 		,baseParams: {
 			action:  'mgr/goods/gettpllist'
 		}
-    });
-    MODx.combo.template.superclass.constructor.call(this,config);
+	});
+	MODx.combo.template.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.combo.template,MODx.combo.ComboBox);
 Ext.reg('minishop-combo-goodstemplate',MODx.combo.template);

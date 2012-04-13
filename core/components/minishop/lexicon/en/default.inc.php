@@ -182,6 +182,9 @@ $_lang['ms.goods.add2'] = 'Additional 2';
 $_lang['ms.goods.add3'] = 'Additional 3';
 $_lang['ms.goods.data'] = 'Parameters of goods';
 
+$_lang['ms.tv.err_nf'] = 'TV not found';
+$_lang['ms.tv.update'] = 'Update TV';
+
 $_lang['ms.orderedgoods.add'] = 'Add goods';
 $_lang['ms.orderedgoods.add_desc'] = 'Select a product to add to your order. If you leave blank the price and weight - they will be added automatically as when you buy. <br/> Additional data must be a json-string, for example: {"color": "Red", "country": "Russia"}';
 $_lang['ms.orderedgoods.remove'] = 'Remove goods';

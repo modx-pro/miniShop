@@ -272,7 +272,6 @@ miniShop.window.createGoods = function(config) {
 			,getState:function() {
 				return { activeTab:this.items.indexOf(this.getActiveTab()) };
 			}
-
 			,items: [{
 				title: _('ms.goods')
 				,layout: 'form'
@@ -288,85 +287,24 @@ miniShop.window.createGoods = function(config) {
 						columnWidth: .6
 						,border: false
 						,layout: 'form'
-						,items: [{
-							xtype: 'textfield'
-							,name: 'pagetitle'
-							,id: 'modx-'+this.ident+'-pagetitle'
-							,fieldLabel: _('pagetitle')
-							,anchor: '100%'
-							,allowBlank: false
-						},{
-							xtype: 'textfield'
-							,name: 'longtitle'
-							,id: 'modx-'+this.ident+'-longtitle'
-							,fieldLabel: _('long_title')
-							,anchor: '100%'
-						},{
-							xtype: 'textarea'
-							,name: 'description'
-							,id: 'modx-'+this.ident+'-description'
-							,fieldLabel: _('description')
-							,anchor: '100%'
-							,grow: false
-							,height: 50
-						},{
-							xtype: 'textarea'
-							,name: 'introtext'
-							,id: 'modx-'+this.ident+'-introtext'
-							,fieldLabel: _('introtext')
-							,anchor: '100%'
-							,height: 50
-						}]
+						,items: [
+							{xtype: 'textfield',name: 'pagetitle',id: 'modx-'+this.ident+'-pagetitle',fieldLabel: _('pagetitle'),anchor: '100%',allowBlank: false}
+							,{xtype: 'textfield',name: 'longtitle',id: 'modx-'+this.ident+'-longtitle',fieldLabel: _('long_title'),anchor: '100%'}
+							,{xtype: 'textarea',name: 'description',id: 'modx-'+this.ident+'-description',fieldLabel: _('description'),anchor: '100%',grow: false,height: 50}
+							,{xtype: 'textarea',name: 'introtext',id: 'modx-'+this.ident+'-introtext',fieldLabel: _('introtext'),anchor: '100%',height: 50}
+						]
 					},{
 						columnWidth: .4
 						,border: false
 						,layout: 'form'
-						,items: [{
-							xtype: 'minishop-combo-goodstemplate'
-							,id: 'modx-'+this.ident+'-template'
-							,fieldLabel: _('template')
-							,editable: false
-							,anchor: '100%'
-							,value: miniShop.config.ms_goods_tpls[0]
-						},{
-							xtype: 'minishop-filter-category'
-							,name: 'parent'
-							,fieldLabel: _('ms.category')
-							,baseParams: {
-								action: 'mgr/goods/getcombo'
-								,addall: 0
-							}
-							,anchor: '100%'
-							,hiddenName: 'parent'
-						},{
-							xtype: 'textfield'
-							,name: 'alias'
-							,id: 'modx-'+this.ident+'-alias'
-							,fieldLabel: _('alias')
-							,anchor: '100%'
-						},{
-							xtype: 'textfield'
-							,name: 'menutitle'
-							,id: 'modx-'+this.ident+'-menutitle'
-							,fieldLabel: _('resource_menutitle')
-							,anchor: '100%'
-						},{
-							xtype: 'xcheckbox'
-							,name: 'published'
-							,id: 'modx-'+this.ident+'-published'
-							,boxLabel: _('resource_published')
-							,description: _('resource_published_help')
-							,inputValue: 1
-							,checked: MODx.config.publish_default == '1' && config.disable_categories ? 1 : 0
-						},{
-							xtype: 'xcheckbox'
-							,boxLabel: _('resource_hide_from_menus')
-							,description: _('resource_hide_from_menus_help')
-							,name: 'hidemenu'
-							,id: 'modx-'+this.ident+'-hidemenu'
-							,inputValue: 1
-							,checked: MODx.config.hidemenu_default == '1' && config.disable_categories ? 1 : 0
-						}]
+						,items: [
+							{xtype: 'minishop-combo-goodstemplate',id: 'modx-'+this.ident+'-template',fieldLabel: _('template'),editable: false,anchor: '100%',value: miniShop.config.ms_goods_tpls[0]}
+							,{xtype: 'minishop-filter-category',name: 'parent',fieldLabel: _('ms.category'),baseParams: {action: 'mgr/goods/getcombo',addall: 0},anchor: '100%',hiddenName: 'parent'}
+							,{xtype: 'textfield',name: 'alias',id: 'modx-'+this.ident+'-alias',fieldLabel: _('alias'),anchor: '100%'}
+							,{xtype: 'textfield',name: 'menutitle',id: 'modx-'+this.ident+'-menutitle',fieldLabel: _('resource_menutitle'),anchor: '100%'}
+							,{xtype: 'xcheckbox',name: 'published',id: 'modx-'+this.ident+'-published',boxLabel: _('resource_published'),description: _('resource_published_help'),inputValue: 1,checked: MODx.config.publish_default == '1' && config.disable_categories ? 1 : 0}
+							,{xtype: 'xcheckbox',boxLabel: _('resource_hide_from_menus'),description: _('resource_hide_from_menus_help'),name: 'hidemenu',id: 'modx-'+this.ident+'-hidemenu',inputValue: 1,checked: MODx.config.hidemenu_default == '1' && config.disable_categories ? 1 : 0}
+						]
 					}]
 				},{xtype: 'textarea',name: 'content',fieldLabel: _('content'),anchor: '100%',height: 100}
 					,{xtype: 'hidden',name: 'class_key',value: 'modDocument'}
@@ -405,6 +343,16 @@ miniShop.window.createGoods = function(config) {
 					,{xtype: 'textarea',name: 'add3',fieldLabel: _('ms.goods.add3'),autoHeight: false,anchor: '100%',height: 100}
 					,{xtype: 'checkbox',name: 'duplicate',value: 1,style: 'padding: 10px;',fieldLabel: _('ms.goods.duplicate'),description: _('ms.goods.duplicate.desc')}
 				]
+			},{
+				title: 'TVs'
+				,items: [{
+					xtype: 'minishop-grid-tvs'
+					,disabled: config.disable_categories
+					,baseParams: {
+						action: 'mgr/goods/tv/getlist'
+						,gid: gid
+					}
+				}]
 			},{
 				title: _('ms.categories')
 				,items: [{
@@ -445,38 +393,20 @@ miniShop.grid.Categories = function(config) {
 	Ext.applyIf(config,{
 		id: this.ident+'-grid-categories'
 		,url: miniShop.config.connector_url
-		,baseParams: {
-			action: 'mgr/goods/getcatlist'
-		}
+		,baseParams: {action: 'mgr/goods/getcatlist'}
 		,autosave: true
-		//,preventSaveRefresh: false
-		//,clicksToEdit: 'auto'
 		,save_action: 'mgr/goods/updatefromgrid'
 		,fields: ['id','gid','pagetitle','enabled']
 		,pageSize: 10
 		,autoHeight: true
 		,paging: true
 		,remoteSort: true
-		,columns: [{
-			header: _('ms.cid')
-			,dataIndex: 'id'
-			,hidden: true
-		},{
-			header: _('ms.gid')
-			,dataIndex: 'gid'
-			,hidden: true
-		},{
-			header: _('ms.name')
-			,dataIndex: 'pagetitle'
-			,width: 100
-			,sortable: true
-		},{
-			header: _('ms.enabled')
-			,dataIndex: 'enabled'
-			,width: 60
-			//,sortable: true
-			,editor: { xtype: 'combo-boolean', renderer: 'boolean' }
-		}]
+		,columns: [
+			{header: _('ms.cid'),dataIndex: 'id',hidden: true}
+			,{header: _('ms.gid'),dataIndex: 'gid',hidden: true}
+			,{header: _('ms.name'),dataIndex: 'pagetitle',width: 100,sortable: true}
+			,{header: _('ms.enabled'),dataIndex: 'enabled',width: 60,editor: { xtype: 'combo-boolean', renderer: 'boolean' }}
+		]
 		,tbar: [{
 			xtype: 'tbfill'
 		},{
@@ -500,3 +430,105 @@ Ext.extend(miniShop.grid.Categories,MODx.grid.Grid, {
 	}
 });
 Ext.reg('minishop-grid-categories',miniShop.grid.Categories);
+
+miniShop.grid.TVs = function(config) {
+	config = config || {};
+
+	Ext.applyIf(config,{
+		id: this.ident+'-grid-tvs'
+		,url: miniShop.config.connector_url
+		,action: 'mgr/goods/tv/getlist'
+		,fields: ['id','resourceId','name','caption','value']
+		,pageSize: 10
+		,autoHeight: true
+		,paging: true
+		,remoteSort: true
+		,columns: [
+			{header: _('id'),dataIndex: 'id',hidden: true,sortable: true}
+			,{header: _('name'),dataIndex: 'name',sortable: true,width: 50}
+			,{header: _('caption'),dataIndex: 'caption',sortable: true,width: 100}
+			,{header: _('value'),dataIndex: 'value',sortable: true,width: 150}
+		]
+		,listeners: {
+			rowDblClick: function(grid, rowIndex, e) {
+				var row = grid.store.getAt(rowIndex);
+				this.updateTV(grid, e, row);
+			}
+		}
+	});
+	miniShop.grid.TVs.superclass.constructor.call(this,config);
+};
+Ext.extend(miniShop.grid.TVs,MODx.grid.Grid, {
+	windows: {}
+	,getMenu: function() {
+		var m = [];
+		m.push({
+			text: _('ms.tv.update')
+			,handler: this.updateGoods
+		});
+		//m.push('-');
+		this.addContextMenuItem(m);
+	}
+	,updateTV: function(btn,e,row) {
+		if (typeof(row) != 'undefined') {
+			var record = row.data;
+		}
+		else {
+			var record = this.menu.record;
+		}
+		this.windows.updateTV = MODx.load({
+			xtype: 'minishop-window-goods-tv'
+			,title: record.name
+			,listeners: {'success': {fn:function() { this.refresh(); },scope:this}}
+		});
+		this.windows.updateTV.fp.getForm().reset();
+		this.windows.updateTV.fp.getForm().setValues(record);
+		this.windows.updateTV.show(e.target);
+	}
+
+});
+Ext.reg('minishop-grid-tvs',miniShop.grid.TVs);
+
+
+
+miniShop.window.updateTV = function(config) {
+	config = config || {};
+	this.ident = config.ident || 'mecitem'+Ext.id();
+
+	Ext.applyIf(config,{
+		title: _('ms.orderedgoods.add')
+		,id: this.ident
+		,width: 500
+		,url: miniShop.config.connector_url
+		,action: 'mgr/goods/tv/update'
+		,labelAlign: 'left'
+		,labelWidth: 150
+		,height: 150
+		,autoHeight: true
+		,fields: [
+			{xtype: 'hidden',name: 'id',id: 'minishop-'+this.ident+'-id'}
+			,{xtype: 'hidden',name: 'resourceId',id: 'minishop-'+this.ident+'-resourceId'}
+			,{xtype: 'displayfield',fieldLabel: _('name'),name: 'name',id: 'minishop-'+this.ident+'-name'}
+			,{xtype: 'displayfield',fieldLabel: _('caption'),name: 'caption',id: 'minishop-'+this.ident+'-caption'}
+			,{xtype: 'textarea',fieldLabel: _('value'),name: 'value',id: 'minishop-'+this.ident+'-value',width: 300, height: 75}
+		]
+		,keys: [{
+			key: Ext.EventObject.ENTER
+			,shift: true
+			,fn: this.submit
+			,scope: this
+		}]
+		,buttons: [{
+			text: _('close')
+			,scope: this
+			,handler: function() { this.hide();}
+		},{
+			text: _('save_and_close')
+			,scope: this
+			,handler: function() { this.submit();}
+		}]
+	});
+	miniShop.window.updateTV.superclass.constructor.call(this,config);
+};
+Ext.extend(miniShop.window.updateTV,MODx.Window);
+Ext.reg('minishop-window-goods-tv',miniShop.window.updateTV);
