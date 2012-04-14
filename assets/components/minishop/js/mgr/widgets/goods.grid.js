@@ -97,10 +97,13 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
 	,renderImg: function(img) {
 		if (img.length > 0) {
 			if (/^(http|https)/.test(img)) {
-				return '<img src="'+MODx.config.connectors_url+'system/phpthumb.php?h=30&src='+img+'&wctx=web&source=1" alt="" />'
+				return '<img src="'+img+'" alt="" height="30" />'
+				//return '<img src="'+MODx.config.connectors_url+'system/phpthumb.php?h=30&src='+img+'&wctx=web&source=1" alt="" />'
 			}
 			else {
-				return '<img src="'+MODx.config.connectors_url+'system/phpthumb.php?h=30&src=/'+img+'&wctx=web&source=1" alt="" />'
+
+				return '<img src="/'+img+'" alt="" height="30" />'
+				//return '<img src="'+MODx.config.connectors_url+'system/phpthumb.php?h=30&src=/'+img+'&wctx=web&source=1" alt="" alt="" height="30" />'
 			}
 		}
 		else {
