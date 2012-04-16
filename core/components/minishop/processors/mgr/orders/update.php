@@ -95,6 +95,7 @@ if ($res = $modx->getObject('ModOrders', $id)) {
 	}
 	// Смена статуса
 	if ($oldstatus != $status) {
+		if ($change_delivery || $change_payment || $change_warehouse) {$res->save();}
 		$miniShop->changeOrderStatus($id, $status);
 	}
 	// Пишем поля и сохраняем заказ
