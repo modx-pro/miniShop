@@ -93,11 +93,6 @@ if ($res = $modx->getObject('ModOrders', $id)) {
 		$change_payment = 1;
 		$res->set('payment', $payment);
 	}
-	// Смена статуса
-	if ($oldstatus != $status) {
-		if ($change_delivery || $change_payment || $change_warehouse) {$res->save();}
-		$miniShop->changeOrderStatus($id, $status);
-	}
 	// Пишем поля и сохраняем заказ
 	$res->set('comment', $comment);
 	if  ($res->save()) {
@@ -109,6 +104,10 @@ if ($res = $modx->getObject('ModOrders', $id)) {
 	if ($address = $modx->getObject('ModAddress', $addr['id'])) {
 		$address->fromArray($addr);
 		$address->save();
+	}
+	// Смена статуса
+	if ($oldstatus != $status) {
+		$miniShop->changeOrderStatus($id, $status);
 	}
 }
 else {
