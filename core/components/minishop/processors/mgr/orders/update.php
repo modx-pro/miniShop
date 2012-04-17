@@ -53,7 +53,7 @@ if ($res = $modx->getObject('ModOrders', $id)) {
 	$oldstatus = $res->get('status');
 	$olddelivery = $res->get('delivery');
 	$oldpayment = $res->get('payment');
-	$oldwarehouse = $res->get('warehouse');
+	$oldwarehouse = $res->get('wid');
 	
 	// Смена склада
 	if ($delivery > 0 && $warehouse != $oldwarehouse) {
