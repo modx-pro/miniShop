@@ -14,7 +14,7 @@
   [[+cart.rows]]
   <tr align="center">
     <td colspan="2"><b>Итого с учетом доставки:</b></td>
-    <td><b id="cartWeight">[[+cart.weight]]</b> шт.</td>
+    <td><b id="cartWeight">[[+cart.weight]]</b> кг</td>
     <td><b id="cartCount">[[+cart.count]]</b> шт.</td>
     <td><b id="cartTotal">[[+cart.total]]</b> руб.</td>
     <td>&nbsp;</td>
