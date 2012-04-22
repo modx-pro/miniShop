@@ -152,7 +152,7 @@ miniShop.window.CreatePayment = function(config) {
 			{xtype: 'hidden',name: 'id',id: 'minishop-'+this.ident+'-id'}
 			,{xtype: 'textfield',fieldLabel: _('ms.name'),name: 'name',id: 'minishop-'+this.ident+'-name',allowBlank: false,width: 300}
 			,{xtype: 'textarea',fieldLabel: _('ms.description'),name: 'description',id: 'minishop-'+this.ident+'-description',width: 300}
-			,{xtype: 'minishop-combo-snippet',fieldLabel: _('snippet'),name: 'snippet',id: 'minishop-'+this.ident+'-snippet',width: 300}
+			,{xtype: 'minishop-combo-snippet',fieldLabel: _('snippet'),name: 'snippet',id: 'minishop-'+this.ident+'-snippet',allowBlank: true,width: 300}
 		]
 		,keys: [{
 			key: Ext.EventObject.ENTER

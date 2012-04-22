@@ -39,14 +39,17 @@ $data['email2user'] = !empty($data['email2user']) ? 1 : 0;
 $data['email2manager'] = !empty($data['email2manager']) ? 1 : 0;
 
 if (!$data['email2user']) {
-	$data['subject2user'] = $data['body2user'] ='';
+	$data['subject2user'] = '';
+	$data['body2user'] = 0;
 }
 else {
 	if (empty($data['subject2user'])) {$modx->error->addField('subject2user',$modx->lexicon('ms.required_field'));}
 	if (empty($data['body2user'])) {$modx->error->addField('body2user',$modx->lexicon('ms.required_field'));}
 }
+
 if (!$data['email2manager']) {
-	$data['subject2manager'] = $data['body2manager'] = '';
+	$data['subject2manager'] = '';
+	$data['body2manager'] = 0;
 }
 else {
 	if (empty($data['subject2manager'])) {$modx->error->addField('subject2manager',$modx->lexicon('ms.required_field'));}

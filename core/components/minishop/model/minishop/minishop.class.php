@@ -610,10 +610,11 @@ class miniShop {
 					$email = $tmp->get('email');
 					if (!empty($email)) {
 						$subject = str_replace($pls['pl'], $pls['vl'], $status->get('subject2user'));
-						$body = $this->modx->getChunk($status->get('body2user'), $pls['vl']);
-						$this->modx->getParser()->processElementTags('', $body, false, false, '[[', ']]', array(), $maxIterations);
-						$this->modx->getParser()->processElementTags('', $body, true, true, '[[', ']]', array(), $maxIterations);
-						
+						if ($chunk = $this->modx->getObject('modChunk', $status->get('body2user'))) {
+							$body = $this->modx->getChunk($chunk->get('name'), $pls['vl']);
+							$this->modx->getParser()->processElementTags('', $body, false, false, '[[', ']]', array(), $maxIterations);
+							$this->modx->getParser()->processElementTags('', $body, true, true, '[[', ']]', array(), $maxIterations);
+						}
 						$this->sendEmail($email, $subject, $body);
 					}
 				}
@@ -625,10 +626,11 @@ class miniShop {
 					$email = $tmp->get('email');
 					if (!empty($email)) {
 						$subject = str_replace($pls['pl'], $pls['vl'], $status->get('subject2manager'));
-						$body = $this->modx->getChunk($status->get('body2manager'), $pls['vl']);
-						$this->modx->getParser()->processElementTags('', $body, false, false, '[[', ']]', array(), $maxIterations);
-						$this->modx->getParser()->processElementTags('', $body, true, true, '[[', ']]', array(), $maxIterations);
-						
+						if ($chunk = $this->modx->getObject('modChunk', $status->get('body2manager'))) {
+							$body = $this->modx->getChunk($chunk->get('name'), $pls['vl']);
+							$this->modx->getParser()->processElementTags('', $body, false, false, '[[', ']]', array(), $maxIterations);
+							$this->modx->getParser()->processElementTags('', $body, true, true, '[[', ']]', array(), $maxIterations);
+						}
 						$this->sendEmail($email, $subject, $body);
 					}
 				}

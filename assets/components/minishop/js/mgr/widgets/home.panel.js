@@ -257,20 +257,45 @@ MODx.combo.chunk = function(config) {
 		name: 'chunk'
 		,hiddenName: 'chunk'
 		,displayField: 'name'
-		,valueField: 'name'
-		//,editable: true
+		,valueField: 'id'
+		,editable: true
 		,fields: ['id','name']
 		,pageSize: 20
 		,emptyText: _('ms.chunk.select')
-		,url: MODx.config.connectors_url+'element/chunk.php'
+		,url: miniShop.config.connector_url
 		,baseParams: {
-			action: 'getList'
+			action:  'mgr/combo/snips_and_chunks'
+			,mode: 'chunks'
 		}
 	});
 	MODx.combo.chunk.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.combo.chunk,MODx.combo.ComboBox);
 Ext.reg('minishop-combo-chunk',MODx.combo.chunk);
+///////////////////////////////////////
+
+// Комбобокс выбора сниппета
+MODx.combo.snippet = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'snippet'
+        ,hiddenName: 'snippet'
+        ,displayField: 'name'
+        ,valueField: 'id'
+        ,editable: true
+        ,fields: ['id','name']
+		,pageSize: 20
+		,emptyText: _('ms.snippet.select')
+		,url: miniShop.config.connector_url
+		,baseParams: {
+			action:  'mgr/combo/snips_and_chunks'
+			,mode: 'snippets'
+		}
+    });
+    MODx.combo.snippet.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.snippet,MODx.combo.ComboBox);
+Ext.reg('minishop-combo-snippet',MODx.combo.snippet);
 ///////////////////////////////////////
 
 // Комбобокс выбора шаблона товара
@@ -294,28 +319,6 @@ MODx.combo.template = function(config) {
 };
 Ext.extend(MODx.combo.template,MODx.combo.ComboBox);
 Ext.reg('minishop-combo-goodstemplate',MODx.combo.template);
-///////////////////////////////////////
-
-// Комбобокс выбора сниппета
-MODx.combo.snippet = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        name: 'snippet'
-        ,hiddenName: 'snippet'
-        ,displayField: 'name'
-        ,valueField: 'id'
-        ,fields: ['id','name']
-		,pageSize: 20
-		,emptyText: _('ms.snippet.select')
-        ,url: MODx.config.connectors_url+'element/snippet.php'
-        ,baseParams: {
-            action: 'getList'
-        }
-    });
-    MODx.combo.snippet.superclass.constructor.call(this,config);
-};
-Ext.extend(MODx.combo.snippet,MODx.combo.ComboBox);
-Ext.reg('minishop-combo-snippet',MODx.combo.snippet);
 ///////////////////////////////////////
 
 

@@ -92,6 +92,19 @@ if ($object->xpdo) {
 			$ogtable = $modx->getTableName('ModOrderedGoods');
 			$dtable = $modx->getTableName('ModDelivery');
 			$otable = $modx->getTableName('ModOrders');
+			$stable = $modx->getTableName('ModStatus');
+
+			$res = $modx->getCollection('ModStatus');
+			foreach ($res as $v) {
+				$user = ;
+				if ($tmp = $modx->getObject('modChunk', array('name' => $res->get('body2user')))) {
+					$v->set('body2user', $tmp->get('id'));
+				}
+				if ($tmp = $modx->getObject('modChunk', array('name' => $res->get('body2manager')))) {
+					$v->set('body2manager', $tmp->get('id'));
+				}
+				$v->save();
+			}
 
 			$sql = "ALTER TABLE {$gtable} ADD `add1` VARCHAR(255) NOT NULL, ADD `add2` VARCHAR(255) NOT NULL , ADD `add3` TEXT NOT NULL";
 			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
@@ -105,6 +118,9 @@ if ($object->xpdo) {
 			$sql = "ALTER TABLE {$dtable} ADD `payments` VARCHAR(255) NOT NULL DEFAULT '[]', ADD INDEX (`payments`)";
 			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
 			$sql = "ALTER TABLE {$otable} ADD `payment` INT NOT NULL DEFAULT '0' AFTER `delivery`";
+			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
+			$sql = "ALTER TABLE {$stable} CHANGE `body2user` `body2user` INT(10) NULL DEFAULT '0';
+					ALTER TABLE {$stable} CHANGE `body2manager` `body2manager` INT(10) NULL DEFAULT '0';";
 			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
 			break;
 	}
