@@ -293,7 +293,7 @@ miniShop.window.createGoods = function(config) {
 						,layout: 'form'
 						,items: [
 							{xtype: 'minishop-combo-goodstemplate',id: 'modx-'+this.ident+'-template',fieldLabel: _('template'),editable: false,anchor: '100%',value: miniShop.config.ms_goods_tpls[0]}
-							,{xtype: 'minishop-filter-category',name: 'parent',fieldLabel: _('ms.category'),baseParams: {action: 'mgr/goods/getcombo',addall: 0},anchor: '100%',hiddenName: 'parent'}
+							,{xtype: 'minishop-filter-category',name: 'parent',fieldLabel: _('ms.category'),baseParams: {action: 'mgr/combo/cats_and_goods',addall: 0},anchor: '100%',hiddenName: 'parent'}
 							,{xtype: 'textfield',name: 'alias',id: 'modx-'+this.ident+'-alias',fieldLabel: _('alias'),anchor: '100%'}
 							,{xtype: 'textfield',name: 'menutitle',id: 'modx-'+this.ident+'-menutitle',fieldLabel: _('resource_menutitle'),anchor: '100%'}
 							,{xtype: 'xcheckbox',name: 'published',id: 'modx-'+this.ident+'-published',boxLabel: _('resource_published'),description: _('resource_published_help'),inputValue: 1,checked: MODx.config.publish_default == '1' && config.disable_categories ? 1 : 0}

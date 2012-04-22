@@ -147,7 +147,7 @@ MODx.combo.category = function(config) {
 		,emptyText: _('ms.category.select')
 		,url: miniShop.config.connector_url
 		,baseParams: {
-			action:  'mgr/goods/getcombo'
+			action:  'mgr/combo/cats_and_goods'
 			,addall: 1
 		}
 	});
@@ -170,7 +170,7 @@ MODx.combo.goods = function(config) {
 		,emptyText: _('ms.goods.select')
 		,url: miniShop.config.connector_url
 		,baseParams: {
-			action:  'mgr/goods/getcombo'
+			action:  'mgr/combo/cats_and_goods'
 			,mode: 'goods'
 		}
 	});
