@@ -57,7 +57,7 @@ foreach ($files as $v) {
 	
 	if (preg_match('/^\//',$file)) {$file = substr($file,1);}
 	
-	if ($modx->getCount('ModGallery', array('gid' => $gid, 'file' => $file))) {continue;}
+	if ($modx->getCount('ModGallery', array('gid' => $gid, 'wid' => $_SESSION['minishop']['warehouse'], 'file' => $file))) {continue;}
 	
 	$res = $modx->newObject('ModGallery');
 	$res->fromArray(array(
