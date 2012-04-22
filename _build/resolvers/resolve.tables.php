@@ -96,11 +96,10 @@ if ($object->xpdo) {
 
 			$res = $modx->getCollection('ModStatus');
 			foreach ($res as $v) {
-				$user = ;
-				if ($tmp = $modx->getObject('modChunk', array('name' => $res->get('body2user')))) {
+				if ($tmp = $modx->getObject('modChunk', array('name' => $v->get('body2user')))) {
 					$v->set('body2user', $tmp->get('id'));
 				}
-				if ($tmp = $modx->getObject('modChunk', array('name' => $res->get('body2manager')))) {
+				if ($tmp = $modx->getObject('modChunk', array('name' => $v->get('body2manager')))) {
 					$v->set('body2manager', $tmp->get('id'));
 				}
 				$v->save();

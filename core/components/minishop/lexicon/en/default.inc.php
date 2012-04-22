@@ -26,7 +26,7 @@
  * @subpackage lexicon
  */
 $_lang['minishop'] = 'miniShop';
-$_lang['ms.menu_desc'] = 'A simple online store for MODX Revolution';
+$_lang['ms.menu_desc'] = 'A friendly online store for MODX Revolution';
 $_lang['ms.order'] = 'Order';
 $_lang['ms.orders'] = 'Orders';
 $_lang['ms.goods'] = 'Goods';

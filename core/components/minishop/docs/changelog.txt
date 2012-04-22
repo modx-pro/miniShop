@@ -1,12 +1,18 @@
 Changelog for miniShop.
 
-1.4.1 beta (22.04.2012)
+1.5.0 beta (22.04.2012)
 =============
 - Добавлено создание галереи товара.
-	- Новый сниппет msGetGallery для вывода изображений товара (поддерживает getPage).
+- Новый сниппет msGetGallery для вывода изображений товара (поддерживает getPage).
+- [#30] Добавлено окно об ошибке при создании товара.
+- [#34] Чанки в ModStatus сохраняются не по имени, а по ID.
+- [#35] Выбор чанков и сниппетов в комбобоксах поддерживает автодополнение.
 -----
 - Added gallery for goods
-	- New snippet msGetGallery to display product images (supports getPage)
+- New snippet msGetGallery to display product images (supports getPage)
+- [#30] Added an error window when creating a product.
+- [#34] Chunks in ModStatus are saved by ID.
+- [#35] The choice of chunks, and snippets in the combobox supports autocompletion.
 
 1.4.0 beta (13.04.2012)
 =============
