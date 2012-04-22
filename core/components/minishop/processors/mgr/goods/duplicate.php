@@ -59,7 +59,7 @@ if ($res_old = $modx->getObject('ModGoods', array('gid' => $id_old, 'wid' => $_S
 		$tmp->save();
 	}
 
-	$res = $modx->getIterator('ModGallery', array('gid' => $id_old));
+	$res = $modx->getIterator('ModGallery', array('gid' => $id_old, 'wid' => $_SESSION['minishop']['warehouse']));
 	foreach ($res as $v) {
 		$tmp = $modx->newObject('ModGallery');
 		$tmp->fromArray($v->toArray());
