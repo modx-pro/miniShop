@@ -36,7 +36,7 @@ if (empty($_POST['parent'])) {
 	$modx->error->addField('parent',$modx->lexicon('ms.required_field'));
 }
 if ($modx->error->hasError()) {
-    return $modx->error->failure();
+    return $modx->error->failure($modx->lexicon('ms.required_field'));
 }
 
 $response = $modx->runProcessor('resource/create', $_POST);
