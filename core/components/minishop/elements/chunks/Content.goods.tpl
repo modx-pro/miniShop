@@ -34,4 +34,9 @@
   </div>
   
   [[*content]]
+  
+  <ul class="thumbnails">
+    [[msGetGallery]]
+  </ul>
+  
 </div>

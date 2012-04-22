@@ -139,4 +139,12 @@ $chunks[13]->fromArray(array(
     'snippet' => getSnippetContent($sources['source_core'].'/elements/chunks/msPayment.form.tpl'),
 ),'',true,true);
 
+$chunks[14]= $modx->newObject('modChunk');
+$chunks[14]->fromArray(array(
+    'id' => 0,
+    'name' => 'tpl.msGallery.row',
+    'description' => 'One image of product',
+    'snippet' => getSnippetContent($sources['source_core'].'/elements/chunks/msGallery.row.tpl'),
+),'',true,true);
+
 return $chunks;
