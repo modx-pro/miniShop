@@ -565,12 +565,6 @@ Ext.extend(miniShop.window.updateTV,MODx.Window);
 Ext.reg('minishop-window-goods-tv',miniShop.window.updateTV);
 
 
-
-
-
-
-
-
 miniShop.grid.Gallery = function(config) {
 	config = config || {};
 

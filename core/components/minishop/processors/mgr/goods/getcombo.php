@@ -37,7 +37,7 @@ $sort = $modx->getOption('sort',$_REQUEST,'pagetitle');
 $dir = $modx->getOption('dir',$_REQUEST,'ASC');
 $query = $modx->getOption('query', $_REQUEST, 0);
 $mode = $modx->getOption('mode', $_REQUEST, 'category');
-$addall = isset($_REQUEST['addall']) ? 1 : 0;
+$addall = $_REQUEST['addall'] ? 1 : 0;
 
 $c = $modx->newQuery('modResource');
 $c->select('id,pagetitle');
