@@ -72,6 +72,9 @@ $_lang['ms.permission.description'] = 'Required permission for edit this object.
 $_lang['ms.duplicate'] = 'Duplicate';
 $_lang['ms.duplicate_confirm'] = 'Duplicate this item?';
 $_lang['ms.reserved'] = 'Reserved';
+$_lang['ms.gallery'] = 'Gallery';
+$_lang['ms.file'] = 'File';
+$_lang['ms.dir'] = 'Directory';
 
 $_lang['ms.warehouse.select'] = 'Select warehouse';
 $_lang['ms.warehouse.create'] = 'New warehouse';
@@ -181,6 +184,17 @@ $_lang['ms.goods.add1'] = 'Additional 1';
 $_lang['ms.goods.add2'] = 'Additional 2';
 $_lang['ms.goods.add3'] = 'Additional 3';
 $_lang['ms.goods.data'] = 'Parameters of goods';
+
+
+$_lang['ms.gallery.create'] = 'Add image';
+$_lang['ms.gallery.update'] = 'Update image';
+$_lang['ms.gallery.remove'] = 'Remove image';
+$_lang['ms.gallery.load'] = 'Load from dir';
+$_lang['ms.gallery.load'] = 'Load from dir';
+$_lang['ms.gallery.load_description'] = '<p>Specify the directory to search for images.<br/>You can use <i>{assets_path}, {base_path}</i>.</p><br/><p>Example: <i>{base_path}inc/images/products/10/</i></p>';
+$_lang['ms.gallery.err_nf'] = 'Gallery not found.';
+$_lang['ms.gallery.item.err_nf'] = 'Image not found.';
+
 
 $_lang['ms.tv.err_nf'] = 'TV not found';
 $_lang['ms.tv.update'] = 'Update TV';

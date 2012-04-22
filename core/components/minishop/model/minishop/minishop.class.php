@@ -746,6 +746,23 @@ class miniShop {
 	}
 
 
+	// Возврат массива изображений, прикрепленных к ресурсу-товару
+	function getGallery($id, $sort = 'id', $dir = 'ASC') {
+		if (empty($id)) {return false;}
+		if (!$this->modx->getCount('modResource', $id)) {return false;}
+
+		$arr = array();
+		$q = $this->modx->newQuery('ModGallery');
+		$q->where(array('gid' => $id, 'wid' => $_SESSION['minishop']['warehouse']));
+		$q->sortby($sort,$dir);
+		$gallery = $this->modx->getCollection('ModGallery', $q);
+		foreach ($gallery as $v) {
+			$arr[] = $v->toArray();
+		}
+		return $arr;
+	}
+
+
 	// Функция вывода ошибки приема оплаты
 	function paymentError($text) {
 		$this->modx->log(modX::LOG_LEVEL_ERROR,'msPayment ERR: '.$text);

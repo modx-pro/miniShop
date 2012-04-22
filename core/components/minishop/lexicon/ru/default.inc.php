@@ -72,6 +72,10 @@ $_lang['ms.permission.description'] = 'Разрешение, которое бу
 $_lang['ms.duplicate'] = 'Сделать копию';
 $_lang['ms.duplicate_confirm'] = 'Сделать копию этого товара?';
 $_lang['ms.reserved'] = 'Зарезервировано';
+$_lang['ms.gallery'] = 'Галерея';
+$_lang['ms.file'] = 'Файл';
+$_lang['ms.dir'] = 'Директория';
+
 
 $_lang['ms.warehouse.select'] = 'Выберите склад';
 $_lang['ms.warehouse.create'] = 'Создать склад';
@@ -181,6 +185,16 @@ $_lang['ms.goods.add1'] = 'Дополнительное поле 1';
 $_lang['ms.goods.add2'] = 'Дополнительное поле 2';
 $_lang['ms.goods.add3'] = 'Дополнительное поле 3';
 $_lang['ms.goods.data'] = 'Параметры товара';
+
+
+$_lang['ms.gallery.create'] = 'Добавить изображение';
+$_lang['ms.gallery.update'] = 'Изменить изображение';
+$_lang['ms.gallery.remove'] = 'Удалить изображение';
+$_lang['ms.gallery.load'] = 'Загрузить из директории';
+$_lang['ms.gallery.load_description'] = '<p>Укажите директорию для поиска изображений.<br/>Вы можете использовать <i>{assets_path}, {base_path}</i>.</p><br/><p>Пример: <i>{base_path}inc/images/products/10/</i></p>';
+$_lang['ms.gallery.remove_confirm'] = 'Вы действительно хотите удалить изображение товара? Это не затронет физический файл.';
+$_lang['ms.gallery.err_nf'] = 'Не указан id товара для вывода галереи.';
+$_lang['ms.gallery.item.err_nf'] = 'Изображение не найдено.';
 
 $_lang['ms.tv.err_nf'] = 'TV параметр не найден';
 $_lang['ms.tv.update'] = 'Обновить TV параметр';

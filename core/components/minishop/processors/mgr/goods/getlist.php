@@ -20,7 +20,7 @@
  * @package minishop
  */
 /**
- * Get a list of Ordered Goods
+ * Get a list of Goods
  *
  * @package minishop
  * @subpackage processors

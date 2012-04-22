@@ -41,6 +41,19 @@
 			<column key="payments" length="" collation="A" null="false" />
 		</index>
 	</object>
+	<object class="ModGallery" table="modGallery" extends="xPDOSimpleObject">
+		<field key="wid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
+		<field key="gid" dbtype="int" precision="11" phptype="integer" null="false" />
+		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="description" dbtype="text" phptype="string" null="false" />
+		<field key="file" dbtype="varchar" precision="255" phptype="string" null="false" />
+
+		<index alias="wid" name="wid" primary="false" unique="true" type="BTREE" >
+			<column key="wid" length="" collation="A" null="false" />
+			<column key="gid" length="" collation="A" null="false" />
+			<column key="file" length="" collation="A" null="false" />
+		</index>
+	</object>
 	<object class="ModGoods" table="modGoods" extends="xPDOSimpleObject">
 		<field key="wid" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
 		<field key="gid" dbtype="int" precision="11" phptype="integer" null="false" default="0" />

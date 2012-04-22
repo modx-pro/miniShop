@@ -110,5 +110,14 @@ $snippets[8]->fromArray(array(
 ),'',true,true);
 $snippets[8]->setProperties($properties);
 
+$snippets[9]= $modx->newObject('modSnippet');
+$snippets[9]->fromArray(array(
+    'id' => 0,
+    'name' => 'msGetGallery',
+    'description' => 'Snippet to display product images',
+    'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/get_gallery.php'),
+),'',true,true);
+$snippets[9]->setProperties($properties);
+
 unset($properties);
 return $snippets;

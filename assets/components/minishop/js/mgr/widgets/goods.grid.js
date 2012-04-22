@@ -96,21 +96,12 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
 	}
 	,renderImg: function(img) {
 		if (img.length > 0) {
-			if (/^(http|https)/.test(img)) {
-				return '<img src="'+img+'" alt="" height="30" />'
-				//return '<img src="'+MODx.config.connectors_url+'system/phpthumb.php?h=30&src='+img+'&wctx=web&source=1" alt="" />'
-			}
-			else {
-
-				return '<img src="/'+img+'" alt="" height="30" />'
-				//return '<img src="'+MODx.config.connectors_url+'system/phpthumb.php?h=30&src=/'+img+'&wctx=web&source=1" alt="" alt="" height="30" />'
-			}
+			if (!/(jpg|jpeg|png|gif|bmp)$/.test(img)) {return img;}
+			else if (/^(http|https)/.test(img)) {return '<img src="'+img+'" alt="" style="display:block;margin:auto;height:30px;" />'}
+			else {return '<img src="/'+img+'" alt="" style="display:block;margin:auto;height:30px;" />'}
 		}
-		else {
-			return '';
-		}
+		else {return '';}
 	}
-
 	,getMenu: function() {
 		var m = [];
 		m.push({
@@ -357,6 +348,17 @@ miniShop.window.createGoods = function(config) {
 					}
 				}]
 			},{
+				title: _('ms.gallery')
+				,items: [{
+					xtype: 'minishop-grid-gallery'
+					,disabled: config.disable_categories
+					,baseParams: {
+						action: 'mgr/goods/gallery/getlist'
+						,gid: gid
+					}
+					,gid: gid
+				}]
+			},{
 				title: _('ms.categories')
 				,items: [{
 					xtype: 'minishop-grid-categories'
@@ -365,6 +367,7 @@ miniShop.window.createGoods = function(config) {
 						action: 'mgr/goods/getcatlist'
 						,gid: gid
 					}
+
 				}]
 			}]
 		}]
@@ -433,6 +436,7 @@ Ext.extend(miniShop.grid.Categories,MODx.grid.Grid, {
 	}
 });
 Ext.reg('minishop-grid-categories',miniShop.grid.Categories);
+
 
 miniShop.grid.TVs = function(config) {
 	config = config || {};
@@ -518,7 +522,6 @@ Ext.extend(miniShop.grid.TVs,MODx.grid.Grid, {
 Ext.reg('minishop-grid-tvs',miniShop.grid.TVs);
 
 
-
 miniShop.window.updateTV = function(config) {
 	config = config || {};
 	this.ident = config.ident || 'mecitem'+Ext.id();
@@ -560,3 +563,190 @@ miniShop.window.updateTV = function(config) {
 };
 Ext.extend(miniShop.window.updateTV,MODx.Window);
 Ext.reg('minishop-window-goods-tv',miniShop.window.updateTV);
+
+
+
+
+
+
+
+
+miniShop.grid.Gallery = function(config) {
+	config = config || {};
+
+	Ext.applyIf(config,{
+		id: 'product-grid-gallery'
+		,url: miniShop.config.connector_url
+		,action: 'mgr/goods/gallery/getlist'
+		,fields: ['id','gid','name','description','file']
+		,pageSize: 4
+		,autoHeight: true
+		,paging: true
+		,remoteSort: true
+		,columns: [
+			{header: _('id'),dataIndex: 'id',hidden: true,sortable: true}
+			,{header: _('gid'),dataIndex: 'gid',hidden: true,sortable: true}
+			,{header: _('name'),dataIndex: 'name',sortable: true,width: 100}
+			,{header: _('description'),dataIndex: 'description',width: 100}
+			,{header: _('ms.file'),dataIndex: 'file',sortable: true, hidden: true}
+			,{header: _('ms.file'),dataIndex: 'file',renderer: this.renderImg, width: 80}
+		]
+		,tbar: [{
+			text: _('ms.gallery.create')
+			,handler: this.createImage
+			,scope: this
+		},{
+			xtype: 'tbfill'
+		},{
+			text: _('ms.gallery.load')
+			,handler: this.loadImages
+			,scope: this
+		}]
+		,listeners: {
+			rowDblClick: function(grid, rowIndex, e) {
+				var row = grid.store.getAt(rowIndex);
+				this.updateImage(grid, e, row);
+			}
+		}
+	});
+	miniShop.grid.Gallery.superclass.constructor.call(this,config);
+};
+Ext.extend(miniShop.grid.Gallery,MODx.grid.Grid, {
+	windows: {}
+	,getMenu: function() {
+		var m = [];
+		m.push({
+			text: _('ms.gallery.update')
+			,handler: this.updateImage
+		});
+		m.push('-');
+		m.push({
+			text: _('ms.gallery.remove')
+			,handler: this.removeImage
+		});
+		this.addContextMenuItem(m);
+	}
+	,renderImg: function(img) {
+		if (img.length > 0) {
+			if (!/(jpg|jpeg|png|gif|bmp)$/.test(img)) {return img;}
+			else if (/^(http|https)/.test(img)) {return '<img src="'+img+'" alt="" style="display:block;margin:auto;height:50px;" />'}
+			else {return '<img src="/'+img+'" alt="" style="display:block;margin:auto;height:50px;" />'}
+		}
+		else {return '';}
+	}
+	,createImage: function(e) {
+		var w = MODx.load({
+			xtype: 'minishop-window-goods-gallery'
+			,title: _('ms.gallery.create')
+			,baseParams: {
+				action: 'mgr/goods/gallery/create'
+				,gid: this.config.gid
+			}
+			,listeners: {'success':{fn:function() {Ext.getCmp('product-grid-gallery').store.reload();},scope:this},'show':{fn:function() {this.center();}}}
+		});
+		w.show(e.target,function() {Ext.isSafari ? w.setPosition(null,30) : w.center();},this);
+	}
+	,loadImages: function(e) {
+		var w = MODx.load({
+			xtype: 'minishop-window-goods-loadgallery'
+			,title: _('ms.gallery.load')
+			,baseParams: {
+				action: 'mgr/goods/gallery/load'
+				,gid: this.config.gid
+			}
+			,listeners: {'success':{fn:function() {Ext.getCmp('product-grid-gallery').store.reload();},scope:this},'show':{fn:function() {this.center();}}}
+		});
+		w.show(e.target,function() {Ext.isSafari ? w.setPosition(null,30) : w.center();},this);
+	}
+	,updateImage: function(btn,e,row) {
+		if (typeof(row) != 'undefined') {
+			var record = row.data;
+		}
+		else {
+			var record = this.menu.record;
+		}
+		this.windows.updateImage = MODx.load({
+			xtype: 'minishop-window-goods-gallery'
+			,title: _('ms.gallery.update')
+			,listeners: {
+				'success': {fn:function() { this.refresh(); },scope:this}
+				,'hide': {fn:function() { this.destroy(); }}
+			}
+		});
+		this.windows.updateImage.fp.getForm().reset();
+		this.windows.updateImage.fp.getForm().setValues(record);
+		this.windows.updateImage.show(e.target);
+	}
+	,removeImage: function(btn,e) {
+		if (!this.menu.record) return false;
+		
+		MODx.msg.confirm({
+			title: _('ms.gallery.gallery')
+			,text: _('ms.gallery.remove_confirm')
+			,url: this.config.url
+			,params: {
+				action: 'mgr/goods/gallery/remove'
+				,id: this.menu.record.id
+			}
+			,listeners: {'success': {fn:function(r) {this.refresh();},scope:this}}
+		});
+	}
+
+});
+Ext.reg('minishop-grid-gallery',miniShop.grid.Gallery);
+
+
+miniShop.window.updateImage = function(config) {
+	config = config || {};
+	this.ident = config.ident || 'mecitem'+Ext.id();
+
+	Ext.applyIf(config,{
+		title: _('ms.gallery.add')
+		,id: this.ident
+		,width: 600
+		,url: miniShop.config.connector_url
+		,action: 'mgr/goods/gallery/update'
+		,labelAlign: 'left'
+		,labelWidth: 150
+		,height: 150
+		,autoHeight: true
+		,fields: [
+			{xtype: 'hidden',name: 'id',id: 'minishop-'+this.ident+'-id'}
+			,{xtype: 'textfield',fieldLabel: _('name'),name: 'name',id: 'minishop-'+this.ident+'-name',anchor: '90%'}
+			,{xtype: 'textarea',fieldLabel: _('description'),name: 'description',id: 'minishop-'+this.ident+'-description',anchor: '90%'}
+			,{xtype: 'modx-combo-browser',fieldLabel: _('ms.file'),name: 'file',id: 'minishop-'+this.ident+'-file',allowBlank: false,anchor: '90%'}
+		]
+		,keys: [{key: Ext.EventObject.ENTER,shift: true,fn: this.submit,scope: this}]
+		,buttons: [{text: _('close'),scope: this,handler: function() { this.hide();}},{text: _('save_and_close'),scope: this,handler: function() { this.submit();}}]
+	});
+	miniShop.window.updateImage.superclass.constructor.call(this,config);
+};
+Ext.extend(miniShop.window.updateImage,MODx.Window);
+Ext.reg('minishop-window-goods-gallery',miniShop.window.updateImage);
+
+miniShop.window.loadImages = function(config) {
+	config = config || {};
+	this.ident = config.ident || 'mecitem'+Ext.id();
+
+	Ext.applyIf(config,{
+		title: _('ms.gallery.add')
+		,id: this.ident
+		,width: 600
+		,url: miniShop.config.connector_url
+		,action: 'mgr/goods/gallery/load'
+		,labelAlign: 'left'
+		,labelWidth: 100
+		,height: 150
+		,bodyStyle: 'padding: 5px 10px;'
+		,autoHeight: true
+		,html: _('ms.gallery.load_description')
+		,fields: [
+			{xtype: 'textfield',fieldLabel: _('ms.dir'),name: 'dir',id: 'minishop-'+this.ident+'-dir',allowBlank: false,anchor: '99%'}
+		]
+		,keys: [{key: Ext.EventObject.ENTER,shift: true,fn: this.submit,scope: this}]
+		,buttons: [{text: _('close'),scope: this,handler: function() { this.hide();}},{text: _('save_and_close'),scope: this,handler: function() { this.submit();}}]
+	});
+	miniShop.window.loadImages.superclass.constructor.call(this,config);
+};
+Ext.extend(miniShop.window.loadImages,MODx.Window);
+Ext.reg('minishop-window-goods-loadgallery',miniShop.window.loadImages);

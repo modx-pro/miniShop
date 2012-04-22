@@ -58,6 +58,15 @@ if ($res_old = $modx->getObject('ModGoods', array('gid' => $id_old, 'wid' => $_S
 		$tmp = $modx->newObject('ModCategories', array('gid' => $id_new, 'cid' => $cid));
 		$tmp->save();
 	}
+
+	$res = $modx->getIterator('ModGallery', array('gid' => $id_old));
+	foreach ($res as $v) {
+		$tmp = $modx->newObject('ModGallery');
+		$tmp->fromArray($v->toArray());
+		$tmp->set('id', 0);
+		$tmp->set('gid', $id_new);
+		$tmp->save();
+	}
 }
 else {
 	return $modx->error->failure($modx->lexicon('ms.goods.err_nf'));

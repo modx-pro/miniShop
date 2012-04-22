@@ -1,5 +1,13 @@
 Changelog for miniShop.
 
+1.4.1 beta (22.04.2012)
+=============
+- Добавлено создание галереи товара.
+	- Новый сниппет msGetGallery для вывода изображений товара (поддерживает getPage).
+-----
+- Added gallery for goods
+	- New snippet msGetGallery to display product images (supports getPage)
+
 1.4.0 beta (13.04.2012)
 =============
 - Добавлено упрощенное редактирование ТВ параметров прямо в окне редактирования товара. 
