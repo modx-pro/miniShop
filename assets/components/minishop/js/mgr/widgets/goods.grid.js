@@ -331,10 +331,10 @@ miniShop.window.createGoods = function(config) {
 					,{xtype: 'hidden',name: 'wid'}
 					,{xtype: 'textfield',name: 'article',fieldLabel: _('ms.article')}
 					,{xtype: 'numberfield',name: 'price',fieldLabel: _('ms.price')}
-					,{xtype: 'numberfield',name: 'weight',fieldLabel: _('ms.weight')}
+					,{xtype: 'numberfield',name: 'weight',decimalPrecision: 3, fieldLabel: _('ms.weight')}
 					,{xtype: 'ms-combo-browser',name: 'img',fieldLabel: _('ms.img'),anchor: '100%'}
 					,{xtype: 'numberfield',name: 'remains',fieldLabel: _('ms.remains')}
-					,{xtype: 'displayfield',name: 'reserved',fieldLabel: _('ms.reserved')}
+					,{xtype: 'textfield',name: 'reserved',disabled: true,fieldLabel: _('ms.reserved')}
 					,{xtype: 'textfield',name: 'add1',fieldLabel: _('ms.goods.add1'),anchor: '100%'}
 					,{xtype: 'textfield',name: 'add2',fieldLabel: _('ms.goods.add2'),anchor: '100%'}
 					,{xtype: 'textarea',name: 'add3',fieldLabel: _('ms.goods.add3'),autoHeight: false,anchor: '100%',height: 100}

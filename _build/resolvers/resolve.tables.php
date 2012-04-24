@@ -111,8 +111,8 @@ if ($object->xpdo) {
 			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
 			$sql = "ALTER TABLE {$ogtable} ADD `data` TEXT NOT NULL";
 			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
-			$sql = "ALTER TABLE {$gtable} ADD `weight` FLOAT(10,2) NOT NULL DEFAULT '0.00' AFTER `price`;
-					ALTER TABLE {$ogtable} ADD `weight` FLOAT(10,2) NOT NULL DEFAULT '0.00' AFTER `price`;";
+			$sql = "ALTER TABLE {$gtable} ADD `weight` FLOAT(10,3) NOT NULL DEFAULT '0.000' AFTER `price`;
+					ALTER TABLE {$ogtable} ADD `weight` FLOAT(10,3) NOT NULL DEFAULT '0.000' AFTER `price`;";
 			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
 			$sql = "ALTER TABLE {$dtable} ADD `payments` VARCHAR(255) NOT NULL DEFAULT '[]', ADD INDEX (`payments`)";
 			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}

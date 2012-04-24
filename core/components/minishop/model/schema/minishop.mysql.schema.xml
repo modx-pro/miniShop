@@ -59,7 +59,7 @@
 		<field key="gid" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
 		<field key="article" dbtype="varchar" precision="50" phptype="string" null="false" default="0" />
 		<field key="price" dbtype="float" precision="10,2" phptype="float" null="false" default="0.00" />
-		<field key="weight" dbtype="float" precision="10,2" phptype="float" null="false" default="0.00" />
+		<field key="weight" dbtype="float" precision="10,3" phptype="float" null="false" default="0.000" />
 		<field key="img" dbtype="text" phptype="string" null="false" />
 		<field key="remains" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
 		<field key="reserved" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
@@ -95,7 +95,7 @@
 		<field key="oid" dbtype="int" precision="11" phptype="integer" null="false" />
 		<field key="num" dbtype="int" precision="11" phptype="integer" null="false" default="1" />
 		<field key="price" dbtype="float" precision="10,2" phptype="float" null="false" />
-		<field key="weight" dbtype="float" precision="10,2" phptype="float" null="false" default="0.00" />
+		<field key="weight" dbtype="float" precision="10,3" phptype="float" null="false" default="0.000" />
 		<field key="sum" dbtype="float" precision="10,2" phptype="float" null="false" />
 		<field key="data" dbtype="text" phptype="string" null="false" />
 
@@ -139,8 +139,8 @@
 		<field key="email2manager" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" />
 		<field key="subject2user" dbtype="varchar" precision="255" phptype="string" null="false" />
 		<field key="subject2manager" dbtype="varchar" precision="255" phptype="string" null="false" />
-		<field key="body2user" dbtype="varchar" precision="255" phptype="string" null="false" />
-		<field key="body2manager" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="body2user" dbtype="int" precision="10" phptype="integer" null="true" default="0" />
+		<field key="body2manager" dbtype="int" precision="10" phptype="integer" null="true" default="0" />
 
 		<index alias="name" name="name" primary="false" unique="false" type="BTREE" >
 			<column key="name" length="" collation="A" null="false" />

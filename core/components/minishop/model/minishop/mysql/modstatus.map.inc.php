@@ -12,8 +12,8 @@ $xpdo_meta_map['ModStatus']= array (
     'email2manager' => 0,
     'subject2user' => NULL,
     'subject2manager' => NULL,
-    'body2user' => NULL,
-    'body2manager' => NULL,
+    'body2user' => 0,
+    'body2manager' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -65,17 +65,19 @@ $xpdo_meta_map['ModStatus']= array (
     ),
     'body2user' => 
     array (
-      'dbtype' => 'varchar',
-      'precision' => '255',
-      'phptype' => 'string',
-      'null' => false,
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'null' => true,
+      'default' => 0,
     ),
     'body2manager' => 
     array (
-      'dbtype' => 'varchar',
-      'precision' => '255',
-      'phptype' => 'string',
-      'null' => false,
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'null' => true,
+      'default' => 0,
     ),
   ),
   'indexes' => 

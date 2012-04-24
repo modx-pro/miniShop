@@ -56,7 +56,7 @@ $xpdo_meta_map['ModGoods']= array (
     'weight' => 
     array (
       'dbtype' => 'float',
-      'precision' => '10,2',
+      'precision' => '10,3',
       'phptype' => 'float',
       'null' => false,
       'default' => 0,
