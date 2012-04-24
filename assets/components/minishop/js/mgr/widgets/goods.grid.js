@@ -1,3 +1,11 @@
+function renderImg(img) {
+	if (img.length > 0) {
+		if (!/(jpg|jpeg|png|gif|bmp)$/.test(img)) {return img;}
+		else if (/^(http|https|\/)/.test(img)) {return '<img src="'+img+'" alt="" style="display:block;margin:auto;height:30px;" />'}
+		else {return '<img src="/'+img+'" alt="" style="display:block;margin:auto;height:30px;" />'}
+	}
+	else {return '';}
+}
 miniShop.grid.Goods = function(config) {
 	config = config || {};
 	Ext.applyIf(config,{
@@ -22,7 +30,7 @@ miniShop.grid.Goods = function(config) {
 			,{header: _('ms.article'),dataIndex: 'article',sortable: true, width: 50}
 			,{header: _('ms.price'),dataIndex: 'price',sortable: true, width: 50}
 			,{header: _('ms.weight'),dataIndex: 'weight',sortable: true, width: 50}
-			,{header: _('ms.img'),dataIndex: 'img',renderer: this.renderImg,sortable: true,width: 50}
+			,{header: _('ms.img'),dataIndex: 'img',renderer: renderImg,sortable: true,width: 50}
 			,{header: _('ms.remains'),dataIndex: 'remains',sortable: true, width: 50}
 			,{header: _('ms.reserved'),dataIndex: 'reserved',sortable: true, width: 50}
 		]
@@ -93,14 +101,6 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
 		this.getStore().baseParams['category'] = cb.value;
 		this.getBottomToolbar().changePage(1);
 		this.refresh();
-	}
-	,renderImg: function(img) {
-		if (img.length > 0) {
-			if (!/(jpg|jpeg|png|gif|bmp)$/.test(img)) {return img;}
-			else if (/^(http|https)/.test(img)) {return '<img src="'+img+'" alt="" style="display:block;margin:auto;height:30px;" />'}
-			else {return '<img src="/'+img+'" alt="" style="display:block;margin:auto;height:30px;" />'}
-		}
-		else {return '';}
 	}
 	,getMenu: function() {
 		var m = [];
@@ -329,7 +329,7 @@ miniShop.window.createGoods = function(config) {
 					,{xtype: 'textfield',name: 'article',fieldLabel: _('ms.article')}
 					,{xtype: 'numberfield',name: 'price',fieldLabel: _('ms.price')}
 					,{xtype: 'numberfield',name: 'weight',fieldLabel: _('ms.weight')}
-					,{xtype: 'modx-combo-browser',name: 'img',fieldLabel: _('ms.img'),anchor: '100%'}
+					,{xtype: 'ms-combo-browser',name: 'img',fieldLabel: _('ms.img'),anchor: '100%'}
 					,{xtype: 'numberfield',name: 'remains',fieldLabel: _('ms.remains')}
 					,{xtype: 'displayfield',name: 'reserved',fieldLabel: _('ms.reserved')}
 					,{xtype: 'textfield',name: 'add1',fieldLabel: _('ms.goods.add1'),anchor: '100%'}
@@ -499,8 +499,8 @@ Ext.extend(miniShop.grid.TVs,MODx.grid.Grid, {
 		switch (record.type) {
 			case 'number': vf.xtype = 'numberfield'; break;
 			case 'text': vf.xtype = 'textfield'; break;
-			case 'image': vf.xtype = 'modx-combo-browser'; break;
-			case 'file': vf.xtype = 'modx-combo-browser'; break;
+			case 'image': vf.xtype = 'ms-combo-browser'; break;
+			case 'file': vf.xtype = 'ms-combo-browser'; break;
 			case 'date': vf.xtype = 'xdatetime'; break;
 			case 'text': vf.xtype = 'textarea'; break;
 			case 'checkbox': vf.xtype = 'textfield'; break;
@@ -583,7 +583,7 @@ miniShop.grid.Gallery = function(config) {
 			,{header: _('name'),dataIndex: 'name',sortable: true,width: 100}
 			,{header: _('description'),dataIndex: 'description',width: 100}
 			,{header: _('ms.file'),dataIndex: 'file',sortable: true, hidden: true}
-			,{header: _('ms.file'),dataIndex: 'file',renderer: this.renderImg, width: 80}
+			,{header: _('ms.file'),dataIndex: 'file',renderer: renderImg, width: 80}
 		]
 		,tbar: [{
 			text: _('ms.gallery.create')
@@ -619,14 +619,6 @@ Ext.extend(miniShop.grid.Gallery,MODx.grid.Grid, {
 			,handler: this.removeImage
 		});
 		this.addContextMenuItem(m);
-	}
-	,renderImg: function(img) {
-		if (img.length > 0) {
-			if (!/(jpg|jpeg|png|gif|bmp)$/.test(img)) {return img;}
-			else if (/^(http|https)/.test(img)) {return '<img src="'+img+'" alt="" style="display:block;margin:auto;height:50px;" />'}
-			else {return '<img src="/'+img+'" alt="" style="display:block;margin:auto;height:50px;" />'}
-		}
-		else {return '';}
 	}
 	,createImage: function(e) {
 		var w = MODx.load({
@@ -708,7 +700,7 @@ miniShop.window.updateImage = function(config) {
 			{xtype: 'hidden',name: 'id',id: 'minishop-'+this.ident+'-id'}
 			,{xtype: 'textfield',fieldLabel: _('name'),name: 'name',id: 'minishop-'+this.ident+'-name',anchor: '90%'}
 			,{xtype: 'textarea',fieldLabel: _('description'),name: 'description',id: 'minishop-'+this.ident+'-description',anchor: '90%'}
-			,{xtype: 'modx-combo-browser',fieldLabel: _('ms.file'),name: 'file',id: 'minishop-'+this.ident+'-file',allowBlank: false,anchor: '90%'}
+			,{xtype: 'ms-combo-browser',fieldLabel: _('ms.file'),name: 'file',id: 'minishop-'+this.ident+'-file',allowBlank: false,anchor: '90%'}
 		]
 		,keys: [{key: Ext.EventObject.ENTER,shift: true,fn: this.submit,scope: this}]
 		,buttons: [{text: _('close'),scope: this,handler: function() { this.hide();}},{text: _('save_and_close'),scope: this,handler: function() { this.submit();}}]
@@ -733,9 +725,9 @@ miniShop.window.loadImages = function(config) {
 		,height: 150
 		,bodyStyle: 'padding: 5px 10px;'
 		,autoHeight: true
-		,html: _('ms.gallery.load_description')
+		//,html: _('ms.gallery.load_description')
 		,fields: [
-			{xtype: 'textfield',fieldLabel: _('ms.dir'),name: 'dir',id: 'minishop-'+this.ident+'-dir',allowBlank: false,anchor: '99%'}
+			{xtype: 'ms-combo-browser',fieldLabel: _('ms.dir'),name: 'dir',id: 'minishop-'+this.ident+'-dir',allowBlank: false,anchor: '99%'}
 		]
 		,keys: [{key: Ext.EventObject.ENTER,shift: true,fn: this.submit,scope: this}]
 		,buttons: [{text: _('close'),scope: this,handler: function() { this.hide();}},{text: _('save_and_close'),scope: this,handler: function() { this.submit();}}]

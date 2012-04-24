@@ -347,3 +347,75 @@ MODx.form.FilterClear = function(config) {
 Ext.extend(MODx.form.FilterClear,Ext.Button);
 Ext.reg('minishop-filter-clear',MODx.form.FilterClear);
 /////////////////////////////////////////
+
+
+
+
+// Модифицированный modx-combo-browser для miniShop
+miniShop.combo.Browser = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+       width: 300
+       ,triggerAction: 'all'
+       ,source: config.source || MODx.config.default_media_source
+    });
+    miniShop.combo.Browser.superclass.constructor.call(this,config);
+    this.config = config;
+};
+Ext.extend(miniShop.combo.Browser,Ext.form.TriggerField,{
+	browser: null
+
+	,onTriggerClick : function(btn){
+		if (this.disabled){
+			return false;
+		}
+		
+		if (this.browser === null) {
+			this.browser = MODx.load({
+				xtype: 'modx-browser'
+				,id: Ext.id()
+				,multiple: true
+				,source: this.config.source || MODx.config.default_media_source
+				,hideFiles: this.config.hideFiles || false
+				,rootVisible: this.config.rootVisible || false
+				,allowedFileTypes: this.config.allowedFileTypes || ''
+				,wctx: this.config.wctx || 'web'
+				,openTo: this.config.openTo || ''
+				//,rootId: this.config.rootId || '/'
+				,hideSourceCombo: this.config.hideSourceCombo || false
+				,hideFiles: this.config.hideFiles || true
+				,listeners: {
+					'select': {fn: function(data) {
+						this.setValue(data.fullRelativeUrl);
+						this.fireEvent('select',data);
+					},scope:this}
+				}
+			});
+		}
+		this.browser.win.buttons[0].on('disable',function(e) {this.enable()})
+		this.browser.win.tree.on('click', function(n,e) {
+				path = this.getPath(n);
+				this.setValue(path);
+			},this
+		)
+		this.browser.win.tree.on('dblclick', function(n,e) {
+				path = this.getPath(n);
+				this.setValue(path);
+				this.browser.hide()
+			},this
+		)
+		this.browser.show(btn)
+		return true;
+	}
+	,onDestroy: function(){
+		miniShop.combo.Browser.superclass.onDestroy.call(this);
+	}
+	,getPath: function(n) {
+		data = n.attributes;
+		path = data.path + '/'
+
+		return path;
+	}
+});
+Ext.reg('ms-combo-browser',miniShop.combo.Browser);
+/////////////////////////////////////////
