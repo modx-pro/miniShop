@@ -145,11 +145,14 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
 			,disable_categories: true
 			,action: 'mgr/goods/create'
 			,listeners: {
-				'success':{fn:function() {
-					Ext.getCmp('minishop-grid-goods').store.reload();
-				},scope:this}
+				'success':{fn:function() {Ext.getCmp('minishop-grid-goods').store.reload();},scope:this}
 				//,'hide':{fn:function() {this.destroy();}}
 				,'show':{fn:function() {this.center();}}
+				,'beforesubmit': {fn:function(d) {
+					if (d.parent == 0) {
+						if (!confirm(_('ms.goods.cat0_confirm'))) {return false;}
+					}
+				}}
 			}
 		});
 		w.show(e.target,function() {
@@ -371,7 +374,7 @@ miniShop.window.createGoods = function(config) {
 				}]
 			}]
 		}]
-	   ,keys: [{
+		,keys: [{
 			key: Ext.EventObject.ENTER
 			,shift: true
 			,fn:  function() {changed = 1; this.submit() }

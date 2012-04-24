@@ -32,9 +32,9 @@ if (!$modx->hasPermission('save')) {return $modx->error->failure($modx->lexicon(
 if (empty($_POST['pagetitle'])) {
 	$modx->error->addField('pagetitle',$modx->lexicon('ms.required_field'));
 }
-if (empty($_POST['parent'])) {
-	$modx->error->addField('parent',$modx->lexicon('ms.required_field'));
-}
+//if (empty($_POST['parent'])) {
+	//$modx->error->addField('parent',$modx->lexicon('ms.required_field'));
+//}
 if ($modx->error->hasError()) {
     return $modx->error->failure();
 }

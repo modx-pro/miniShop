@@ -184,6 +184,7 @@ $_lang['ms.goods.add1'] = 'Additional 1';
 $_lang['ms.goods.add2'] = 'Additional 2';
 $_lang['ms.goods.add3'] = 'Additional 3';
 $_lang['ms.goods.data'] = 'Parameters of goods';
+$_lang['ms.goods.cat0_confirm'] = 'You did not select a product category, you really want to keep it in the root of the site?';
 
 
 $_lang['ms.gallery.create'] = 'Add image';
