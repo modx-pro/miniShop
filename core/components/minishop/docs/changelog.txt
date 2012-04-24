@@ -1,5 +1,15 @@
 Changelog for miniShop.
 
+1.5.1 rc (24.04.2012)
+=============
+- [#35] Модифицирован браузер MODx для возможности выбора директорий. miniShop правильно понимает источники файлов.
+- [#36] Добавлена возможность сохранения товара в корень.
+- [#37] Размерность параметра вес увеличена до 3х знаков после запятой.
+-----
+- [#35] Modified MODx browser to be able to select directories. miniShop understands the files source.
+- [#36] Added the ability to save products in the root.
+- [#37] The dimension of the parameter weight increased to 3 decimal places.
+
 1.5.0 beta (22.04.2012)
 =============
 - Добавлено создание галереи товара.

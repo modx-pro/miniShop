@@ -381,7 +381,7 @@ Ext.extend(miniShop.combo.Browser,Ext.form.TriggerField,{
 				,allowedFileTypes: this.config.allowedFileTypes || ''
 				,wctx: this.config.wctx || 'web'
 				,openTo: this.config.openTo || ''
-				//,rootId: this.config.rootId || '/'
+				,rootId: this.config.rootId || '/'
 				,hideSourceCombo: this.config.hideSourceCombo || false
 				,hideFiles: this.config.hideFiles || true
 				,listeners: {
@@ -411,6 +411,7 @@ Ext.extend(miniShop.combo.Browser,Ext.form.TriggerField,{
 		miniShop.combo.Browser.superclass.onDestroy.call(this);
 	}
 	,getPath: function(n) {
+		if (n.id == '/') {return '';}
 		data = n.attributes;
 		path = data.path + '/'
 

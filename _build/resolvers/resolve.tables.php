@@ -121,6 +121,9 @@ if ($object->xpdo) {
 			$sql = "ALTER TABLE {$stable} CHANGE `body2user` `body2user` INT(10) NULL DEFAULT '0';
 					ALTER TABLE {$stable} CHANGE `body2manager` `body2manager` INT(10) NULL DEFAULT '0';";
 			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
+			$sql = "ALTER TABLE {$gtable} CHANGE `weight` `weight` FLOAT(10,3) NOT NULL DEFAULT '0.000';
+				ALTER TABLE {$ogtable} CHANGE `weight` `weight` FLOAT(10,3) NOT NULL DEFAULT '0.000';";
+			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
 			break;
 	}
 }
