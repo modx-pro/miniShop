@@ -40,7 +40,7 @@ $mode = $modx->getOption('mode', $_REQUEST, 'category');
 $addall = $_REQUEST['addall'] ? 1 : 0;
 
 $c = $modx->newQuery('modResource');
-$c->select('id,pagetitle');
+$c->select('id,pagetitle,parent');
 
 // Режим работы комбо: вывод категорий, или товаров?
 if ($mode == 'category') {
@@ -59,16 +59,32 @@ $count = $modx->getCount('modResource',$c);
 $c->sortby($sort,$dir);
 
 if ($isLimit) $c->limit($limit,$start);
-
 $res = $modx->getCollection('modResource',$c);
-if ($addall && empty($query)) {
+
+// Предварительная обработка элементов
+$tmp = array();
+foreach ($res as $v) {
+	$id = $v->get('id');
+	$parent = $v->get('parent');
+	// Если вложенная категория - добавляем имя родителя
+	if ($mode == 'category' && $tmp2 = $modx->getObject('modResource', array('id' => $parent, 'template:IN' => $categories_tpls))) {
+		$pagetitle = $tmp2->get('pagetitle') . ' - ' . $v->get('pagetitle');
+	}
+	else {$pagetitle = $v->get('pagetitle');}
+	
+	$tmp[$id] = $pagetitle;
+}
+// Сортировка массива по именам
+asort($tmp);
+
+// Добавляем пункт "Все", если нужно
+if ($addall && empty($query) && empty($start)) {
 	$arr = array(array('id' => 0, 'pagetitle' => $modx->lexicon('ms.combo.all')));
 }
-else {
-	$arr = array();
+else {$arr = array();}
+
+foreach ($tmp as $k => $v) {
+	$arr[]= array('id' => $k,'pagetitle' => $v);
 }
-foreach ($res as $v) {
-    $tmp = $v->toArray();
-	$arr[]= $tmp;
-}
+
 return $this->outputArray($arr,$count);
