@@ -11,13 +11,12 @@ $start = $modx->getOption('start',$_REQUEST,0);
 $limit = $modx->getOption('limit',$_REQUEST,10);
 $sort = $modx->getOption('sort',$_REQUEST,'id');
 $dir = $modx->getOption('dir',$_REQUEST,'DESC');
-
-$iid = $modx->getOption('iid', $_REQUEST, 0);
+$oid = $modx->getOption('oid', $_REQUEST, 0);
 $type = $modx->getOption('type', $_REQUEST, 0);
 $operation = $modx->getOption('operation', $_REQUEST, 0);
 
 $c = $modx->newQuery('ModLog');
-$c->where(array('iid' => $iid));
+$c->where(array('oid' => $oid));
 if (!empty($type)) {
 	$c->andCondition(array('type' => $type));
 }
