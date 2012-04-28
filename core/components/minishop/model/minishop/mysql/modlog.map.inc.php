@@ -7,6 +7,7 @@ $xpdo_meta_map['ModLog']= array (
   'fields' => 
   array (
     'type' => NULL,
+    'oid' => NULL,
     'iid' => NULL,
     'operation' => NULL,
     'old' => NULL,
@@ -14,6 +15,7 @@ $xpdo_meta_map['ModLog']= array (
     'uid' => NULL,
     'ip' => NULL,
     'timestamp' => 'CURRENT_TIMESTAMP',
+    'comment' => NULL,
   ),
   'fieldMeta' => 
   array (
@@ -24,6 +26,13 @@ $xpdo_meta_map['ModLog']= array (
       'phptype' => 'string',
       'null' => false,
       'index' => 'index',
+    ),
+    'oid' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '11',
+      'phptype' => 'integer',
+      'null' => false,
     ),
     'iid' => 
     array (
@@ -74,6 +83,12 @@ $xpdo_meta_map['ModLog']= array (
       'index' => 'index',
       'extra' => 'on update current_timestamp',
     ),
+    'comment' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'string',
+      'null' => true,
+    ),
   ),
   'indexes' => 
   array (
@@ -107,7 +122,7 @@ $xpdo_meta_map['ModLog']= array (
           'collation' => 'A',
           'null' => false,
         ),
-        'iid' => 
+        'oid' => 
         array (
           'length' => '',
           'collation' => 'A',

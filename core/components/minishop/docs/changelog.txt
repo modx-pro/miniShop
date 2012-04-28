@@ -9,6 +9,7 @@ Changelog for miniShop.
 - Ресурсы-категории товаров больше не обязаны быть контейнерами (теперь не важно значение isfolder).
 - Добавлена цена за единицу веса в методах доставки. Старая цена теперь дополнительная. Цена доставки вычисляется по формуле (weight * price) + add_price
 - Добавлен показ стоимости и веса заказа в менеджере.
+- Изменения товаров в заказе теперь логируются и выводятся в истории заказа.
 -----
 - Added invoke events to launch the plugins when you changing products in the component. mSearch will now index goods on changing.
 - Added a more options for resources in the editing window of the goods (deleted, richtext,cacheable, searchable and clearcache)
@@ -17,6 +18,7 @@ Changelog for miniShop.
 - Resources-categories of goods are no longer required to be containers (now isfolder is no matter).
 - Added the price per unit of weight in the methods of delivery. Old price is now additional. Shipping is calculated by the formula (weight * price) + add_price
 - Added displaying weight and sum of order in the manager.
+- Changing goods in order are now logged and showing in orders history.
 
 1.5.1 rc (24.04.2012)
 =============

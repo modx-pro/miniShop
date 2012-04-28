@@ -3,9 +3,8 @@ miniShop.grid.Payments = function(config) {
 
 	this.exp = new Ext.grid.RowExpander({
 		expandOnDblClick: false
-		,tpl : new Ext.Template(
-			'<p class="desc">{description}</p>'
-		)
+		,tpl : new Ext.Template('<p class="desc">{description}</p>')
+		,renderer : function(v, p, record){return record.data.description != '' ? '<div class="x-grid3-row-expander">&#160;</div>' : '&#160;';}
 	});
 
 	Ext.applyIf(config,{

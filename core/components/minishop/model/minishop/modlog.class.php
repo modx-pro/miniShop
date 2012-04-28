@@ -12,14 +12,25 @@ class ModLog extends xPDOSimpleObject {
 		$val = $this->get($val);
 		switch ($type) {
 			case 'status': $obj = 'ModStatus'; break;
+			case 'goods': $obj = 'modResource'; break;
 			case 'delivery': $obj = 'ModDelivery'; break;
 			case 'payment': $obj = 'ModPayment'; break;
 			case 'warehouse': $obj = 'ModWarehouse'; break;
 			default: $obj = ''; 
 		}
 		if (empty($obj)) {return $val;}
-		if ($res = $this->xpdo->getObject($obj, $val)) {
-			return $res->get('name');
+		if ($type == 'goods') {
+			if ($res = $this->xpdo->getObject($obj, $this->get('iid'))) {
+				return $res->get('pagetitle');
+			}
+		}
+		else {
+			if (empty($val)) {
+				return $this->xpdo->lexicon('no');
+			}
+			else if ($res = $this->xpdo->getObject($obj, $val)) {
+				return $res->get('name');
+			}
 		}
 	}
 	

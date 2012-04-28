@@ -6,7 +6,7 @@ miniShop.grid.Orders = function(config) {
 		,baseParams: {
 			action: 'orders/getlist'
 		}
-		,fields: ['id','fullname','num','warehousename','status','sum','created','updated']
+		,fields: ['id','fullname','num','warehouse_name','sum','weight','created','status','updated']
 		,autoHeight: true
 		,paging: true
 		,remoteSort: true
@@ -14,7 +14,7 @@ miniShop.grid.Orders = function(config) {
 			{header: _('id'),dataIndex: 'id',hidden: true,sortable: true,width: 50}
 			,{header: _('ms.fullname'),dataIndex: 'fullname',hidden: true,width: 100}
 			,{header: _('ms.num'),dataIndex: 'num',sortable: true,width: 50}
-			,{header: _('ms.warehouse'),dataIndex: 'warehouse_name',hidden: true,width: 50}
+			,{header: _('ms.warehouse'),dataIndex: 'warehouse_name',width: 50}
 			,{header: _('ms.sum'),dataIndex: 'sum',sortable: true,width: 50}
 			,{header: _('ms.weight'),dataIndex: 'weight',sortable: true,width: 50}
 			,{header: _('ms.created'),dataIndex: 'created',sortable: true,width: 100}
@@ -202,7 +202,7 @@ miniShop.window.ViewOrder = function(config) {
 					,style: 'background: transparent;padding-top: 10px;'
 					,items: [{
 						xtype: 'minishop-grid-history'
-						,baseParams: {action: 'log/getlist',iid: oid}
+						,baseParams: {action: 'log/getlist',oid: oid}
 					}]
 				}
 			]
@@ -268,14 +268,13 @@ miniShop.grid.History = function(config) {
 		id: this.ident+'-grid-history'
 		,url: miniShop.config.connector_url
 		,baseParams: {action: 'history/getlist'}
-		,fields: ['id','type','name','timestamp']
+		,fields: ['type','name','timestamp','comment']
 		,pageSize: 10
 		,autoHeight: true
 		,paging: true
 		,remoteSort: true
 		,columns: [
-			{header: _('ms.iid'),dataIndex: 'iid',hidden: true}
-			,{header: _('ms.type'),dataIndex: 'type',width: 50}
+			{header: _('ms.type'),dataIndex: 'type',width: 50}
 			,{header: _('ms.name'),dataIndex: 'name',width: 100}
 			,{header: _('ms.timestamp'),dataIndex: 'timestamp',sortable: true,width: 100}
 		]

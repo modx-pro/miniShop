@@ -93,6 +93,7 @@ if ($object->xpdo) {
 			$dtable = $modx->getTableName('ModDelivery');
 			$otable = $modx->getTableName('ModOrders');
 			$stable = $modx->getTableName('ModStatus');
+			$ltable = $modx->getTableName('ModLog');
 
 			$res = $modx->getCollection('ModStatus');
 			foreach ($res as $v) {
@@ -137,6 +138,11 @@ if ($object->xpdo) {
 			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
 			
 			$sql = "ALTER TABLE {$otable} ADD `weight` FLOAT(10, 3) NOT NULL DEFAULT '0.000' AFTER `sum`";
+			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
+
+			$sql = "ALTER TABLE {$ltable} CHANGE `iid` `oid` INT(11) NOT NULL DEFAULT '0';
+				ALTER TABLE {$ltable} ADD `iid` INT NOT NULL AFTER `oid` DEFAULT '0';
+				ALTER TABLE {$ltable} ADD `comment` TEXT NULL";
 			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
 			
 			break;

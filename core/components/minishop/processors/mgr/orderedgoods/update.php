@@ -36,6 +36,7 @@ if ($res = $modx->getObject('modResource', $_POST['gid'])) {
 	$sum = $_POST['num'] * $price;
 	
 	if ($goods = $modx->getObject('ModOrderedGoods', $_POST['id'])) {
+		$oldval = $goods->get('num');
 		$goods->fromArray(array(
 			'gid' => $_POST['gid']
 			,'oid' => $_POST['oid']
@@ -46,6 +47,7 @@ if ($res = $modx->getObject('modResource', $_POST['gid'])) {
 			,'data' => !empty($_POST['data']) ? $_POST['data'] : json_encode(array())
 		));
 		$goods->save();
+		$miniShop->Log('goods', $_POST['oid'], $_POST['gid'], 'change', $oldval, $_POST['num'], 'Changed quantity of "'.$res->get('pagetitle').'" from '.$oldval.' to '.$_POST['num']);
 	}
 	else {
 		return $modx->error->failure($modx->lexicon('ms.goods.err_nf'));

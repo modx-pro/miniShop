@@ -77,9 +77,9 @@ if ($res = $modx->getObject('ModOrders', $id)) {
 	// Saving changes
 	$res->set('comment', $comment);
 	if  ($res->save()) {
-		if ($change_warehouse) {$miniShop->Log('warehouse', $id, 'change', $oldwarehouse, $warehouse);}
-		if ($change_delivery) {$miniShop->Log('delivery', $id, 'change', $oldelivery, $delivery);}
-		if ($change_payment) {$miniShop->Log('payment', $id, 'change', $oldpayment, $payment);}
+		if ($change_warehouse) {$miniShop->Log('warehouse', $id, 0, 'change', $oldwarehouse, $warehouse);}
+		if ($change_delivery) {$miniShop->Log('delivery', $id, 0, 'change', $oldelivery, $delivery);}
+		if ($change_payment) {$miniShop->Log('payment', $id, 0, 'change', $oldpayment, $payment);}
 	}
 	
 	if ($address = $modx->getObject('ModAddress', $addr['id'])) {

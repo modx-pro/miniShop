@@ -131,22 +131,26 @@ class miniShop {
 	 * Function for logging events in table ModLog
 	 *
 	 * @param string $type			// any type, like warehouse, goods, status etc
-	 * @param int $id				// id of item for this entry
+	 * @param int $oid				// id of the order, which owns the record
+	 * @param int $iid				// id of the item for this entry. Used for logging changing of the goods
 	 * @param string $operation		// change, create, etc
 	 * @param string $old			// old value
 	 * @param string $new			// new value
+	 * @param string $comment
 	 * */
-	function Log($type, $id, $operation, $old, $new) {
+	function Log($type, $oid, $iid, $operation, $old, $new, $comment) {
 		if ($old == $new) {return;}
 		$uid = empty($this->modx->user->id) ? 1 : $this->modx->user->id;
 		$res = $this->modx->newObject('ModLog');
 		$res->set('uid', $uid);
 		$res->set('type', $type);
-		$res->set('iid', $id);
+		$res->set('oid', $oid);
+		$res->set('iid', $iid);
 		$res->set('operation', $operation);
 		$res->set('old', $old);
 		$res->set('new', $new);
 		$res->set('ip', $_SERVER['REMOTE_ADDR']);
+		$res->set('comment', $comment);
 		$res->save();
 	}
 
@@ -714,7 +718,7 @@ class miniShop {
 			$order->set('status', $new);
 			// Saving new status
 			if ($order->save()) {
-				$this->Log('status', $order->get('id'), 'change', $old, $new);
+				$this->Log('status', $order->get('id'), 0, 'change', $old, $new);
 				
 				if ($this->modx->getOption('minishop.enable_remains')) {
 					if ($new == $this->modx->getOption('minishop.status_final')) {

@@ -205,7 +205,7 @@ $_lang['ms.tv.update'] = 'Update TV';
 $_lang['ms.orderedgoods.add'] = 'Add goods';
 $_lang['ms.orderedgoods.add_desc'] = 'Select a product to add to your order. If you leave blank the price and weight - they will be added automatically as when you buy. <br/> Additional data must be a json-string, for example: {"color": "Red", "country": "Russia"}';
 $_lang['ms.orderedgoods.remove'] = 'Remove goods';
-$_lang['ms.orderedgoods.remove_confirm'] = 'ВAre you sure to remove this goods from order?';
+$_lang['ms.orderedgoods.remove_confirm'] = 'Are you sure to remove this goods from order?';
 $_lang['ms.orderedgoods.update'] = 'Update goods';
 $_lang['ms.orderedgoods.err_data'] = 'Failed to save additianal data';
 

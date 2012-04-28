@@ -26,6 +26,7 @@ if (!empty($_POST['data'])) {
 		 return $modx->error->failure($modx->lexicon('ms.orderedgoods.err_data'));
 	}
 }
+
 // Loading miniShop class
 $miniShop = new miniShop($modx);
 
@@ -45,6 +46,7 @@ if ($res = $modx->getObject('modResource', $_POST['gid'])) {
 		,'data' => !empty($_POST['data']) ? $_POST['data'] : json_encode(array())
 	));
 	$goods->save();
+	$miniShop->Log('goods', $_POST['oid'], $_POST['gid'], 'add', 0, $_POST['num'], 'Added '.$_POST['num'].' items of "'. $res->get('pagetitle').'"');
 
 	if ($order = $modx->getObject('ModOrders', $_POST['oid'])) {
 		$order->updateSum();

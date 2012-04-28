@@ -37,6 +37,7 @@ foreach ($orders as $v) {
 		'name' => $v->getGoodsName()
 		,'num' => $v->get('num')
 		,'price' => $v->get('price')
+		,'weight' => $v->get('weight')
 		,'sum' => $v->get('sum')
 		,'data' => $data
 	);

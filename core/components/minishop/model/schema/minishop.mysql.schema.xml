@@ -75,6 +75,7 @@
 	</object>
 	<object class="ModLog" table="modLog" extends="xPDOSimpleObject">
 		<field key="type" dbtype="varchar" precision="50" phptype="string" null="false" index="index" />
+		<field key="oid" dbtype="int" precision="11" phptype="integer" null="false" />
 		<field key="iid" dbtype="int" precision="11" phptype="integer" null="false" />
 		<field key="operation" dbtype="varchar" precision="255" phptype="string" null="false" />
 		<field key="old" dbtype="text" phptype="string" null="false" />
@@ -82,13 +83,14 @@
 		<field key="uid" dbtype="int" precision="11" phptype="integer" null="false" />
 		<field key="ip" dbtype="varchar" precision="15" phptype="string" null="false" />
 		<field key="timestamp" dbtype="timestamp" phptype="timestamp" null="false" default="CURRENT_TIMESTAMP" index="index"  extra="on update current_timestamp" />
+		<field key="comment" dbtype="text" phptype="string" null="true" />
 
 		<index alias="timestamp" name="timestamp" primary="false" unique="false" type="BTREE" >
 			<column key="timestamp" length="" collation="A" null="false" />
 		</index>
 		<index alias="type" name="type" primary="false" unique="false" type="BTREE" >
 			<column key="type" length="" collation="A" null="false" />
-			<column key="iid" length="" collation="A" null="false" />
+			<column key="oid" length="" collation="A" null="false" />
 		</index>
 	</object>
 	<object class="ModOrderedGoods" table="modOrderedGoods" extends="xPDOSimpleObject">

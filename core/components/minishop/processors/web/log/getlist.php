@@ -35,7 +35,7 @@ $arr = array();
 foreach ($logs as $v) {
 	$arr[] = array(
 		'type' => $modx->lexicon('ms.'.$v->get('type'))
-		,'name' => ($v->get('new') == 0) ? $modx->lexicon('no') : $v->getName()
+		,'name' => $v->getName()
 		,'timestamp' => $v->get('timestamp')
 	);
 }

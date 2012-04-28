@@ -3,25 +3,18 @@ miniShop.grid.Orders = function(config) {
 
 	this.exp = new Ext.grid.RowExpander({
 		expandOnDblClick: false
-		,tpl : new Ext.Template(
-			'<p class="desc">{comment}</p>'
-		)
+		,tpl : new Ext.Template('<p class="desc">{comment}</p>')
+		,renderer : function(v, p, record){return record.data.comment != '' ? '<div class="x-grid3-row-expander">&#160;</div>' : '&#160;';}
 	});
 
 	Ext.applyIf(config,{
 		id: 'minishop-grid-orders'
 		,url: miniShop.config.connector_url
-		,baseParams: {
-			action: 'mgr/orders/getlist'
-		}
-		,save_action: 'mgr/orders/updatefromgrid'
-		,autosave: true
+		,baseParams: {action: 'mgr/orders/getlist'}
 		,plugins: this.exp
 		,autoHeight: true
 		,paging: true
 		,remoteSort: true
-		,clicksToEdit: 'auto'
-		//,preventSaveRefresh: false
 		,fields: ['id','uid','fullname','num','wid','warehousename','status','statusname','sum','weight','created','updated','comment']
 		,columns: [this.exp
 			,{header: _('id'),dataIndex: 'id',hidden: true,sortable: true,width: 50}
@@ -267,7 +260,7 @@ miniShop.window.EditOrder = function(config) {
 					,title: _('ms.orderhistory')
 					,items: [{
 						xtype: 'minishop-grid-log'
-						,baseParams: {action: 'mgr/log/getlist',iid: oid}
+						,baseParams: {action: 'mgr/log/getlist',oid: oid}
 					}]
 				}
 			]
@@ -283,11 +276,6 @@ miniShop.window.EditOrder = function(config) {
 			,scope: this
 			,handler: function() {changed = 0; this.hide(); }
 		},
-		/*{
-			text: config.saveBtnText || _('save')
-			,scope: this
-			,handler: function() { this.submit(false); }
-		},*/
 		{
 			text: config.saveBtnText || _('save_and_close')
 			,scope: this
@@ -303,17 +291,24 @@ Ext.reg('minishop-window-editorder',miniShop.window.EditOrder);
 // History of changing the order 
 miniShop.grid.Log = function(config) {
 	config = config || {};
+	this.exp = new Ext.grid.RowExpander({
+		expandOnDblClick: false
+		,tpl : new Ext.Template('<p class="desc">{comment}</p>')
+		,renderer : function(v, p, record){return record.data.comment != null ? '<div class="x-grid3-row-expander">&#160;</div>' : '&#160;';}
+	});
 	Ext.applyIf(config,{
 		id: this.ident+'-grid-log'
 		,url: miniShop.config.connector_url
 		,baseParams: {action: 'mgr/log/getlist',type: 'status',operation: 'change'}
-		,fields: ['iid','type','old','new','name','uid','username','ip','timestamp']
+		,fields: ['oid','iid','type','old','new','name','uid','username','ip','timestamp','comment']
 		,pageSize: 10
 		,autoHeight: true
+		,plugins: this.exp
 		,paging: true
 		,remoteSort: true
-		,columns: [
-			{header: _('ms.iid'),dataIndex: 'iid',hidden: true}
+		,columns: [this.exp
+			,{header: _('ms.oid'),dataIndex: 'oid',hidden: true}
+			,{header: _('ms.iid'),dataIndex: 'iid',hidden: true}
 			,{header: _('ms.type'),dataIndex: 'type',width: 50}
 			,{header: _('ms.log.old'),dataIndex: 'old',sortable: true,hidden: true,width: 50}
 			,{header: _('ms.log.new'),dataIndex: 'new',sortable: true,hidden: true,width: 50}
@@ -321,7 +316,8 @@ miniShop.grid.Log = function(config) {
 			,{header: _('ms.uid'),dataIndex: 'uid',sortable: true,hidden: true,width: 50}
 			,{header: _('ms.username'),dataIndex: 'username',sortable: false,width: 50}
 			,{header: _('ms.ip'),dataIndex: 'ip',hidden: true,sortable: true,width: 50}
-			,{header: _('ms.timestamp'),dataIndex: 'timestamp',sortable: true,width: 100}
+			,{header: _('ms.timestamp'),dataIndex: 'timestamp',sortable: true,width: 70}
+			,{header: _('ms.comment'),dataIndex: 'comment',hidden: true}
 		]
 	});
 	miniShop.grid.Log.superclass.constructor.call(this,config);
@@ -337,9 +333,8 @@ miniShop.grid.Goods = function(config) {
 	
 	this.exp = new Ext.grid.RowExpander({
 		expandOnDblClick: false
-		,tpl : new Ext.Template(
-			'<p class="desc">{data}</p>'
-		)
+		,tpl : new Ext.Template('<p class="desc">{data}</p>')
+		,renderer : function(v, p, record){return record.data.data != '' && record.data.data != '[]' ? '<div class="x-grid3-row-expander">&#160;</div>' : '&#160;';}
 	});
 	
 	Ext.applyIf(config,{

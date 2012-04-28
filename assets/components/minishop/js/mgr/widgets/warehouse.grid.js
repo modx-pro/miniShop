@@ -3,22 +3,18 @@ miniShop.grid.Warehouses = function(config) {
 
 	this.exp = new Ext.grid.RowExpander({
 		expandOnDblClick: false
-		,tpl : new Ext.Template(
-			'<p class="desc">{description}</p>'
-		)
+		,tpl : new Ext.Template('<p class="desc">{description}</p>')
+		,renderer : function(v, p, record){return record.data.description != '' ? '<div class="x-grid3-row-expander">&#160;</div>' : '&#160;';}
 	});
 
 	Ext.applyIf(config,{
 		id: 'minishop-grid-warehouses'
 		,url: miniShop.config.connector_url
-		,baseParams: {
-			action: 'mgr/warehouse/getlist'
-		}
+		,baseParams: {action: 'mgr/warehouse/getlist'}
 		,plugins: this.exp
 		,autoHeight: true
 		,paging: true
 		,remoteSort: true
-		,clicksToEdit: 'auto'
 		,fields: ['id','name','currency','address','phone','email','description','permission']
 		,columns: [this.exp, 
 			{header: _('id'),dataIndex: 'id',sortable: true,width: 35}
@@ -393,9 +389,8 @@ miniShop.grid.WarehousePayments = function(config) {
 
 	this.exp = new Ext.grid.RowExpander({
 		expandOnDblClick: false
-		,tpl : new Ext.Template(
-			'<p class="desc">{description}</p>'
-		)
+		,tpl : new Ext.Template('<p class="desc">{description}</p>')
+		,renderer : function(v, p, record){return record.data.description != '' ? '<div class="x-grid3-row-expander">&#160;</div>' : '&#160;';}
 	});
 
 	Ext.applyIf(config,{
