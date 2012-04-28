@@ -183,7 +183,7 @@ Ext.extend(miniShop.grid.Orders,MODx.grid.Grid,{
 Ext.reg('minishop-grid-orders',miniShop.grid.Orders);
 
 
-// Всплывающее окно заказа со свойствами
+// Popup window with order properties
 miniShop.window.EditOrder = function(config) {
 	config = config || {};
 	this.ident = config.ident || 'qur'+Ext.id();
@@ -241,7 +241,7 @@ miniShop.window.EditOrder = function(config) {
 						,oid: oid
 						,baseParams: {action: 'mgr/orderedgoods/getlist',oid: oid}
 					}]
-				// Третий таб
+				// Third tab
 				},{
 					id: this.ident+'-address'
 					,title: _('ms.address')
@@ -261,7 +261,7 @@ miniShop.window.EditOrder = function(config) {
 						,{xtype: 'textfield',name: 'addr_room',fieldLabel: _('ms.room'),width: 100}
 						,{xtype: 'textarea',name: 'addr_comment',id: this.ident+'-addrcomment',fieldLabel: _('ms.comment'),anchor: '90%',autoHeight: false,height: 50}
 					]
-				// Четвертый таб
+				// Fourth tab
 				},{
 					id: this.ident+'-orderhistory'
 					,title: _('ms.orderhistory')
@@ -300,7 +300,7 @@ Ext.extend(miniShop.window.EditOrder,MODx.Window);
 Ext.reg('minishop-window-editorder',miniShop.window.EditOrder);
 
 
-// История изменения статусов заказов
+// History of changing the order 
 miniShop.grid.Log = function(config) {
 	config = config || {};
 	Ext.applyIf(config,{
@@ -331,7 +331,7 @@ Ext.reg('minishop-grid-log',miniShop.grid.Log);
 
 
 
-// Таблица с заказанными товарами
+// Table with ordered goods
 miniShop.grid.Goods = function(config) {
 	config = config || {};
 	
@@ -345,11 +345,6 @@ miniShop.grid.Goods = function(config) {
 	Ext.applyIf(config,{
 		id: this.ident+'-grid-goods'
 		,url: miniShop.config.connector_url
-		//,baseParams: {action: 'mgr/orderedgoods/getlist'}
-		//,autosave: true
-		//,preventSaveRefresh: false
-		//,clicksToEdit: 'auto'
-		//,save_action: 'mgr/orderedgoods/updatefromgrid'
 		,fields: ['id','gid','oid','name','num','price','weight','sum','data']
 		,pageSize: 10
 		,autoHeight: true

@@ -8,7 +8,7 @@ if (!isset($modx->miniShop) || !is_object($modx->miniShop)) {
 	if (!($modx->miniShop instanceof miniShop)) return '';
 }
 
-// Плейсхолдеры заказа
+// Placeholders of order
 if ($order = $modx->getObject('ModOrders', $oid)) {
 	$tmp = $order->toArray();
 	$tmp['delivery_name'] = $order->getDeliveryName();
@@ -16,25 +16,25 @@ if ($order = $modx->getObject('ModOrders', $oid)) {
 	$tmp['delivery_price'] = $delivery_price = $order->getDeliveryPrice();
 	$modx->setPlaceholders($tmp,'order.');
 }
-// Плейсхолдеры адреса
+// Placeholders of address
 if ($address = $modx->getObject('ModAddress', $order->get('address'))) {
 	$tmp = $address->toArray();
 	$modx->setPlaceholders($tmp,'addr.');
 }
 
-// Плейсхолдеры склада
+// Placeholders of warehouse
 if ($warehouse = $modx->getObject('ModWarehouse', $order->get('wid'))) {
 	$tmp = $warehouse->toArray();
 	$modx->setPlaceholders($tmp,'wh.');
 }
 
-// Плейсхолдеры юзера
+// Placeholders of user
 if ($user = $modx->getObject('modUserProfile', $order->get('uid'))) {
 	$tmp = $user->toArray();
 	$modx->setPlaceholders($tmp,'user.');
 }
 
-// Таблица заказов
+// Table with ordered goods
 $arr = array();
 $arr['rows'] = '';
 $arr['count'] = $arr['total'] = 0;

@@ -14,8 +14,9 @@ miniShop.grid.Orders = function(config) {
 			{header: _('id'),dataIndex: 'id',hidden: true,sortable: true,width: 50}
 			,{header: _('ms.fullname'),dataIndex: 'fullname',hidden: true,width: 100}
 			,{header: _('ms.num'),dataIndex: 'num',sortable: true,width: 50}
-			,{header: _('ms.warehouse'),dataIndex: 'warehousename',hidden: true,width: 50}
+			,{header: _('ms.warehouse'),dataIndex: 'warehouse_name',hidden: true,width: 50}
 			,{header: _('ms.sum'),dataIndex: 'sum',sortable: true,width: 50}
+			,{header: _('ms.weight'),dataIndex: 'weight',sortable: true,width: 50}
 			,{header: _('ms.created'),dataIndex: 'created',sortable: true,width: 100}
 			,{header: _('ms.status'),dataIndex: 'status',renderer: this.renderStatus,sortable: true,width: 80}
 			,{header: _('ms.updated'),dataIndex: 'updated',sortable: true,width: 100}
@@ -119,7 +120,7 @@ Ext.extend(miniShop.grid.Orders,MODx.grid.Grid,{
 Ext.reg('minishop-grid-orders',miniShop.grid.Orders);
 
 
-
+// Popup window with order properties
 miniShop.window.ViewOrder = function(config) {
 	config = config || {};
 	this.ident = config.ident || 'qur'+Ext.id();
@@ -144,20 +145,23 @@ miniShop.window.ViewOrder = function(config) {
 				,bodyStyle: { background: 'transparent', padding: '10px' }
 				,autoHeight: true
 				,labelWidth: 200
-				// Первый таб
+				// First tab
 				,items: [{
 					border: false
 					,layout: 'form'
 					,items: [
 						{xtype: 'displayfield',name: 'num',id: this.ident+'-num',fieldLabel: _('ms.num')}
+						,{xtype: 'displayfield',name: 'sum',id: this.ident+'-sum',fieldLabel: _('ms.sum')}
+						,{xtype: 'displayfield',name: 'weight',id: this.ident+'-weight',fieldLabel: _('ms.weight')}
 						,{xtype: 'displayfield',name: 'created',id: this.ident+'-created',fieldLabel: _('ms.created')}
 						,{xtype: 'displayfield',name: 'fullname',id: this.ident+'-fullname',fieldLabel: _('ms.fullname')}
 						,{xtype: 'displayfield',name: 'email',id: this.ident+'-email',fieldLabel: _('ms.email')}
 						,{xtype: 'displayfield',name: 'delivery_name',id: this.ident+'-delivery',fieldLabel: _('ms.delivery')}
-						,{xtype: 'displayfield',name: 'statusname',id: this.ident+'-statusname',fieldLabel: _('ms.statusname')}
+						,{xtype: 'displayfield',name: 'payment_name',id: this.ident+'-payment',fieldLabel: _('ms.payment')}
+						,{xtype: 'displayfield',name: 'status_name',id: this.ident+'-statusname',fieldLabel: _('ms.statusname')}
 					]
 				}]
-				// Второй таб
+				// Second tab
 				},{
 					id: this.ident+'-goods'
 					,title: _('ms.goods')
@@ -166,7 +170,7 @@ miniShop.window.ViewOrder = function(config) {
 						xtype: 'minishop-grid-goods'
 						,baseParams: {action: 'orderedgoods/getlist',oid: oid}
 					}]
-				// Третий таб
+				// Third tab
 				},{
 					id: this.ident+'-address'
 					,title: _('ms.address')
@@ -191,7 +195,7 @@ miniShop.window.ViewOrder = function(config) {
 						,{xtype: 'displayfield',name: 'addr_room',fieldLabel: _('ms.room'),width: 100}
 						,{xtype: 'displayfield',name: 'addr_comment',id: this.ident+'-addrcomment',fieldLabel: _('ms.comment'),anchor: '70%',height: 50}
 					]
-			// Четвертый таб
+			// Fourth tab
 				},{
 					id: this.ident+'-orderhistory'
 					,title: _('ms.orderhistory')
@@ -221,7 +225,7 @@ Ext.extend(miniShop.window.ViewOrder,MODx.Window);
 Ext.reg('minishop-window-vieworder',miniShop.window.ViewOrder);
 
 
-// Таблица с заказанными товарами
+// Table with ordered goods
 miniShop.grid.Goods = function(config) {
 	config = config || {};
 	
@@ -257,7 +261,7 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid);
 Ext.reg('minishop-grid-goods',miniShop.grid.Goods);
 
 
-// История изменения статусов заказов
+// History of changing the order 
 miniShop.grid.History = function(config) {
 	config = config || {};
 	Ext.applyIf(config,{

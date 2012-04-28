@@ -82,6 +82,7 @@ class ModOrders extends xPDOSimpleObject {
 
 			return $sum + $add_price;
 		}
+		else {return 0;}
 	}
 
 	function unReserve() {
