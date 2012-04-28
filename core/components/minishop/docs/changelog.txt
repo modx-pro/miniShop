@@ -1,5 +1,15 @@
 Changelog for miniShop.
 
+1.5.2 rc (28.04.2012)
+=============
+- Добавлен вызов событий для запуска плагинов при изменении товаров из компонента.
+- Добавлен настройки ресурса в окне редактирования товара (deleted, richtext,clearcache)
+- В таблице товаров теперь отображается их состояние, по типу дерева ресурсов (удаленый товар красным цветом, неопубликованный - серым и т.п.)
+-----
+- Added invoke events to launch the plugins when you changing products in the component.
+- Added a more options for resources in the editing window of the goods (deleted, richtext, clearcache)
+- The goods grid now displays status of products, as in resources tree (deleted item is red color, unpublished - gray, etc.)
+
 1.5.1 rc (24.04.2012)
 =============
 - [#35] Модифицирован браузер MODx для возможности выбора директорий. miniShop правильно понимает источники файлов.
