@@ -22,7 +22,7 @@ miniShop.grid.Orders = function(config) {
 		,remoteSort: true
 		,clicksToEdit: 'auto'
 		//,preventSaveRefresh: false
-		,fields: ['id','uid','fullname','num','wid','warehousename','status','statusname','sum','created','updated','comment']
+		,fields: ['id','uid','fullname','num','wid','warehousename','status','statusname','sum','weight','created','updated','comment']
 		,columns: [this.exp
 			,{header: _('id'),dataIndex: 'id',hidden: true,sortable: true,width: 50}
 			,{header: _('ms.uid'),dataIndex: 'uid',hidden: true,width: 50}
@@ -32,6 +32,7 @@ miniShop.grid.Orders = function(config) {
 			,{header: _('ms.warehouse'),dataIndex: 'warehousename',hidden: true,width: 50}
 			,{header: _('ms.status'),dataIndex: 'status',renderer: this.renderStatus,sortable: true,width: 50}
 			,{header: _('ms.sum'),dataIndex: 'sum',sortable: true,width: 50}
+			,{header: _('ms.weight'),dataIndex: 'weight',sortable: true,width: 50}
 			,{header: _('ms.created'),dataIndex: 'created',sortable: true,width: 100}
 			,{header: _('ms.updated'),dataIndex: 'updated',sortable: true,width: 100}
 			,{header: _('ms.comment'),dataIndex: 'comment',hidden: true}
@@ -212,13 +213,15 @@ miniShop.window.EditOrder = function(config) {
 			,items: [{
 				title: _('ms.order')
 				,layout: 'form'
-				// Первый таб
+				// First tab
 				,items: [{
 					border: false
 					,layout: 'form'
 					,items: [
 						{xtype: 'hidden',name: 'id'}
 						,{xtype: 'displayfield',name: 'num',id: this.ident+'-num',fieldLabel: _('ms.num')}
+						,{xtype: 'displayfield',name: 'sum',id: this.ident+'-sum',fieldLabel: _('ms.sum')}
+						,{xtype: 'displayfield',name: 'weight',id: this.ident+'-weight',fieldLabel: _('ms.weight')}
 						,{xtype: 'displayfield',name: 'created',id: this.ident+'-created',fieldLabel: _('ms.created')}
 						,{xtype: 'displayfield',name: 'fullname',id: this.ident+'-fullname',fieldLabel: _('ms.fullname')}
 						,{xtype: 'displayfield',name: 'email',id: this.ident+'-email',fieldLabel: _('ms.email')}
@@ -226,12 +229,10 @@ miniShop.window.EditOrder = function(config) {
 						,{xtype: 'minishop-filter-delivery',name: 'delivery',hiddenName: 'delivery',id: this.ident+'-delivery',fieldLabel: _('ms.delivery'),anchor: '70%'}
 						,{xtype: 'minishop-filter-payment',name: 'payment',hiddenName: 'payment',id: this.ident+'-payment',fieldLabel: _('ms.payment'),anchor: '70%'}
 						,{xtype: 'minishop-filter-status',name: 'status',hiddenName: 'status',id: this.ident+'-status',fieldLabel: _('ms.status'),anchor: '70%'}
-						//,{xtype: 'displayfield',name: 'delivery_name',id: this.ident+'-delivery',fieldLabel: _('ms.delivery')}
-						//,{xtype: 'displayfield',name: 'payment_name',id: this.ident+'-payment',fieldLabel: _('ms.payment')}
 						,{xtype: 'textarea',name: 'comment',id: this.ident+'-comment',fieldLabel: _('ms.comment'),anchor: '90%',autoHeight: false,height: 50}
 					]
 				}]
-				// Второй таб
+				// Second tab
 				},{
 					id: this.ident+'-goods'
 					,title: _('ms.goods')

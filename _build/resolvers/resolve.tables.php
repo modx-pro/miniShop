@@ -112,17 +112,22 @@ if ($object->xpdo) {
 			$sql = "ALTER TABLE {$ogtable} ADD `data` TEXT NOT NULL";
 			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
 			$sql = "ALTER TABLE {$gtable} ADD `weight` FLOAT(10,3) NOT NULL DEFAULT '0.000' AFTER `price`;
-					ALTER TABLE {$ogtable} ADD `weight` FLOAT(10,3) NOT NULL DEFAULT '0.000' AFTER `price`;";
+				ALTER TABLE {$ogtable} ADD `weight` FLOAT(10,3) NOT NULL DEFAULT '0.000' AFTER `price`;";
 			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
 			$sql = "ALTER TABLE {$dtable} ADD `payments` VARCHAR(255) NOT NULL DEFAULT '[]', ADD INDEX (`payments`)";
 			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
 			$sql = "ALTER TABLE {$otable} ADD `payment` INT NOT NULL DEFAULT '0' AFTER `delivery`";
 			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
 			$sql = "ALTER TABLE {$stable} CHANGE `body2user` `body2user` INT(10) NULL DEFAULT '0';
-					ALTER TABLE {$stable} CHANGE `body2manager` `body2manager` INT(10) NULL DEFAULT '0';";
+				ALTER TABLE {$stable} CHANGE `body2manager` `body2manager` INT(10) NULL DEFAULT '0';";
 			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
 			$sql = "ALTER TABLE {$gtable} CHANGE `weight` `weight` FLOAT(10,3) NOT NULL DEFAULT '0.000';
 				ALTER TABLE {$ogtable} CHANGE `weight` `weight` FLOAT(10,3) NOT NULL DEFAULT '0.000';";
+			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
+			$sql = "ALTER TABLE {$dtable} CHANGE `price` `add_price` FLOAT(10, 2) NOT NULL DEFAULT '0.00';
+				ALTER TABLE {$dtable} ADD `price` FLOAT(10, 2) NOT NULL DEFAULT '0.00' AFTER `description`;";
+			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
+			$sql = "ALTER TABLE {$otable} ADD `weight` FLOAT(10, 3) NOT NULL DEFAULT '0.000' AFTER `sum`";
 			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
 			break;
 	}

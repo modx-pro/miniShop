@@ -31,6 +31,7 @@
 		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
 		<field key="description" dbtype="text" phptype="string" null="false" />
 		<field key="price" dbtype="float" precision="10,2" phptype="float" null="false" default="0.00" />
+		<field key="add_price" dbtype="float" precision="10,2" phptype="float" null="false" default="0.00" />
 		<field key="enabled" dbtype="tinyint" precision="1" phptype="integer" null="false" default="1" />
 		<field key="payments" dbtype="varchar" precision="255" phptype="string" null="false" default="[]" index="index" />
 
@@ -110,6 +111,7 @@
 		<field key="wid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
 		<field key="status" dbtype="tinyint" precision="2" phptype="integer" null="false" default="1" index="index" />
 		<field key="sum" dbtype="float" precision="10,2" phptype="float" null="false" />
+		<field key="weight" dbtype="float" precision="10,3" phptype="float" null="false" default="0.000" />
 		<field key="created" dbtype="timestamp" phptype="timestamp" null="false" default="0000-00-00 00:00:00" />
 		<field key="updated" dbtype="timestamp" phptype="timestamp" null="false" default="0000-00-00 00:00:00"  extra="on update current_timestamp" />
 		<field key="comment" dbtype="text" phptype="string" null="false" />

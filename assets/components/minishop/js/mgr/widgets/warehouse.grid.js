@@ -230,19 +230,18 @@ miniShop.grid.WarehouseDelivery = function(config) {
 		}
 		,autosave: true
 		,save_action: 'mgr/delivery/updatefromgrid'
-		,fields: ['id','wid','name','description','price','enabled']
+		,fields: ['id','wid','name','description','price','add_price','enabled']
 		,paging: true
 		,plugins: this.exp
 		,remoteSort: true
 		,columns: [this.exp, 
 			{header: _('id'),dataIndex: 'id',hidden: true}
 			,{header: _('wid'),dataIndex: 'wid',hidden: true}
-			,{header: _('ms.name'),dataIndex: 'name',width: 200,sortable: true}
-			,{header: _('ms.description'),dataIndex: 'description',hidden: true}
-			//,{header: _('ms.price'),dataIndex: 'price',width: 50,sortable: true,editor: { xtype: 'numberfield' }}
-			,{header: _('ms.price'),dataIndex: 'price',width: 75,sortable: true}
-			//,{header: _('ms.enabled'),dataIndex: 'enabled',width: 50,sortable: true,editor: { xtype: 'combo-boolean', renderer: 'boolean' }}
-			,{header: _('ms.enabled'),dataIndex: 'enabled',width: 75, sortable: true, renderer: this.renderBoolean}
+			,{header: _('ms.name'),dataIndex: 'name',sortable: true,width: 100}
+			,{header: _('ms.description'),dataIndex: 'description',hidden: true, width: 100}
+			,{header: _('ms.delivery.price'),dataIndex: 'price',sortable: true}
+			,{header: _('ms.delivery.add_price'),dataIndex: 'add_price',sortable: true}
+			,{header: _('ms.enabled'),dataIndex: 'enabled',sortable: true, renderer: this.renderBoolean, width: 55}
 		]
 		,tbar: [{
 			text: _('create')
@@ -362,13 +361,13 @@ miniShop.window.CreateDelivery = function(config) {
 				,layout: 'form'
 				,style: 'padding: 0 5px;'
 				,bodyStyle: 'padding-top: 10px;'
-				,labelWidth: 110
-				// Поля основных параметров доставки
+				,labelWidth: 170
 				,items: [
 					{xtype: 'hidden',name: 'id',id: 'minishop-'+this.ident+'-id', value: id}
 					,{xtype: 'hidden',name: 'wid',id: 'minishop-'+this.ident+'-wid',value: wid}
 					,{xtype: 'textfield',fieldLabel: _('ms.name'),name: 'name',id: 'minishop-'+this.ident+'-name',width: 250,allowBlank: false}
-					,{xtype: 'numberfield',fieldLabel: _('ms.price'),name: 'price',id: 'minishop-'+this.ident+'-price',width: 100}
+					,{xtype: 'numberfield',fieldLabel: _('ms.delivery.price'),name: 'price',id: 'minishop-'+this.ident+'-price',width: 100}
+					,{xtype: 'numberfield',fieldLabel: _('ms.delivery.add_price'),name: 'add_price',id: 'minishop-'+this.ident+'-add_price',width: 100}
 					,{xtype: 'textarea',fieldLabel: _('ms.description'),name: 'description',id: 'minishop-'+this.ident+'-description',width: 250,height: 50}
 					,{xtype: 'combo-boolean',fieldLabel: _('ms.enabled'),name: 'enabled',id: 'minishop-'+this.ident+'-enabled', hiddenName: 'enabled', width: 75}
 				]

@@ -62,7 +62,7 @@ $_lang['ms.iid'] = 'ItemID';
 $_lang['ms.type'] = 'Type';
 $_lang['ms.color'] = 'Color';
 $_lang['ms.content'] = 'Content';
-$_lang['ms.enabled'] = 'Enable';
+$_lang['ms.enabled'] = 'Enabled';
 $_lang['ms.operation'] = 'Operation';
 $_lang['ms.properties'] = 'Properties';
 $_lang['ms.permission'] = 'Permission';
@@ -105,6 +105,8 @@ $_lang['ms.delivery.err_save'] = 'Failed to save the delivery.';
 $_lang['ms.delivery.err_remove'] = 'Failed to remove the delivery.';
 $_lang['ms.delivery.err_ae'] = 'Delivery with the same name already exists.';
 $_lang['ms.delivery.err_nf'] = 'Delivery not found.';
+$_lang['ms.delivery.price'] = 'Price per unit weight';
+$_lang['ms.delivery.add_price'] = 'Additional price';
 
 $_lang['ms.status'] = 'Status';
 $_lang['ms.statuses'] = 'Statuses';

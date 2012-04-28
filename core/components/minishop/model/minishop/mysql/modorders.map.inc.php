@@ -11,6 +11,7 @@ $xpdo_meta_map['ModOrders']= array (
     'wid' => NULL,
     'status' => 1,
     'sum' => NULL,
+    'weight' => 0,
     'created' => '0000-00-00 00:00:00',
     'updated' => '0000-00-00 00:00:00',
     'comment' => NULL,
@@ -58,6 +59,14 @@ $xpdo_meta_map['ModOrders']= array (
       'precision' => '10,2',
       'phptype' => 'float',
       'null' => false,
+    ),
+    'weight' => 
+    array (
+      'dbtype' => 'float',
+      'precision' => '10,3',
+      'phptype' => 'float',
+      'null' => false,
+      'default' => 0,
     ),
     'created' => 
     array (

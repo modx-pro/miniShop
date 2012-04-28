@@ -653,7 +653,7 @@ class miniShop {
 		$cart = $_SESSION['minishop']['goods'];
 		$enable_remains = $this->modx->getOption('minishop.enable_remains');
 
-		$cart_sum = 0;
+		$cart_sum = $cart_weight = 0;
 		$oid = $order->get('id');
 		foreach ($cart as $v) {
 			$res = $this->modx->newObject('ModOrderedGoods');
@@ -666,6 +666,7 @@ class miniShop {
 			$res->set('data', json_encode($v['data']));
 			$res->save();
 			$cart_sum += $v['price'] * $v['num'];
+			$cart_weight += $v['weight'] * $v['num'];
 			// If the remains are enabled - reserving goods
 			if ($enable_remains) {
 				if ($tmp = $this->modx->getObject('ModGoods', array('gid' => $v['id'], 'wid' => $_SESSION['minishop']['warehouse']))) {
@@ -674,6 +675,7 @@ class miniShop {
 			}
 		}
 		$order->set('sum', $cart_sum);
+		$order->set('weight', $cart_weight);
 		$order->save();
 
 		// Sets status "new" to the order and sends email notices

@@ -62,7 +62,7 @@ $_lang['ms.iid'] = 'ItemID';
 $_lang['ms.type'] = 'Тип';
 $_lang['ms.color'] = 'Цвет';
 $_lang['ms.content'] = 'Описание';
-$_lang['ms.enabled'] = 'Вкл.';
+$_lang['ms.enabled'] = 'Включено';
 $_lang['ms.operation'] = 'Операция';
 $_lang['ms.properties'] = 'Свойства';
 $_lang['ms.permission'] = 'Право доступа';
@@ -106,6 +106,8 @@ $_lang['ms.delivery.err_save'] = 'Ошибка при сохранении до�
 $_lang['ms.delivery.err_remove'] = 'Ошибка удаления доставки.';
 $_lang['ms.delivery.err_ae'] = 'Доставка с таким названием уже существует.';
 $_lang['ms.delivery.err_nf'] = 'Доставка не найдена.';
+$_lang['ms.delivery.price'] = 'Цена за единицу веса';
+$_lang['ms.delivery.add_price'] = 'Добавочная цена';
 
 $_lang['ms.status'] = 'Статус';
 $_lang['ms.statuses'] = 'Статусы';

@@ -47,6 +47,17 @@ class ModOrders extends xPDOSimpleObject {
 			$this->save();
 		}
 	}
+
+	function updateWeight() {
+		if ($res = $this->xpdo->getCollection('ModOrderedGoods', array('oid' => $this->get('id')))) {
+			$weight = 0;
+			foreach ($res as $v) {
+				$weight += $v->get('weight');
+			}
+			$this->set('weight', $weight);
+			$this->save();
+		}
+	}
 	
 	function getDeliveryName() {
 		if ($res = $this->xpdo->getObject('ModDelivery', $this->get('delivery'))) {
@@ -61,8 +72,15 @@ class ModOrders extends xPDOSimpleObject {
 	}
 
 	function getDeliveryPrice() {
+		$weight = $this->get('weight');
+
 		if ($res = $this->xpdo->getObject('ModDelivery', $this->get('delivery'))) {
-			return $res->get('price');
+			$price = $res->get('price');
+			$add_price = $res->get('add_price');
+
+			$sum = round($weight * $price, 2);
+
+			return $sum + $add_price;
 		}
 	}
 

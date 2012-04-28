@@ -10,6 +10,7 @@ $xpdo_meta_map['ModDelivery']= array (
     'name' => NULL,
     'description' => NULL,
     'price' => 0,
+    'add_price' => 0,
     'enabled' => 1,
     'payments' => '[]',
   ),
@@ -37,6 +38,14 @@ $xpdo_meta_map['ModDelivery']= array (
       'null' => false,
     ),
     'price' => 
+    array (
+      'dbtype' => 'float',
+      'precision' => '10,2',
+      'phptype' => 'float',
+      'null' => false,
+      'default' => 0,
+    ),
+    'add_price' => 
     array (
       'dbtype' => 'float',
       'precision' => '10,2',
