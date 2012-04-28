@@ -259,9 +259,15 @@ miniShop.window.EditOrder = function(config) {
 					id: this.ident+'-orderhistory'
 					,title: _('ms.orderhistory')
 					,items: [{
-						xtype: 'minishop-grid-log'
+						id: this.ident+'-orderhistory-grid'
+						,xtype: 'minishop-grid-log'
 						,baseParams: {action: 'mgr/log/getlist',oid: oid}
 					}]
+					,listeners: {
+						activate : {fn: function(){
+							Ext.getCmp(this.ident+'-orderhistory-grid').refresh();
+						}, scope: this}
+					}
 				}
 			]
 		}]

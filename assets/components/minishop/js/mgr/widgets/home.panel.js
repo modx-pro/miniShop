@@ -32,7 +32,7 @@ miniShop.panel.Home = function(config) {
 				}]
 				,listeners: {
 					activate : function(panel){
-						//Ext.getCmp('minishop-grid-warehouses').refresh();
+						Ext.getCmp('minishop-grid-orders').refresh();
 					}
 				}
 			},{
