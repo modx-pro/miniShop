@@ -1,14 +1,18 @@
 Changelog for miniShop.
 
-1.5.2 rc (28.04.2012)
+1.6.0 rc (28.04.2012)
 =============
-- Добавлен вызов событий для запуска плагинов при изменении товаров из компонента.
-- Добавлен настройки ресурса в окне редактирования товара (deleted, richtext,clearcache)
+- Добавлен вызов событий для запуска плагинов при изменении товаров из компонента. mSearch теперь будет индексировать изменения товаров.
+- Добавлен настройки ресурса в окне редактирования товара (deleted, richtext,cacheable, searchable и clearcache)
 - В таблице товаров теперь отображается их состояние, по типу дерева ресурсов (удаленый товар красным цветом, неопубликованный - серым и т.п.)
+- Исправлен баг при сохранении в админке заказа с пустым методом оплаты и не пустым методом доставки.
+- Ресурсы-категории товаров больше не обязаны быть контейнерами (теперь не важно значение isfolder).
 -----
-- Added invoke events to launch the plugins when you changing products in the component.
-- Added a more options for resources in the editing window of the goods (deleted, richtext, clearcache)
+- Added invoke events to launch the plugins when you changing products in the component. mSearch will now index goods on changing.
+- Added a more options for resources in the editing window of the goods (deleted, richtext,cacheable, searchable and clearcache)
 - The goods grid now displays status of products, as in resources tree (deleted item is red color, unpublished - gray, etc.)
+- Fixed bug in manager when you save empty payment method and not empty delivery method.
+- Resources-categories of goods are no longer required to be containers (now isfolder is no matter).
 
 1.5.1 rc (24.04.2012)
 =============

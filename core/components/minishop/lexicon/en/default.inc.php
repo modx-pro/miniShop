@@ -141,7 +141,7 @@ $_lang['ms.comment'] = 'Comment';
 $_lang['ms.orders.intro_msg'] = 'Orders management section';
 $_lang['ms.goods.intro_msg'] = 'Goods management section';
 $_lang['ms.warehouses.intro_msg'] = 'Warehouses management section';
-$_lang['ms.paymets.intro_msg'] = 'Payment management section. You must create methods of payments and set their properties, and then link these payments to delivery methods (in section "Warehouses")';
+$_lang['ms.payments.intro_msg'] = 'Payment management section. You must create methods of payments and set their properties, and then link these payments to delivery methods (in section "Warehouses")';
 $_lang['ms.status.intro_msg'] = 'Statuses management section';
 
 $_lang['ms.orders.item_err_save'] = 'Order not found.';
