@@ -231,9 +231,8 @@ miniShop.grid.Goods = function(config) {
 	
 	this.exp = new Ext.grid.RowExpander({
 		expandOnDblClick: false
-		,tpl : new Ext.Template(
-			'<p class="desc">{data}</p>'
-		)
+		,tpl : new Ext.Template('<p class="desc">{data}</p>')
+		,renderer : function(v, p, record){return record.data.data != '' && record.data.data != '[]' ? '<div class="x-grid3-row-expander">&#160;</div>' : '&#160;';}
 	});
 	
 	Ext.applyIf(config,{
