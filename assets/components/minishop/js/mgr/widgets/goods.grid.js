@@ -287,8 +287,8 @@ miniShop.window.createGoods = function(config) {
 						,items: [
 							{xtype: 'textfield',name: 'pagetitle',id: 'modx-'+this.ident+'-pagetitle',fieldLabel: _('pagetitle'),anchor: '100%',allowBlank: false}
 							,{xtype: 'textfield',name: 'longtitle',id: 'modx-'+this.ident+'-longtitle',fieldLabel: _('long_title'),anchor: '100%'}
-							,{xtype: 'textarea',name: 'description',id: 'modx-'+this.ident+'-description',fieldLabel: _('description'),anchor: '100%',grow: false,height: 50}
-							,{xtype: 'textarea',name: 'introtext',id: 'modx-'+this.ident+'-introtext',fieldLabel: _('introtext'),anchor: '100%',height: 50}
+							,{xtype: 'textarea',name: 'description',id: 'modx-'+this.ident+'-description',fieldLabel: _('description'),anchor: '100%',grow: false,height: 90}
+							,{xtype: 'textarea',name: 'introtext',id: 'modx-'+this.ident+'-introtext',fieldLabel: _('introtext'),anchor: '100%',height: 90}
 						]
 					},{
 						columnWidth: .4
@@ -300,7 +300,10 @@ miniShop.window.createGoods = function(config) {
 							,{xtype: 'textfield',name: 'alias',id: 'modx-'+this.ident+'-alias',fieldLabel: _('alias'),anchor: '100%'}
 							,{xtype: 'textfield',name: 'menutitle',id: 'modx-'+this.ident+'-menutitle',fieldLabel: _('resource_menutitle'),anchor: '100%'}
 							,{xtype: 'xcheckbox',name: 'published',id: 'modx-'+this.ident+'-published',boxLabel: _('resource_published'),description: _('resource_published_help'),inputValue: 1,checked: MODx.config.publish_default == '1' && config.disable_categories ? 1 : 0}
-							,{xtype: 'xcheckbox',boxLabel: _('resource_hide_from_menus'),description: _('resource_hide_from_menus_help'),name: 'hidemenu',id: 'modx-'+this.ident+'-hidemenu',inputValue: 1,checked: MODx.config.hidemenu_default == '1' && config.disable_categories ? 1 : 0}
+							,{xtype: 'xcheckbox',name: 'hidemenu',id: 'modx-'+this.ident+'-hidemenu',boxLabel: _('resource_hide_from_menus'),description: _('resource_hide_from_menus_help'),inputValue: 1,checked: MODx.config.hidemenu_default == '1' && config.disable_categories ? 1 : 0}
+							,{xtype: 'xcheckbox',name: 'searchable',id: 'modx-'+this.ident+'-searchable',boxLabel: _('resource_searchable'),description: _('resource_searchable_help'),inputValue: 1,checked: MODx.config.search_default == '1' ? 1 : 0}
+							,{xtype: 'xcheckbox',name: 'cacheable',id: 'modx-'+this.ident+'-cacheable',boxLabel: _('resource_cacheable'),description: _('resource_cacheable_help'),inputValue: 1,checked: MODx.config.cache_default == '1' ? 1 : 0}
+							,{xtype: 'xcheckbox',name: 'clearCache',id: 'modx-'+this.ident+'-clearcache',boxLabel: _('clear_cache_on_save'),description: _('clear_cache_on_save_msg'),inputValue: 1,checked: true}
 						]
 					}]
 				},{xtype: 'textarea',name: 'content',fieldLabel: _('content'),anchor: '100%',height: 100}

@@ -45,6 +45,8 @@ if ($response->isError()) {
 }
 
 $id = $response->response['object']['id'];
+$_POST['id'] = $id;
+$modx->invokeEvent('OnDocFormSave', $_POST);
 
 if ($modx->getCount('modResource', $id) > 0) {
 	$wids = array();

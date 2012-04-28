@@ -45,6 +45,7 @@ $wid = $modx->getOption('wid', $_REQUEST, 0);
 if ($modx->getCount('modResource', $id) > 0) {
 	// Обновляем ресурс
 	$response = $modx->runProcessor('resource/update', $_POST);
+	$modx->invokeEvent('OnDocFormSave', $_POST);
 	if ($response->isError()) {
 		return $modx->error->failure($response->getMessage());
 	}

@@ -38,6 +38,8 @@ if ($res->save() == false) {
     return $modx->error->failure($modx->lexicon('ms.goods.err_delete'));
 }
 else {
+	$_POST = $res->toArray();
+	$modx->invokeEvent('OnDocFormDelete', $_POST);
 	if ($res2 = $modx->getObject('ModGoods', array('gid' => $id))) {
 		$res2->remove();
 	}
