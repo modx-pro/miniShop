@@ -25,6 +25,14 @@
  * @package minishop
  */
 class miniShop {
+
+
+	/*
+	 * Construction of class
+	 *
+	 * @param class modX
+	 * @param array $config
+	 * */
     function __construct(modX &$modx,array $config = array()) {
         $this->modx =& $modx;
 
@@ -56,13 +64,13 @@ class miniShop {
         $this->modx->addPackage('minishop',$this->config['modelPath'], $this->modx->config['table_prefix'].'ms_');
         $this->modx->lexicon->load('minishop:default');
 
-		// Вывод ошибок при отладке
+		// Show errors if debug enabled
 		if (isset($this->config['debug']) && $this->config['debug'] != 0) {
 			ini_set('display_errors', 1); 
 			error_reporting(E_ALL ^ E_NOTICE);
 		}
 
-		// Определение дефолтных переменных сессии для работы магазина
+		// Default session variables for miniShop
 		if (!isset($_SESSION['minishop']['warehouse'])) {$_SESSION['minishop']['warehouse'] = $this->getDefaultWarehouse();}
 		if (!isset($_SESSION['minishop']['category'])) {$_SESSION['minishop']['category'] = 0;}
 		if (!isset($_SESSION['minishop']['status'])) {$_SESSION['minishop']['status'] = 0;}
@@ -89,7 +97,13 @@ class miniShop {
 	}
 
  
-	// Распечатка массива
+	/*
+	 * Print human-readable array.
+	 * Used in the development.
+	 *
+	 * @param array $arr
+	 * @ignore
+	 * */
 	function print_arr($arr = array()) {
 		echo '<pre>';
 		print_r($arr);
@@ -97,7 +111,12 @@ class miniShop {
 	}
 
 
-	// Создание плейсхолдеров из массива значений
+	/*
+	 * Receive indexed array with values and returns 2 arrays with placeholders and values
+	 *
+	 * @param array $arr
+	 * @returns array $tmp
+	 * */
 	function makePlaceholders($arr = array()) {
 		$tmp = array();
 		foreach ($arr as $k => $v) {
@@ -108,7 +127,15 @@ class miniShop {
 	}
 
 
-	// Логирование изменений заказов и товаров в БД
+	/*
+	 * Function for logging events in table ModLog
+	 *
+	 * @param string $type			// any type, like warehouse, goods, status etc
+	 * @param int $id				// id of item for this entry
+	 * @param string $operation		// change, create, etc
+	 * @param string $old			// old value
+	 * @param string $new			// new value
+	 * */
 	function Log($type, $id, $operation, $old, $new) {
 		if ($old == $new) {return;}
 		$uid = empty($this->modx->user->id) ? 1 : $this->modx->user->id;
@@ -124,7 +151,12 @@ class miniShop {
 	}
 
 
-	// Массив статусов для рендера в админке и фронтенде
+	/*
+	 * Get array of statuses from ModStatus
+	 * Used for render statuses in manager
+	 *
+	 * @returns array $arr
+	 * */
 	function getStatusesArray() {
 		$arr = array();
 		if ($tmp = $this->modx->getCollection('ModStatus')) {
@@ -136,34 +168,43 @@ class miniShop {
 	}
 
 
-	// Вычисление "склада по-умолчанию"
+	/*
+	 * Function returns id of warehouse for this user
+	 *
+	 * @returns int $id					// id of entry in ModWarehouse
+	 * */
 	function getDefaultWarehouse() {
-		// Есть значение в сессии
+		// If variable exists in $_SESSION - return it
 		if (!empty($_SESSION['minishop']['warehouse'])) {
 			return $_SESSION['minishop']['warehouse'];
 		}
-		//Если нет - вычисляем
+		//If no - calculate
 		$q = $this->modx->newQuery('ModWarehouse');
 		$q->sortby('name', 'ASC');
-		if ($tmp = $this->modx->getCollection('ModWarehouse', $q)) {
-			foreach ($tmp as $v) {
-				
-				$permission = $v->get('permission');
-				if (!empty($permission) && !$this->modx->hasPermission($permission)) {
-					continue;
-				}
-				else {
-					return $v->get('id');
-				}
+		$tmp = $this->modx->getCollection('ModWarehouse', $q);
+		foreach ($tmp as $v) {
+			// Check required permission for this warehouse
+			$permission = $v->get('permission');
+			if (!empty($permission) && !$this->modx->hasPermission($permission)) {
+				continue;
+			}
+			else {
+				return $v->get('id');
 			}
 		}
-		else {
-			return 1;
-		}
+		// if there are no correct warehouses - return 1, because we need not empty value in $_SESSION
+		return 1;
 	}
 
 
-	// Возврат ошибки
+	/*
+	 * Function returns errors array
+	 * Mostly used for ajax requests.
+	 *
+	 * @param string $msg				// key of lexicon entry
+	 * @param array $data				// any additional data for response
+	 * @returns array $data				// id of entry in ModWarehouse
+	 * */
 	function error($msg, $data = array()) {
 		$data['status'] = 'error';
 		$data['message'] = $this->modx->lexicon($msg);
@@ -171,17 +212,28 @@ class miniShop {
 	}
 
 
-	// Возврат успешной операции
+	/*
+	 * Function returns success array
+	 * Mostly used for ajax requests.
+	 *
+	 * @param string $msg				// key of lexicon entry
+	 * @param array $data				// any additional data for response
+	 * @returns array $data				// id of entry in ModWarehouse
+	 * */
 	function success($msg, $data = array()) {
 		$data['status'] = 'success';
 		$data['message'] = $this->modx->lexicon($msg);
 		return $data;
 	}
 
-	// Функция выводит id ресурсов для которых указанная категория - дополнительная
-	function getGoods($x) {
-		return $this->getGoodsByCategories($x);
-	}
+
+	/*
+	 * Selects ids of resources for parents by the links in ModCategory
+	 * It is not an getChildIds variant. It is function for multi-categories feature.
+	 *
+	 * @param ararys $parents				// array of ids of categories
+	 * @returns array $ids					// array of ids matched resources
+	 * */
 	function getGoodsByCategories($parents = array()) {
 		if (empty($parents)) {$parents = array($this->modx->resource->id);}
 		if (!is_array($parents)) {$parents = explode(',', $parents);}
@@ -196,7 +248,11 @@ class miniShop {
 	}
 
 
-	// Вывод списка заказов в личный кабинет
+	/*
+	 * This function prepares and returns chunk for list of customers orders on fronend
+	 *
+	 * @returns string $chunk
+	 * */
 	function getMyOrdersList() {
 		$arr = array(
 			'config' => $this->modx->toJSON(
@@ -214,7 +270,11 @@ class miniShop {
 	}
 
 
-	// Подсчет состояния корзины
+	/*
+	 * Returns array with current cart status
+	 *
+	 * @returns array $arr 					// array with total weight, price, and number of goods
+	 * */
 	function getCartStatus() {
 		$cart = $_SESSION['minishop']['goods'];
 		if (empty($cart)) {$cart = array();}
@@ -232,7 +292,12 @@ class miniShop {
 	}
 
 
-	// Цена товара
+	/*
+	 * Gets price of product
+	 * If it's set snippet in system setting minishop.getprice_snippet - runs it
+	 *
+	 * @returns int $price
+	 * */
 	function getPrice($id) {
 		$snippet = $this->modx->getOption('minishop.getprice_snippet');
 		if (!empty($snippet)) {
@@ -251,7 +316,12 @@ class miniShop {
 	}
 
 
-	// Вес товара
+	/*
+	 * Gets weight of product
+	 * If it's set snippet in system setting minishop.getweight_snippet - runs it
+	 *
+	 * @returns int $weight
+	 * */
 	function getWeight($id) {
 		$snippet = $this->modx->getOption('minishop.getweight_snippet');
 		if (!empty($snippet)) {
@@ -270,7 +340,14 @@ class miniShop {
 	}
 
 
-	// Добавление товара в корзину
+	/*
+	 * Adds product in cart
+	 * 
+	 * @param $id							// id of resource
+	 * @param $num							// quantity
+	 * @param $data							// array with additional data (color, manufacterer, country etc)
+	 * @returns array $cartStatus
+	 * */
 	function addToCart($id, $num = 1, $data = array()) {
 		if (empty($id)) {return $this->error($this->modx->lexicon('ms.addToCart.error'));}
 		$num = intval($num);
@@ -302,7 +379,12 @@ class miniShop {
 	}
 
 
-	// Удаление товара из корзины
+	/*
+	 * Removes product from cart
+	 * 
+	 * @param $key							// key of entry for remove
+	 * @returns array $cartStatus
+	 * */
 	function remFromCart($key) {
 		if (array_key_exists($key, $_SESSION['minishop']['goods'])) {
 			unset($_SESSION['minishop']['goods'][$key]);
@@ -314,16 +396,43 @@ class miniShop {
 	}
 
 
-	// Вывод корзины со всеми выбранными товарами
+	/*
+	 * Changes products quantity in cart
+	 *
+	 * @param $key							// key of entry
+	 * @param $num							// quantity
+	 * @returns array $arr					// success of error array
+	 * */
+	function changeCartCount($key, $num = 0) {
+		if (array_key_exists($key, $_SESSION['minishop']['goods'])) {
+			if ($num <= 0) {
+				unset($_SESSION['minishop']['goods'][$key]);
+			}
+			else {
+				$_SESSION['minishop']['goods'][$key]['num'] = $num;
+			}
+			return $this->success('ms.changeCartCount.success', $this->getCartStatus());
+		}
+		else {
+			return $this->error('ms.changeCartCount.error', $this->getCartStatus());
+		}
+	}
+
+
+	/*
+	 * Prepares and returns rendered cart for frontend
+	 * 
+	 * @returns string $cart				// fully processed cart
+	 * */
 	function getCart() {
 		$cart = $_SESSION['minishop']['goods'];
 
 		if (empty($cart)) {
 			return $this->modx->lexicon('ms.Cart.empty');
 		}
-
+		// load rendered items of cart
 		$pl = $this->renderCart($this->config['tplCartRow']);
-
+		// if user is authenticated - load his profile and set plaseholders to chunk
 		if ($this->modx->user->isAuthenticated()) {
 			$profile = $this->modx->user->getOne('Profile');
 			$this->modx->setPlaceholders(array(
@@ -340,24 +449,12 @@ class miniShop {
 	}
 
 
-	// Изменение товаров в корзине
-	function changeCartCount($id, $val = 0) {
-		if (array_key_exists($id, $_SESSION['minishop']['goods'])) {
-			if ($val <= 0) {
-				unset($_SESSION['minishop']['goods'][$id]);
-			}
-			else {
-				$_SESSION['minishop']['goods'][$id]['num'] = $val;
-			}
-			return $this->success('ms.changeCartCount.success', $this->getCartStatus());
-		}
-		else {
-			return $this->error('ms.changeCartCount.error', $this->getCartStatus());
-		}
-	}
-
-
-	// Обработка строк корзины по указанному шаблону
+	/*
+	 * Renders cart rows, e.g. products
+	 * 
+	 * @param string $tpl				// template for processing
+	 * @returns array $arr				// array with rendered cart rows and cart total vars (weight, price and quantity)
+	 * */
 	function renderCart($tpl) {
 		$arr = array();
 		$arr['rows'] = '';
@@ -371,20 +468,20 @@ class miniShop {
 				$tmp['sum'] = $v['num'] * $v['price'];
 				$tmp['tmp_weight'] = $v['num'] * $v['weight'];
 
-				// ТВ параметры
+				// Template variables
 				$tvs = $res->getMany('TemplateVars');
 				foreach ($tvs as $v2) {
 					$tmp[$v2->get('name')] = $v2->get('value');
 				}
 				
-				// Свойства товара
+				// Main properties of product
 				if ($tmp2 = $this->modx->getObject('ModGoods', array('gid' => $v['id'], 'wid' => $_SESSION['minishop']['warehouse']))) {
 					$tmp3 = $tmp2->toArray(); 
 					unset($tmp3['id']);
 					$tmp = array_merge($tmp, $tmp3);
 				}
 				
-				// Дополнительные свойства выбранного товара
+				// Additional properties of product
 				if (is_array($v['data']) && !empty($v['data'])) {
 					foreach ($v['data'] as $k2 => $v2) {
 						$tmp['data.'.$k2] = $v2;
@@ -401,7 +498,12 @@ class miniShop {
 	}
 
 
-	// Вывод методов доставки текущего склада
+	/*
+	 * Renders methods of delivery of the current warehouse.
+	 * Used for selecting by customer on frontend.
+	 * 
+	 * @returns string $options				// processed html
+	 * */
 	function getDelivery() {
 		$q = $this->modx->newQuery('ModDelivery');
 		$q->where(array('enabled' => 1, 'wid' => $_SESSION['minishop']['warehouse']));
@@ -418,7 +520,12 @@ class miniShop {
 	}
 
 
-	// Вывод способов оплаты в зависимости от текущего метода доставки
+	/*
+	 * Renders methods of payments of the current warehouse and selected method of delivery.
+	 * Used for selecting by customer on frontend.
+	 * 
+	 * @returns string $options				// processed html
+	 * */
 	function getPayments() {
 		$q = $this->modx->newQuery('ModPayment');
 	
@@ -442,14 +549,21 @@ class miniShop {
 	}
 
 
-	// Отправка заказа в БД
+	/*
+	 * Create order
+	 * All necessary parameters are taken from the $_SESSION
+	 * 
+	 * @returns string $chunk				// processed html with success message or error
+	 * */
 	function submitOrder() {
-		// Проверка корзины
+		// Checking cart
 		if (empty($_SESSION['minishop']['goods']) || empty($_SESSION['minishop']['address']['email'])) {
 			return $this->modx->lexicon('ms.Cart.empty');
 		}
 
-		// Проверка авторизации юзера и регистрация, при необходимости
+		// Email is the key of user in miniShop
+		// If user is authenticated - we get his email
+		// If no email in user profile - get it from $_POST and save
 		if ($this->modx->user->isAuthenticated()) {
 			$uid = $this->modx->user->id;
 			$profile = $this->modx->user->getOne('Profile');
@@ -459,21 +573,21 @@ class miniShop {
 				$profile->save();
 			}
 		}
-		// Юзер не авторизован
+		// Processing not authenticated user
 		else {
-			// Такой емаил есть в базе - используем этого юзера
+			// Checking user by email. 
 			$email = $_SESSION['minishop']['address']['email'];
 			if ($profile = $this->modx->getObject('modUserProfile', array('email' => $email))) {
 				$uid = $profile->get('internalKey');
 			}
-			// Новый юзер, регистрируем
+			// If no email exists - registering the new user.
 			else {
 				$user = $this->modx->newObject('modUser', array('username' => $email, 'password' => md5(rand())));
 				$profile = $this->modx->newObject('modUserProfile', array('email' => $email, 'fullname' => $_SESSION['minishop']['address']['receiver']));
 				$user->addOne($profile);
 				$user->save();
 				
-				// Если указано - заносим в группы
+				// If needed - write the user to a group
 				if (!empty($this->config['userGroups'])) {
 					$groups = explode(',', $this->config['userGroups']);
 					foreach ($groups as $group) {
@@ -484,8 +598,8 @@ class miniShop {
 			}
 		}
 		
-		// Отправка заказа в базу данных
-		// Получаем номер заказа
+		// Sending order to databse
+		// First of all we need to get the current number of order
 		$td = date('ym');
 		$tmp = $this->modx->query("SELECT `num` FROM {$this->modx->getTableName('ModOrders')} WHERE `num` LIKE '{$td}%' ORDER BY `id` DESC LIMIT 1");
 		$tnum = $tmp->fetch(PDO::FETCH_COLUMN);
@@ -495,7 +609,8 @@ class miniShop {
 		$tnum = explode('/', $tnum);
 		$num = $td.'/'.($tnum[1] + 1);
 
-		// Обработка адреса
+		// Getting address of order
+		// If we received an array - creating the new address entry in ModAddress
 		$addr = $_SESSION['minishop']['address'];
 		if (is_array($addr) && !empty($addr)) {
 			$address = $this->modx->newObject('ModAddress');
@@ -504,28 +619,24 @@ class miniShop {
 			$address->save();
 			$aid = $address->get('id');
 		}
-		/*
-		else if (!is_array($addr) && $addr > 0) {
-			if (!$address = $this->modx->getObject('ModAddress', array('id' => $_SESSION['minishop']['address'], 'uid' => $this->modx->user->id))) {
-				die('Ошибка получения выбранного адреса');
-			}
-			else {
+		// If we received an single number - it is id of the existing record and we must check it.
+		// If it ok - we use this id.
+		else if (!is_array($addr) && intval($addr) > 0) {
+			if ($address = $this->modx->getObject('ModAddress', array('id' => $_SESSION['minishop']['address'], 'uid' => $this->modx->user->id))) {
 				$aid = $address->get('id');
 			}
 		}
-		else if ($_SESSION['minishop']['delivery'] == 'self') {
-			$aid = 0;
-		}
 		else {
-			// Неизвестная ошибка с адресом
+			// Bad address, but we continue.
+			// Maybe, in this shop address not needed fo ordering?
 		}
-		*/
 		
 		
-		// Создание заказа
+		// Creation of the order
+		// Get an delivery and payment ids
 		$delivery = !empty($_SESSION['minishop']['delivery']) ? $_SESSION['minishop']['delivery'] : '0';
 		$payment = !empty($_SESSION['minishop']['payment']) ? $_SESSION['minishop']['payment'] : '0';
-		
+
 		$order = $this->modx->newObject('ModOrders');
 		$order->set('uid', $uid);
 		$order->set('num', $num);
@@ -538,7 +649,7 @@ class miniShop {
 		$order->set('updated', date('Y-m-d H:i:s'));
 		$order->save();
 
-		// Сохранение товаров корзины
+		// Saving goods in cart
 		$cart = $_SESSION['minishop']['goods'];
 		$enable_remains = $this->modx->getOption('minishop.enable_remains');
 
@@ -555,7 +666,7 @@ class miniShop {
 			$res->set('data', json_encode($v['data']));
 			$res->save();
 			$cart_sum += $v['price'] * $v['num'];
-			// Если включена работа с остатками - резервируем товар на складе.
+			// If the remains are enabled - reserving goods
 			if ($enable_remains) {
 				if ($tmp = $this->modx->getObject('ModGoods', array('gid' => $v['id'], 'wid' => $_SESSION['minishop']['warehouse']))) {
 					$tmp->reserve($v['num']);
@@ -565,14 +676,16 @@ class miniShop {
 		$order->set('sum', $cart_sum);
 		$order->save();
 
-		// Изменения статуса и отправка писем
+		// Sets status "new" to the order and sends email notices
 		if ($this->changeOrderStatus($order->get('id'), $this->config['ms_status_new'])) {
 			unset($_SESSION['minishop']);
+			// Launching special snippet (if it set) for processing the order
 			if (!empty($payment) && $tmp = $this->modx->getObject('ModPayment', $payment)) {
 				if ($snippet = $tmp->getSnippetName()) {
 					return $this->modx->runSnippet($snippet, array('order' => $order, 'profile' => $profile, 'address' => $address));
 				}
 			}
+			// Or returning success chunk
 			$arr = $order->toArray();
 			$arr['email'] = $profile->get('email');
 			return $this->modx->getChunk($this->config['tplSubmitOrderSuccess'], $arr);
@@ -583,7 +696,12 @@ class miniShop {
 	}
 
 
-	// Изменение статуса заказа, логирование изменения и отправка уведомления (если включено)
+	/*
+	 * Changes order status with logging and sending email notices
+	 * 
+	 * @param int $oid						// id of order
+	 * @param int $new						// new order status
+	 * */
 	function changeOrderStatus($oid, $new) {
 		if (!$order = $this->modx->getObject('ModOrders', $oid)) {return false;}
 		$pls = $this->makePlaceholders($order->toArray());
@@ -592,6 +710,7 @@ class miniShop {
 		if ($status = $this->modx->getObject('ModStatus', $new)) {
 			$old = $order->get('status');
 			$order->set('status', $new);
+			// Saving new status
 			if ($order->save()) {
 				$this->Log('status', $order->get('id'), 'change', $old, $new);
 				
@@ -604,7 +723,7 @@ class miniShop {
 					}
 				}
 			}
-			// Письмо покупателю
+			// Email to customer
 			if ($status->get('email2user')) {
 				if ($tmp = $this->modx->getObject('modUserProfile', array('internalKey' => $pls['vl']['uid']))) {
 					$email = $tmp->get('email');
@@ -620,7 +739,7 @@ class miniShop {
 				}
 			}
 
-			// Письмо менеджеру
+			// Email to manager
 			if ($status->get('email2manager')) {
 				if ($tmp = $this->modx->getObject('ModWarehouse', $pls['vl']['wid'])) {
 					$email = $tmp->get('email');
@@ -641,7 +760,13 @@ class miniShop {
 	}
 
 
-	// Отправка почты по указанному адресу, с темой и телом
+	/*
+	 * Sends emails
+	 * 
+	 * @param int $to
+	 * @param int $subject
+	 * @param int $message
+	 * */
 	function sendEmail($to, $subject, $message) {
 		if (!isset($this->modx->mail) || !is_object($this->modx->mail)) {$this->modx->getService('mail', 'mail.modPHPMailer');}
 		$this->modx->mail->set(modMail::MAIL_FROM, $this->modx->getOption('emailsender'));
@@ -663,7 +788,14 @@ class miniShop {
 	}
 
 
-	// Отправка покупателя на оплату
+	/*
+	 * Prepares and returns chunk for redirecting customer to payment gateway
+	 * Designed for work with z-payment.ru, but must work with other gateways. It depends of form in parsed chunk.
+	 * 
+	 * @param int $oid						// id of existing order
+	 * @param int $email					// email of customer from this order for verification
+	 * return string $chunk
+	 * */
 	function redirectCustomer($oid, $email) {
 		if (empty($oid)) {
 			$this->modx->log(modX::LOG_LEVEL_ERROR,'msPayment ERR: Empty order Id');
@@ -697,7 +829,14 @@ class miniShop {
 	}
 
 
-	// Прием информации об оплате от z-payment.ru
+	/*
+	 * Receiving info about payment
+	 * This is totally for z-payments.ru. Will not work with other payments systems.
+	 * Fot other systems you must create your own snippet.
+	 * 
+	 * @param array $data						// request array
+	 * return string $chunk
+	 * */
 	function receivePayment($data) {
 		if (strstr($_SERVER['HTTP_REFERER'], 'z-payment.ru') != false) {
 			$url = $this->modx->getOption('site_url');
@@ -713,19 +852,19 @@ class miniShop {
 			$$Key = $Value;
 		}
 
-		//Проверяем номер магазина
+		// Check shop number
 		if ($LMI_PAYEE_PURSE != $shop_id) {$this->paymentError('Invalid shop Id '.$LMI_PAYEE_PURSE);}
-		//Проверяем наличие заказа и его сумму
+		// Check order
 		if ($res = $this->modx->getObject('ModOrders', array('id' => $LMI_PAYMENT_NO, 'status:!=' => $status_paid))) {
 			$sum = $res->get('sum') + $res->getDeliveryPrice();
 			if ($sum != intval($LMI_PAYMENT_AMOUNT)) {$this->paymentError('Wrong amount of the order');}
 		}
 		else {$this->paymentError('Order with Id = '.$LMI_PAYMENT_NO.' not found or already paid');}
 
-		// Если это предварительный запрос - отвечаем YES
+		// Prerequest or no?
 		if ($LMI_PREREQUEST == 1) {die('YES');}
 
-		// Рабочий запрос - проверяем хэш
+		// Working request
 		$CalcHash = md5($LMI_PAYEE_PURSE
 						.$LMI_PAYMENT_AMOUNT
 						.$LMI_PAYMENT_NO
@@ -737,9 +876,9 @@ class miniShop {
 						.$LMI_PAYER_PURSE
 						.$LMI_PAYER_WM
 					);
-		// Хэш совпадает, проводим платеж у себя
+		// Hash ok, continue
 		if($LMI_HASH == strtoupper($CalcHash)) {
-			//Подтверждение оплаты заказа
+			// Changing order status
 			if ($this->changeOrderStatus($LMI_PAYMENT_NO, $status_paid)) {
 				die('YES');
 			}
@@ -747,8 +886,26 @@ class miniShop {
 		else {$this->paymentError('Wrong HASH');}
 	}
 
+	/*
+	 * Log payment errors and returns HTTP code so z-payment.ru continue trying
+	 * 
+	 * @param string $text
+	 * */
+	function paymentError($text) {
+		$this->modx->log(modX::LOG_LEVEL_ERROR,'msPayment ERR: '.$text);
+		header("HTTP/1.0 400 Bad Request");
+		die('ERR: '.$text);
+	}
 
-	// Возврат массива изображений, прикрепленных к ресурсу-товару
+
+	/*
+	 * Gets gallery of files for product
+	 * 
+	 * @param int $id						// id of existing resource
+	 * @param string $sord					// field for sorting
+	 * @param string $dir					// direction of sorting
+	 * return array $arr					// array with all product files with properties
+	 * */
 	function getGallery($id, $sort = 'id', $dir = 'ASC') {
 		if (empty($id)) {return false;}
 		if (!$this->modx->getCount('modResource', $id)) {return false;}
@@ -765,12 +922,7 @@ class miniShop {
 	}
 
 
-	// Функция вывода ошибки приема оплаты
-	function paymentError($text) {
-		$this->modx->log(modX::LOG_LEVEL_ERROR,'msPayment ERR: '.$text);
-		header("HTTP/1.0 400 Bad Request");
-		die('ERR: '.$text);
-	}
+
 
 
 
@@ -791,6 +943,9 @@ class miniShop {
 		$string = mb_strtolower($string, "utf-8");
 		$string = mb_strtoupper(mb_substr($string, 0, 1, "utf-8"), "UTF-8").mb_substr($string, 1, mb_strlen($string), "UTF-8" );  
 		return $string;  
+	}
+	function getGoods($parents) {
+		return $this->getGoodsByCategories($parents);
 	}
 
 }
