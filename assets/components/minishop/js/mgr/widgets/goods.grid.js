@@ -14,6 +14,7 @@ miniShop.grid.Goods = function(config) {
 		,baseParams: {
 			action: 'mgr/goods/getlist'
 		}
+		,cls: 'ms-grid'
 		,save_action: 'mgr/goods/updatefromgrid'
 		,autosave: true
 		,autoHeight: true
@@ -21,7 +22,7 @@ miniShop.grid.Goods = function(config) {
 		,remoteSort: true
 		,clicksToEdit: 'auto'
 		//,preventSaveRefresh: false
-		,fields: ['id','pagetitle','parent','wid','article','price','weight','img','remains','reserved','url']
+		,fields: ['id','pagetitle','parent','wid','article','price','weight','img','remains','reserved','url','published','deleted','hidemenu']
 		,columns: [
 			{header: _('id'), dataIndex: 'id', sortable: true, width: 35}
 			,{header: _('ms.warehouse'), dataIndex: 'wid', hidden: true}
@@ -34,43 +35,34 @@ miniShop.grid.Goods = function(config) {
 			,{header: _('ms.remains'),dataIndex: 'remains',sortable: true, width: 50}
 			,{header: _('ms.reserved'),dataIndex: 'reserved',sortable: true, width: 50}
 		]
-		,tbar: [{
-			text: _('ms.goods.create')
-			,handler: this.createGoods
-			,scope: this
-		},{
-			xtype: 'tbspacer'
-			,width: 30
-		},
+		,tbar: [
+			{text: _('ms.goods.create'),handler: this.createGoods,scope: this}
+			,{xtype: 'tbspacer',width: 30},
 			'<strong>' + _('ms.warehouse') + ':</strong>&nbsp;'
-		,{
-			xtype: 'minishop-filter-warehouse'
-			,id: 'goods-filter-warehouse'
-			,listeners: {select: {fn: this.filterByWarehouse, scope:this}}
-		},{
-			xtype: 'tbspacer'
-			,width: 10
-		},
+			,{xtype: 'minishop-filter-warehouse',id: 'goods-filter-warehouse',listeners: {select: {fn: this.filterByWarehouse, scope:this}}}
+			,{xtype: 'tbspacer',width: 10},
 			'<strong>' + _('ms.category') + ':</strong>&nbsp;'
-		,{
-			xtype: 'minishop-filter-category'
-			,id: 'goods-filter-category'
-			,width: 200
-			,listeners: {'select': {fn: this.filterByCategory, scope:this}}
-		 },{
-			xtype: 'tbfill'
-		},{
-			xtype: 'minishop-filter-byquery'
-			,id: 'minishop-goods-filter-byquery'
-			,listeners: {render: { fn: function(tf) {tf.getEl().addKeyListener(Ext.EventObject.ENTER, function() {this.FilterByQuery(tf);}, this);},scope: this}}
-		},{
-			xtype: 'minishop-filter-clear'
-			,listeners: {click: {fn: this.FilterClear, scope: this}}
-		}]
+			,{xtype: 'minishop-filter-category',id: 'goods-filter-category',width: 200,listeners: {'select': {fn: this.filterByCategory, scope:this}}}
+			,{xtype: 'tbfill'}
+			,{xtype: 'minishop-filter-byquery',id: 'minishop-goods-filter-byquery',listeners: {render: { fn: function(tf) {tf.getEl().addKeyListener(Ext.EventObject.ENTER, function() {this.FilterByQuery(tf);}, this);},scope: this}}}
+			,{xtype: 'minishop-filter-clear',listeners: {click: {fn: this.FilterClear, scope: this}}}
+		]
 		,listeners: {
 			rowDblClick: function(grid, rowIndex, e) {
 				var row = grid.store.getAt(rowIndex);
 				this.editGoods(grid, e, row);
+			}
+		}
+		,viewConfig: {
+			forceFit:true,
+			enableRowBody:true,
+			showPreview:true,
+			getRowClass : function(rec, ri, p){
+				var cls = 'ms-row';
+				if (!rec.data.published) cls += ' ms-unpublished';
+				if (rec.data.deleted) cls += ' ms-deleted';
+				if (rec.data.hidemenu) cls += ' ms-hidemenu';
+				return cls;
 			}
 		}
 	});
@@ -102,7 +94,7 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
 		this.getBottomToolbar().changePage(1);
 		this.refresh();
 	}
-	,getMenu: function() {
+	,getMenu: function(r,x) {
 		var m = [];
 		m.push({
 			text: _('ms.goods.change')
@@ -122,11 +114,13 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
 			text: _('ms.goods.goto_manager_page')
 			,handler: this.goToGoodsManagerPage
 		});
-		m.push('-');     
+		/*
+		m.push('-');  
 		m.push({
 			text: _('ms.goods.delete')
 			,handler: this.deleteGoods
 		});
+		*/
 		this.addContextMenuItem(m);
 	}
 	,goToGoodsSitePage: function() {
@@ -281,18 +275,19 @@ miniShop.window.createGoods = function(config) {
 					layout: 'column'
 					,border: false
 					,items: [{
-						columnWidth: .6
+						columnWidth: .5
 						,border: false
 						,layout: 'form'
 						,items: [
 							{xtype: 'textfield',name: 'pagetitle',id: 'modx-'+this.ident+'-pagetitle',fieldLabel: _('pagetitle'),anchor: '100%',allowBlank: false}
 							,{xtype: 'textfield',name: 'longtitle',id: 'modx-'+this.ident+'-longtitle',fieldLabel: _('long_title'),anchor: '100%'}
-							,{xtype: 'textarea',name: 'description',id: 'modx-'+this.ident+'-description',fieldLabel: _('description'),anchor: '100%',grow: false,height: 90}
-							,{xtype: 'textarea',name: 'introtext',id: 'modx-'+this.ident+'-introtext',fieldLabel: _('introtext'),anchor: '100%',height: 90}
+							,{xtype: 'textarea',name: 'description',id: 'modx-'+this.ident+'-description',fieldLabel: _('description'),anchor: '100%',grow: false,height: 50}
+							,{xtype: 'textarea',name: 'introtext',id: 'modx-'+this.ident+'-introtext',fieldLabel: _('introtext'),anchor: '100%',height: 50}
+							,{xtype: 'xcheckbox',name: 'deleted',id: 'modx-'+this.ident+'-deleted',boxLabel: _('deleted'),description: _('resource_delete_help'),inputValue: 1,checked: false}
 							,{xtype: 'xcheckbox',name: 'clearCache',id: 'modx-'+this.ident+'-clearcache',boxLabel: _('clear_cache_on_save'),description: _('clear_cache_on_save_msg'),inputValue: 1,checked: true}
 						]
 					},{
-						columnWidth: .4
+						columnWidth: .5
 						,border: false
 						,layout: 'form'
 						,items: [
@@ -304,7 +299,8 @@ miniShop.window.createGoods = function(config) {
 							,{xtype: 'xcheckbox',name: 'hidemenu',id: 'modx-'+this.ident+'-hidemenu',boxLabel: _('resource_hide_from_menus'),description: _('resource_hide_from_menus_help'),inputValue: 1,checked: MODx.config.hidemenu_default == '1' && config.disable_categories ? 1 : 0}
 							,{xtype: 'xcheckbox',name: 'searchable',id: 'modx-'+this.ident+'-searchable',boxLabel: _('resource_searchable'),description: _('resource_searchable_help'),inputValue: 1,checked: MODx.config.search_default == '1' && config.disable_categories  ? 1 : 0}
 							,{xtype: 'xcheckbox',name: 'cacheable',id: 'modx-'+this.ident+'-cacheable',boxLabel: _('resource_cacheable'),description: _('resource_cacheable_help'),inputValue: 1,checked: MODx.config.cache_default == '1' && config.disable_categories  ? 1 : 0}
-							,{xtype: 'xcheckbox',name: 'richtext',id: 'modx-'+this.ident+'-richtext',boxLabel: _('resource_richtext'),description: _('resource_richtext_help'),inputValue: 1,checked: MODx.config.richtext_default == '1' && config.disable_categories  ? 1 : 0}
+							//,{xtype: 'xcheckbox',name: 'richtext',id: 'modx-'+this.ident+'-richtext',boxLabel: _('resource_richtext'),description: _('resource_richtext_help'),inputValue: 1,checked: MODx.config.richtext_default == '1' && config.disable_categories  ? 1 : 0}
+
 						]
 					}]
 				},{xtype: 'textarea',name: 'content',fieldLabel: _('content'),anchor: '100%',height: 100}

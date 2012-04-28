@@ -54,7 +54,7 @@ $c->leftJoin('ModGoods', 'ModGoods', array(
 	"ModGoods.wid = ".$_SESSION['minishop']['warehouse']
 ));
 
-$c->where(array('modResource.deleted' => false, 'modResource.template:IN' => $goods_tpls, 'modResource.isfolder:=' => 0));
+$c->where(array('modResource.template:IN' => $goods_tpls, 'modResource.isfolder:=' => 0));
 
 // Фильтрация по категории
 if (!empty($category)) {
@@ -85,6 +85,9 @@ foreach ($goods as $v) {
 		'id' => $v->get('id')
 		,'pagetitle' => $v->get('pagetitle')
 		,'parent' => $v->get('parent')
+		,'published' => $v->get('published')
+		,'deleted' => $v->get('deleted')
+		,'hidemenu' => $v->get('hidemenu')
 	);
 	$tmp['url'] = $this->modx->makeUrl($v->get('id'), '', '', 'full');
 	if ($tmp2 = $modx->getObject('ModGoods', array('gid' => $tmp['id'], 'wid' => $warehouse)) ) {

@@ -1,1 +1,14 @@
 .x-color-palette {width:80%;height:auto;cursor:pointer}
+
+.ms-grid .ms-unpublished div {
+    color: gray;
+}
+.ms-grid .ms-hidemenu div {
+    font-style: italic !important;
+}
+
+.ms-grid .ms-deleted div {
+    color: brown !important;
+    text-decoration: line-through !important;
+
+}
