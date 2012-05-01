@@ -1,10 +1,13 @@
 <?php
 /**
  * -----------------
- * Это модифицированный getResources 1.4.2pl для miniShop
- * Отличается от обычного только поддержкой мульткатегорий ресурсов и дополнительных свойств товаров (цена, артикул, остаток, изображение и т.д.)
+ * This is modification of getResources 1.4.2pl made for miniShop
+ * The difference in
+ *   1. Sorting and filtering by ModGoods.
+ *   2. Supports multicategories.
+ *   3. Loads goods properties (such as price, img, remains etc) in &tpl chunk.
  *
- * Модификация: Василий Наумкин <bezumkin@yandex.ru>
+ * Modification made by Vasiliy Naumkin <bezumkin@yandex.ru>
  * -----------------
  *
  *
@@ -196,7 +199,7 @@ foreach ($parents as $parent) {
     $parent = next($parents);
 }
 
-// add by bezumkin 22/02.2012
+// added by bezumkin 22/02.2012
 if (!isset($modx->miniShop) || !is_object($modx->miniShop)) {
 	$modx->miniShop = $modx->getService('minishop','miniShop', $modx->getOption('core_path').'components/minishop/model/minishop/', $scriptProperties);
 	if (!($modx->miniShop instanceof miniShop)) return '';
@@ -205,10 +208,9 @@ $incats = $modx->miniShop->getGoodsByCategories($parentArray);
 // eof add
 $parents = array_merge($parentArray, $children);
 
-
 /* build query */
 $criteria = array("modResource.parent IN (" . implode(',', $parents) . ")");
-// add by bezumkin 22.02.2012
+// added by bezumkin 22.02.2012
 if (!empty($incats)) {
 	$criteria[0] .= " OR modResource.id IN (" . implode(',', $incats) . ")"; 
 }
@@ -346,7 +348,15 @@ if (!empty($resources)) {
 if (!empty($where)) {
     $criteria->where($where);
 }
-
+// add by bezumkin 01.04.2012
+if (!empty($sortbyMS)) {
+	$criteria->leftJoin('ModGoods', 'ModGoods', array(
+		"ModGoods.gid = modResource.id",
+		"ModGoods.wid = ".$_SESSION['minishop']['warehouse']
+	));
+	$criteria->sortby($sortbyMS, $sortdir);
+}
+// eof add
 $total = $modx->getCount('modResource', $criteria);
 $modx->setPlaceholder($totalVar, $total);
 
@@ -400,15 +410,6 @@ if (!empty($sortbyTV)) {
     }
     $criteria->sortby("sortTV", $sortdirTV);
 }
-// add by bezumkin 12.02.2012
-if (!empty($sortbyMS)) {
-	$criteria->leftJoin('ModGoods', 'ModGoods', array(
-		"ModGoods.gid = modResource.id",
-		"ModGoods.wid = ".$_SESSION['minishop']['warehouse']
-	));
-	$criteria->sortby($sortbyMS, $sortdir);
-}
-// eof add
 if (!empty($sortby)) {
     if (strpos($sortby, '{') === 0) {
         $sorts = $modx->fromJSON($sortby);
@@ -418,7 +419,8 @@ if (!empty($sortby)) {
     if (is_array($sorts)) {
         while (list($sort, $dir) = each($sorts)) {
             if ($sortbyEscaped) $sort = $modx->escape($sort);
-            if (!empty($sortbyAlias)) $sort = $modx->escape($sortbyAlias) . ".{$sort}";
+            //if (!empty($sortbyAlias)) $sort = $modx->escape($sortbyAlias) . ".{$sort}"; // commented by bezumkin 01.04.2012
+            if (!empty($sortbyAlias) && $sort != 'RAND()') $sort = $modx->escape($sortbyAlias) . ".{$sort}"; // added by bezumkin 01.04.2012
             $criteria->sortby($sort, $dir);
         }
     }
@@ -477,7 +479,7 @@ foreach ($collection as $resourceId => $resource) {
         )
         ,$includeContent ? $resource->toArray() : $resource->get($fields)
         ,$tvs
-		,$ms_properties	// add by bezumkin 11.02.2012
+		,$ms_properties	// added by bezumkin 11.02.2012
     );
 	
 	
