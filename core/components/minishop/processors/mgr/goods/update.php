@@ -88,7 +88,7 @@ if ($modx->getCount('modResource', $id) > 0) {
 		
 		if ($res2->save()) {
 			if (!$nolog) {
-				$miniShop->Log('goods', $res2->get('id'), 'remains', $old, $_REQUEST['remains']);
+				//$miniShop->Log('goods', $res2->get('id'), 'remains', $old, $_REQUEST['remains']);
 			}
 		}
 	}
