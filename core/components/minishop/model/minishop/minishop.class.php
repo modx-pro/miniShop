@@ -138,7 +138,7 @@ class miniShop {
 	 * @param string $new			// new value
 	 * @param string $comment
 	 * */
-	function Log($type, $oid, $iid, $operation, $old, $new, $comment) {
+	function Log($type, $oid, $iid, $operation, $old, $new, $comment = '') {
 		if ($old == $new) {return;}
 		$uid = empty($this->modx->user->id) ? 1 : $this->modx->user->id;
 		$res = $this->modx->newObject('ModLog');
