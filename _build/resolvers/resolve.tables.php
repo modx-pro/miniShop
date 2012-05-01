@@ -140,10 +140,10 @@ if ($object->xpdo) {
 			$sql = "ALTER TABLE {$otable} ADD `weight` FLOAT(10, 3) NOT NULL DEFAULT '0.000' AFTER `sum`";
 			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
 
-			//$sql = "ALTER TABLE {$ltable} CHANGE `iid` `oid` INT(11) NOT NULL DEFAULT '0';
-			//	ALTER TABLE {$ltable} ADD `iid` INT NOT NULL AFTER `oid` DEFAULT '0';
-			//	ALTER TABLE {$ltable} ADD `comment` TEXT NULL";
-			//if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
+			$sql = "ALTER TABLE {$ltable} CHANGE `iid` `oid` INT(11) NOT NULL DEFAULT '0';
+				ALTER TABLE {$ltable} ADD `iid` INT NOT NULL AFTER `oid` DEFAULT '0';
+				ALTER TABLE {$ltable} ADD `comment` TEXT NULL";
+			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
 			
 			break;
 	}
