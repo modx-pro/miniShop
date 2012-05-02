@@ -25,6 +25,7 @@ if (!empty($_POST['data'])) {
 	if (!json_decode($_POST['data'], true) && $_POST['data'] != '[]') {
 		 return $modx->error->failure($modx->lexicon('ms.orderedgoods.err_data'));
 	}
+	else {$data = json_encode(json_decode($_POST['data']));}
 }
 
 // Loading miniShop class
@@ -44,7 +45,7 @@ if ($res = $modx->getObject('modResource', $_POST['gid'])) {
 			,'price' => $price
 			,'weight' => $weight
 			,'sum' => $sum
-			,'data' => !empty($_POST['data']) ? $_POST['data'] : json_encode(array())
+			,'data' => !empty($data) ? $data : json_encode(array())
 		));
 		$goods->save();
 		$miniShop->Log('goods', $_POST['oid'], $_POST['gid'], 'change', $oldval, $_POST['num'], 'Changed quantity of "'.$res->get('pagetitle').'" from '.$oldval.' to '.$_POST['num']);

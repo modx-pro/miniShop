@@ -6,15 +6,23 @@ $xpdo_meta_map['ModTags']= array (
   'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
+    'rid' => NULL,
     'gid' => NULL,
     'tag' => NULL,
   ),
   'fieldMeta' => 
   array (
+    'rid' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'null' => false,
+    ),
     'gid' => 
     array (
       'dbtype' => 'int',
-      'precision' => '11',
+      'precision' => '10',
       'phptype' => 'integer',
       'null' => false,
       'index' => 'index',

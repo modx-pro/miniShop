@@ -339,14 +339,14 @@ miniShop.grid.Goods = function(config) {
 	
 	this.exp = new Ext.grid.RowExpander({
 		expandOnDblClick: false
-		,tpl : new Ext.Template('<p class="desc">{data}</p>')
-		,renderer : function(v, p, record){return record.data.data != '' && record.data.data != '[]' ? '<div class="x-grid3-row-expander">&#160;</div>' : '&#160;';}
+		,tpl : new Ext.Template('<p class="desc">{data_view}</p>')
+		,renderer : function(v, p, record){return record.data.data_view != '' ? '<div class="x-grid3-row-expander">&#160;</div>' : '&#160;';}
 	});
 	
 	Ext.applyIf(config,{
 		id: this.ident+'-grid-goods'
 		,url: miniShop.config.connector_url
-		,fields: ['id','gid','oid','name','num','price','weight','sum','data']
+		,fields: ['id','gid','oid','name','num','price','weight','sum','data','data_view']
 		,pageSize: 10
 		,autoHeight: true
 		,paging: true
@@ -360,7 +360,7 @@ miniShop.grid.Goods = function(config) {
 			,{header: _('ms.price'),dataIndex: 'price',sortable: true,width: 50}
 			,{header: _('ms.weight'),dataIndex: 'weight',sortable: true,width: 50}
 			,{header: _('ms.goods.sum'),dataIndex: 'sum',sortable: true,width: 50}
-			,{header: _('ms.goods.data'),dataIndex: 'data',hidden: true}
+			,{header: _('ms.goods.data'),dataIndex: 'data_view',hidden: true}
 		]
 		,tbar: [{
 			text: _('ms.orderedgoods.add')

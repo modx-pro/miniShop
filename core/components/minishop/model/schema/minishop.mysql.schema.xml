@@ -151,7 +151,8 @@
 		</index>
 	</object>
 	<object class="ModTags" table="modTags" extends="xPDOSimpleObject">
-		<field key="gid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
+		<field key="rid" dbtype="int" precision="10" phptype="integer" null="false" />
+		<field key="gid" dbtype="int" precision="10" phptype="integer" null="false" index="index" />
 		<field key="tag" dbtype="varchar" precision="255" phptype="string" null="false" />
 
 		<index alias="gid" name="gid" primary="false" unique="true" type="BTREE" >

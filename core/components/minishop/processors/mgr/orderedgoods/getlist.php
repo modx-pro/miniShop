@@ -47,21 +47,18 @@ $orders = $modx->getCollection('ModOrderedGoods',$c);
 $arr = array();
 foreach ($orders as $v) {
     $tmp = $v->toArray();
-	//$tmp['name'] = $v->getGoodsName();
 	if ($res = $modx->getObject('modResource', $tmp['gid'])) {
 		$tmp['name'] = $res->get('pagetitle');
 	}
-	/*
-	if ($tmp['data'] == '[]') {$tmp['data'] = '';}
+	if ($tmp['data'] == '[]') {$tmp['data_view'] = '';}
 	else {
 		$tmp2 = json_decode($tmp['data'], true);
-		$tmp['data'] = '<ul>';
+		$tmp['data_view'] = '<ul>';
 		foreach ($tmp2 as $k => $v2) {
-			$tmp['data'] .= "<li>".$modx->lexicon('ms.'.$k)." &mdash; $v2</li>";
+			$tmp['data_view'] .= "<li>".$modx->lexicon('ms.'.$k)." &mdash; $v2</li>";
 		}
-		$tmp['data'] .= '</ul>';
+		$tmp['data_view'] .= '</ul>';
 	}
-	*/
 	$arr[] = $tmp;
 }
 return $this->outputArray($arr, $count);
