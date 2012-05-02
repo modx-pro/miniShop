@@ -138,6 +138,7 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
 			,title: _('ms.goods.create')
 			,disable_categories: true
 			,action: 'mgr/goods/create'
+			,record: {richtext: 1}
 			,listeners: {
 				'success':{fn:function() {Ext.getCmp('minishop-grid-goods').store.reload();},scope:this}
 				//,'hide':{fn:function() {this.destroy();}}
@@ -299,17 +300,15 @@ miniShop.window.createGoods = function(config) {
 							,{xtype: 'xcheckbox',name: 'hidemenu',id: 'modx-'+this.ident+'-hidemenu',boxLabel: _('resource_hide_from_menus'),description: _('resource_hide_from_menus_help'),inputValue: 1,checked: MODx.config.hidemenu_default == '1' && config.disable_categories ? 1 : 0}
 							,{xtype: 'xcheckbox',name: 'searchable',id: 'modx-'+this.ident+'-searchable',boxLabel: _('resource_searchable'),description: _('resource_searchable_help'),inputValue: 1,checked: MODx.config.search_default == '1' && config.disable_categories  ? 1 : 0}
 							,{xtype: 'xcheckbox',name: 'cacheable',id: 'modx-'+this.ident+'-cacheable',boxLabel: _('resource_cacheable'),description: _('resource_cacheable_help'),inputValue: 1,checked: MODx.config.cache_default == '1' && config.disable_categories  ? 1 : 0}
-							//,{xtype: 'xcheckbox',name: 'richtext',id: 'modx-'+this.ident+'-richtext',boxLabel: _('resource_richtext'),description: _('resource_richtext_help'),inputValue: 1,checked: MODx.config.richtext_default == '1' && config.disable_categories  ? 1 : 0}
-
 						]
 					}]
-				},{xtype: 'textarea',name: 'content',fieldLabel: _('content'),anchor: '100%',height: 100}
+				},{xtype: config.record.richtext ? 'htmleditor' : 'textarea',name: 'content',id: 'modx-'+this.ident+'-content', fieldLabel: _('content'),anchor: '100%',height: 100}
+					,{xtype: 'xcheckbox',name: 'richtext',id: 'modx-'+this.ident+'-richtext',boxLabel: _('resource_richtext'),description: _('resource_richtext_help'),inputValue: 1,checked: MODx.config.richtext_default == '1' && config.disable_categories  ? 1 : 0}
 					,{xtype: 'hidden',name: 'class_key',value: 'modDocument'}
 					,{xtype: 'hidden',name: 'context_key'}
 					,{xtype: 'hidden',name: 'content_type' ,value: 1}
 					,{xtype: 'hidden',name: 'content_dispo',value: 0}
 					,{xtype: 'hidden',name: 'isfolder' ,value: 0}
-					,{xtype: 'hidden',name: 'richtext' ,value: 1}
 				]
 			},{
 				id: 'modx-'+this.ident+'-properties'
