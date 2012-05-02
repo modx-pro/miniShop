@@ -75,6 +75,7 @@ $_lang['ms.reserved'] = 'Reserved';
 $_lang['ms.gallery'] = 'Gallery';
 $_lang['ms.file'] = 'File';
 $_lang['ms.dir'] = 'Directory';
+$_lang['ms.tags'] = 'Tags';
 
 $_lang['ms.warehouse.select'] = 'Select warehouse';
 $_lang['ms.warehouse.create'] = 'New warehouse';

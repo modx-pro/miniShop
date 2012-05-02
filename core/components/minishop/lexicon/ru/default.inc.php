@@ -75,6 +75,8 @@ $_lang['ms.reserved'] = 'Зарезервировано';
 $_lang['ms.gallery'] = 'Галерея';
 $_lang['ms.file'] = 'Файл';
 $_lang['ms.dir'] = 'Директория';
+$_lang['ms.tags'] = 'Теги';
+
 
 
 $_lang['ms.warehouse.select'] = 'Выберите склад';
