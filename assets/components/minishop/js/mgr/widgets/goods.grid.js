@@ -302,7 +302,7 @@ miniShop.window.createGoods = function(config) {
 							,{xtype: 'xcheckbox',name: 'cacheable',id: 'modx-'+this.ident+'-cacheable',boxLabel: _('resource_cacheable'),description: _('resource_cacheable_help'),inputValue: 1,checked: MODx.config.cache_default == '1' && config.disable_categories  ? 1 : 0}
 						]
 					}]
-				},{xtype: config.record.richtext ? 'htmleditor' : 'textarea',name: 'content',id: 'modx-'+this.ident+'-content', fieldLabel: _('content'),anchor: '100%',height: 100}
+				},{xtype: config.record.richtext ? 'htmleditor' : 'textarea',name: 'content',id: 'modx-'+this.ident+'-content', fieldLabel: _('content'),anchor: '100%',height: 150}
 					,{xtype: 'xcheckbox',name: 'richtext',id: 'modx-'+this.ident+'-richtext',boxLabel: _('resource_richtext'),description: _('resource_richtext_help'),inputValue: 1,checked: MODx.config.richtext_default == '1' && config.disable_categories  ? 1 : 0}
 					,{xtype: 'hidden',name: 'class_key',value: 'modDocument'}
 					,{xtype: 'hidden',name: 'context_key'}
@@ -444,7 +444,7 @@ miniShop.grid.TVs = function(config) {
 		id: this.ident+'-grid-tvs'
 		,url: miniShop.config.connector_url
 		,action: 'mgr/goods/tv/getlist'
-		,fields: ['id','resourceId','name','caption','value','input_properties','type']
+		,fields: ['id','resourceId','name','caption','value','intro','input_properties','type']
 		,pageSize: 10
 		,autoHeight: true
 		,paging: true
@@ -453,7 +453,7 @@ miniShop.grid.TVs = function(config) {
 			{header: _('id'),dataIndex: 'id',hidden: true,sortable: true}
 			,{header: _('name'),dataIndex: 'name',sortable: true,width: 50}
 			,{header: _('caption'),dataIndex: 'caption',sortable: true,width: 100}
-			,{header: _('value'),dataIndex: 'value',sortable: true,width: 150}
+			,{header: _('value'),dataIndex: 'intro',sortable: true,width: 150}
 		]
 		,listeners: {
 			rowDblClick: function(grid, rowIndex, e) {
@@ -493,7 +493,7 @@ Ext.extend(miniShop.grid.TVs,MODx.grid.Grid, {
 		});
 		this.windows.updateTV.fp.getForm().reset();
 
-		var vf = {fieldLabel: _('value'),name: 'value',id: 'minishop-'+this.ident+'-value', anchor: '95%'};
+		var vf = {fieldLabel: _('value'),name: 'value',id: 'minishop-'+this.ident+'-value', anchor: '100%'};
 		var def = 0;
 		switch (record.type) {
 			case 'number': vf.xtype = 'numberfield'; break;
@@ -504,11 +504,12 @@ Ext.extend(miniShop.grid.TVs,MODx.grid.Grid, {
 			case 'text': vf.xtype = 'textarea'; break;
 			case 'checkbox': vf.xtype = 'textfield'; break;
 			case 'option': vf.xtype = 'textfield'; break;
-			case 'richtext': vf.xtype = 'htmleditor'; vf.height = 100; break;
-			case 'textarea': vf.xtype = 'textarea'; vf.height = 100; break;
-			default: vf.xtype = 'textarea'; vf.height = 75; var def = 1;
+			case 'richtext': vf.xtype = 'htmleditor'; vf.height = 400; break;
+			case 'textarea': vf.xtype = 'textarea'; vf.height = 400; break;
+			default: vf.xtype = 'textarea'; vf.height = 400; var def = 1;
 		}
 		if (def != 1) {
+			console.log(vf)
 			Ext.applyIf(vf,record.input_properties);
 		}
 
@@ -528,20 +529,40 @@ miniShop.window.updateTV = function(config) {
 	Ext.applyIf(config,{
 		title: _('ms.orderedgoods.add')
 		,id: this.ident
-		,width: 600
+		,width: 700
 		,url: miniShop.config.connector_url
 		,action: 'mgr/goods/tv/update'
-		,labelAlign: 'left'
-		,labelWidth: 150
-		,height: 150
+		,labelAlign: 'top'
 		,autoHeight: true
-		,fields: [
-			{xtype: 'hidden',name: 'id',id: 'minishop-'+this.ident+'-id'}
-			,{xtype: 'hidden',name: 'resourceId',id: 'minishop-'+this.ident+'-resourceId'}
-			,{xtype: 'displayfield',fieldLabel: _('type'),name: 'type',id: 'minishop-'+this.ident+'-type'}
-			,{xtype: 'displayfield',fieldLabel: _('name'),name: 'name',id: 'minishop-'+this.ident+'-name'}
-			,{xtype: 'displayfield',fieldLabel: _('caption'),name: 'caption',id: 'minishop-'+this.ident+'-caption'}
-		]
+		,fields: [{
+			items: [{
+				layout: 'form'
+				,cls: 'modx-panel'
+				,bodyStyle: { background: 'transparent', padding: '10px' }
+				,items: [{
+					layout: 'column'
+					,border: false
+					,items: [{
+						columnWidth: .5
+						,border: false
+						,layout: 'form'
+						,items: [
+							{xtype: 'hidden',name: 'id',id: 'minishop-'+this.ident+'-id'}
+							,{xtype: 'hidden',name: 'resourceId',id: 'minishop-'+this.ident+'-resourceId'}
+							,{xtype: 'hidden',name: 'type',id: 'minishop-'+this.ident+'-type'}
+							,{xtype: 'displayfield',fieldLabel: _('name'),name: 'name',id: 'minishop-'+this.ident+'-name'}
+						]
+					},{
+						columnWidth: .5
+						,border: false
+						,layout: 'form'
+						,items: [
+							{xtype: 'displayfield',fieldLabel: _('caption'),name: 'caption',id: 'minishop-'+this.ident+'-caption'}
+						]
+					}]
+				}]
+			}]
+		}]
 		,keys: [{
 			key: Ext.EventObject.ENTER
 			,shift: true
