@@ -420,3 +420,47 @@ Ext.extend(miniShop.combo.Browser,Ext.form.TriggerField,{
 });
 Ext.reg('ms-combo-browser',miniShop.combo.Browser);
 /////////////////////////////////////////
+
+
+//Superbox-select for miniShop Tags
+miniShop.combo.tags = function(config) {
+	config = config || {};
+	Ext.applyIf(config,{
+		xtype:'superboxselect'
+		,allowBlank: true
+		,msgTarget: 'under'
+		,allowAddNewData: true
+		,addNewDataOnBlur : true
+		,resizable: true
+		,name: 'tags[]'
+		,anchor:'100%'
+		,store:new Ext.data.JsonStore({
+			 id:'tags-store'
+			,root:'results'
+			,autoLoad: true
+			,autoSave: false
+			,totalProperty:'total'
+			,fields:['tag']
+			,url: miniShop.config.connector_url
+			,baseParams: {action:  'mgr/goods/gettags'}
+		})
+		,mode: 'remote'
+		,displayField: 'tag'
+		,valueField: 'tag'
+		,triggerAction: 'all'
+		,extraItemCls: 'x-tag'
+		,listeners: {
+			newitem: function(bs,v, f){
+				v = v.slice(0,1).toUpperCase() + v.slice(1).toLowerCase();
+				var newObj = {
+					tag: v
+				};
+				bs.addItem(newObj);
+			}
+		}
+	});
+	miniShop.combo.tags.superclass.constructor.call(this,config);
+};
+Ext.extend(miniShop.combo.tags,Ext.ux.form.SuperBoxSelect);
+Ext.reg('ms-superbox-tags',miniShop.combo.tags);
+///////////////////////////////////////

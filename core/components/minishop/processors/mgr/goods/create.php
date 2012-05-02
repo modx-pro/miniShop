@@ -78,6 +78,7 @@ if ($modx->getCount('modResource', $id) > 0) {
 		$res2->set('add2', $_REQUEST['add2']);
 		$res2->set('add3', $_REQUEST['add3']);
 		$res2->save();
+		$res2->addTags($_REQUEST['tags']);
 	}
 
 }

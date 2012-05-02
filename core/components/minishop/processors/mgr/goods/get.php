@@ -42,6 +42,7 @@ if ($res = $modx->getObject('modResource', $id)) {
 		unset($tmp['id']);
 		
 		$arr = array_merge($arr, $tmp);
+		$arr['tags'] = $res2->getTags(1);
 	}
 	else {
 		$arr['wid'] = $wid;

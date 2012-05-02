@@ -41,6 +41,7 @@ else {
 	$_POST = $res->toArray();
 	$modx->invokeEvent('OnDocFormDelete', $_POST);
 	if ($res2 = $modx->getObject('ModGoods', array('gid' => $id))) {
+		$res2->removeTags();
 		$res2->remove();
 	}
 	

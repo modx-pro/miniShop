@@ -81,7 +81,6 @@ $xpdo_meta_map['ModOrders']= array (
       'phptype' => 'timestamp',
       'null' => false,
       'default' => '0000-00-00 00:00:00',
-      'extra' => 'on update current_timestamp',
     ),
     'comment' => 
     array (

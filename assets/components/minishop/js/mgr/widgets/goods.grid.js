@@ -331,6 +331,7 @@ miniShop.window.createGoods = function(config) {
 					,{xtype: 'ms-combo-browser',name: 'img',fieldLabel: _('ms.img'),anchor: '100%'}
 					,{xtype: 'numberfield',name: 'remains',fieldLabel: _('ms.remains')}
 					,{xtype: 'textfield',name: 'reserved',disabled: true,fieldLabel: _('ms.reserved')}
+					,{xtype: 'ms-superbox-tags', name: 'tags[]', value: config.record.tags, fieldLabel: _('ms.tags')}
 					,{xtype: 'textfield',name: 'add1',fieldLabel: _('ms.goods.add1'),anchor: '100%'}
 					,{xtype: 'textfield',name: 'add2',fieldLabel: _('ms.goods.add2'),anchor: '100%'}
 					,{xtype: 'textarea',name: 'add3',fieldLabel: _('ms.goods.add3'),autoHeight: false,anchor: '100%',height: 100}

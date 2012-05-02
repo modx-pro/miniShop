@@ -4,11 +4,12 @@ Changelog for miniShop.
 1.6.1 rc (03.05.2012)
 =============
 - Убрал отправку покупателя на z-payment.ru по умолчанию из чанков.
-- Добавил richtext редактор в окно редактирования товара.
+- Добавлен richtext редактор в окно редактирования товара.
+- Добавлены теги для товарам. Теперь рвы можете связывать товары через отдельную таблицу.
 -----
 - Removed redirect customers to z-payment.ru by default from chunks.
 - Added richtext editor to goods editor window.
-
+- Added tags for goods. Now you can linking goods through separate table.
 
 1.6.0 rc (28.04.2012)
 =============

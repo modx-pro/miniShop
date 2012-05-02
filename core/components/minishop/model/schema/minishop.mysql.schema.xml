@@ -82,7 +82,7 @@
 		<field key="new" dbtype="text" phptype="string" null="false" />
 		<field key="uid" dbtype="int" precision="11" phptype="integer" null="false" />
 		<field key="ip" dbtype="varchar" precision="15" phptype="string" null="false" />
-		<field key="timestamp" dbtype="timestamp" phptype="timestamp" null="false" default="CURRENT_TIMESTAMP" index="index"  extra="on update current_timestamp" />
+		<field key="timestamp" dbtype="timestamp" phptype="timestamp" null="false" default="CURRENT_TIMESTAMP" index="index" />
 		<field key="comment" dbtype="text" phptype="string" null="true" />
 
 		<index alias="timestamp" name="timestamp" primary="false" unique="false" type="BTREE" >
@@ -115,7 +115,7 @@
 		<field key="sum" dbtype="float" precision="10,2" phptype="float" null="false" />
 		<field key="weight" dbtype="float" precision="10,3" phptype="float" null="false" default="0.000" />
 		<field key="created" dbtype="timestamp" phptype="timestamp" null="false" default="0000-00-00 00:00:00" />
-		<field key="updated" dbtype="timestamp" phptype="timestamp" null="false" default="0000-00-00 00:00:00"  extra="on update current_timestamp" />
+		<field key="updated" dbtype="timestamp" phptype="timestamp" null="false" default="0000-00-00 00:00:00" />
 		<field key="comment" dbtype="text" phptype="string" null="false" />
 		<field key="delivery" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
 		<field key="payment" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
@@ -148,6 +148,15 @@
 
 		<index alias="name" name="name" primary="false" unique="false" type="BTREE" >
 			<column key="name" length="" collation="A" null="false" />
+		</index>
+	</object>
+	<object class="ModTags" table="modTags" extends="xPDOSimpleObject">
+		<field key="gid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
+		<field key="tag" dbtype="varchar" precision="255" phptype="string" null="false" />
+
+		<index alias="gid" name="gid" primary="false" unique="true" type="BTREE" >
+			<column key="gid" length="" collation="A" null="false" />
+			<column key="tag" length="" collation="A" null="false" />
 		</index>
 	</object>
 	<object class="ModWarehouse" table="modWarehouse" extends="xPDOSimpleObject">

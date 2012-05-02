@@ -81,7 +81,6 @@ $xpdo_meta_map['ModLog']= array (
       'null' => false,
       'default' => 'CURRENT_TIMESTAMP',
       'index' => 'index',
-      'extra' => 'on update current_timestamp',
     ),
     'comment' => 
     array (

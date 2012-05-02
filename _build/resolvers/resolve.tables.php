@@ -46,6 +46,7 @@ if ($object->xpdo) {
 			$manager->createObjectContainer('ModWarehouse');
 			$manager->createObjectContainer('ModPayment');
 			$manager->createObjectContainer('ModGallery');
+			$manager->createObjectContainer('ModTags');
 			
 			$exists = $modx->getCount('ModWarehouse');
 			if ($exists == 0) {
@@ -87,6 +88,7 @@ if ($object->xpdo) {
 		case xPDOTransport::ACTION_UPGRADE:
 			$manager->createObjectContainer('ModPayment');
 			$manager->createObjectContainer('ModGallery');
+			$manager->createObjectContainer('ModTags');
 			
 			$gtable = $modx->getTableName('ModGoods');
 			$ogtable = $modx->getTableName('ModOrderedGoods');

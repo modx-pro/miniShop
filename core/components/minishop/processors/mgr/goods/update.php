@@ -87,6 +87,7 @@ if ($modx->getCount('modResource', $id) > 0) {
 		$res2->set('add3', $_REQUEST['add3']);
 		
 		if ($res2->save()) {
+			$res2->addTags($_REQUEST['tags']);
 			if (!$nolog) {
 				//$miniShop->Log('goods', $res2->get('id'), 'remains', $old, $_REQUEST['remains']);
 			}

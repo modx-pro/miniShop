@@ -36,4 +36,39 @@ class ModGoods extends xPDOSimpleObject {
 		return $this->reserve($num, 2);
 	}
 
+	function addTags($data) {
+		$gid = $this->get('id');
+
+		$this->xpdo->removeCollection('ModTags', array('gid' => $gid, 'tag:NOT IN' => $data));
+		foreach ($data as $v) {
+			$v = trim($v);
+			if (empty($v)) {continue;}
+			$tag = $this->xpdo->newObject('ModTags', array('gid' => $gid, 'tag' => $v));
+			$tag->save();
+		}
+	}
+
+	function removeTags() {
+		$gid = $this->get('id');
+		$this->xpdo->removeCollection('ModTags', array('gid' => $gid));
+	}
+
+	function getTags($backend = 0) {
+		$gid = $this->get('id');
+		$res = $this->xpdo->getCollection('ModTags', array('gid' => $gid));
+		$tags = array();
+		foreach ($res as $v) {
+			if ($backend) {
+				$tags[] = array('tag' => $v->get('tag'));
+			}
+			else {
+				$tags[] = $v->get('tag');
+			}
+			
+		}
+		return $tags;
+	}
+
+	
+
 }
