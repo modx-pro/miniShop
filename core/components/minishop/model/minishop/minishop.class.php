@@ -63,6 +63,7 @@ class miniShop {
 
         $this->modx->addPackage('minishop',$this->config['modelPath'], $this->modx->config['table_prefix'].'ms_');
         $this->modx->lexicon->load('minishop:default');
+        $this->modx->lexicon->load('minishop:add');
 
 		// Show errors if debug enabled
 		if (isset($this->config['debug']) && $this->config['debug'] != 0) {
