@@ -11,7 +11,7 @@ if (!$modx->hasPermission('remove')) {return $modx->error->failure($modx->lexico
 $id = $scriptProperties['id'];
 
 $response = $modx->runProcessor('resource/delete', $scriptProperties);
-$modx->invokeEvent('OnDocFormDelete', $scriptProperties);
+
 if ($response->isError()) {
 	return $modx->error->failure($response->getMessage());
 }

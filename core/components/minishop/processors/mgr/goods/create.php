@@ -1,34 +1,13 @@
 <?php
 /**
- * miniShop
- *
- * Copyright 2010 by Shaun McCormick <shaun+minishop@modx.com>
- *
- * miniShop is free software; you can redistribute it and/or modify it under the
- * terms of the GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the License, or (at your option) any later
- * version.
- *
- * miniShop is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along with
- * miniShop; if not, write to the Free Software Foundation, Inc., 59 Temple
- * Place, Suite 330, Boston, MA 02111-1307 USA
- *
- * @package minishop
- */
-/**
  * Create an Goods
  * 
  * @package minishop
  * @subpackage processors
  */
-/* get board */
+
 if (!$modx->hasPermission('save')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
 
-// Проверка обязательных полей
 if (empty($_POST['pagetitle'])) {
 	$modx->error->addField('pagetitle',$modx->lexicon('ms.required_field'));
 }
@@ -46,11 +25,10 @@ if ($response->isError()) {
 
 $id = $response->response['object']['id'];
 $_POST['id'] = $id;
-$modx->invokeEvent('OnDocFormSave', $_POST);
 
 if ($modx->getCount('modResource', $id) > 0) {
 	$wids = array();
-	// Если обновляем информацию на всех складах сразу - достаем их id
+	// If updating resource on all warehouses - get its ids
 	if ($_REQUEST['duplicate']) {
 		$tmp = $modx->getCollection('ModWarehouse');
 		foreach ($tmp as $v) {
