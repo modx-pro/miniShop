@@ -49,7 +49,7 @@ if ($res_old = $modx->getObject('ModGoods', array('gid' => $id_old, 'wid' => $_S
 	$res_new = $modx->newObject('ModGoods');
 	$res_new->fromArray($tmp);
 	if (!$res_new->save()) {
-		return $modx->error->failure('ms.orders.goods_err_save');
+		return $modx->error->failure('ms.goods.err_save');
 	}
 	
 	$res = $modx->getIterator('ModCategories', array('gid' => $id_old));
