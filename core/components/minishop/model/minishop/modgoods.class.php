@@ -44,8 +44,10 @@ class ModGoods extends xPDOSimpleObject {
 		foreach ($data as $v) {
 			$v = trim($v);
 			if (empty($v)) {continue;}
-			$tag = $this->xpdo->newObject('ModTags', array('rid' => $rid, 'gid' => $gid, 'tag' => $v));
-			$tag->save();
+			if (!$tag = $this->xpdo->getObject('ModTags', array('rid' => $rid, 'gid' => $gid, 'tag' => $v))) {
+				$tag = $this->xpdo->newObject('ModTags', array('rid' => $rid, 'gid' => $gid, 'tag' => $v));
+				$tag->save();
+			}
 		}
 	}
 
