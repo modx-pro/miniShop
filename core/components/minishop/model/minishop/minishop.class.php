@@ -928,6 +928,72 @@ class miniShop {
 		return $arr;
 	}
 
+	/*
+	 * Gets mathing resources by tags
+	 *
+	 * @param array $tags					// Tags for search
+	 * @param int $strict					// Search for matching all tags exactly
+	 * @param int $only_ids					// Return only ids of matched resources
+	 * @return array $ids					// Or array with resources with data and tags
+	 * */
+	function getTagged($tags = array(), $strict = 0, $only_ids = 0) {
+		if (!is_array($tags)) {$tags = explode(',', $tags);}
+
+		$sql = "SELECT `rid` FROM {$this->modx->getTableName('ModTags')} WHERE `tag` IN ('".implode("','", $tags)."')";
+		$q = new xPDOCriteria($this->modx, $sql);
+		$ids = array();
+		if ($q->prepare() && $q->stmt->execute()){
+			$ids = $q->stmt->fetchAll(PDO::FETCH_COLUMN);
+		}
+		$ids = array_unique($ids);
+		
+		// If needed only ids of not strictly mathed items - return.
+		if (!$strict && $only_ids) {return $ids;}
+
+		// Filtering ids
+		$count = count($tags);
+		if ($strict) {
+			foreach ($ids as $key => $rid) {
+				if ($this->modx->getCount('ModTags', array('rid' => $rid)) != $count) {
+					unset($ids[$key]);
+					continue;
+				}
+				
+				foreach ($tags as $tag) {
+					if (!$this->modx->getCount('ModTags', array('rid' => $rid, 'tag' => $tag))) {
+						unset($ids[$key]);
+						break;
+					}
+				}
+			}
+		}
+
+		// Return strictly ids, if needed
+		$ids = array_unique($ids);
+		if ($only_ids) {
+			return $ids;
+		}
+
+		// Process results
+		$data = array();
+		foreach ($ids as $id) {
+			if (!$only_ids) {
+				if ($res = $this->modx->getObject('modResource', $id)) {
+					if ($goods = $this->modx->getObject('ModGoods', array('gid' => $id, 'wid' => $_SESSION['minishop']['warehouse']))) {
+						$goods_arr = $goods->toArray();
+						$goods_arr['gid'] = $goods_arr['id'];
+						unset($goods_arr['id']);
+						$data[$id] = array_merge($res->toArray(), $goods_arr);
+						$data[$id]['tags'] = $goods->getTags();
+					}
+				}
+			}
+		}
+
+		// Return results
+		return $data;
+	}
+
 
 
 

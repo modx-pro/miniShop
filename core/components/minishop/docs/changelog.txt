@@ -5,7 +5,8 @@ Changelog for miniShop.
 =============
 - Убрал отправку покупателя на z-payment.ru по умолчанию из чанков.
 - Добавлен richtext редактор в окно редактирования товара.
-- Добавлены теги для товарам. Теперь рвы можете связывать товары через отдельную таблицу.
+- Добавлены теги для товаров. Теперь рвы можете связывать товары через отдельную таблицу.
+- Новый метод getTagged в классе miniShop, выводит ресурсы подходящие по тегам.
 - Улучшено копирование товаров
 - Исправлено удаление свойств товаров в таблицах miniShop.
 - Улучшено контекстное меню товаров.
@@ -13,6 +14,7 @@ Changelog for miniShop.
 - Removed redirect customers to z-payment.ru by default from chunks.
 - Added richtext editor to goods editor window.
 - Added tags for goods. Now you can linking goods through separate table.
+- New method getTagged in miniShop class - selecting resources by tags.
 - Improved duplicating of goods
 - Fixed deleting goods properties in a miniShop tables.
 - Improved context menu of goods.
