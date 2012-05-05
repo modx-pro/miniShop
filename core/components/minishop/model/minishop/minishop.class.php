@@ -932,8 +932,10 @@ class miniShop {
 	 * Gets mathing resources by tags
 	 *
 	 * @param array $tags					// Tags for search
-	 * @param int $strict					// Search for matching all tags exactly
 	 * @param int $only_ids					// Return only ids of matched resources
+	 * @param int $strict					// 0 - goods must have at least one specified tag
+	 * 										// 1 - goods must have all specified tags, but can have more
+	 * 										// 2 - goods must have exactly the same tags.
 	 * @return array $ids					// Or array with resources with data and tags
 	 * */
 	function getTagged($tags = array(), $strict = 0, $only_ids = 0) {
@@ -954,9 +956,11 @@ class miniShop {
 		$count = count($tags);
 		if ($strict) {
 			foreach ($ids as $key => $rid) {
-				if ($this->modx->getCount('ModTags', array('rid' => $rid)) != $count) {
-					unset($ids[$key]);
-					continue;
+				if ($strict > 1) {
+					if ($this->modx->getCount('ModTags', array('rid' => $rid)) != $count) {
+						unset($ids[$key]);
+						continue;
+					}
 				}
 				
 				foreach ($tags as $tag) {
