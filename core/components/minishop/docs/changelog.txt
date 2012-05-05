@@ -7,13 +7,15 @@ Changelog for miniShop.
 - Добавлен richtext редактор в окно редактирования товара.
 - Добавлены теги для товарам. Теперь рвы можете связывать товары через отдельную таблицу.
 - Улучшено копирование товаров
-- Исправлено удаление свойст товаров в таблицах miniShop.
+- Исправлено удаление свойств товаров в таблицах miniShop.
+- Улучшено контекстное меню товаров.
 -----
 - Removed redirect customers to z-payment.ru by default from chunks.
 - Added richtext editor to goods editor window.
 - Added tags for goods. Now you can linking goods through separate table.
 - Improved duplicating of goods
 - Fixed deleting goods properties in a miniShop tables.
+- Improved context menu of goods.
 
 1.6.0 rc (28.04.2012)
 =============

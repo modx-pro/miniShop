@@ -22,7 +22,7 @@ miniShop.grid.Goods = function(config) {
 		,remoteSort: true
 		,clicksToEdit: 'auto'
 		//,preventSaveRefresh: false
-		,fields: ['id','pagetitle','parent','wid','article','price','weight','img','remains','reserved','url','published','deleted','hidemenu']
+		,fields: ['id','pagetitle','parent','wid','article','price','weight','img','remains','reserved','url','published','deleted','hidemenu','menu']
 		,columns: [
 			{header: _('id'), dataIndex: 'id', sortable: true, width: 35}
 			,{header: _('ms.warehouse'), dataIndex: 'wid', hidden: true}
@@ -93,35 +93,6 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
 		this.getStore().baseParams['category'] = cb.value;
 		this.getBottomToolbar().changePage(1);
 		this.refresh();
-	}
-	,getMenu: function(r,x) {
-		var m = [];
-		m.push({
-			text: _('ms.goods.change')
-			,handler: this.editGoods
-			,scope: this
-		});
-		m.push({
-			text: _('ms.duplicate')
-			,handler: this.duplicateGoods
-		});
-		m.push('-');
-		m.push({
-			text: _('ms.goods.goto_site_page')
-			,handler: this.goToGoodsSitePage
-		}); 
-		m.push({
-			text: _('ms.goods.goto_manager_page')
-			,handler: this.goToGoodsManagerPage
-		});
-		/*
-		m.push('-');  
-		m.push({
-			text: _('ms.goods.delete')
-			,handler: this.deleteGoods
-		});
-		*/
-		this.addContextMenuItem(m);
 	}
 	,goToGoodsSitePage: function() {
 		var url = this.menu.record.url;
@@ -220,11 +191,60 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
 		if (!this.menu.record) return false;
 		
 		MODx.msg.confirm({
-			title: _('ms.goods.delete')
+			title: _('resource_delete')
 			,text: _('ms.goods.delete_confirm')
 			,url: this.config.url
 			,params: {
 				action: 'mgr/goods/delete'
+				,id: this.menu.record.id
+			}
+			,listeners: {
+				'success': {fn:function(r) {
+					this.refresh();
+				},scope:this}
+			}
+		});
+	}
+	,undeleteGoods: function(btn,e) {
+		if (!this.menu.record) return false;
+		
+		MODx.Ajax.request({
+			url: MODx.config.connectors_url + 'resource/index.php'
+			,params: {
+				action: 'undelete'
+				,id: this.menu.record.id
+			}
+			,listeners: {
+				'success': {fn:function(r) {
+					this.refresh();
+				},scope:this}
+			}
+		})
+	}
+	,publishGoods: function(btn,e) {
+		if (!this.menu.record) return false;
+		MODx.Ajax.request({
+			url: MODx.config.connectors_url + 'resource/index.php'
+			,params: {
+				action: 'publish'
+				,id: this.menu.record.id
+			}
+			,listeners: {
+				'success': {fn:function(r) {
+					this.refresh();
+				},scope:this}
+			}
+		})
+	}
+	,unpublishGoods: function(btn,e) {
+		if (!this.menu.record) return false;
+		
+		MODx.msg.confirm({
+			title: _('resource_unpublish')
+			,text: _('resource_unpublish_confirm')
+			,url: MODx.config.connectors_url + 'resource/index.php'
+			,params: {
+				action: 'unpublish'
 				,id: this.menu.record.id
 			}
 			,listeners: {

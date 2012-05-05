@@ -1,26 +1,6 @@
 <?php
 /**
- * miniShop
- *
- * Copyright 2012 by Vasiliy Naumkin <bezumkin@yandex.ru>
- *
- * miniShop is free software; you can redistribute it and/or modify it under the
- * terms of the GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the License, or (at your option) any later
- * version.
- *
- * miniShop is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along with
- * miniShop; if not, write to the Free Software Foundation, Inc., 59 Temple
- * Place, Suite 330, Boston, MA 02111-1307 USA
- *
- * @package minishop
- */
-/**
- * Default Russian Lexicon Entries for miniShop
+ * Default English Lexicon Entries for miniShop
  *
  * @package minishop
  * @subpackage lexicon
@@ -173,15 +153,15 @@ $_lang['ms.goods.create'] = 'New goods';
 $_lang['ms.goods.change'] = 'Edit goods';
 $_lang['ms.goods.goto_manager_page'] = 'Open goods page';
 $_lang['ms.goods.goto_site_page'] = 'View goods on site';
-$_lang['ms.goods.delete'] = 'Remove goods';
-$_lang['ms.goods.delete_confirm'] = 'Are you sure to remove goods?<br/>This will set parameter "deleted" to 1.';
+//$_lang['ms.goods.delete'] = 'Remove goods';
+$_lang['ms.goods.delete_confirm'] = 'Are you sure to remove this product?<br/>This will set parameter "deleted" to 1 and delete all product properties, such as price, image, remains, gallery etc.<br/>Then you can undelete this or clean trash in resources tree.';
 $_lang['ms.goods.err_delete'] = 'Failed to remove goods.';
 $_lang['ms.goods.err_ns'] = 'Goods ID not set.';
 $_lang['ms.goods.err_nf'] = 'Goods not found';
 $_lang['ms.goods.err_wh_ns'] = 'Warehouse ID not set.';
 $_lang['ms.goods.err_save'] = 'Failure to save goods.';
 $_lang['ms.goods.wh_err_nf'] = 'Warehouse not found.';
-$_lang['ms.goods.duplicate'] = 'Apply to all warehouses.';
+$_lang['ms.goods.duplicate'] = 'Rewrite on all warehouses.';
 $_lang['ms.goods.duplicate.desc'] = 'This will apply additional goods parameters (price, article etc.) to all warehouses.';
 $_lang['ms.goods.add1'] = 'Additional 1';
 $_lang['ms.goods.add2'] = 'Additional 2';

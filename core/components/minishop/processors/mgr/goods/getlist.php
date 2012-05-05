@@ -79,6 +79,8 @@ $c->sortby($sort,$dir);
 if ($isLimit) {$c->limit($limit,$start);}
 $goods = $modx->getCollection('modResource', $c);
 
+$modx->lexicon->load('core:resource');
+
 $arr = array();
 foreach ($goods as $v) {
 	$tmp = array(
@@ -101,6 +103,17 @@ foreach ($goods as $v) {
 	}
 	
 	$tmp = array_merge($tmp, $tmp2);
+
+	$tmp['menu'] = array(
+		array('text' => $modx->lexicon('ms.goods.change'), 'handler' => 'this.editGoods')
+		,array('text' => $modx->lexicon('ms.duplicate'), 'handler' => 'this.duplicateGoods')
+		,'-'
+		,array('text' => $modx->lexicon('ms.goods.goto_site_page'), 'handler' => 'this.goToGoodsSitePage')
+		,array('text' => $modx->lexicon('ms.goods.goto_manager_page'), 'handler' => 'this.goToGoodsManagerPage')
+		,'-'
+	);
+	$tmp['menu'][] = $tmp['published'] ? array('text' => $modx->lexicon('resource_unpublish'), 'handler' => 'this.unpublishGoods') : array('text' => $modx->lexicon('resource_publish'), 'handler' => 'this.publishGoods');
+	$tmp['menu'][] = $tmp['deleted'] ? array('text' => $modx->lexicon('resource_undelete'), 'handler' => 'this.undeleteGoods') : array('text' => $modx->lexicon('resource_delete'), 'handler' => 'this.deleteGoods');
 
     $arr[]= $tmp;
 }

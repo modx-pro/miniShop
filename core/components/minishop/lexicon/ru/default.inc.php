@@ -1,25 +1,5 @@
 <?php
 /**
- * miniShop
- *
- * Copyright 2012 by Vasiliy Naumkin <bezumkin@yandex.ru>
- *
- * miniShop is free software; you can redistribute it and/or modify it under the
- * terms of the GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the License, or (at your option) any later
- * version.
- *
- * miniShop is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along with
- * miniShop; if not, write to the Free Software Foundation, Inc., 59 Temple
- * Place, Suite 330, Boston, MA 02111-1307 USA
- *
- * @package minishop
- */
-/**
  * Default Russian Lexicon Entries for miniShop
  *
  * @package minishop
@@ -175,15 +155,15 @@ $_lang['ms.goods.create'] = 'Создать товар';
 $_lang['ms.goods.change'] = 'Изменить свойства товара';
 $_lang['ms.goods.goto_manager_page'] = 'Открыть страницу товара';
 $_lang['ms.goods.goto_site_page'] = 'Просмотреть товар на сайте';
-$_lang['ms.goods.delete'] = 'Удалить товар';
-$_lang['ms.goods.delete_confirm'] = 'Вы действительно хотите удалить товар?<br/>Это поставит метку "удален" и товар исчезнет из списка. В дальнейшем, вы сможете окончательно удалить его из дерева ресурсов, или восстановить.<br/>Также, это удалит дополнительные свойства товара: цену, изображение, артикул и остаток.';
+//$_lang['ms.goods.delete'] = 'Удалить товар';
+$_lang['ms.goods.delete_confirm'] = 'Вы действительно хотите удалить товар?<br/>Это поставит ресурсу "deleted" = 1 и <b>удалит все свойства товара</b>: цену, изображение, остаток, галерею и т.д.<br/>Затем вы сможете окончательно удалить русурс, очистив корзину, или восстановить его.';
 $_lang['ms.goods.err_delete'] = 'Ошибка при удалении товара.';
 $_lang['ms.goods.err_ns'] = 'Не указан ID товара.';
 $_lang['ms.goods.err_nf'] = 'Товар с указанным ID не найден.';
 $_lang['ms.goods.err_wh_ns'] = 'Не указан ID склада товара.';
 $_lang['ms.goods.err_save'] = 'Ошибка при сохранении товара.';
 $_lang['ms.goods.wh_err_nf'] = 'Не указан склад товара.';
-$_lang['ms.goods.duplicate'] = 'Для всех складов';
+$_lang['ms.goods.duplicate'] = 'Перезаписать на всех складах.';
 $_lang['ms.goods.duplicate.desc'] = 'Если вы отметите это чекбокс, то текущее сохранение перезапишет свойства этого товара на всех доступных складах.';
 $_lang['ms.goods.add1'] = 'Дополнительное поле 1';
 $_lang['ms.goods.add2'] = 'Дополнительное поле 2';
