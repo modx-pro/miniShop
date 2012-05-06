@@ -1,30 +1,11 @@
 <?php
 /**
- * miniShop
- *
- * Copyright 2010 by Shaun McCormick <shaun+minishop@modx.com>
- *
- * miniShop is free software; you can redistribute it and/or modify it under the
- * terms of the GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the License, or (at your option) any later
- * version.
- *
- * miniShop is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along with
- * miniShop; if not, write to the Free Software Foundation, Inc., 59 Temple
- * Place, Suite 330, Boston, MA 02111-1307 USA
- *
- * @package minishop
- */
-/**
  * Get a list of Goods
  *
  * @package minishop
  * @subpackage processors
  */
+ 
 if (!isset($modx->miniShop) || !is_object($modx->miniShop)) {
 	$miniShop = $modx->getService('miniShop','miniShop',$modx->getOption('minishop.core_path',null,$modx->getOption('core_path').'components/minishop/').'model/minishop/', $scriptProperties);
 	if (!($miniShop instanceof miniShop)) return '';
@@ -33,7 +14,6 @@ if (!isset($modx->miniShop) || !is_object($modx->miniShop)) {
 if (!$modx->hasPermission('view')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
 
 $goods_tpls = $miniShop->config['ms_goods_tpls'];
-//$category_tpls = $miniShop->config['ms_category_tpls'];
 
 $isLimit = !empty($_REQUEST['limit']);
 $start = $modx->getOption('start',$_REQUEST,0);
@@ -56,9 +36,13 @@ $c->leftJoin('ModGoods', 'ModGoods', array(
 
 $c->where(array('modResource.template:IN' => $goods_tpls, 'modResource.isfolder:=' => 0));
 
-// Фильтрация по категории
+// Filtering by category
 if (!empty($category)) {
-	$c->andCondition(array('parent' => $category), '', 1);
+	if ($tmp = $modx->getObject('modResource', $category)) {
+		$categories = $modx->getChildIds($category, 10, array('context' => $tmp->get('context_key')));
+		$categories[] = $category;
+		$c->andCondition(array('parent:IN' => $categories), '', 1);
+	}
 	
 	$ids = $modx->miniShop->getGoodsByCategories($category);
 	if (!empty($ids)) {
@@ -66,9 +50,9 @@ if (!empty($category)) {
 	}
 }
 
-// Фильтрация по строке поиска
+// Filtering by search query
 if (!empty($query)) {
-	// Поиск по названию и артиклю
+	// Search by pagetitle or article
 	$c->andCondition(array('modResource.pagetitle:LIKE' => '%'.$query.'%'), '', 2);
 	$c->orCondition(array('ModGoods.article:LIKE' => '%'.$query.'%'), '', 2);
 }
