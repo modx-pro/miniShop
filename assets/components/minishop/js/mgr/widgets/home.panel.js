@@ -434,6 +434,7 @@ miniShop.combo.tags = function(config) {
 		,resizable: true
 		,name: 'tags[]'
 		,anchor:'100%'
+		,minChars: 3
 		,store:new Ext.data.JsonStore({
 			 id:'tags-store'
 			,root:'results'
@@ -451,7 +452,6 @@ miniShop.combo.tags = function(config) {
 		,extraItemCls: 'x-tag'
 		,listeners: {
 			newitem: function(bs,v, f){
-				v = v.slice(0,1).toUpperCase() + v.slice(1).toLowerCase();
 				var newObj = {
 					tag: v
 				};
