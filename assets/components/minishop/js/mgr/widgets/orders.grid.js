@@ -300,7 +300,7 @@ miniShop.grid.Log = function(config) {
 	this.exp = new Ext.grid.RowExpander({
 		expandOnDblClick: false
 		,tpl : new Ext.Template('<p class="desc">{comment}</p>')
-		,renderer : function(v, p, record){return record.data.comment != null ? '<div class="x-grid3-row-expander">&#160;</div>' : '&#160;';}
+		,renderer : function(v, p, record){return record.data.comment != null && record.data.comment != '' ? '<div class="x-grid3-row-expander">&#160;</div>' : '&#160;';}
 	});
 	Ext.applyIf(config,{
 		id: this.ident+'-grid-log'
