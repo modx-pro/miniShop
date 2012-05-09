@@ -491,7 +491,7 @@ Ext.extend(miniShop.grid.TVs,MODx.grid.Grid, {
 		var m = [];
 		m.push({
 			text: _('ms.tv.update')
-			,handler: this.updateGoods
+			,handler: this.updateTV
 		});
 		//m.push('-');
 		this.addContextMenuItem(m);
