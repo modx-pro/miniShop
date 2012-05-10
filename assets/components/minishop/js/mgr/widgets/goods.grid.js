@@ -37,6 +37,7 @@ miniShop.grid.Goods = function(config) {
 		]
 		,tbar: [
 			{text: _('ms.goods.create'),handler: this.createGoods,scope: this}
+			//,{text: '',menu: this.getGoodsMenu()}
 			,{xtype: 'tbspacer',width: 30},
 			'<strong>' + _('ms.warehouse') + ':</strong>&nbsp;'
 			,{xtype: 'minishop-filter-warehouse',id: 'goods-filter-warehouse',listeners: {select: {fn: this.filterByWarehouse, scope:this}}}
@@ -71,6 +72,19 @@ miniShop.grid.Goods = function(config) {
 Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
 	windows: {}
 
+	,getGoodsMenu: function() {
+		var m = [];
+		m.push({
+			text: _('ms.import')
+			,handler: startImport
+			,scope: this
+		},{
+			text: _('ms.export')
+			,handler: startExport
+			,scope: this
+		});
+		return m;
+    }
 	,FilterClear: function() {
 		var s = this.getStore();
 		s.baseParams.query = '';

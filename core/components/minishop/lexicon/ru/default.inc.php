@@ -56,6 +56,8 @@ $_lang['ms.gallery'] = 'Галерея';
 $_lang['ms.file'] = 'Файл';
 $_lang['ms.dir'] = 'Директория';
 $_lang['ms.tags'] = 'Теги';
+$_lang['ms.import'] = 'Импорт';
+$_lang['ms.export'] = 'Экспорт';
 
 
 

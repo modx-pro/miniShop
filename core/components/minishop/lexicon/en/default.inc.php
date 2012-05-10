@@ -56,6 +56,8 @@ $_lang['ms.gallery'] = 'Gallery';
 $_lang['ms.file'] = 'File';
 $_lang['ms.dir'] = 'Directory';
 $_lang['ms.tags'] = 'Tags';
+$_lang['ms.import'] = 'Import';
+$_lang['ms.export'] = 'Export';
 
 $_lang['ms.warehouse.select'] = 'Select warehouse';
 $_lang['ms.warehouse.create'] = 'New warehouse';
