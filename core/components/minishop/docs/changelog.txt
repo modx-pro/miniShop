@@ -3,10 +3,16 @@ Changelog for miniShop.
 1.6.2 rc (13.05.2012)
 =============
 - Добавлены параметры сниппету miniShop.
+- Добавлены параметры сниппету msGetGallery.
+- Добавлены параметры сниппету msGetResources. Также переведены на русский все оригинальные параметры getResources.
 - msGetGoodsPlaceholder и msGetGoodsPlaceholders теперь поддерживают получение тэгов товара
+- Небольшие улучшения кода сниппетов
 -----
 - Added parameters to snippet miniShop. 
+- Added parameters to snippet msGetGallery.
+- Added parameters to snippet. Also translated into Russian all original parameters of getResources.
 - msGetGoodsPlaceholder and msGetGoodsPlaceholders are now supporting retrieving tags of product
+- Small improvements of code of snippets.
 
 
 1.6.1 rc (06.05.2012)
