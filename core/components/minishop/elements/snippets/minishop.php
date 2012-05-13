@@ -1,39 +1,15 @@
 <?php
-// Определение действия сниппета
+// Defining action. If no action in $_REQUEST - set default (getCart)
 if (empty($_REQUEST['action'])) {$action = $modx->getOption('action', $scriptProperties, 'getCart');}
 else {$action = $_REQUEST['action'];}
 
-// Чанки оформления
-$c['tplCartOuter'] = $modx->getOption('tplCartOuter', $scriptProperties, 'tpl.msCart.outer');
-$c['tplCartRow'] = $modx->getOption('tplCartRow', $scriptProperties, 'tpl.msCart.row');
-$c['tplCartStatus'] = $modx->getOption('tplCartStatus', $scriptProperties, 'tpl.msCart.status');
-$c['tplDeliveryRow'] = $modx->getOption('tplDeliveryRow', $scriptProperties, 'tpl.msDelivery.row');
-$c['tplPaymentRow'] = $modx->getOption('tplPaymentRow', $scriptProperties, 'tpl.msDelivery.row');
-$c['tplAddrForm'] = $modx->getOption('tplAddrForm', $scriptProperties, 'tpl.msAddrForm');
-$c['tplAddrFormMini'] = $modx->getOption('tplAddrFormMini', $scriptProperties, 'tpl.msAddrForm.mini');
-$c['tplAddrFormSaved'] = $modx->getOption('tplAddrFormSaved', $scriptProperties, 'tpl.msAddrForm.saved');
-$c['tplConfirmOrder'] = $modx->getOption('tplConfirmOrder', $scriptProperties, 'tpl.msConfirmOrder');
-$c['tplConfirmOrderRow'] = $modx->getOption('tplConfirmOrderRow', $scriptProperties, 'tpl.msConfirmOrder.row');
-$c['tplOrderEmailUser'] = $modx->getOption('tplOrderEmailUser', $scriptProperties, 'tpl.msOrderEmail.user');
-$c['tplOrderEmailManager'] = $modx->getOption('tplOrderEmailManager', $scriptProperties, 'tpl.msOrderEmail.manager');
-$c['tplOrderEmailRow'] = $modx->getOption('tplOrderEmailRow', $scriptProperties, 'tpl.msOrderEmail.row');
-$c['tplSubmitOrderSuccess'] = $modx->getOption('tplSubmitOrderSuccess', $scriptProperties, 'tpl.msSubmitOrder.success');
-$c['tplMyOrdersList'] = $modx->getOption('tplMyOrdersList', $scriptProperties, 'tpl.msMyOrdersList'); 
-$c['tplPaymentForm'] = $modx->getOption('tplPaymentForm', $scriptProperties, 'tpl.msPayment.form');
-
-// Debug
-$c['debug'] = $modx->getOption('debug', $scriptProperties, 0);
-
-// Группы для регистрации покупателей
-$c['userGroups'] = $modx->getOption('userGroups', $scriptProperties, 0);
-
-// Подключение класса
+// Load class
 if (!isset($modx->miniShop) || !is_object($modx->miniShop)) {
-  $modx->miniShop = $modx->getService('minishop','miniShop', $modx->getOption('core_path').'components/minishop/model/minishop/', $c);
+  $modx->miniShop = $modx->getService('minishop','miniShop', $modx->getOption('core_path').'components/minishop/model/minishop/', $scriptProperties);
   if (!($modx->miniShop instanceof miniShop)) return '';
 }
 
-// Вызов нужного метода
+// Load needed method
 switch ($action) {
 	case 'getCart': $res = $modx->miniShop->getCart(); break;
 	case 'addToCart': $res = $modx->miniShop->addToCart($_POST['gid'], $_POST['num'], $_POST['data']); break;
@@ -57,7 +33,7 @@ switch ($action) {
     default: $res = '';
 }
 
-// Вывод ответа, в зависимости от типа запроса
+// Returning results, according to request typea
 if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest' && !empty($res)) {
 	if (!$_REQUEST['json_encode']) {
 		echo json_encode($res);

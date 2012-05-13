@@ -1,20 +1,32 @@
 <?php
+
 if (!isset($modx->miniShop) || !is_object($modx->miniShop)) {
-  $modx->miniShop = $modx->getService('minishop','miniShop', $modx->getOption('core_path').'components/minishop/model/minishop/', array());
+  $modx->miniShop = $modx->getService('minishop','miniShop', $modx->getOption('core_path').'components/minishop/model/minishop/', $scriptProperties);
   if (!($modx->miniShop instanceof miniShop)) return '';
 }
 
-// resource - Объект modResource товара.
+// We have object resource - it is usual modResource object.
+// Getting id of resource
 $id = $resource->get('id');
 
-// Дополнительные свойства товара
+// Getting properties of product
 if (!$res = $modx->getObject('ModGoods', array('gid' => $id, 'wid' => $_SESSION['minishop']['warehouse']))) {return 0;}
 
-// Получение цены.
+// Retrieving price
 $price = $res->get('price');
 
-// Здесь можно написать любые правила для измения цены товаров, скидок, и прочего.
-// Но помните, что этот сниппет перезапишется при обновлении магазина, поэтому его лучше переименовать и обязательно указать
-// в системном параметре minishop.getprice_snippet
+/*
+Here you can write any rules for modification of price of the goods
+But remember, this snippet will be overwritten on upgrading miniShop to new version.
+So you need to rename this snippet and specify new name in system setting "minishop.getprice_snippet"
+For example we can increase price of every red colored product:
+	Getting all properties of a request, including array "data" with additional properties from frontend
+	
+	$request = $_REQUEST;
+	if ($request['data']['color'] == 'red') {
+		$price += 200;
+	}
+*/
 
+// By default we simply returning price from modGoods
 return $price;

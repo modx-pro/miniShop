@@ -1,20 +1,11 @@
 <?php
-// Определяем переменные для работы
-$id = $modx->getOption('id', $scriptProperties, $modx->resource->id);
-$tpl = $modx->getOption('tpl', $scriptProperties, 'tpl.msGallery.row');
-$limit = $modx->getOption('limit', $scriptProperties, 0);
-$offset = $modx->getOption('offset', $scriptProperties, 0);
-$outputSeparator = $modx->getOption('outputSeparator', $scriptProperties, "\n");
-$totalVar = $modx->getOption('totalVar', $scriptProperties, 'total');
-$sortby = $modx->getOption('sortby', $scriptProperties, 'id');
-$sortdir = $modx->getOption('sortdir', $scriptProperties, 'ASC');
-$onlyImg = isset($onlyImg) ? $onlyImg : 1;
 
 if (!isset($modx->miniShop) || !is_object($modx->miniShop)) {
   $modx->miniShop = $modx->getService('minishop','miniShop', $modx->getOption('core_path').'components/minishop/model/minishop/', $scriptProperties);
   if (!($modx->miniShop instanceof miniShop)) return '';
 }
 
+if (empty($id)) {$id = $modx->resource->id;}
 
 if (!$modx->getCount('modResource', $id)) {return $modx->lexicon('ms.goods.err_nf');}
 

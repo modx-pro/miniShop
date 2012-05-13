@@ -10,7 +10,7 @@ $wid = $_SESSION['minishop']['warehouse'];	// warehouse id
 if ($res = $modx->getObject('ModGoods', array('gid' => $gid, 'wid' => $wid))) {
 	$arr = $res->toArray();
 	$arr['price'] = $modx->miniShop->getPrice($gid);
-
+	$arr['tags'] = implode(', ', $res->getTags());
 	$modx->setPlaceholders($arr);
 }
 

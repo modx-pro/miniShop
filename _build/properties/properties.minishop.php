@@ -1,89 +1,196 @@
-<?php
-/**
- * miniShop
- *
- * Copyright 2012 by Vasiliy Naumkin <bezumkin@yandex.ru>
- *
- * miniShop is free software; you can redistribute it and/or modify it under the
- * terms of the GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the License, or (at your option) any later
- * version.
- *
- * miniShop is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along with
- * miniShop; if not, write to the Free Software Foundation, Inc., 59 Temple
- * Place, Suite 330, Boston, MA 02111-1307 USA
- *
- * @package minishop
- */
+<?
 /**
  * Properties for the miniShop snippet.
  *
  * @package minishop
  * @subpackage build
  */
-$properties = array(
-/*
-    array(
-        'name' => 'tpl',
-        'desc' => 'prop_minishop.tpl_desc',
-        'type' => 'textfield',
-        'options' => '',
-        'value' => 'Item',
-        'lexicon' => 'minishop:properties',
-    ),
-    array(
-        'name' => 'sortBy',
-        'desc' => 'prop_minishop.sortby_desc',
-        'type' => 'textfield',
-        'options' => '',
-        'value' => 'name',
-        'lexicon' => 'minishop:properties',
-    ),
-    array(
-        'name' => 'sortDir',
-        'desc' => 'prop_minishop.sortdir_desc',
-        'type' => 'textfield',
-        'options' => '',
-        'value' => 'ASC',
-        'lexicon' => 'minishop:properties',
-    ),
-    array(
-        'name' => 'limit',
-        'desc' => 'prop_minishop.limit_desc',
-        'type' => 'textfield',
-        'options' => '',
-        'value' => 5,
-        'lexicon' => 'minishop:properties',
-    ),
-    array(
-        'name' => 'outputSeparator',
-        'desc' => 'prop_minishop.outputseparator_desc',
-        'type' => 'textfield',
-        'options' => '',
-        'value' => '',
-        'lexicon' => 'minishop:properties',
-    ),
-    array(
-        'name' => 'toPlaceholder',
-        'desc' => 'prop_minishop.toplaceholder_desc',
-        'type' => 'textfield',
-        'options' => '',
-        'value' => true,
-        'lexicon' => 'minishop:properties',
-    ),
-    array(
-        'name' => '',
-        'desc' => 'prop_minishop.',
-        'type' => 'textfield',
-        'options' => '',
-        'value' => '',
-        'lexicon' => 'minishop:properties',
-    ),
-*/
+$properties = array();
+
+// snippet miniShop
+$properties[5] = array(
+	array(
+		'name' => 'tplCartOuter',
+		'value' => 'tpl.msCart.outer',
+		'type' => 'textfield',
+		'desc' => 'ms.tplCartOuter',
+		'lexicon' => 'minishop:properties',
+		'options' => '',
+	),
+	array(
+		'name' => 'tplCartRow',
+		'value' => 'tpl.msCart.row',
+		'type' => 'textfield',
+		'desc' => 'ms.tplCartRow',
+		'lexicon' => 'minishop:properties',
+		'options' => '',
+	),
+	array(
+		'name' => 'tplDeliveryRow',
+		'value' => 'tpl.msDelivery.row',
+		'type' => 'textfield',
+		'desc' => 'ms.tplDeliveryRow',
+		'lexicon' => 'minishop:properties',
+		'options' => '',
+	),
+	array(
+		'name' => 'tplPaymentRow',
+		'value' => 'tpl.msDelivery.row',
+		'type' => 'textfield',
+		'desc' => 'ms.tplPaymentRow',
+		'lexicon' => 'minishop:properties',
+		'options' => '',
+	),
+	array(
+		'name' => 'tplAddrForm',
+		'value' => 'tpl.msAddrForm',
+		'type' => 'textfield',
+		'desc' => 'ms.tplAddrForm',
+		'lexicon' => 'minishop:properties',
+		'options' => '',
+	),
+	array(
+		'name' => 'tplOrderEmailUser',
+		'value' => 'tpl.msOrderEmail.user',
+		'type' => 'textfield',
+		'desc' => 'ms.tplOrderEmailUser',
+		'lexicon' => 'minishop:properties',
+		'options' => '',
+	),
+	array(
+		'name' => 'tplOrderEmailManager',
+		'value' => 'tpl.msOrderEmail.manager',
+		'type' => 'textfield',
+		'desc' => 'ms.tplOrderEmailManager',
+		'lexicon' => 'minishop:properties',
+		'options' => '',
+	),
+	array(
+		'name' => 'tplOrderEmailRow',
+		'value' => 'tpl.msOrderEmail.row',
+		'type' => 'textfield',
+		'desc' => 'ms.tplOrderEmailRow',
+		'lexicon' => 'minishop:properties',
+		'options' => '',
+	),
+	array(
+		'name' => 'tplSubmitOrderSuccess',
+		'value' => 'tpl.msSubmitOrder.success',
+		'type' => 'textfield',
+		'desc' => 'ms.tplSubmitOrderSuccess',
+		'lexicon' => 'minishop:properties',
+		'options' => '',
+	),
+	array(
+		'name' => 'tplMyOrdersList',
+		'value' => 'tpl.msMyOrdersList',
+		'type' => 'textfield',
+		'desc' => 'ms.tplMyOrdersList',
+		'lexicon' => 'minishop:properties',
+		'options' => '',
+	),
+	array(
+		'name' => 'tplPaymentForm',
+		'value' => 'tpl.msPayment.form',
+		'type' => 'textfield',
+		'desc' => 'ms.tplPaymentForm',
+		'lexicon' => 'minishop:properties',
+		'options' => '',
+	),
+	array(
+		'name' => 'debug',
+		'value' => 0,
+		'type' => 'boolean',
+		'desc' => 'ms.debug',
+		'lexicon' => 'minishop:properties',
+		'options' => '',
+	),
+	array(
+		'name' => 'userGroups',
+		'value' => '',
+		'type' => 'textfield',
+		'desc' => 'ms.userGroups',
+		'lexicon' => 'minishop:properties',
+		'options' => '',
+	)
+);
+
+
+$properties[9] = array(
+	array(
+		'name' => 'id',
+		'value' => 0,
+		'type' => 'numberfield',
+		'desc' => 'ms.id',
+		'lexicon' => 'minishop:properties',
+		'options' => '',
+	),
+	array(
+		'name' => 'tpl',
+		'value' => 'tpl.msGallery.row',
+		'type' => 'textfield',
+		'desc' => 'ms.tpl',
+		'lexicon' => 'minishop:properties',
+		'options' => '',
+	),
+	array(
+		'name' => 'limit',
+		'value' => 10,
+		'type' => 'numberfield',
+		'desc' => 'ms.limit',
+		'lexicon' => 'minishop:properties',
+		'options' => '',
+	),
+	array(
+		'name' => 'offset',
+		'value' => 0,
+		'type' => 'numberfield',
+		'desc' => 'ms.offset',
+		'lexicon' => 'minishop:properties',
+		'options' => '',
+	),
+	array(
+		'name' => 'outputSeparator',
+		'value' => "\n",
+		'type' => 'textfield',
+		'desc' => 'ms.outputSeparator',
+		'lexicon' => 'minishop:properties',
+		'options' => '',
+	),
+	array(
+		'name' => 'totalVar',
+		'value' => 'total',
+		'type' => 'textfield',
+		'desc' => 'ms.totalVar',
+		'lexicon' => 'minishop:properties',
+		'options' => '',
+	),
+	array(
+		'name' => 'sortby',
+		'value' => 'id',
+		'type' => 'sortby',
+		'desc' => 'ms.sortby',
+		'lexicon' => 'minishop:properties',
+		'options' => '',
+	),
+	array(
+		'name' => 'sortdir',
+		'value' => 'id',
+		'type' => 'sortdir',
+		'desc' => 'ms.sortdir',
+		'lexicon' => 'minishop:properties',
+		'options' => '',
+	),
+	array(
+		'name' => 'onlyImg',
+		'value' => 1,
+		'type' => 'boolean',
+		'desc' => 'ms.onlyImg',
+		'lexicon' => 'minishop:properties',
+		'options' => '',
+	),
+
+
 );
 
 return $properties;

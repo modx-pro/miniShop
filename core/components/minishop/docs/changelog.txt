@@ -1,5 +1,13 @@
 Changelog for miniShop.
 
+1.6.2 rc (13.05.2012)
+=============
+- Добавлены параметры сниппету miniShop.
+- msGetGoodsPlaceholder и msGetGoodsPlaceholders теперь поддерживают получение тэгов товара
+-----
+- Added parameters to snippet miniShop. 
+- msGetGoodsPlaceholder and msGetGoodsPlaceholders are now supporting retrieving tags of product
+
 
 1.6.1 rc (06.05.2012)
 =============
