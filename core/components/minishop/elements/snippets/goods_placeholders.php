@@ -1,4 +1,5 @@
 <?php
+
 if (!isset($modx->miniShop) || !is_object($modx->miniShop)) {
 	$modx->miniShop = $modx->getService('minishop','miniShop', $modx->getOption('core_path').'components/minishop/model/minishop/', $scriptProperties);
 	if (!($modx->miniShop instanceof miniShop)) return '';

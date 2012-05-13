@@ -15,7 +15,7 @@ $snippets[0]->fromArray(array(
     'description' => 'Snippet for switch active warehouse on frontend.',
     'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/change_warehouse.php'),
 ),'',true,true);
-$snippets[0]->setProperties(array());
+$snippets[0]->setProperties($properties[0]);
 
 /*
 $snippets[1]= $modx->newObject('modSnippet');
@@ -25,7 +25,7 @@ $snippets[1]->fromArray(array(
     'description' => 'Returns comma separated ids list of resources, that match to category. Must be used with getResources',
     'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/getgoods.php'),
 ),'',true,true);
-$snippets[1]->setProperties($properties);
+$snippets[1]->setProperties($properties[1]);
 */
 
 $snippets[2]= $modx->newObject('modSnippet');
@@ -35,7 +35,7 @@ $snippets[2]->fromArray(array(
     'description' => 'Snippet for modification the goods price. Any rules for changing price will be here.',
     'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/get_price.php'),
 ),'',true,true);
-$snippets[2]->setProperties(array());
+$snippets[2]->setProperties($properties[2]);
 
 $snippets[3]= $modx->newObject('modSnippet');
 $snippets[3]->fromArray(array(
@@ -44,7 +44,7 @@ $snippets[3]->fromArray(array(
     'description' => 'Output filter for extended properties of goods, such as price, article, image and remains',
     'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/goods_placeholder.php'),
 ),'',true,true);
-$snippets[3]->setProperties(array());
+$snippets[3]->setProperties($properties[3]);
 
 $snippets[4]= $modx->newObject('modSnippet');
 $snippets[4]->fromArray(array(
@@ -53,7 +53,7 @@ $snippets[4]->fromArray(array(
     'description' => 'Snippet for setPlaceholders() all goods placeholders on goods page.',
     'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/goods_placeholders.php'),
 ),'',true,true);
-$snippets[4]->setProperties(array());
+$snippets[4]->setProperties($properties[4]);
 
 $snippets[5]= $modx->newObject('modSnippet');
 $snippets[5]->fromArray(array(
@@ -71,7 +71,7 @@ $snippets[6]->fromArray(array(
     'description' => 'Snippet for showing various orders and goods placeholders in email notices. Should be called in email chunks.',
     'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/orders_placeholders.php'),
 ),'',true,true);
-$snippets[6]->setProperties(array());
+$snippets[6]->setProperties($properties[6]);
 
 $snippets[7]= $modx->newObject('modSnippet');
 $snippets[7]->fromArray(array(
@@ -80,7 +80,7 @@ $snippets[7]->fromArray(array(
     'description' => 'A modified getResources 1.4.2pl for miniShop. Support multicategory and extended goods properties (price,article etc.). Recommended instead getResources + msGetGoods + msGetGoodsPlaceholder.',
     'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/ms_getresources.php'),
 ),'',true,true);
-$snippets[7]->setProperties(array());
+$snippets[7]->setProperties($properties[7]);
 
 $snippets[8]= $modx->newObject('modSnippet');
 $snippets[8]->fromArray(array(
@@ -89,7 +89,7 @@ $snippets[8]->fromArray(array(
     'description' => 'FormIt hook for submitting orders',
     'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/hook_saveform.php'),
 ),'',true,true);
-$snippets[8]->setProperties(array());
+$snippets[8]->setProperties($properties[8]);
 
 $snippets[9]= $modx->newObject('modSnippet');
 $snippets[9]->fromArray(array(
@@ -98,7 +98,7 @@ $snippets[9]->fromArray(array(
     'description' => 'Snippet to display product images',
     'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/get_gallery.php'),
 ),'',true,true);
-$snippets[9]->setProperties(array());
+$snippets[9]->setProperties($properties[9]);
 
 unset($properties);
 return $snippets;

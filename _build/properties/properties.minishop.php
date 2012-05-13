@@ -7,7 +7,12 @@
  */
 $properties = array();
 
-// snippet miniShop
+$properties[0] = array();
+$properties[1] = array();
+$properties[2] = array();
+$properties[3] = array();
+$properties[4] = array();
+
 $properties[5] = array(
 	array(
 		'name' => 'tplCartOuter',
@@ -115,6 +120,9 @@ $properties[5] = array(
 	)
 );
 
+$properties[6] = array();
+$properties[7] = array();
+$properties[8] = array();
 
 $properties[9] = array(
 	array(
@@ -189,8 +197,6 @@ $properties[9] = array(
 		'lexicon' => 'minishop:properties',
 		'options' => '',
 	),
-
-
 );
 
 return $properties;
