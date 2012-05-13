@@ -66,7 +66,7 @@ class miniShop {
         $this->modx->lexicon->load('minishop:add');
 
 		// Show errors if debug enabled
-		if (isset($this->config['debug']) && $this->config['debug'] != 0) {
+		if ($this->config['debug']) {
 			ini_set('display_errors', 1); 
 			error_reporting(E_ALL ^ E_NOTICE);
 		}
