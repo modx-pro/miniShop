@@ -18,7 +18,7 @@
 <script type="text/javascript">
 	Ext.onReady(function() {
 		miniShop.config = [[+config]];
-		miniShop.config.connector_url = "/[[~[[*id]]]]";
+		miniShop.config.connector_url = "[[~[[*id]]]]";
 		miniShop.action = 0;
 	});
 </script>
