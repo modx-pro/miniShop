@@ -38,7 +38,7 @@ foreach ($orders as $v) {
 			}
 			$tmp['data_view'] .= '</ul>';
 		}
-		else {$tmp['data_view'] = '';}	
+		else {$tmp['data_view'] = $tmp2;}
 	}
 	else {$tmp['data_view'] = '';}
 
