@@ -1,25 +1,5 @@
 <?php
 /**
- * miniShop
- *
- * Copyright 2010 by Shaun McCormick <shaun+minishop@modx.com>
- *
- * miniShop is free software; you can redistribute it and/or modify it under the
- * terms of the GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the License, or (at your option) any later
- * version.
- *
- * miniShop is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along with
- * miniShop; if not, write to the Free Software Foundation, Inc., 59 Temple
- * Place, Suite 330, Boston, MA 02111-1307 USA
- *
- * @package minishop
- */
-/**
  * Get a list of Ordered Goods
  *
  * @package minishop
@@ -50,15 +30,18 @@ foreach ($orders as $v) {
 	if ($res = $modx->getObject('modResource', $tmp['gid'])) {
 		$tmp['name'] = $res->get('pagetitle');
 	}
-	if ($tmp['data'] == '[]') {$tmp['data_view'] = '';}
-	else {
-		$tmp2 = json_decode($tmp['data'], true);
-		$tmp['data_view'] = '<ul>';
-		foreach ($tmp2 as $k => $v2) {
-			$tmp['data_view'] .= "<li>".$modx->lexicon('ms.'.$k)." &mdash; $v2</li>";
+	if ($tmp2 = json_decode($tmp['data'], true)) {
+		if (is_array($tmp2)){
+			$tmp['data_view'] = '<ul>';
+			foreach ($tmp2 as $k => $v2) {
+				$tmp['data_view'] .= "<li>".$modx->lexicon('ms.'.$k)." &mdash; $v2</li>";
+			}
+			$tmp['data_view'] .= '</ul>';
 		}
-		$tmp['data_view'] .= '</ul>';
+		else {$tmp['data_view'] = '';}	
 	}
+	else {$tmp['data_view'] = '';}
+
 	$arr[] = $tmp;
 }
 return $this->outputArray($arr, $count);
