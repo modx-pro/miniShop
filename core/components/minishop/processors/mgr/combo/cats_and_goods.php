@@ -5,7 +5,6 @@
  * @package minishop
  * @subpackage processors
  */
-
 if (!$modx->hasPermission('view')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
 
 // Getting ids of templates
@@ -23,15 +22,15 @@ $mode = $modx->getOption('mode', $_REQUEST, 'category');
 $addall = $_REQUEST['addall'] ? 1 : 0;
 
 // Starting new query
-$c = $modx->newQuery('modResource');
+$c = $modx->newQuery('modResource', array('deleted:!=' => 1));
 $c->select('id,pagetitle,parent');
 
 // Depending on the mode refine query
 if ($mode == 'category') {
-	$c->where(array('template:IN' => $categories_tpls/*, 'isfolder' => 1*/));
+	$c->where(array('template:IN' => $categories_tpls));
 }
 else if ($mode == 'goods') {
-	$c->where(array('template:IN' => $goods_tpls/*, 'isfolder' => 0*/));
+	$c->where(array('template:IN' => $goods_tpls));
 }
 
 // Filtering by name
