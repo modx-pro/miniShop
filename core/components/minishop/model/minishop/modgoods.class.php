@@ -23,10 +23,10 @@ class ModGoods extends xPDOSimpleObject {
 		$this->set('reserved', $reserved_new);
 		
 		if ($this->save()) {
-			if (!isset($this->xpdo->miniShop) || !is_object($this->xpdo->miniShop)) {
-				$this->xpdo->miniShop = new miniShop($this->xpdo);
-			}
-			$this->xpdo->miniShop->Log('goods', $this->get('gid'), 'remains', $remains, $remains_new);
+			//if (!isset($this->xpdo->miniShop) || !is_object($this->xpdo->miniShop)) {
+			//	$this->xpdo->miniShop = new miniShop($this->xpdo);
+			//}
+			//$this->xpdo->miniShop->Log('goods', $this->get('gid'), 'remains', $remains, $remains_new);
 			return true;
 		}
 	}
