@@ -2,8 +2,10 @@ Changelog for miniShop.
 
 1.7.0 (15.06.2012)
 =============
+- Исправлено добавление новых тэгов товарам
 - [#45] Количество результатов для таблиц берется из системной настройки 'default_per_page'
 -----
+- Fixed adding new tags to goods
 - [#45] Number of results for grids now taken from system setting 'default_per_page'
 
 1.6.2 rc (13.05.2012)
