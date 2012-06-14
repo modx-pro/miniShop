@@ -350,13 +350,26 @@ Ext.reg('minishop-filter-clear',MODx.form.FilterClear);
 // Модифицированный modx-combo-browser для miniShop
 miniShop.combo.Browser = function(config) {
     config = config || {};
-    Ext.applyIf(config,{
-       width: 300
-       ,triggerAction: 'all'
-       ,source: config.source || MODx.config.default_media_source
-    });
-    miniShop.combo.Browser.superclass.constructor.call(this,config);
-    this.config = config;
+	
+	if (config.length != 0 && config.openTo.length != 0) {
+		if (!/^\//.test(config.openTo)) {
+			config.openTo = '/' + config.openTo;
+		}
+		if (!/$\//.test(config.openTo)) {
+			var tmp = config.openTo.split('/')
+			delete tmp[tmp.length - 1];
+			tmp = tmp.join('/');
+			config.openTo = tmp.substr(1)
+			console.log(config.openTo)
+		}
+	}
+
+	Ext.applyIf(config,{
+	   width: 300
+	   ,triggerAction: 'all'
+	});
+	miniShop.combo.Browser.superclass.constructor.call(this,config);
+	this.config = config;
 };
 Ext.extend(miniShop.combo.Browser,Ext.form.TriggerField,{
 	browser: null

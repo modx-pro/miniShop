@@ -2,9 +2,13 @@ Changelog for miniShop.
 
 1.7.0 (15.06.2012)
 =============
+- Улучшена работа браузера для выбора изображений - при изменении картинки открывается нужная директория.
+- Добавлено создание комплектов товаров
 - Исправлено добавление новых тэгов товарам
 - [#45] Количество результатов для таблиц берется из системной настройки 'default_per_page'
 -----
+- Fixed work of browser for selection of images - when changing image it's open to needed directory.
+- Added creation of kits with goods
 - Fixed adding new tags to goods
 - [#45] Number of results for grids now taken from system setting 'default_per_page'
 

@@ -358,7 +358,7 @@ miniShop.window.createGoods = function(config) {
 					,{xtype: 'textfield',name: 'article',fieldLabel: _('ms.article')}
 					,{xtype: 'numberfield',name: 'price',fieldLabel: _('ms.price')}
 					,{xtype: 'numberfield',name: 'weight',decimalPrecision: 3, fieldLabel: _('ms.weight')}
-					,{xtype: 'ms-combo-browser',name: 'img',fieldLabel: _('ms.img'),anchor: '100%'}
+					,{xtype: 'ms-combo-browser', openTo: config.record.img, name: 'img',fieldLabel: _('ms.img'),anchor: '100%'}
 					,{xtype: 'numberfield',name: 'remains',fieldLabel: _('ms.remains')}
 					,{xtype: 'textfield',name: 'reserved',disabled: true,fieldLabel: _('ms.reserved')}
 					,{xtype: 'ms-superbox-tags', name: 'tags[]', value: config.record.tags, fieldLabel: _('ms.tags')}
@@ -705,6 +705,7 @@ Ext.extend(miniShop.grid.Gallery,MODx.grid.Grid, {
 		this.windows.updateImage = MODx.load({
 			xtype: 'minishop-window-goods-gallery'
 			,title: _('ms.gallery.update')
+			,openTo: record.file
 			,listeners: {
 				'success': {fn:function() { this.refresh(); },scope:this}
 				,'hide': {fn:function() { this.destroy(); }}
@@ -751,7 +752,7 @@ miniShop.window.updateImage = function(config) {
 			{xtype: 'hidden',name: 'id',id: 'minishop-'+this.ident+'-id'}
 			,{xtype: 'textfield',fieldLabel: _('name'),name: 'name',id: 'minishop-'+this.ident+'-name',anchor: '90%'}
 			,{xtype: 'textarea',fieldLabel: _('description'),name: 'description',id: 'minishop-'+this.ident+'-description',anchor: '90%'}
-			,{xtype: 'ms-combo-browser',fieldLabel: _('ms.file'),name: 'file',id: 'minishop-'+this.ident+'-file',allowBlank: false,anchor: '90%'}
+			,{xtype: 'ms-combo-browser', openTo: config.openTo, fieldLabel: _('ms.file'),name: 'file',id: 'minishop-'+this.ident+'-file',allowBlank: false,anchor: '90%'}
 		]
 		,keys: [{key: Ext.EventObject.ENTER,shift: true,fn: this.submit,scope: this}]
 		,buttons: [{text: _('close'),scope: this,handler: function() { this.hide();}},{text: _('save_and_close'),scope: this,handler: function() { this.submit();}}]
