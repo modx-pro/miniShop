@@ -73,6 +73,15 @@
 			<column key="gid" length="" collation="A" null="false" />
 		</index>
 	</object>
+	<object class="ModKits" table="modKits" extends="xPDOSimpleObject">
+		<field key="rid" dbtype="int" precision="10" phptype="integer" null="false" index="index" />
+		<field key="gid" dbtype="int" precision="10" phptype="integer" null="false" />
+
+		<index alias="rid" name="rid" primary="false" unique="true" type="BTREE" >
+			<column key="rid" length="" collation="A" null="false" />
+			<column key="gid" length="" collation="A" null="false" />
+		</index>
+	</object>
 	<object class="ModLog" table="modLog" extends="xPDOSimpleObject">
 		<field key="type" dbtype="varchar" precision="50" phptype="string" null="false" index="index" />
 		<field key="oid" dbtype="int" precision="11" phptype="integer" null="false" />

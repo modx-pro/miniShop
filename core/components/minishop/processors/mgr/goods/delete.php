@@ -19,4 +19,8 @@ $modx->removeCollection('ModGoods', array('gid' => $id));
 $modx->removeCollection('ModCategories', array('gid' => $id));
 $modx->removeCollection('ModTags', array('rid' => $id));
 
+$q = $modx->newQuery('ModKits',array('rid' => $id));
+$q->orCondition(array('gid' => $id));
+$modx->removeCollection('ModKits', $q);
+
 return $modx->error->success('',$res);

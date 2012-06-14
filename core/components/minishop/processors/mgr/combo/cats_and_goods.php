@@ -32,6 +32,9 @@ if ($mode == 'category') {
 else if ($mode == 'goods') {
 	$c->where(array('template:IN' => $goods_tpls));
 }
+else if ($mode == 'kits') {
+	$c->where(array('template:NOT IN' => $categories_tpls));
+}
 
 // Filtering by name
 if (!empty($query)) {

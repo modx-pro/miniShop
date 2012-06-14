@@ -10,6 +10,7 @@ $_lang['ms.menu_desc'] = 'Удобный интернет-магазин для 
 $_lang['ms.order'] = 'Заказ';
 $_lang['ms.orders'] = 'Заказы';
 $_lang['ms.goods'] = 'Товары';
+$_lang['ms.kits'] = 'Комлекты';
 $_lang['ms.warehouse'] = 'Склад';
 $_lang['ms.payment'] = 'Оплата';
 $_lang['ms.warehouses'] = 'Склады';
@@ -153,12 +154,13 @@ $_lang['ms.goods.price'] = 'Цена';
 $_lang['ms.goods.name'] = 'Наименование';
 $_lang['ms.goods.num'] = 'Кол-во';
 $_lang['ms.goods.sum'] = 'Сумма';
-$_lang['ms.goods.create'] = 'Создать товар';
-$_lang['ms.goods.change'] = 'Изменить свойства товара';
-$_lang['ms.goods.goto_manager_page'] = 'Открыть страницу товара';
-$_lang['ms.goods.goto_site_page'] = 'Просмотреть товар на сайте';
+$_lang['ms.goods.create'] = 'Создать';
+$_lang['ms.goods.change'] = 'Изменить';
+$_lang['ms.goods.goto_manager_page'] = 'Открыть в новом окне';
+$_lang['ms.goods.goto_site_page'] = 'Просмотреть на сайте';
 //$_lang['ms.goods.delete'] = 'Удалить товар';
 $_lang['ms.goods.delete_confirm'] = 'Вы действительно хотите удалить товар?<br/>Это поставит ресурсу "deleted" = 1 и <b>удалит все свойства товара</b>: цену, изображение, остаток, галерею и т.д.<br/>Затем вы сможете окончательно удалить русурс, очистив корзину, или восстановить его.';
+$_lang['ms.kits.delete_confirm'] = 'Вы действительно хотите удалить набор товаров?<br/>Это поставит ресурсу "deleted" = 1 и удалит связь товаров с этим комплектом.';
 $_lang['ms.goods.err_delete'] = 'Ошибка при удалении товара.';
 $_lang['ms.goods.err_ns'] = 'Не указан ID товара.';
 $_lang['ms.goods.err_nf'] = 'Товар с указанным ID не найден.';
@@ -172,7 +174,7 @@ $_lang['ms.goods.add2'] = 'Дополнительное поле 2';
 $_lang['ms.goods.add3'] = 'Дополнительное поле 3';
 $_lang['ms.goods.data'] = 'Параметры товара';
 $_lang['ms.goods.cat0_confirm'] = 'Вы не выбрали категорию товара, вы действительно хотите сохранить его в корень сайта?';
-
+$_lang['ms.goods.select'] = 'Выберите товар';
 
 $_lang['ms.gallery.create'] = 'Добавить изображение';
 $_lang['ms.gallery.update'] = 'Изменить изображение';

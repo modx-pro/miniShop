@@ -58,6 +58,7 @@ class miniShop {
             'processorsPath' => $corePath.'processors/',
 			'ms_categories_tpls' => explode(',', $this->modx->getOption('minishop.categories_tpl', '', 1)),
 			'ms_goods_tpls' => explode(',', $this->modx->getOption('minishop.goods_tpl', '', 1)),
+			'ms_kits_tpls' => explode(',', $this->modx->getOption('minishop.kits_tpl', '', 1)),
 			'ms_status_new' => $this->modx->getOption('minishop.status_new', '', 1)
         ),$config);
 

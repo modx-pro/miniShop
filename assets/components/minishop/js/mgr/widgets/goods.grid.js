@@ -11,12 +11,8 @@ miniShop.grid.Goods = function(config) {
 	Ext.applyIf(config,{
 		id: 'minishop-grid-goods'
 		,url: miniShop.config.connector_url
-		,baseParams: {
-			action: 'mgr/goods/getlist'
-		}
+		,baseParams: {action: 'mgr/goods/getlist'}
 		,cls: 'ms-grid'
-		,save_action: 'mgr/goods/updatefromgrid'
-		,autosave: true
 		,autoHeight: true
 		,paging: true
 		,remoteSort: true
@@ -299,7 +295,7 @@ miniShop.window.createGoods = function(config) {
 				return { activeTab:this.items.indexOf(this.getActiveTab()) };
 			}
 			,items: [{
-				title: _('ms.goods')
+				title: _('resource')
 				,layout: 'form'
 				,cls: 'modx-panel'
 				,bodyStyle: { background: 'transparent', padding: '10px' }
@@ -327,7 +323,7 @@ miniShop.window.createGoods = function(config) {
 						,layout: 'form'
 						,items: [
 							{xtype: 'minishop-combo-goodstemplate',id: 'modx-'+this.ident+'-template',fieldLabel: _('template'),editable: false,anchor: '100%',value: miniShop.config.ms_goods_tpls[0]}
-							,{xtype: 'minishop-filter-category',name: 'parent',fieldLabel: _('ms.category'),baseParams: {action: 'mgr/combo/cats_and_goods',addall: 0},anchor: '100%',hiddenName: 'parent'}
+							,{xtype: 'minishop-filter-category',id: 'modx-'+this.ident+'-category', name: 'parent',fieldLabel: _('ms.category'),baseParams: {action: 'mgr/combo/cats_and_goods',addall: 0},anchor: '100%',hiddenName: 'parent'}
 							,{xtype: 'textfield',name: 'alias',id: 'modx-'+this.ident+'-alias',fieldLabel: _('alias'),anchor: '100%'}
 							,{xtype: 'textfield',name: 'menutitle',id: 'modx-'+this.ident+'-menutitle',fieldLabel: _('resource_menutitle'),anchor: '100%'}
 							,{xtype: 'xcheckbox',name: 'published',id: 'modx-'+this.ident+'-published',boxLabel: _('resource_published'),description: _('resource_published_help'),inputValue: 1,checked: MODx.config.publish_default == '1' && config.disable_categories ? 1 : 0}

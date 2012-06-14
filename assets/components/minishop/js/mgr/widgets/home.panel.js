@@ -53,9 +53,9 @@ miniShop.panel.Home = function(config) {
 							{xtype: 'minishop-grid-goods',preventRender: true}
 						]
 					},{
-						title: _('ms.goods')
+						title: _('ms.kits')
 						,items: [
-							//,{xtype: 'minishop-grid-kit',preventRender: true}
+							{xtype: 'minishop-grid-kits',preventRender: true}
 						]
 					}]
 				}]
@@ -308,6 +308,7 @@ MODx.combo.template = function(config) {
 		,url: miniShop.config.connector_url
 		,baseParams: {
 			action:  'mgr/goods/gettpllist'
+			,kits: 0
 		}
 	});
 	MODx.combo.template.superclass.constructor.call(this,config);

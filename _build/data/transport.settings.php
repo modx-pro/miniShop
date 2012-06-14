@@ -126,4 +126,22 @@ $settings[10]->fromArray(array(
     'area' => 'settings',
 ),'',true,true);
 
+$settings[11]= $modx->newObject('modSystemSetting');
+$settings[11]->fromArray(array(
+    'key' => 'minishop.kits_tpl',
+    'value' => 1,
+    'xtype' => 'textfield',
+    'namespace' => 'minishop',
+    'area' => 'settings',
+),'',true,true);
+
+$settings[11]= $modx->newObject('modSystemSetting');
+$settings[11]->fromArray(array(
+    'key' => 'minishop.default_kits_dir',
+    'value' => 0,
+    'xtype' => 'textfield',
+    'namespace' => 'minishop',
+    'area' => 'settings',
+),'',true,true);
+
 return $settings;
