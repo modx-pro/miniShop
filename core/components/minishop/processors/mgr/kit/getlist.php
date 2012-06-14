@@ -1,16 +1,16 @@
 <?php
 /**
- * Get a list of Goods
+ * Get a list of Kits
  *
  * @package minishop
  * @subpackage processors
  */
- 
+/*
 if (!isset($modx->miniShop) || !is_object($modx->miniShop)) {
 	$miniShop = $modx->getService('miniShop','miniShop',$modx->getOption('minishop.core_path',null,$modx->getOption('core_path').'components/minishop/').'model/minishop/', $scriptProperties);
 	if (!($miniShop instanceof miniShop)) return '';
 }
-
+*/
 if (!$modx->hasPermission('view')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
 
 $goods_tpls = $miniShop->config['ms_goods_tpls'];
@@ -22,10 +22,10 @@ $sort = $modx->getOption('sort',$_REQUEST,'pagetitle');
 $dir = $modx->getOption('dir',$_REQUEST,'ASC');
 $query = $modx->getOption('query',$_REQUEST, 0);
 
-$warehouse = $modx->getOption('warehouse', $_REQUEST, $_SESSION['minishop']['warehouse']);
-$category = $modx->getOption('category', $_REQUEST, $_SESSION['minishop']['category']);
-$_SESSION['minishop']['warehouse'] = $warehouse;
-$_SESSION['minishop']['category'] = $category;
+//$warehouse = $modx->getOption('warehouse', $_REQUEST, $_SESSION['minishop']['warehouse']);
+//$category = $modx->getOption('category', $_REQUEST, $_SESSION['minishop']['category']);
+//$_SESSION['minishop']['warehouse'] = $warehouse;
+//$_SESSION['minishop']['category'] = $category;
 
 $c = $modx->newQuery('modResource');
 
@@ -34,9 +34,10 @@ $c->leftJoin('ModGoods', 'ModGoods', array(
 	"ModGoods.wid = ".$_SESSION['minishop']['warehouse']
 ));
 
-$c->where(array('modResource.template:IN' => $goods_tpls, 'modResource.isfolder:=' => 0));
+$c->where(array('modResource.template:IN' => $kits_tpls));
 
 // Filtering by category
+/*
 if (!empty($category)) {
 	if ($tmp = $modx->getObject('modResource', $category)) {
 		$categories = $modx->getChildIds($category, 10, array('context' => $tmp->get('context_key')));
@@ -49,7 +50,7 @@ if (!empty($category)) {
 		$c->orCondition(array('id:IN' => $ids), '', 1);
 	}
 }
-
+*/
 // Filtering by search query
 if (!empty($query)) {
 	// Search by pagetitle or article

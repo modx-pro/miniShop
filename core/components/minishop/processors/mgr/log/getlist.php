@@ -10,7 +10,7 @@ if (!$modx->hasPermission('view')) {return $modx->error->failure($modx->lexicon(
 
 $isLimit = !empty($_REQUEST['limit']);
 $start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,10);
+$limit = $modx->getOption('limit',$_REQUEST,round($modx->getOption('default_per_page') / 2));
 $sort = $modx->getOption('sort',$_REQUEST,'id');
 $dir = $modx->getOption('dir',$_REQUEST,'DESC');
 $oid = $modx->getOption('oid', $_REQUEST, 0);

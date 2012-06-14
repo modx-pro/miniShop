@@ -12,7 +12,7 @@ $categories_tpls = explode(',', $this->modx->getOption('minishop.categories_tpl'
 
 $isLimit = !empty($_REQUEST['limit']);
 $start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST, 20);
+$limit = $modx->getOption('limit',$_REQUEST, round($modx->getOption('default_per_page') / 2));
 $sort = $modx->getOption('sort',$_REQUEST,'pagetitle');
 $dir = $modx->getOption('dir',$_REQUEST,'ASC');
 $gid = $modx->getOption('gid', $_REQUEST, 0);

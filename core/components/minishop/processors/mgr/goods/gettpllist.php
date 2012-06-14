@@ -5,7 +5,6 @@
  * @package minishop
  * @subpackage processors
  */
- 
 if (!$modx->hasPermission('view')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));} 
 
 if (!isset($modx->miniShop) || !is_object($modx->miniShop)) {

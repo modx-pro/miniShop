@@ -10,17 +10,14 @@ miniShop.panel.Home = function(config) {
 			,cls: 'modx-page-header container'
 		},{
 			xtype: 'modx-tabs'
-			,bodyStyle: 'padding: 10px'
-			,cls: 'container'
+			,bodyStyle: 'padding: 5px'
 			,defaults: { border: false ,autoHeight: true }
 			,border: true
 			,hideMode: 'offsets'
 			,stateful: true
 			,stateId: 'ms-tabpanel-home'
 			,stateEvents: ['tabchange']
-			,getState:function() {
-				return { activeTab:this.items.indexOf(this.getActiveTab()) };
-			}
+			,getState:function() {return { activeTab:this.items.indexOf(this.getActiveTab())};}
 			,items: [{
 				title: _('ms.orders')
 				,items: [{
@@ -41,14 +38,27 @@ miniShop.panel.Home = function(config) {
 					html: '<p>'+_('ms.goods.intro_msg')+'</p><br />'
 					,border: false
 				},{
-					xtype: 'minishop-grid-goods'
-					,preventRender: true
+					xtype: 'modx-tabs'
+					,bodyStyle: 'padding: 5px;'
+					,defaults: { border: false ,autoHeight: true }
+					,border: true
+					,hideMode: 'offsets'
+					,stateful: true
+					,stateId: 'ms-tabpanel-home-goods'
+					,stateEvents: ['tabchange']
+					,getState:function() {return { activeTab:this.items.indexOf(this.getActiveTab())};}
+					,items: [{
+						title: _('ms.goods')
+						,items: [
+							{xtype: 'minishop-grid-goods',preventRender: true}
+						]
+					},{
+						title: _('ms.goods')
+						,items: [
+							//,{xtype: 'minishop-grid-kit',preventRender: true}
+						]
+					}]
 				}]
-				,listeners: {
-					activate : function(panel){
-						//Ext.getCmp('minishop-grid-goods').refresh();
-					}
-				}
 			},{
 				title: _('ms.warehouses')
 				,items: [{
@@ -58,11 +68,6 @@ miniShop.panel.Home = function(config) {
 					xtype: 'minishop-grid-warehouses'
 					,preventRender: true
 				}]
-				,listeners: {
-					activate : function(panel){
-						//Ext.getCmp('minishop-grid-warehouses').refresh();
-					}
-				}
 			},{
 				title: _('ms.statuses')
 				,items: [{
@@ -72,11 +77,6 @@ miniShop.panel.Home = function(config) {
 					xtype: 'minishop-grid-statuses'
 					,preventRender: true
 				}]
-				,listeners: {
-					activate : function(panel){
-						//Ext.getCmp('minishop-grid-statuses').refresh();
-					}
-				}
 			},{
 				title: _('ms.payments')
 				,items: [{
@@ -86,11 +86,6 @@ miniShop.panel.Home = function(config) {
 					xtype: 'minishop-grid-payments'
 					,preventRender: true
 				}]
-				,listeners: {
-					activate : function(panel){
-						//Ext.getCmp('minishop-grid-payments').refresh();
-					}
-				}
 			}]
 		}]
 	});
