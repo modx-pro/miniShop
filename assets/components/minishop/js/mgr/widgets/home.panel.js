@@ -360,7 +360,6 @@ miniShop.combo.Browser = function(config) {
 			delete tmp[tmp.length - 1];
 			tmp = tmp.join('/');
 			config.openTo = tmp.substr(1)
-			console.log(config.openTo)
 		}
 	}
 

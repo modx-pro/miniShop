@@ -1000,6 +1000,44 @@ class miniShop {
 	}
 
 
+	/*
+	 * Gets resource with goods properties
+	 *
+	 * @param int $id						// modResource id
+	 * @param int $wid						// ModWarehouse id
+	 * @param bool $tvs						// Retrive tvs?
+	 *
+	 * @return array $arr					// Resource with goods properties and tags and processed price
+	 * */
+	function getProduct($id = 0, $wid = 0, $level = 0) {
+		if (empty($id)) {$id = $this->modx->resource->id;}
+		if (empty($wid)) {$wid = $_SESSION['minishop']['warehouse'];}
+
+		$res = array();
+		if ($level > 0 && $resource = $this->modx->getObject('modResource', $id)) {
+			$res = $resource->toArray();
+		}
+
+		$tvs = array();
+		if ($level > 1) {
+			$tmp = $resource->getMany('TemplateVars');
+			foreach ($tmp as $v) {
+				$tvs['tv.'.$v->get('name')] = $v->get('value');
+			}
+		}
+
+		$goods = array();
+		if ($tmp = $this->modx->getObject('ModGoods', array('gid' => $id, 'wid' => $wid))) {
+			$goods = $tmp->toArray();
+			unset($goods['id']);
+			$goods['price'] = $this->getPrice($id);
+			$goods['tags'] = implode(', ', $tmp->getTags());
+		}
+
+		$arr = array_merge($res, $goods, $tvs);
+		return $arr;
+	}
+	
 
 
 

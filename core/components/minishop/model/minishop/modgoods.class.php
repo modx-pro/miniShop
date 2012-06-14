@@ -72,6 +72,45 @@ class ModGoods extends xPDOSimpleObject {
 		return $tags;
 	}
 
-	
+	function getKits($only_ids = 0, $sort = '', $dir = 'ASC') {
+		$q = $this->xpdo->newQuery('ModKits', array('gid' => $this->get('gid')));
+		$q->select('rid');
+		if ($q->prepare() && $q->stmt->execute()) {
+			$ids = $q->stmt->fetchAll(PDO::FETCH_COLUMN, 0);
+		}
+
+		if (empty($ids)) {return array();}
+		
+		$q = $this->xpdo->newQuery('ModKits', array('rid:IN' => $ids));
+		if (!empty($sort)) {
+			$q->leftJoin('modResource','modResource', array('modResource.id = ModKits.gid'));
+			$q->sortby('modResource.'.$sort, $dir);
+		}
+		
+		//$q->prepare();echo $q->toSql();die;
+		$res = $this->xpdo->getCollection('ModKits', $q);
+		$arr = array();
+		foreach ($res as $v) {
+			$key = $v->get('rid');
+			$gid = $v->get('gid');
+			if (!array_key_exists($key, $arr)) {
+				if (!$only_ids && $tmp = $this->xpdo->getObject('modResource', $key)) {
+					$arr[$key] = $tmp->toArray();
+				}
+				else {
+					$arr[$key] = array('id' => $key);
+				}
+				$arr[$key]['resources'] = array();
+			}
+			
+			if (!$only_ids && $tmp = $this->xpdo->getObject('modResource', $gid)) {
+				$arr[$key]['resources'][] = $tmp->toArray();
+			}
+			else {
+				$arr[$key]['resources'][] = $gid;
+			}
+		}
+		return $arr;
+	}
 
 }
