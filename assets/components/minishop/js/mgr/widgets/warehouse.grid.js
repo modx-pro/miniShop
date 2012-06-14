@@ -219,7 +219,7 @@ miniShop.grid.WarehouseDelivery = function(config) {
 	Ext.applyIf(config,{
 		id: 'minishop-grid-warehouse-delivery'
 		,url: miniShop.config.connector_url
-		,pageSize: 5
+		,pageSize: Math.round(MODx.config.default_per_page / 4)
 		,baseParams: {
 			action: 'mgr/delivery/getlist'
 			,wid: config.warehouse.id
@@ -396,7 +396,7 @@ miniShop.grid.WarehousePayments = function(config) {
 	Ext.applyIf(config,{
 		id: 'minishop-grid-warehouse-payments'
 		,url: miniShop.config.connector_url
-		,pageSize: 5
+		,pageSize: Math.round(MODx.config.default_per_page / 4)
 		,baseParams: {
 			action: 'mgr/warehouse/getpaymentslist'
 			,delivery: config.delivery.id

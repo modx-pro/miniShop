@@ -307,7 +307,7 @@ miniShop.grid.Log = function(config) {
 		,url: miniShop.config.connector_url
 		,baseParams: {action: 'mgr/log/getlist',type: 'status',operation: 'change'}
 		,fields: ['oid','iid','type','old','new','name','uid','username','ip','timestamp','comment']
-		,pageSize: 10
+		,pageSize: Math.round(MODx.config.default_per_page / 2)
 		,autoHeight: true
 		,plugins: this.exp
 		,paging: true
@@ -347,7 +347,7 @@ miniShop.grid.Goods = function(config) {
 		id: this.ident+'-grid-goods'
 		,url: miniShop.config.connector_url
 		,fields: ['id','gid','oid','name','num','price','weight','sum','data','data_view']
-		,pageSize: 10
+		,pageSize: Math.round(MODx.config.default_per_page / 2)
 		,autoHeight: true
 		,paging: true
 		,plugins: this.exp

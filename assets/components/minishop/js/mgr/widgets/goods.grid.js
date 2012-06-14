@@ -437,7 +437,7 @@ miniShop.grid.Categories = function(config) {
 		,autosave: true
 		,save_action: 'mgr/goods/updatefromgrid'
 		,fields: ['id','gid','pagetitle','enabled']
-		,pageSize: 10
+		,pageSize: Math.round(MODx.config.default_per_page / 2)
 		,autoHeight: true
 		,paging: true
 		,remoteSort: true
@@ -480,7 +480,7 @@ miniShop.grid.TVs = function(config) {
 		,url: miniShop.config.connector_url
 		,action: 'mgr/goods/tv/getlist'
 		,fields: ['id','resourceId','name','caption','value','intro','input_properties','type']
-		,pageSize: 10
+		,pageSize: Math.round(MODx.config.default_per_page / 2)
 		,autoHeight: true
 		,paging: true
 		,remoteSort: true
@@ -628,7 +628,7 @@ miniShop.grid.Gallery = function(config) {
 		,url: miniShop.config.connector_url
 		,action: 'mgr/goods/gallery/getlist'
 		,fields: ['id','gid','name','description','file']
-		,pageSize: 4
+		,pageSize: Math.round(MODx.config.default_per_page / 4)
 		,autoHeight: true
 		,paging: true
 		,remoteSort: true
