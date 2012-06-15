@@ -49,7 +49,23 @@ foreach ($kits as $v) {
 		,'hidemenu' => $v->get('hidemenu')
 	);
 	$tmp['url'] = $this->modx->makeUrl($v->get('id'), '', '', 'full');
-
+	
+	// Resources in kit
+	$q = $modx->newQuery('ModKits', array('rid' => $v->get('id')));
+	$q->select('gid');
+	if ($q->prepare() && $q->stmt->execute()) {
+		$ids = $q->stmt->fetchAll(PDO::FETCH_COLUMN, 0);
+		if (count($ids)) {
+			$q = $modx->newQuery('modResource', array('id:IN' => $ids));
+			$q->select('pagetitle');
+			if ($q->prepare() && $q->stmt->execute()) {
+				$titles = $q->stmt->fetchAll(PDO::FETCH_COLUMN, 0);
+				$tmp['resources'] = implode(', ', $titles);
+			}
+		}
+	}
+	
+	//Menu
 	$tmp['menu'] = array(
 		array('text' => $modx->lexicon('ms.goods.change'), 'handler' => 'this.editKit')
 		,'-'
