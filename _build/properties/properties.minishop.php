@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Properties for the miniShop snippet.
  *
@@ -504,3 +504,4 @@ $properties[9] = array(
 );
 
 return $properties;
+?>
