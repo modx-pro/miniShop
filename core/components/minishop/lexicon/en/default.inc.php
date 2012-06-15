@@ -200,9 +200,12 @@ $_lang['ms.log.new'] = 'New value';
 
 $_lang['ms.addToCart.success'] = 'The goods were successfully added to cart.';
 $_lang['ms.addToCart.error'] = 'Error adding goods.';
+$_lang['ms.addKitToCart.success'] = 'The kit were successfully added to cart. Added goods: [[+count]].';
+$_lang['ms.addKitToCart.error'] = 'Error adding all goods of kit. Added: [[+count]].';
 $_lang['ms.remFromCart.success'] = 'Goods were removed.';
 $_lang['ms.remFromCart.error'] = 'Failure to remove goods.';
 $_lang['ms.Cart.empty'] = 'Your cart is empty.';
+
 
 $_lang['ms.delivery.self'] = 'Self delivery';
 $_lang['ms.delivery.err_save'] = 'Failure to save delivery.';

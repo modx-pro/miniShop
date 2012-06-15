@@ -89,7 +89,8 @@ Ext.extend(miniShop.grid.Kits,MODx.grid.Grid,{
 			}
 		});
 		w.show(e.target,function() {
-			Ext.isSafari ? w.setPosition(null,30) : w.center();
+			//Ext.isSafari ? w.setPosition(null,30) : w.center();
+			w.setPosition(null,50)
 		},this);
 	}
 	,editKit: function(btn, e, row) {
@@ -126,7 +127,8 @@ Ext.extend(miniShop.grid.Kits,MODx.grid.Grid,{
 					});
 					w.setValues(r.object);
 					w.show(e.target,function() {
-						Ext.isSafari ? w.setPosition(null,30) : w.center();
+						//Ext.isSafari ? w.setPosition(null,30) : w.center();
+						w.setPosition(null,50)
 					},this);
 				},scope:this}
 			}
@@ -311,7 +313,7 @@ miniShop.grid.Kititems = function(config) {
 			action: 'mgr/goods/kits/getgoods'
 			,gid: config.gid
 		}
-		,fields: ['id','pagetitle','parent']
+		,fields: ['id','gid','pagetitle','parent','url','menu']
 		,pageSize: Math.round(MODx.config.default_per_page / 2)
 		,autoHeight: true
 		,paging: true
@@ -381,13 +383,13 @@ Ext.extend(miniShop.grid.Kititems,MODx.grid.Grid, {
 			}
 		})
 	}
-	,getMenu: function() {
-		var m = [];
-		m.push({
-			text: _('delete')
-			,handler: this.removeItem
-		});
-		this.addContextMenuItem(m);
+	,goToGoodsSitePage: function() {
+		var url = this.menu.record.url;
+		window.open(url);
+	}
+	,goToGoodsManagerPage: function() {
+		var id = this.menu.record.gid;
+		window.open('/manager/index.php?a=30&id=' + id);
 	}
 });
 Ext.reg('minishop-grid-goods-in-kit',miniShop.grid.Kititems);

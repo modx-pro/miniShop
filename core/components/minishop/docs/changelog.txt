@@ -3,16 +3,18 @@ Changelog for miniShop.
 1.7.0 (15.06.2012)
 =============
 - Добавлено создание комплектов товаров
-- Улучшена работа браузера для выбора изображений - при изменении картинки открывается нужная директория.
+- При добавление в корзину товар теперь проверяется по шаблону. Если присылают комплект - добавляются все товары комплекта.
 - Новый метод getProduct, который достает ресурс со всеми свойствами, включая ТВ.
+- Улучшена работа браузера для выбора изображений - при изменении картинки открывается нужная директория.
 - Исправлено добавление новых тэгов товарам
-- [#45] Количество результатов для таблиц берется из системной настройки 'default_per_page'
+- [#45] Количество результатов для таблиц берется из системной настройки 'default_per_page'. Во всплывающих окнах это значение делится на 2 или больше.
 -----
 - Added creation of kits with goods
+- Goods are checked when it adding to cart for right template. If you sending to cart a kit - method adds all goods of this kit.
 - New method getProduct, which retrieving resource with all properties and TVs
-- Fixed work of browser for selection of images - when changing image it's open to needed directory.
+- Improved browser for selection of images - when changing image it's open to needed directory.
 - Fixed adding new tags to goods
-- [#45] Number of results for grids now taken from system setting 'default_per_page'
+- [#45] Number of results for grids now taken from system setting 'default_per_page'. In popup windows this value divided by 2 or more.
 
 1.6.2 rc (13.05.2012)
 =============

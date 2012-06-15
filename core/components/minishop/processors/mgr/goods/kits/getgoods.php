@@ -44,6 +44,14 @@ foreach ($kits as $v) {
 			$res['parent'] = $tmp3->get('pagetitle');
 		}
 	}
+	$tmp['url'] = $modx->makeUrl($tmp['gid'], '', '', 'full');
+	$tmp['menu'] = array(
+		array('text' => $modx->lexicon('ms.goods.goto_site_page'), 'handler' => 'this.goToGoodsSitePage')
+		,array('text' => $modx->lexicon('ms.goods.goto_manager_page'), 'handler' => 'this.goToGoodsManagerPage')
+		,'-'
+		,array('text' => $modx->lexicon('delete'), 'handler' => 'this.removeItem')
+	);
+	
 	$arr[] = array_merge($tmp, $res);
 }
 return $this->outputArray($arr, $count);

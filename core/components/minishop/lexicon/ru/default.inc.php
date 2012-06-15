@@ -200,6 +200,8 @@ $_lang['ms.log.new'] = 'Значение';
 
 $_lang['ms.addToCart.success'] = 'Товар успешно добавлен в корзину.';
 $_lang['ms.addToCart.error'] = 'Ошибка добавления товара.';
+$_lang['ms.addKitToCart.success'] = 'Комплект успешно добавлен в корзину. Добавлено товаров: [[+count]].';
+$_lang['ms.addKitToCart.error'] = 'Ошибка при добавлении комплекта в корзину. Добавлено: [[+count]].';
 $_lang['ms.remFromCart.success'] = 'Товар удален из корзины.';
 $_lang['ms.remFromCart.error'] = 'Ошибка удаления товара.';
 $_lang['ms.Cart.empty'] = 'Ваша корзина пуста.';

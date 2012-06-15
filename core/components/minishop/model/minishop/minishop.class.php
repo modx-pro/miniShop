@@ -209,11 +209,12 @@ class miniShop {
 	 *
 	 * @param string $msg				// key of lexicon entry
 	 * @param array $data				// any additional data for response
+	 * @param array $pl					// placeholders for lexicon entry
 	 * @returns array $data				// id of entry in ModWarehouse
 	 * */
-	function error($msg, $data = array()) {
+	function error($msg, $data = array(), $pl = array()) {
 		$data['status'] = 'error';
-		$data['message'] = $this->modx->lexicon($msg);
+		$data['message'] = $this->modx->lexicon($msg, $pl);
 		return $data;
 	}
 
@@ -224,11 +225,12 @@ class miniShop {
 	 *
 	 * @param string $msg				// key of lexicon entry
 	 * @param array $data				// any additional data for response
+	 * @param array $pl					// placeholders for lexicon entry
 	 * @returns array $data				// id of entry in ModWarehouse
 	 * */
-	function success($msg, $data = array()) {
+	function success($msg, $data = array(), $pl = array()) {
 		$data['status'] = 'success';
-		$data['message'] = $this->modx->lexicon($msg);
+		$data['message'] = $this->modx->lexicon($msg, $pl);
 		return $data;
 	}
 
@@ -355,15 +357,43 @@ class miniShop {
 	 * @returns array $cartStatus
 	 * */
 	function addToCart($id, $num = 1, $data = array()) {
-		if (empty($id)) {return $this->error($this->modx->lexicon('ms.addToCart.error'));}
-		$num = intval($num);
+		if (empty($id)) {return $this->error('ms.addToCart.error');}
 		if (empty($num)) {$num = 1;}
 		if (empty($data)) {$data = array();}
 
+		// Verification of resource to be added to cart
+		if ($res = $this->modx->getObject('modResource', array('id' => $id, 'deleted' => 0))) {
+			$tpl = $res->get('template');
+			// This is a kit
+			if (in_array($tpl, $this->config['ms_kits_tpls'])) {
+				$tmp = $this->modx->getCollection('ModKits', array('rid' => $id));
+				$i = 0;
+				foreach ($tmp as $v) {
+					$response = $this->addToCart($v->get('gid'), 1);
+					if ($response['status'] == 'error') {
+						$error = 1;
+					}
+					else {$i++;}
+				}
+				if ($error) {
+					return $this->error('ms.addKitToCart.error', $this->getCartStatus(), array('count' => $i));
+				}
+				return $this->success('ms.addKitToCart.success', $this->getCartStatus(), array('count' => $i));
+			}
+			// This is a product
+			else if (!in_array($tpl, $this->config['ms_goods_tpls'])) {
+				// This is not a kit or product
+				return $this->error('ms.addToCart.error');
+			}
+		}
+		else {return $this->error('ms.addToCart.error');}
+		
+		// Continuing adding product
+		$num = intval($num);
 		if ($num > 1000000) {return $this->error('ms.addToCart.error', $this->getCartStatus());}
 
-		if (empty($_SESSION['minishop'])) {$_SESSION['minishop'] = array();}
-		if (empty($_SESSION['minishop']['goods'])) {$_SESSION['minishop']['goods'] = array();}
+		if (!isset($_SESSION['minishop'])) {$_SESSION['minishop'] = array();}
+		if (!isset($_SESSION['minishop']['goods'])) {$_SESSION['minishop']['goods'] = array();}
 		
 		$key = md5($id.(json_encode($data)));
 		
@@ -914,8 +944,8 @@ class miniShop {
 	 * @param string $dir					// direction of sorting
 	 * return array $arr					// array with all product files with properties
 	 * */
-	function getGallery($id, $sort = 'id', $dir = 'ASC') {
-		if (empty($id)) {return false;}
+	function getGallery($id = 0, $sort = 'id', $dir = 'ASC') {
+		if (empty($id)) {$id = $this->modx->resource->id;}
 		if (!$this->modx->getCount('modResource', $id)) {return false;}
 
 		$arr = array();
