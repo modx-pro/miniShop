@@ -171,11 +171,18 @@ function remFromCart(key) {
 		cartStatus(data);
 	})
 }
+// Склонение чистительных
+function decOfNum(number, titles)  
+{  
+    cases = [2, 0, 1, 1, 1, 2];  
+    return titles[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5] ];  
+}  
 
 // Обновление корзиты в подвале
 function cartStatus(data) {
 	var total = data.total;
 	var count = data.count;
+	var dec = decOfNum(data.count, ['товар', 'товара', 'товаров']);
 	if (count > 0) {
 		if ($("#cartLink").find('span').length > 0) {
 			$("#cartLink").find('span').text('('+count+')')
@@ -183,7 +190,7 @@ function cartStatus(data) {
 		else {
 			$("#cartLink").html($("#cartLink").text() + ' <span>('+count+')</span>')
 		}
-		$("#cartLink").attr('title', 'В корзине сейчас товаров: '+count+'шт., на сумму: '+total+'руб.')
+		$("#cartLink").attr('title', 'В корзине сейчас '+count+' '+dec+', на сумму: '+total+'руб.')
 	}
 	else {
 		$("#cartLink").find('span').remove()
