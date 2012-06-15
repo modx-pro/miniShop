@@ -255,7 +255,7 @@ miniShop.window.createKit = function(config) {
 						,layout: 'form'
 						,items: [
 							{xtype: 'minishop-combo-goodstemplate',id: 'modx-'+this.ident+'-template',baseParams: {action:  'mgr/goods/gettpllist',kits: 1}, fieldLabel: _('template'),editable: false,anchor: '100%',value: miniShop.config.ms_kits_tpls[0]}
-							,{xtype: 'minishop-filter-category',id: 'modx-'+this.ident+'-category',baseParams: {action: 'mgr/combo/cats_and_goods',addall: 0,mode: 'kits'}, name: 'parent',fieldLabel: _('parent'),anchor: '100%',hiddenName: 'parent', value: MODx.config['minishop.default_kits_dir']}
+							,{xtype: 'minishop-filter-category',id: 'modx-'+this.ident+'-category',baseParams: {action: 'mgr/combo/cats_and_goods',addall: 0,mode: 'kits'}, name: 'parent',fieldLabel: _('parent'),anchor: '100%',hiddenName: 'parent', value: MODx.config['minishop.default_kits_parent']}
 							,{xtype: 'textfield',name: 'alias',id: 'modx-'+this.ident+'-alias',fieldLabel: _('alias'),anchor: '100%'}
 							,{xtype: 'textfield',name: 'menutitle',id: 'modx-'+this.ident+'-menutitle',fieldLabel: _('resource_menutitle'),anchor: '100%'}
 							,{xtype: 'xcheckbox',name: 'published',id: 'modx-'+this.ident+'-published',boxLabel: _('resource_published'),description: _('resource_published_help'),inputValue: 1,checked: MODx.config.publish_default == '1' && config.disable_goods ? 1 : 0}
