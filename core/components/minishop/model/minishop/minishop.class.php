@@ -1035,7 +1035,10 @@ class miniShop {
 	 *
 	 * @param int $id						// modResource id
 	 * @param int $wid						// ModWarehouse id
-	 * @param bool $tvs						// Retrive tvs?
+	 * @param bool $level						// Level of retrieving.
+	 *									0 - goods properties
+	 *									1 - goods + resource
+	 * 									2 - goods + resource + tvs
 	 *
 	 * @return array $arr					// Resource with goods properties and tags and processed price
 	 * */
