@@ -14,8 +14,8 @@ set_time_limit(0);
 /* define package */
 define('PKG_NAME','miniShop');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
-define('PKG_VERSION','1.6.2');
-define('PKG_RELEASE','rc');
+define('PKG_VERSION','1.7');
+define('PKG_RELEASE','stable');
 
 /* define sources */
 $root = dirname(dirname(__FILE__)).'/';
