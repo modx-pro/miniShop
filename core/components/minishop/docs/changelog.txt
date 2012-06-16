@@ -1,5 +1,13 @@
 Changelog for miniShop.
 
+1.7.1 (16.06.2012)
+=============
+- Теперь комплект может быть товаром, просто добавьте номер шаблона комплекта в minishop.goods_tpls
+- [#49] Исправлен вывод определенного количества ТВ параметров во всплывающем окне
+-----
+- Now kit can be a product, just add template of kit to minishop.goods_tpls
+- [#49] Fised output a certain number of TV in popup window
+
 1.7.0 (15.06.2012)
 =============
 - Добавлено создание комплектов товаров

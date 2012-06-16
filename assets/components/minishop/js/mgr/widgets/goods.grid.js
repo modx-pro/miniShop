@@ -475,16 +475,16 @@ miniShop.grid.TVs = function(config) {
 		id: this.ident+'-grid-tvs'
 		,url: miniShop.config.connector_url
 		,action: 'mgr/goods/tv/getlist'
-		,fields: ['id','resourceId','name','caption','value','intro','input_properties','type']
+		,fields: ['id','name','caption','value','intro','input_properties','type']
 		,pageSize: Math.round(MODx.config.default_per_page / 2)
 		,autoHeight: true
 		,paging: true
 		,remoteSort: true
 		,columns: [
-			{header: _('id'),dataIndex: 'id',hidden: true,sortable: true}
-			,{header: _('name'),dataIndex: 'name',sortable: true,width: 50}
-			,{header: _('caption'),dataIndex: 'caption',sortable: true,width: 100}
-			,{header: _('value'),dataIndex: 'intro',sortable: true,width: 150}
+			{header: _('id'),dataIndex: 'id',hidden: true,sortable: false}
+			,{header: _('name'),dataIndex: 'name',sortable: false,width: 50}
+			,{header: _('caption'),dataIndex: 'caption',sortable: false,width: 100}
+			,{header: _('value'),dataIndex: 'intro',sortable: false,width: 150}
 		]
 		,listeners: {
 			rowDblClick: function(grid, rowIndex, e) {
@@ -579,7 +579,7 @@ miniShop.window.updateTV = function(config) {
 						,layout: 'form'
 						,items: [
 							{xtype: 'hidden',name: 'id',id: 'minishop-'+this.ident+'-id'}
-							,{xtype: 'hidden',name: 'resourceId',id: 'minishop-'+this.ident+'-resourceId'}
+							,{xtype: 'hidden',name: 'contentid',id: 'minishop-'+this.ident+'-contentid'}
 							,{xtype: 'hidden',name: 'type',id: 'minishop-'+this.ident+'-type'}
 							,{xtype: 'displayfield',fieldLabel: _('name'),name: 'name',id: 'minishop-'+this.ident+'-name'}
 						]
