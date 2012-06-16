@@ -365,7 +365,7 @@ class miniShop {
 		if ($res = $this->modx->getObject('modResource', array('id' => $id, 'deleted' => 0))) {
 			$tpl = $res->get('template');
 			// This is a kit
-			if (in_array($tpl, $this->config['ms_kits_tpls'])) {
+			if (in_array($tpl, $this->config['ms_kits_tpls']) && !in_array($tpl, $this->config['ms_goods_tpls'])) {
 				$tmp = $this->modx->getCollection('ModKits', array('rid' => $id));
 				$i = 0;
 				foreach ($tmp as $v) {

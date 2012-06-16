@@ -350,8 +350,8 @@ Ext.reg('minishop-filter-clear',MODx.form.FilterClear);
 // Модифицированный modx-combo-browser для miniShop
 miniShop.combo.Browser = function(config) {
     config = config || {};
-	
-	if (config.length != 0 && config.openTo.length != 0) {
+
+	if (config.length != 0 && typeof config.openTo !== "undefined") {
 		if (!/^\//.test(config.openTo)) {
 			config.openTo = '/' + config.openTo;
 		}
