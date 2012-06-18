@@ -4,10 +4,11 @@ miniShop.panel.Home = function(config) {
 		border: false
 		,deferredRender: true
 		,baseCls: 'modx-formpanel'
+		,cls: 'container'
 		,items: [{
 			html: '<h2>'+_('minishop')+'</h2>'
 			,border: false
-			,cls: 'modx-page-header container'
+			,cls: 'modx-page-header'
 		},{
 			xtype: 'modx-tabs'
 			,bodyStyle: 'padding: 5px'
@@ -21,8 +22,10 @@ miniShop.panel.Home = function(config) {
 			,items: [{
 				title: _('ms.orders')
 				,items: [{
-					html: '<p>'+_('ms.orders.intro_msg')+'</p><br />'
+					html: '<p>'+_('ms.orders.intro_msg')+'</p>'
 					,border: false
+					,bodyCssClass: 'panel-desc'
+					,bodyStyle: 'margin-bottom: 10px'
 				},{
 					xtype: 'minishop-grid-orders'
 					,preventRender: true
@@ -35,8 +38,10 @@ miniShop.panel.Home = function(config) {
 			},{
 				title: _('ms.goods')
 				,items: [{
-					html: '<p>'+_('ms.goods.intro_msg')+'</p><br />'
+					html: '<p>'+_('ms.goods.intro_msg')+'</p>'
 					,border: false
+					,bodyCssClass: 'panel-desc'
+					,bodyStyle: 'margin-bottom: 10px'
 				},{
 					xtype: 'modx-tabs'
 					,bodyStyle: 'padding: 5px;'
@@ -62,8 +67,10 @@ miniShop.panel.Home = function(config) {
 			},{
 				title: _('ms.warehouses')
 				,items: [{
-					html: '<p>'+_('ms.warehouses.intro_msg')+'</p><br />'
+					html: '<p>'+_('ms.warehouses.intro_msg')+'</p>'
 					,border: false
+					,bodyCssClass: 'panel-desc'
+					,bodyStyle: 'margin-bottom: 10px'
 				},{
 					xtype: 'minishop-grid-warehouses'
 					,preventRender: true
@@ -71,8 +78,10 @@ miniShop.panel.Home = function(config) {
 			},{
 				title: _('ms.statuses')
 				,items: [{
-					html: '<p>'+_('ms.status.intro_msg')+'</p><br />'
+					html: '<p>'+_('ms.status.intro_msg')+'</p>'
 					,border: false
+					,bodyCssClass: 'panel-desc'
+					,bodyStyle: 'margin-bottom: 10px'
 				},{
 					xtype: 'minishop-grid-statuses'
 					,preventRender: true
@@ -80,8 +89,10 @@ miniShop.panel.Home = function(config) {
 			},{
 				title: _('ms.payments')
 				,items: [{
-					html: '<p>'+_('ms.payments.intro_msg')+'</p><br />'
+					html: '<p>'+_('ms.payments.intro_msg')+'</p>'
 					,border: false
+					,bodyCssClass: 'panel-desc'
+					,bodyStyle: 'margin-bottom: 10px'
 				},{
 					xtype: 'minishop-grid-payments'
 					,preventRender: true
