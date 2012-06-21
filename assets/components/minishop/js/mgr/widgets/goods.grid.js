@@ -475,7 +475,7 @@ miniShop.grid.TVs = function(config) {
 		id: this.ident+'-grid-tvs'
 		,url: miniShop.config.connector_url
 		,action: 'mgr/goods/tv/getlist'
-		,fields: ['id','name','caption','value','intro','input_properties','type']
+		,fields: ['id','name','resourceId','caption','value','intro','input_properties','type']
 		,pageSize: Math.round(MODx.config.default_per_page / 2)
 		,autoHeight: true
 		,paging: true
@@ -579,7 +579,7 @@ miniShop.window.updateTV = function(config) {
 						,layout: 'form'
 						,items: [
 							{xtype: 'hidden',name: 'id',id: 'minishop-'+this.ident+'-id'}
-							,{xtype: 'hidden',name: 'contentid',id: 'minishop-'+this.ident+'-contentid'}
+							,{xtype: 'hidden',name: 'resourceId',id: 'minishop-'+this.ident+'-resourceId'}
 							,{xtype: 'hidden',name: 'type',id: 'minishop-'+this.ident+'-type'}
 							,{xtype: 'displayfield',fieldLabel: _('name'),name: 'name',id: 'minishop-'+this.ident+'-name'}
 						]

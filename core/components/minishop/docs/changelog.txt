@@ -1,5 +1,11 @@
 Changelog for miniShop.
 
+1.7.2 (21.06.2012)
+=============
+- Исправлено сохранение ТВ параметров
+-----
+- Fixed saving TV parameters
+
 1.7.1 (16.06.2012)
 =============
 - Теперь комплект может быть товаром, просто добавьте номер шаблона комплекта в minishop.goods_tpls
@@ -182,107 +188,4 @@ Changelog for miniShop.
 - Исправление ошибок и генеральная уборка кода.
 -----
 - Change personal details for order submition to FormIt to make flexible validation. Chunk tpl.msAddrForm was changed.
-- Add new &action to miniShop snippet - getDelivery. It outputs methods of the delivery for current warehouse (templating chunk - &tplDeliveryRow). By default it`s the option for select tag.
-- Fix delivery, it works everywhere. Delivery placeholders are in msGetOrdersPlaceholders. Change letter chunks.
-- Add new parameter &userGroups for miniShop snippet. It allows to declare groups (separated by commas) of registered customers when they makes an order. By default - NULL.
-- Add new system parameter minishop.getprice_snippet. It receives Resource object and returns price. By default - msGetPrice.
-- Add new payment system via payment agregator z-payment.ru, considering this:
-	- Add new system parameter minishop.status_paid. This parameter is set when the payment is done.
-	- Add new system parameter minishop.payment_shopid - number of the shop in z-payment.ru system.
-	- Add new system parameter minishop.payment_key - secret Merchant Key of the shop in z-payment.ru system.
-	- Add new chunk tpl.msPayment.form - the form for payment creation at the payment system.
-	- Add new action in miniShop snippet: redirectCustomer - customer redirection to service site for making the payment.
-	- Add new action in miniShop snippet: receivePayment - it receives notification about payment and switch order status (with preserving the history and sending emails).
-	- All payment errors are stored in the system log.
-- Bugfixes and cleaning code.
-
-
-1.0.2 beta2 (06.03.2012)
-=============
-- Добавлены дополнительные свойства товаров корзины. Если помимо id товара и количества прислать массив $_POST['data'] - он сохранится json-строкой
-  при заказе в ModOrderedGoods и эти свойства будут доступны в корзине плейсхолдерами с префиксом [[+data.*]]
-- При заказе теперь учитывается доставка (если она есть в $_SESSION['minishop']['delivery'])
-- [#19] Исправлена нумерация заказов
------
-- Added additional properties of the goods cart. If in addition to id and quantity of goods you send an array $_POST['data'] - it will save as json-string
-  to ModOrderedGoods and these properties will be available in your cart placeholders with the prefix [[+data.*]]
-- When you submitting order delivery is works (if it is in the $ _SESSION ['minishop'] ['delivery'])
-- [#19] Fixed the numbering order
-
-
-1.0.2 beta1 (28.02.2012)
-==============
-- Чанки больше не перезаписываются при обновлении пакета.
-- Личный кабинет покупателя со списком товара. Вызывается: [[!miniShop?action=`getMyOrdersList`]] В новом чанке tpl.msMyOrdersList подключается ExtJS из /manager и стили из cdn.
-- [#14] Добавлены префиксы для плейсхолдеров (addr., order., wh. и cart.) сниппета msGetOrdersPlaceholders, чтобы они не перезаписывали друг друга. Изменены чанки почтовых уведомлений.
-- [#15] При выводе корзины теперь поддерживаются дополнительные свойства товаров ([[+img]], [[+price]] и т.д.)
-- [#16] Поправлено положение заголовка компонента в менеджере.
------
-- Chunks are no longer overwritten when you upgrade the package.
-- Private Ofiice of the customer with list of orders. Called by: [[!MiniShop?action = `getMyOrdersList`]] In new chunk tpl.msMyOrdersList loading ExtJS from /manager path and styles from CDN.
-- [#14] Added placeholders for prefixes (addr., order., Wh. And cart.) Snippet msGetOrdersPlaceholders, so they do not overwrite each other. Changed chunks email notifications.
-- [#15] In the cart are now supported additional properties of goods ([[+img]], [[+price]], etc.)
-- [#16] Fixed the position of the header of component in manager.
-
-
-1.0.1 beta2 (16.02.2012)
-==============
-- Добавил 3 дополнительных поля товара для хранения любых данных. 2 varchar(255) и одно text - можно json массивы хранить.
-- Добавил пример импорта из csv в БД товаров. Файл import_example.php
-- Немного привел в порядок окошки в менеджере.
-- [#13] Исправлена ошибка с пустой карточкой товара при двойном клике на строке таблицы в менеджере.
------
-- Added 3 additional product fields to store any data. 2 varchar(255) and 1 text - you may store json arrays.
-- Added an example of importing from csv into the database products. File import_example.php
-- Slightly updated popups code.
-- [#13] Fixed empty goods popup bug.
-
-
-1.0.1 beta1 (15.02.2012)
-==============
-- Добавлено создание и продвинутое редактирование товаров сразу из компонента.
-- Изменение чанка tpl.msGoods.row для использования плейсхолдеров напрямую из msGetResources. 
-- [#12] Исправлена ошибка с отсутствующими товарами при установке с нуля.
------
-- Added the creation and advanced editing of goods from the component.
-- Changing the chunk tpl.msGoods.row to use placeholders of msGetResources.
-- [#12] Fixed bug with missing goods on fresh install.
-
-
-1.0.0 beta3 (14.02.2012)
-==============
-- [#11] В пакете beta2 был неправильно назван чанк tpl.msCart.outer
-- [#10] Исправлена ошибка, при которой в менеджере выводились категории вместе с товарами.
-- [#9] В менеджере, в разделе мультикатегорий товара добавлен поиск.
-- [#8] Удалил сниппет msGetGoods, который просто выдавал id подходящих по категории ресурсов. Его полностью заменяет msGetResources.
-- [#7] msGetResources теперь умеет сортировать по дополнительным параметрам (цена, артикул). Параметр &orderbyMS=``.
-- [#6] Различные мелкие исправления от Mark-H.
-- [#5] Убрал отдельные настройки для путей компонента (minishop.core_path и minishop.assets_path) - это затруднило бы перенос сайта.
-- Улучшена сортировка в таблицах менеджера.
------
-- [#11] Fixed incorrect name of chunk tpl.msCart.outer
-- [#10] Fixed a bug in manager where categories showed with goods in grid.
-- [#9] In the manager, added Multicategories search in goods management.
-- [#8] Removed snippet msGetGoods. msGetResources instead.
-- [#7] msGetResources now able to sort by additional parameters (price, product). New parameter &orderbyMS=``.
-- [#6] Various minor fixes from Mark-H
-- [#5] Removed settings minishop.core_path and minishop.assets_path.
-- Improved sorting in manager grids.
-
-
-1.0.0 beta2 (12.02.2012)
-==============
-- Добавил модифицированный сниппет getResources для ускорения загрузки категорий. От обычного отличается поддержкой мультикатегорий и дополнительных свойств.
-- Английская локализация
-- Множество различных изменений в коде для улучшения производительности и стабильности.
------
-- Added a modified snippet getResources to speed up loading categories. Differs from the usual support Multicategories and additional properties.
-- English localization
-- Lots of various changes in the code to improve performance and stability.
-
-
-1.0.0 beta1 (10.02.2012)
-==============
-- Первый публичный релиз
------
-- First public release
+- Add new &action to miniShop snippet - getDelivery. It outputs methods of the delivery for current 
