@@ -4,9 +4,11 @@ Changelog for miniShop.
 =============
 - Исправлено сохранение ТВ параметров
 - msGetOrdersPlaceholders теперь использует метод getProduct
+- Небольшие исправления UI
 -----
 - Fixed saving TV parameters
 - msGetOrdersPlaceholders now use getProduct method
+- Some UI improvements
 
 1.7.1 (16.06.2012)
 =============
