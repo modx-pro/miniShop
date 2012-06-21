@@ -40,18 +40,12 @@ $arr['rows'] = '';
 $arr['count'] = $arr['total'] = 0;
 $cart = $modx->getCollection('ModOrderedGoods', array('oid' => $order->get('id')));
 foreach ($cart as $v) {
-	if ($res = $modx->getObject('modResource', $v->get('gid'))) {
-		$tmp = $res->toArray();
-		$tmp['num'] = $v->get('num');
-		$tmp['sum'] = $v->get('sum');
-		$tmp['price'] = $v->get('price');
-		$tmp['weight'] = $v->get('weight');
-		
-		$tvs = $res->getMany('TemplateVars');
-		foreach ($tvs as $v2) {
-			$tmp[$v2->get('name')] = $v2->get('value');
-		}
-		
+    $ordered = $v->toArray();
+    unset($ordered['id']);
+    $res = $res = $modx->miniShop->getProduct($ordered['gid'], $order->get('wid'), 2);
+    if (count($res)) {
+        $tmp = array_merge($res, $ordered);
+
 		$data = json_decode($v->get('data'), 1);
 		if (is_array($data) && !empty($data)) {
 			foreach ($data as $k2 => $v2) {
@@ -65,7 +59,7 @@ foreach ($cart as $v) {
 		$arr['weight'] += $tmp['weight'];
 	}
 }
-$arr['total'] += $delivery_price;
+$arr['total_all'] = $arr['total'] + $delivery_price;
 $modx->setPlaceholders($arr,'cart.');
 
 return '';
