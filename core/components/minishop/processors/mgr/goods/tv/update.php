@@ -12,12 +12,11 @@ if (empty($_POST['id'])) {
 	return $modx->error->failure($modx->lexicon('tv_err_ns'));
 }
 
-if ($tv = $modx->getObject('modTemplateVarResource', array('tmplvarid' => $_POST['id'], 'contentid' => $_POST['resourceId']))) {
-	$tv->set('value', $_POST['value']);
-	$tv->save();
+if (!$tv = $modx->getObject('modTemplateVarResource', array('tmplvarid' => $_POST['id'], 'contentid' => $_POST['resourceId']))) {
+	$tv = $modx->newObject('modTemplateVarResource', array('tmplvarid' => $_POST['id'], 'contentid' => $_POST['resourceId']));
 }
-else {
-	return $modx->error->failure($modx->lexicon('tv_err_nf'));
-}
+
+$tv->set('value', $_POST['value']);
+$tv->save();
 
 return $modx->error->success('', $res);
