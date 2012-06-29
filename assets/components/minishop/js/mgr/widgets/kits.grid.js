@@ -88,10 +88,7 @@ Ext.extend(miniShop.grid.Kits,MODx.grid.Grid,{
 				}}
 			}
 		});
-		w.show(e.target,function() {
-			//Ext.isSafari ? w.setPosition(null,30) : w.center();
-			w.setPosition(null,50)
-		},this);
+		w.show(e.target,function() {w.setPosition(null,50)},this);
 	}
 	,editKit: function(btn, e, row) {
 		if (typeof(row) != 'undefined') {gid = row.data.id}
@@ -126,10 +123,7 @@ Ext.extend(miniShop.grid.Kits,MODx.grid.Grid,{
 						}
 					});
 					w.setValues(r.object);
-					w.show(e.target,function() {
-						//Ext.isSafari ? w.setPosition(null,30) : w.center();
-						w.setPosition(null,50)
-					},this);
+					w.show(e.target,function() {w.setPosition(null,50)},this);
 				},scope:this}
 			}
 		});

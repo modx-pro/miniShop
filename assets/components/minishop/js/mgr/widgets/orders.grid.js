@@ -165,9 +165,7 @@ Ext.extend(miniShop.grid.Orders,MODx.grid.Grid,{
 						}
 					});
 					w.setValues(r.object);
-					w.show(e.target,function() {
-						Ext.isSafari ? w.setPosition(null,30) : w.center();
-					},this);
+					w.show(e.target,function() {w.setPosition(null,50)},this);
 				},scope:this}
 			}
 		});
@@ -392,7 +390,7 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid, {
 		this.addContextMenuItem(m);
 	}
 	,addGoods: function(btn,e) {
-		this.windows.addOrderedGoods = MODx.load({
+		var w = MODx.load({
 			xtype: 'minishop-window-orderedgoods'
 			,title: _('ms.orderedgoods.add')
 			,oid: this.oid
@@ -401,7 +399,7 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid, {
 				'success': {fn:function() { this.refresh(); },scope:this}
 			}
 		});
-		this.windows.addOrderedGoods.show(e.target);
+		w.show(e.target,function() {w.setPosition(null,50)},this);
 	}
 	,updateGoods: function(btn,e,row) {
 		if (typeof(row) != 'undefined') {
@@ -410,7 +408,7 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid, {
 		else {
 			var record = this.menu.record;
 		}
-		this.windows.addOrderedGoods = MODx.load({
+		var w = MODx.load({
 			xtype: 'minishop-window-orderedgoods'
 			,title: record.name
 			,action: 'mgr/orderedgoods/update'
@@ -420,9 +418,9 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid, {
 				'success': {fn:function() { this.refresh(); },scope:this}
 			}
 		});
-		this.windows.addOrderedGoods.fp.getForm().reset();
-		this.windows.addOrderedGoods.fp.getForm().setValues(record);
-		this.windows.addOrderedGoods.show(e.target);
+		w.fp.getForm().reset();
+		w.fp.getForm().setValues(record);
+		w.show(e.target,function() {w.setPosition(null,50)},this);
 	}
 	,removeGoods: function(btn,e) {
 		if (!this.menu.record) return false;

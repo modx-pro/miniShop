@@ -78,7 +78,7 @@ Ext.extend(miniShop.grid.Payments,MODx.grid.Grid,{
 		this.refresh();
 	}
 	,createPayment: function(btn,e) {
-		this.windows.createPayment = MODx.load({
+		var w = MODx.load({
 			xtype: 'minishop-window-payment-create'
 			,title: _('ms.payment.create')
 			,action: 'mgr/payment/create'
@@ -89,8 +89,8 @@ Ext.extend(miniShop.grid.Payments,MODx.grid.Grid,{
 				'success': {fn:function() { this.refresh(); },scope:this}
 			}
 		});
-		this.windows.createPayment.fp.getForm().reset();
-		this.windows.createPayment.show(e.target);
+		w.fp.getForm().reset();
+		w.show(e.target,function() {w.setPosition(null,50)},this);
 	}
 	,updatePayment: function(btn,e,row) {
 		if (typeof(row) != 'undefined') {
@@ -99,7 +99,7 @@ Ext.extend(miniShop.grid.Payments,MODx.grid.Grid,{
 		else {
 			var record = this.menu.record;
 		}
-		this.windows.updatePayment = MODx.load({
+		var w = MODx.load({
 			xtype: 'minishop-window-payment-create'
 			,title: record.name
 			,record: record
@@ -109,9 +109,9 @@ Ext.extend(miniShop.grid.Payments,MODx.grid.Grid,{
 				success: {fn:function() { this.refresh(); },scope:this}
 			}
 		});
-		this.windows.updatePayment.fp.getForm().reset();
-		this.windows.updatePayment.fp.getForm().setValues(record);
-		this.windows.updatePayment.show(e.target);
+		w.fp.getForm().reset();
+		w.fp.getForm().setValues(record);
+		w.show(e.target,function() {w.setPosition(null,50)},this);
 	}
 	,removePayment: function(btn,e) {
 		if (!this.menu.record) return false;

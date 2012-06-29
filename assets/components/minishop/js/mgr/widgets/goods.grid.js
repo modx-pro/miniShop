@@ -131,9 +131,7 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
 				}}
 			}
 		});
-		w.show(e.target,function() {
-			Ext.isSafari ? w.setPosition(null,30) : w.center();
-		},this);
+		w.show(e.target,function() {w.setPosition(null,50)},this);
 	}
 	,editGoods: function(btn, e, row) {
 		if (typeof(row) != 'undefined') {
@@ -174,9 +172,7 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
 						}
 					});
 					w.setValues(r.object);
-					w.show(e.target,function() {
-						Ext.isSafari ? w.setPosition(null,30) : w.center();
-					},this);
+					w.show(e.target,function() {w.setPosition(null,50)},this);
 				},scope:this}
 			}
 		});
@@ -548,7 +544,7 @@ Ext.extend(miniShop.grid.TVs,MODx.grid.Grid, {
 
 		this.windows.updateTV.fp.add(vf);
 		this.windows.updateTV.fp.getForm().setValues(record);
-		this.windows.updateTV.show(e.target);
+		this.windows.updateTV.show(e.target,function() {w.setPosition(null,50)},this);
 	}
 
 });
@@ -683,7 +679,7 @@ Ext.extend(miniShop.grid.Gallery,MODx.grid.Grid, {
 			}
 			,listeners: {'success':{fn:function() {Ext.getCmp('product-grid-gallery').store.reload();},scope:this},'show':{fn:function() {this.center();}}}
 		});
-		w.show(e.target,function() {Ext.isSafari ? w.setPosition(null,30) : w.center();},this);
+		w.show(e.target,function() {w.setPosition(null,50)},this);
 	}
 	,loadImages: function(e) {
 		var w = MODx.load({
@@ -695,7 +691,7 @@ Ext.extend(miniShop.grid.Gallery,MODx.grid.Grid, {
 			}
 			,listeners: {'success':{fn:function() {Ext.getCmp('product-grid-gallery').store.reload();},scope:this},'show':{fn:function() {this.center();}}}
 		});
-		w.show(e.target,function() {Ext.isSafari ? w.setPosition(null,30) : w.center();},this);
+		w.show(e.target,function() {w.setPosition(null,50)},this);
 	}
 	,updateImage: function(btn,e,row) {
 		if (typeof(row) != 'undefined') {
@@ -715,7 +711,7 @@ Ext.extend(miniShop.grid.Gallery,MODx.grid.Grid, {
 		});
 		this.windows.updateImage.fp.getForm().reset();
 		this.windows.updateImage.fp.getForm().setValues(record);
-		this.windows.updateImage.show(e.target);
+		this.windows.updateImage.show(e.target,function() {w.setPosition(null,50)},this);
 	}
 	,removeImage: function(btn,e) {
 		if (!this.menu.record) return false;

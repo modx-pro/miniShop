@@ -54,7 +54,7 @@ Ext.extend(miniShop.grid.Status,MODx.grid.Grid,{
 	}
 
 	,createStatus: function(btn,e) {
-		this.windows.createStatus = MODx.load({
+		var w = MODx.load({
 			xtype: 'minishop-window-status-create'
 			,title: _('ms.status.create')
 			,action: 'mgr/status/create'
@@ -63,7 +63,7 @@ Ext.extend(miniShop.grid.Status,MODx.grid.Grid,{
 				,hide: {fn:function() { this.destroy(); }}
 			}
 		});
-		this.windows.createStatus.show(e.target);
+		w.show(e.target,function() {w.setPosition(null,50)},this);
 	}
 	,updateStatus: function(btn,e,row) {
 		if (typeof(row) != 'undefined') {
@@ -72,7 +72,7 @@ Ext.extend(miniShop.grid.Status,MODx.grid.Grid,{
 		else {
 			var record = this.menu.record;
 		}
-		this.windows.createStatus = MODx.load({
+		var w = MODx.load({
 			xtype: 'minishop-window-status-create'
 			,action: 'mgr/status/update'
 			,title: record.name
@@ -82,8 +82,8 @@ Ext.extend(miniShop.grid.Status,MODx.grid.Grid,{
 				,hide: {fn:function() { this.destroy(); }}
 			}
 		});
-		this.windows.createStatus.fp.getForm().setValues(record);
-		this.windows.createStatus.show(e.target);
+		w.fp.getForm().setValues(record);
+		w.show(e.target,function() {w.setPosition(null,50)},this);
 	}
 	,removeStatus: function(btn,e) {
 		if (!this.menu.record) return false;

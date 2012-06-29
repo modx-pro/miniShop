@@ -78,7 +78,7 @@ Ext.extend(miniShop.grid.Warehouses,MODx.grid.Grid,{
 		this.refresh();
 	}
 	,createWarehouse: function(btn,e) {
-		this.windows.createWarehouse = MODx.load({
+		var w = MODx.load({
 			xtype: 'minishop-window-warehouse-create'
 			,title: _('ms.warehouse.create')
 			,action: 'mgr/warehouse/create'
@@ -90,8 +90,8 @@ Ext.extend(miniShop.grid.Warehouses,MODx.grid.Grid,{
 				'success': {fn:function() { this.refresh(); },scope:this}
 			}
 		});
-		this.windows.createWarehouse.fp.getForm().reset();
-		this.windows.createWarehouse.show(e.target);
+		w.fp.getForm().reset();
+		w.show(e.target,function() {w.setPosition(null,50)},this);
 	}
 	,updateWarehouse: function(btn,e,row) {
 		if (typeof(row) != 'undefined') {
@@ -100,7 +100,7 @@ Ext.extend(miniShop.grid.Warehouses,MODx.grid.Grid,{
 		else {
 			var record = this.menu.record;
 		}
-		this.windows.updateWarehouse = MODx.load({
+		var w = MODx.load({
 			xtype: 'minishop-window-warehouse-create'
 			,title: record.name
 			,record: record
@@ -110,9 +110,9 @@ Ext.extend(miniShop.grid.Warehouses,MODx.grid.Grid,{
 				success: {fn:function() { this.refresh(); },scope:this}
 			}
 		});
-		this.windows.updateWarehouse.fp.getForm().reset();
-		this.windows.updateWarehouse.fp.getForm().setValues(record);
-		this.windows.updateWarehouse.show(e.target);
+		w.fp.getForm().reset();
+		w.fp.getForm().setValues(record);
+		w.show(e.target,function() {w.setPosition(null,50)},this);
 	}
 	,removeWarehouse: function(btn,e) {
 		if (!this.menu.record) return false;
@@ -273,21 +273,18 @@ Ext.extend(miniShop.grid.WarehouseDelivery,MODx.grid.Grid, {
 		else {return _('no');}
 	}
 	,createDelivery: function(btn,e) {
-		//if (!this.windows.createDelivery) {
-			this.windows.createDelivery = MODx.load({
-				xtype: 'minishop-window-delivery-create'
-				,title: _('ms.delivery.create')
-				,height: 150
-				,autoHeight: true
-				,record: {}
-				,payment_disabled: true
-				,listeners: {
-					'success': {fn:function() { this.refresh(); },scope:this}
-				}
-			});
-		//}
-		//this.windows.createDelivery.fp.getForm().reset();
-		this.windows.createDelivery.show(e.target);
+		var w = MODx.load({
+			xtype: 'minishop-window-delivery-create'
+			,title: _('ms.delivery.create')
+			,height: 150
+			,autoHeight: true
+			,record: {}
+			,payment_disabled: true
+			,listeners: {
+				'success': {fn:function() { this.refresh(); },scope:this}
+			}
+		});
+		w.show(e.target,function() {w.setPosition(null,50)},this);
 	}
 	,updateDelivery: function(btn,e,row) {
 		if (typeof(row) != 'undefined') {
@@ -296,23 +293,20 @@ Ext.extend(miniShop.grid.WarehouseDelivery,MODx.grid.Grid, {
 		else {
 			var record = this.menu.record;
 		}
-		//if (!this.windows.updateWarehouse) {
-			this.windows.updateDelivery = MODx.load({
-				xtype: 'minishop-window-delivery-create'
-				,title: _('ms.delivery.update')
-				,record: record
-				,height: 150
-				,autoHeight: true
-				,action: 'mgr/delivery/update'
-				,listeners: {
-					success: {fn:function() { this.refresh(); },scope:this}
-				}
-			});
-			
-		//}
-		this.windows.updateDelivery.fp.getForm().reset();
-		this.windows.updateDelivery.fp.getForm().setValues(record);
-		this.windows.updateDelivery.show(e.target);
+		var w = MODx.load({
+			xtype: 'minishop-window-delivery-create'
+			,title: _('ms.delivery.update')
+			,record: record
+			,height: 150
+			,autoHeight: true
+			,action: 'mgr/delivery/update'
+			,listeners: {
+				success: {fn:function() { this.refresh(); },scope:this}
+			}
+		});
+		w.fp.getForm().reset();
+		w.fp.getForm().setValues(record);
+		w.show(e.target,function() {w.setPosition(null,50)},this);
 	}
 	,removeDelivery: function(btn,e) {
 		if (!this.menu.record) return false;
