@@ -412,6 +412,8 @@ miniShop.window.createGoods = function(config) {
 			,scope: this
 			,handler: function() {this.hide(); }
 		},{
+			xtype: 'tbfill'
+		},{
 			text: config.saveBtnText || _('save_and_close')
 			,scope: this
 			,handler: function() {changed = 1; this.submit() }

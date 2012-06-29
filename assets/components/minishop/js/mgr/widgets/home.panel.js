@@ -11,6 +11,7 @@ miniShop.panel.Home = function(config) {
 			,cls: 'modx-page-header'
 		},{
 			xtype: 'modx-tabs'
+			,id: 'minishop-tabs-main'
 			,bodyStyle: 'padding: 5px'
 			,defaults: { border: false ,autoHeight: true }
 			,border: true
@@ -37,6 +38,7 @@ miniShop.panel.Home = function(config) {
 				}
 			},{
 				title: _('ms.goods')
+				,id: 'minishop-tabs-goods'
 				,items: [{
 					html: '<p>'+_('ms.goods.intro_msg')+'</p>'
 					,border: false
@@ -44,6 +46,7 @@ miniShop.panel.Home = function(config) {
 					,bodyStyle: 'margin-bottom: 10px'
 				},{
 					xtype: 'modx-tabs'
+					,id: 'minishop-tabs-goods-inner'
 					,bodyStyle: 'padding: 5px;'
 					,defaults: { border: false ,autoHeight: true }
 					,border: true
@@ -54,11 +57,13 @@ miniShop.panel.Home = function(config) {
 					,getState:function() {return { activeTab:this.items.indexOf(this.getActiveTab())};}
 					,items: [{
 						title: _('ms.goods')
+						,id: 'minishop-tabs-goods-inner-goods'
 						,items: [
 							{xtype: 'minishop-grid-goods',preventRender: true}
 						]
 					},{
 						title: _('ms.kits')
+						,id: 'minishop-tabs-goods-inner-kits'
 						,items: [
 							{xtype: 'minishop-grid-kits',preventRender: true}
 						]
