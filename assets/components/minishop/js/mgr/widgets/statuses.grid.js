@@ -31,7 +31,6 @@ miniShop.grid.Status = function(config) {
 };
 Ext.extend(miniShop.grid.Status,MODx.grid.Grid,{
 	windows: {}
-
 	,renderColor: function(value) {
 		return '<div style="width: 30px; height: 20px; border-radius: 3px; background: #' + value + '">&nbsp;</div>'
 	}	

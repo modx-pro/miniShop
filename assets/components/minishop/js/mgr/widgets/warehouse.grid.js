@@ -50,7 +50,6 @@ miniShop.grid.Warehouses = function(config) {
 };
 Ext.extend(miniShop.grid.Warehouses,MODx.grid.Grid,{
 	windows: {}
-
 	,getMenu: function() {
 		var m = [];
 		m.push({
@@ -284,7 +283,7 @@ Ext.extend(miniShop.grid.WarehouseDelivery,MODx.grid.Grid, {
 				'success': {fn:function() { this.refresh(); },scope:this}
 			}
 		});
-		w.show(e.target,function() {w.setPosition(null,50)},this);
+		w.show(e.target,function() {w.setPosition(null,100)},this);
 	}
 	,updateDelivery: function(btn,e,row) {
 		if (typeof(row) != 'undefined') {
@@ -306,7 +305,7 @@ Ext.extend(miniShop.grid.WarehouseDelivery,MODx.grid.Grid, {
 		});
 		w.fp.getForm().reset();
 		w.fp.getForm().setValues(record);
-		w.show(e.target,function() {w.setPosition(null,50)},this);
+		w.show(e.target,function() {w.setPosition(null,100)},this);
 	}
 	,removeDelivery: function(btn,e) {
 		if (!this.menu.record) return false;

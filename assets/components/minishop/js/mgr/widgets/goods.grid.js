@@ -67,7 +67,6 @@ miniShop.grid.Goods = function(config) {
 };
 Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
 	windows: {}
-
 	,getGoodsMenu: function() {
 		var m = [];
 		m.push({
@@ -511,7 +510,7 @@ Ext.extend(miniShop.grid.TVs,MODx.grid.Grid, {
 		else {
 			var record = this.menu.record;
 		}
-		this.windows.updateTV = MODx.load({
+		var w = MODx.load({
 			xtype: 'minishop-window-goods-tv'
 			,props: record
 			,title: record.name
@@ -520,7 +519,7 @@ Ext.extend(miniShop.grid.TVs,MODx.grid.Grid, {
 				,'hide': {fn:function() { this.destroy(); }}
 			}
 		});
-		this.windows.updateTV.fp.getForm().reset();
+		w.fp.getForm().reset();
 
 		var vf = {fieldLabel: _('value'),name: 'value',id: 'minishop-'+this.ident+'-value', anchor: '100%'};
 		var def = 0;
@@ -532,19 +531,20 @@ Ext.extend(miniShop.grid.TVs,MODx.grid.Grid, {
 			case 'date': vf.xtype = 'xdatetime'; break;
 			case 'text': vf.xtype = 'textarea'; break;
 			case 'checkbox': vf.xtype = 'textfield'; break;
+			case 'radio': vf.xtype = 'textfield'; break;
 			case 'option': vf.xtype = 'textfield'; break;
 			case 'richtext': vf.xtype = 'htmleditor'; vf.height = 400; break;
 			case 'textarea': vf.xtype = 'textarea'; vf.height = 400; break;
 			default: vf.xtype = 'textarea'; vf.height = 400; var def = 1;
 		}
 		if (def != 1) {
-			console.log(vf)
+			//console.log(vf)
 			Ext.applyIf(vf,record.input_properties);
 		}
 
-		this.windows.updateTV.fp.add(vf);
-		this.windows.updateTV.fp.getForm().setValues(record);
-		this.windows.updateTV.show(e.target,function() {w.setPosition(null,50)},this);
+		w.fp.add(vf);
+		w.fp.getForm().setValues(record);
+		w.show(e.target,function() {w.setPosition(null,100)},this);
 	}
 
 });
@@ -679,7 +679,7 @@ Ext.extend(miniShop.grid.Gallery,MODx.grid.Grid, {
 			}
 			,listeners: {'success':{fn:function() {Ext.getCmp('product-grid-gallery').store.reload();},scope:this},'show':{fn:function() {this.center();}}}
 		});
-		w.show(e.target,function() {w.setPosition(null,50)},this);
+		w.show(e.target,function() {w.setPosition(null,100)},this);
 	}
 	,loadImages: function(e) {
 		var w = MODx.load({
@@ -691,7 +691,7 @@ Ext.extend(miniShop.grid.Gallery,MODx.grid.Grid, {
 			}
 			,listeners: {'success':{fn:function() {Ext.getCmp('product-grid-gallery').store.reload();},scope:this},'show':{fn:function() {this.center();}}}
 		});
-		w.show(e.target,function() {w.setPosition(null,50)},this);
+		w.show(e.target,function() {w.setPosition(null,100)},this);
 	}
 	,updateImage: function(btn,e,row) {
 		if (typeof(row) != 'undefined') {
@@ -700,7 +700,7 @@ Ext.extend(miniShop.grid.Gallery,MODx.grid.Grid, {
 		else {
 			var record = this.menu.record;
 		}
-		this.windows.updateImage = MODx.load({
+		w = MODx.load({
 			xtype: 'minishop-window-goods-gallery'
 			,title: _('ms.gallery.update')
 			,openTo: record.file
@@ -709,9 +709,9 @@ Ext.extend(miniShop.grid.Gallery,MODx.grid.Grid, {
 				,'hide': {fn:function() { this.destroy(); }}
 			}
 		});
-		this.windows.updateImage.fp.getForm().reset();
-		this.windows.updateImage.fp.getForm().setValues(record);
-		this.windows.updateImage.show(e.target,function() {w.setPosition(null,50)},this);
+		w.fp.getForm().reset();
+		w.fp.getForm().setValues(record);
+		w.show(e.target,function() {w.setPosition(null,100)},this);
 	}
 	,removeImage: function(btn,e) {
 		if (!this.menu.record) return false;

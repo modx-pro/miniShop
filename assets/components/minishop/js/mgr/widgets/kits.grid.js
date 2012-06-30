@@ -47,7 +47,6 @@ miniShop.grid.Kits = function(config) {
 };
 Ext.extend(miniShop.grid.Kits,MODx.grid.Grid,{
 	windows: {}
-
 	,FilterClear: function() {
 		var s = this.getStore();
 		s.baseParams.query = '';

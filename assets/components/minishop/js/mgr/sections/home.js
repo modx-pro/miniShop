@@ -2,18 +2,27 @@ Ext.onReady(function() {
     MODx.load({ xtype: 'minishop-page-home'});
 	
 	var action = Ext.getUrlParam('act');
-	var gid = Ext.getUrlParam('gid');
+	var item = Ext.getUrlParam('item');
 	var wid = Ext.getUrlParam('wid') || 1;
-	if (action == 'edit' && typeof gid != 'undefined') {
+	
+	if (action == 'new') {
+		Ext.getCmp('minishop-tabs-main').setActiveTab('minishop-tabs-goods');
+		Ext.getCmp('minishop-tabs-goods-inner').setActiveTab('minishop-tabs-goods-inner-goods');
+		Ext.getCmp('minishop-grid-goods').createGoods('');
+	}
+	else if (action == 'edit' && typeof item != 'undefined') {
 		var row = {
 			data: {
-				id: gid
+				id: item
 				,wid: wid
 			}
 		};
 		Ext.getCmp('minishop-tabs-main').setActiveTab('minishop-tabs-goods');
 		Ext.getCmp('minishop-tabs-goods-inner').setActiveTab('minishop-tabs-goods-inner-goods');
 		Ext.getCmp('minishop-grid-goods').editGoods('','', row);
+	}
+	else if (action == 'tab' && typeof item != 'undefined') {
+		Ext.getCmp('minishop-tabs-main').setActiveTab(Number(item));
 	}
 
 });

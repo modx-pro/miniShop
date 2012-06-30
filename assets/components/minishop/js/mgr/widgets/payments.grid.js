@@ -50,7 +50,6 @@ miniShop.grid.Payments = function(config) {
 };
 Ext.extend(miniShop.grid.Payments,MODx.grid.Grid,{
 	windows: {}
-
 	,getMenu: function() {
 		var m = [];
 		m.push({

@@ -72,7 +72,6 @@ miniShop.grid.Orders = function(config) {
 };
 Ext.extend(miniShop.grid.Orders,MODx.grid.Grid,{
 	windows: {}
-
 	,FilterClear: function() {
 		var s = this.getStore();
 		s.baseParams.query = '';
@@ -399,7 +398,7 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid, {
 				'success': {fn:function() { this.refresh(); },scope:this}
 			}
 		});
-		w.show(e.target,function() {w.setPosition(null,50)},this);
+		w.show(e.target,function() {w.setPosition(null,100)},this);
 	}
 	,updateGoods: function(btn,e,row) {
 		if (typeof(row) != 'undefined') {
@@ -420,7 +419,7 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid, {
 		});
 		w.fp.getForm().reset();
 		w.fp.getForm().setValues(record);
-		w.show(e.target,function() {w.setPosition(null,50)},this);
+		w.show(e.target,function() {w.setPosition(null,100)},this);
 	}
 	,removeGoods: function(btn,e) {
 		if (!this.menu.record) return false;
