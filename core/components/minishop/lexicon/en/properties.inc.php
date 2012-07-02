@@ -1,5 +1,6 @@
 <?php
 
+$_lang['ms.action'] = 'Action for miniShop snippet. This is mode of snippet work.';
 $_lang['ms.tplCartOuter'] = 'Chunk of cart table';
 $_lang['ms.tplCartRow'] = 'One row of cart table';
 $_lang['ms.tplDeliveryRow'] = 'Chunk of one delivery method';
@@ -11,6 +12,7 @@ $_lang['ms.tplOrderEmailRow'] = 'One ordered product in email';
 $_lang['ms.tplSubmitOrderSuccess'] = 'Success message after completing order';
 $_lang['ms.tplMyOrdersList'] = 'Chunk for dispaying customer orders in private office';
 $_lang['ms.tplPaymentForm'] = 'Chunk of payment form';
+$_lang['ms.tplMiniCart'] = 'Chunk of mini cart';
 $_lang['ms.debug'] = 'Enable displaying errors?';
 $_lang['ms.userGroups'] = 'Comma-separated list of existing groups for registering new customers.';
 

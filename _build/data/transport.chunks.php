@@ -147,4 +147,20 @@ $chunks[14]->fromArray(array(
     'snippet' => getSnippetContent($sources['source_core'].'/elements/chunks/msGallery.row.tpl'),
 ),'',true,true);
 
+$chunks[15]= $modx->newObject('modChunk');
+$chunks[15]->fromArray(array(
+    'id' => 0,
+    'name' => 'tpl.msCart.mini',
+    'description' => 'Chunk of minicart',
+    'snippet' => getSnippetContent($sources['source_core'].'/elements/chunks/msCart.mini.tpl'),
+),'',true,true);
+
+$chunks[16]= $modx->newObject('modChunk');
+$chunks[16]->fromArray(array(
+    'id' => 0,
+    'name' => 'tpl.msPayment.row',
+    'description' => 'Chunk for one payment method',
+    'snippet' => getSnippetContent($sources['source_core'].'/elements/chunks/msPayment.row.tpl'),
+),'',true,true);
+
 return $chunks;

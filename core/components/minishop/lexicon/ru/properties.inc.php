@@ -1,5 +1,6 @@
 <?php
 
+$_lang['ms.action'] = 'Действие сниппета miniShop. Это режим работы основного сниппета магазина.';
 $_lang['ms.tplCartOuter'] = 'Чанк таблицы корзины';
 $_lang['ms.tplCartRow'] = 'Чанк одного ряда таблицы заказа';
 $_lang['ms.tplDeliveryRow'] = 'Чанк одного варианта доставки';
@@ -11,6 +12,7 @@ $_lang['ms.tplOrderEmailRow'] = 'Чанк одного заказанного т
 $_lang['ms.tplSubmitOrderSuccess'] = 'Чанк сообщения об успешном заказе';
 $_lang['ms.tplMyOrdersList'] = 'Чанк вывода заказов в личном кабинете';
 $_lang['ms.tplPaymentForm'] = 'Чанк формы оплаты заказа';
+$_lang['ms.tplMiniCart'] = 'Чанк оформления миникорзины';
 $_lang['ms.debug'] = 'Включить отображение ошибок?';
 $_lang['ms.userGroups'] = 'Группы для регистрации новых покупателей, через запятую';
 

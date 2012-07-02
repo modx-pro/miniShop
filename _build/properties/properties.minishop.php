@@ -15,6 +15,23 @@ $properties[4] = array();
 
 $properties[5] = array(
 	array(
+		'name' => 'action',
+		'value' => 'getCart',
+		'type' => 'list',
+		'desc' => 'ms.action',
+		'lexicon' => 'minishop:properties',
+		'options' => array(
+			array('text' => 'getCart','value' => 'getCart'),
+			array('text' => 'getMiniCart','value' => 'getMiniCart'),
+			array('text' => 'getDelivery','value' => 'getDelivery'),
+			array('text' => 'getPayments','value' => 'getPayments'),
+			array('text' => 'submitOrder','value' => 'submitOrder'),
+			array('text' => 'getMyOrdersList','value' => 'getMyOrdersList'),
+			array('text' => 'redirectCustomer','value' => 'redirectCustomer'),
+			array('text' => 'receivePayment','value' => 'receivePayment'),
+		),
+	),
+	array(
 		'name' => 'tplCartOuter',
 		'value' => 'tpl.msCart.outer',
 		'type' => 'textfield',
@@ -40,7 +57,7 @@ $properties[5] = array(
 	),
 	array(
 		'name' => 'tplPaymentRow',
-		'value' => 'tpl.msDelivery.row',
+		'value' => 'tpl.msPayment.row',
 		'type' => 'textfield',
 		'desc' => 'ms.tplPaymentRow',
 		'lexicon' => 'minishop:properties',
@@ -99,6 +116,14 @@ $properties[5] = array(
 		'value' => 'tpl.msPayment.form',
 		'type' => 'textfield',
 		'desc' => 'ms.tplPaymentForm',
+		'lexicon' => 'minishop:properties',
+		'options' => '',
+	),
+	array(
+		'name' => 'tplMiniCart',
+		'value' => 'tpl.msCart.mini',
+		'type' => 'textfield',
+		'desc' => 'ms.tplMiniCart',
 		'lexicon' => 'minishop:properties',
 		'options' => '',
 	),

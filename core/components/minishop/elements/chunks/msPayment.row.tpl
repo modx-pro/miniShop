@@ -1,0 +1,1 @@
+<option value="[[+id]]" title="[[+description]]" [[+selected]]>[[+name]] [[+price:gt=`0`:then=`(+ [[+price]]руб.)`]]</option>

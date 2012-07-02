@@ -486,6 +486,18 @@ class miniShop {
 
 
 	/*
+	 * Returns mini cart for frontend
+	 * 
+	 * @returns string $cart				// fully processed mini cart
+	 * */
+	function getMiniCart() {
+		$status = $this->getCartStatus();
+		
+		return $this->modx->getChunk($this->config['tplMiniCart'], $status);
+	}
+	
+	
+	/*
 	 * Renders cart rows, e.g. products
 	 * 
 	 * @param string $tpl				// template for processing

@@ -5,7 +5,7 @@ Ext.onReady(function() {
 	var item = Ext.getUrlParam('item');
 	var wid = Ext.getUrlParam('wid') || 1;
 	
-	if (action == 'new') {
+	if (action == 'create') {
 		Ext.getCmp('minishop-tabs-main').setActiveTab('minishop-tabs-goods');
 		Ext.getCmp('minishop-tabs-goods-inner').setActiveTab('minishop-tabs-goods-inner-goods');
 		Ext.getCmp('minishop-grid-goods').createGoods('');

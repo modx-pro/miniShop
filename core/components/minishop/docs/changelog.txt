@@ -1,5 +1,23 @@
 Changelog for miniShop.
 
+1.7.3 (02.07.2012)
+=============
+- Добавлена поддержка прямых ссылок на некоторые действия компонента (типа, /manager/?a=78&act=edit&item=15)
+- Очередные улучшения UI админки
+- Добавлен чанк tpl.msPayment.row
+- Добавлено действие getMiniCart сниппету miniShop, для вывода миникорзины
+- Добавлен чанк tpl.msCart.mini для миникорзины
+- Изменен minishop.js для работы с миникорзиной
+- [#51] Обновлен msGetResources до нового getResources 1.5.0- Очередные правки UI админки
+-----
+- Added support of direct links on some component actions (for example, /manager/?a=78&act=edit&item=15)
+- Another UI improvements in manager
+- Added chunk tpl.msPayment.row
+- Added action getMiniCart for snippet miniShop.
+- Added chunk tpl.msCart.mini for minicart templating
+- Changed minishop.js for work with minicart
+- [#51] Updated msGetResources to new getResources 1.5.0
+
 1.7.2 (21.06.2012)
 =============
 - Исправлено сохранение ТВ параметров
