@@ -14,7 +14,7 @@ set_time_limit(0);
 /* define package */
 define('PKG_NAME','miniShop');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
-define('PKG_VERSION','1.7.3');
+define('PKG_VERSION','1.8.0');
 define('PKG_RELEASE','pl');
 
 /* define sources */
@@ -141,6 +141,23 @@ if (!is_array($settings)) {
     $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($settings).' System Settings.');
 }
 unset($settings,$setting,$attributes);
+
+/* load miniShop events */
+$events = include $sources['data'].'transport.events.php';
+if (!is_array($events)) {
+    $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in events.');
+} else {
+    $attributes = array (
+        xPDOTransport::PRESERVE_KEYS => true,
+        xPDOTransport::UPDATE_OBJECT => true,
+    );
+    foreach ($events as $event) {
+        $vehicle = $builder->createVehicle($event,$attributes);
+        $builder->putVehicle($vehicle);
+    }
+    $modx->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($events).' miniShop events.');
+}
+unset ($events, $event, $attributes);
 
 /* load menu */
 $menu = include $sources['data'].'transport.menu.php';

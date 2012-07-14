@@ -1,5 +1,11 @@
 Changelog for miniShop.
 
+1.8.0 (15.07.2012)
+=============
+- Добавлены события для плагинов. Теперь можно писать плагины, реагирующие на создание\изменение заказа и его статуса
+-----
+- Added events for plugins. Now you can make plugins, that will listen for events create\update of an order and its status change.
+
 1.7.3 (02.07.2012)
 =============
 - Добавлена поддержка прямых ссылок на некоторые действия компонента (типа, /manager/?a=78&act=edit&item=15)
