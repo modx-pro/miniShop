@@ -12,14 +12,14 @@ $categories_tpls = explode(',', $this->modx->getOption('minishop.categories_tpl'
 $goods_tpls = explode(',', $this->modx->getOption('minishop.goods_tpl', '', 1));
 
 // Getting variables
-$isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,round($modx->getOption('default_per_page') / 2));
-$sort = $modx->getOption('sort',$_REQUEST,'pagetitle');
-$dir = $modx->getOption('dir',$_REQUEST,'ASC');
-$query = $modx->getOption('query', $_REQUEST, 0);
-$mode = $modx->getOption('mode', $_REQUEST, 'category');
-$addall = $_REQUEST['addall'] ? 1 : 0;
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,round($modx->getOption('default_per_page') / 2));
+$sort = $modx->getOption('sort',$scriptProperties,'pagetitle');
+$dir = $modx->getOption('dir',$scriptProperties,'ASC');
+$query = $modx->getOption('query', $scriptProperties, 0);
+$mode = $modx->getOption('mode', $scriptProperties, 'category');
+$addall = $scriptProperties['addall'] ? 1 : 0;
 
 // Starting new query
 $c = $modx->newQuery('modResource', array('deleted:!=' => 1));

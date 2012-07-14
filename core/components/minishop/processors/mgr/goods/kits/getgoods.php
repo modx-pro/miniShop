@@ -8,13 +8,13 @@
 
 if (!$modx->hasPermission('view')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
 
-$isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,round($modx->getOption('default_per_page') / 2));
-$sort = $modx->getOption('sort',$_REQUEST,'pagetitle');
-$dir = $modx->getOption('dir',$_REQUEST,'ASC');
-//$query = $modx->getOption('query',$_REQUEST, 0);
-$resource = $modx->getOption('gid', $_REQUEST, 0);
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,round($modx->getOption('default_per_page') / 2));
+$sort = $modx->getOption('sort',$scriptProperties,'pagetitle');
+$dir = $modx->getOption('dir',$scriptProperties,'ASC');
+//$query = $modx->getOption('query',$scriptProperties, 0);
+$resource = $modx->getOption('gid', $scriptProperties, 0);
 
 if (empty($resource)) {return $modx->error->faulure($modx->lexicon('ms.goods.err_ns'));}
 

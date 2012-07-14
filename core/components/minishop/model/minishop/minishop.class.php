@@ -695,6 +695,7 @@ class miniShop {
 		$order->set('status', 0);
 		$order->set('created', date('Y-m-d H:i:s'));
 		$order->set('updated', date('Y-m-d H:i:s'));
+		$this->modx->invokeEvent('msOnBeforeOrderCreate', array('order' => $order, 'profile' => $profile, 'address' => $address));
 		$order->save();
 
 		// Saving goods in cart
@@ -724,7 +725,9 @@ class miniShop {
 		}
 		$order->set('sum', $cart_sum);
 		$order->set('weight', $cart_weight);
-		$order->save();
+		if ($order->save()) {
+			$this->modx->invokeEvent('msOnOrderCreate', array('order' => $order, 'profile' => $profile, 'address' => $address));
+		}
 
 		// Sets status "new" to the order and sends email notices
 		if ($this->changeOrderStatus($order->get('id'), $this->config['ms_status_new'])) {
@@ -755,14 +758,16 @@ class miniShop {
 	function changeOrderStatus($oid, $new) {
 		if (!$order = $this->modx->getObject('ModOrders', $oid)) {return false;}
 		$pls = $this->makePlaceholders($order->toArray());
-		$maxIterations= (integer) $this->modx->getOption('parser_max_iterations', null, 10);
+		$maxIterations = (integer) $this->modx->getOption('parser_max_iterations', null, 10);
 
 		if ($status = $this->modx->getObject('ModStatus', $new)) {
 			$old = $order->get('status');
 			$order->set('status', $new);
+			$this->modx->invokeEvent('msOnBeforeOrderChangeStatus', array('order' => $order, 'old' => $old, 'new' => $new));
 			// Saving new status
 			if ($order->save()) {
 				$this->Log('status', $order->get('id'), 0, 'change', $old, $new);
+				$this->modx->invokeEvent('msOnOrderChangeStatus', array('order' => $order, 'old' => $old, 'new' => $new));
 				
 				if ($this->modx->getOption('minishop.enable_remains')) {
 					if ($new == $this->modx->getOption('minishop.status_final')) {

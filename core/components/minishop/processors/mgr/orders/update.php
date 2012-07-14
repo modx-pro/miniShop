@@ -11,17 +11,17 @@
 if (!$modx->hasPermission('save')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
 
 // Getting variables
-$id = $modx->getOption('id', $_REQUEST, 0);
-$status = $modx->getOption('status', $_REQUEST, 1);
-$comment = $modx->getOption('comment', $_REQUEST, '');
-$warehouse = $modx->getOption('wid', $_REQUEST, 0);
-$delivery = $modx->getOption('delivery', $_REQUEST, 0);
-$payment = $modx->getOption('payment', $_REQUEST, 0);
+$id = $modx->getOption('id', $scriptProperties, 0);
+$status = $modx->getOption('status', $scriptProperties, 1);
+$comment = $modx->getOption('comment', $scriptProperties, '');
+$warehouse = $modx->getOption('wid', $scriptProperties, 0);
+$delivery = $modx->getOption('delivery', $scriptProperties, 0);
+$payment = $modx->getOption('payment', $scriptProperties, 0);
 if (empty($id)) {return $modx->error->failure($modx->lexicon('ms.orders.item_err_save'));}
 
 // Processing variables for assress of customer
 $addr = array();
-foreach ($_REQUEST as $k => $v) {
+foreach ($scriptProperties as $k => $v) {
 	if (strstr($k, 'addr_') != false) {
 		$k = substr($k, 5);
 		$addr[$k] = $v;
@@ -74,12 +74,14 @@ if ($res = $modx->getObject('ModOrders', $id)) {
 		$change_payment = 1;
 		$res->set('payment', $payment);
 	}
-	// Saving changes
 	$res->set('comment', $comment);
+	// Saving changes
+	$modx->invokeEvent('msOnBeforeOrderUpdate', array('order' => $res));
 	if  ($res->save()) {
 		if ($change_warehouse) {$miniShop->Log('warehouse', $id, 0, 'change', $oldwarehouse, $warehouse);}
 		if ($change_delivery) {$miniShop->Log('delivery', $id, 0, 'change', $oldelivery, $delivery);}
 		if ($change_payment) {$miniShop->Log('payment', $id, 0, 'change', $oldpayment, $payment);}
+		$modx->invokeEvent('msOnOrderUpdate', array('order' => $res));
 	}
 	
 	if ($address = $modx->getObject('ModAddress', $addr['id'])) {

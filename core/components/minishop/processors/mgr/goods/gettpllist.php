@@ -11,7 +11,7 @@ if (!isset($modx->miniShop) || !is_object($modx->miniShop)) {
 	$miniShop = $modx->getService('miniShop','miniShop',$modx->getOption('minishop.core_path',null,$modx->getOption('core_path').'components/minishop/').'model/minishop/', $scriptProperties);
 	if (!($miniShop instanceof miniShop)) return '';
 }
-if (isset($_REQUEST['kits']) && !empty($_REQUEST['kits'])) {
+if (isset($scriptProperties['kits']) && !empty($scriptProperties['kits'])) {
 	$goods_tpls = $miniShop->config['ms_kits_tpls'];
 }
 else {

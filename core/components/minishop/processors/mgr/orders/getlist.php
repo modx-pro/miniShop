@@ -7,18 +7,18 @@
  */
 if (!$modx->hasPermission('view')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
 
-$isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,$modx->getOption('default_per_page'));
-$sort = $modx->getOption('sort',$_REQUEST,'created');
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,$modx->getOption('default_per_page'));
+$sort = $modx->getOption('sort',$scriptProperties,'created');
 
-$dir = $modx->getOption('dir',$_REQUEST,'DESC');
-$warehouse = $modx->getOption('warehouse', $_REQUEST, $_SESSION['minishop']['warehouse']);
-$status = $modx->getOption('status', $_REQUEST, $_SESSION['minishop']['status']);
+$dir = $modx->getOption('dir',$scriptProperties,'DESC');
+$warehouse = $modx->getOption('warehouse', $scriptProperties, $_SESSION['minishop']['warehouse']);
+$status = $modx->getOption('status', $scriptProperties, $_SESSION['minishop']['status']);
 $_SESSION['minishop']['warehouse'] = $warehouse;
 $_SESSION['minishop']['status'] = $status;
 
-$query = $modx->getOption('query',$_REQUEST, 0);
+$query = $modx->getOption('query',$scriptProperties, 0);
 $c = $modx->newQuery('ModOrders');
 
 if (!empty($status)) {

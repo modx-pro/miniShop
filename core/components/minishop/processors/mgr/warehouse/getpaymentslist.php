@@ -7,13 +7,12 @@
  */
 if (!$modx->hasPermission('view')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
  
-$isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,round($modx->getOption('default_per_page') / 2));
-$sort = $modx->getOption('sort',$_REQUEST,'id');
-$dir = $modx->getOption('dir',$_REQUEST,'ASC');
-$did = $modx->getOption('delivery',$_REQUEST,0);
-//$query = $modx->getOption('query',$_REQUEST, 0);
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,round($modx->getOption('default_per_page') / 2));
+$sort = $modx->getOption('sort',$scriptProperties,'id');
+$dir = $modx->getOption('dir',$scriptProperties,'ASC');
+$did = $modx->getOption('delivery',$scriptProperties,0);
 
 if (empty($did)) {
 	return $modx->error->failure($modx->lexicon('ms.delivery.err_nf'));
@@ -26,16 +25,6 @@ else {
 $cur_payments = $delivery->getPayments();
 
 $c = $modx->newQuery('ModPayment');
-/*
-if (!empty($query)) {
-	$c->orCondition(array(
-		'name:LIKE' => '%'.$query.'%'
-		,'description:LIKE' => '%'.$query.'%'
-		,'snippet:LIKE' => '%'.$query.'%'
-	));
-}
-*/
-
 $count = $modx->getCount('ModPayment',$c);
 
 $c->sortby($sort,$dir);

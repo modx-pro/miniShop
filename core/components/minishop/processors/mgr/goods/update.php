@@ -8,22 +8,22 @@
 
 if (!$modx->hasPermission('save')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
 
-if (empty($_POST['pagetitle'])) {
+if (empty($scriptProperties['pagetitle'])) {
 	$modx->error->addField('pagetitle',$modx->lexicon('ms.required_field'));
 }
-//if (empty($_POST['parent'])) {
+//if (empty($scriptProperties['parent'])) {
 //	$modx->error->addField('parent',$modx->lexicon('ms.required_field'));
 //}
 if ($modx->error->hasError()) {
     return $modx->error->failure();
 }
 
-$id = $modx->getOption('id', $_REQUEST, 0);
-$wid = $modx->getOption('wid', $_REQUEST, 0);
+$id = $modx->getOption('id', $scriptProperties, 0);
+$wid = $modx->getOption('wid', $scriptProperties, 0);
 
 if ($modx->getCount('modResource', $id) > 0) {
 	// Updating resource
-	$response = $modx->runProcessor('resource/update', $_POST);
+	$response = $modx->runProcessor('resource/update', $scriptProperties);
 	if ($response->isError()) {
 		return $modx->error->failure($response->getMessage());
 	}
@@ -31,8 +31,8 @@ if ($modx->getCount('modResource', $id) > 0) {
 	$miniShop = new miniShop($modx);
 
 	// If resource is deleted - clean records in miniShop and exit
-	if ($_REQUEST['deleted'] == 1) {
-		$response = $modx->runProcessor('mgr/goods/delete', $_REQUEST, array('processors_path' => $miniShop->config['processorsPath']));
+	if ($scriptProperties['deleted'] == 1) {
+		$response = $modx->runProcessor('mgr/goods/delete', $scriptProperties, array('processors_path' => $miniShop->config['processorsPath']));
 		if ($response->isError()) {
 			return $modx->error->failure($response->getMessage());
 		}
@@ -41,7 +41,7 @@ if ($modx->getCount('modResource', $id) > 0) {
 
 	$wids = array();
 	// If updating resource on all warehouses - get its ids
-	if ($_REQUEST['duplicate']) {
+	if ($scriptProperties['duplicate']) {
 		$tmp = $modx->getCollection('ModWarehouse');
 		foreach ($tmp as $v) {
 			$permission = $v->get('permission');
@@ -59,30 +59,30 @@ if ($modx->getCount('modResource', $id) > 0) {
 
 	foreach ($wids as $wid) {
 		$nolog = 0;
-		if (!$res2 = $modx->getObject('ModGoods', array('wid' => $wid, 'gid' => $id))) {
-			$res2 = $modx->newObject('ModGoods', array('wid' => $wid, 'gid' => $id));
+		if (!$res = $modx->getObject('ModGoods', array('wid' => $wid, 'gid' => $id))) {
+			$res = $modx->newObject('ModGoods', array('wid' => $wid, 'gid' => $id));
 			$nolog = 1;
 		}
-		$old =  $res2->get('remains');
-		$res2->set('article', $_REQUEST['article']);
-		$res2->set('price', $_REQUEST['price']);
-		$res2->set('weight', $_REQUEST['weight']);
-		$res2->set('img', $_REQUEST['img']);
-		$res2->set('remains', $_REQUEST['remains']);
-		$res2->set('add1', $_REQUEST['add1']);
-		$res2->set('add2', $_REQUEST['add2']);
-		$res2->set('add3', $_REQUEST['add3']);
+		$old =  $res->get('remains');
+		$res->set('article', $scriptProperties['article']);
+		$res->set('price', $scriptProperties['price']);
+		$res->set('weight', $scriptProperties['weight']);
+		$res->set('img', $scriptProperties['img']);
+		$res->set('remains', $scriptProperties['remains']);
+		$res->set('add1', $scriptProperties['add1']);
+		$res->set('add2', $scriptProperties['add2']);
+		$res->set('add3', $scriptProperties['add3']);
 		
-		if ($res2->save()) {
-			$res2->addTags($_REQUEST['tags']);
+		if ($res->save()) {
+			$res->addTags($scriptProperties['tags']);
 			if (!$nolog) {
-				//$miniShop->Log('goods', $res2->get('id'), 'remains', $old, $_REQUEST['remains']);
+				//$miniShop->Log('goods', $res->get('id'), 'remains', $old, $scriptProperties['remains']);
 			}
 		}
 	}
 	
 	// Defence agaid duplicate main category of the product and additionals
-	if ($tmp = $modx->getObject('ModCategories', array('gid' => $id, 'cid' => $_REQUEST['parent']))) {
+	if ($tmp = $modx->getObject('ModCategories', array('gid' => $id, 'cid' => $scriptProperties['parent']))) {
 		$tmp->remove();
 	}
 }

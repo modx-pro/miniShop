@@ -7,8 +7,8 @@
  */
 /* get board */
 
-$id = $modx->getOption('id',$_REQUEST, 0);
-$wid = $modx->getOption('wid',$_REQUEST, $_SESSION['minishop']['warehouse']);
+$id = $modx->getOption('id',$scriptProperties, 0);
+$wid = $modx->getOption('wid',$scriptProperties, $_SESSION['minishop']['warehouse']);
 
 if (empty($id)) {
 	return $modx->error->failure($modx->lexicon('ms.goods.err_ns'));

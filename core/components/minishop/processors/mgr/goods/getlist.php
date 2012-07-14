@@ -15,15 +15,15 @@ if (!$modx->hasPermission('view')) {return $modx->error->failure($modx->lexicon(
 
 $goods_tpls = $miniShop->config['ms_goods_tpls'];
 
-$isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,$modx->getOption('default_per_page'));
-$sort = $modx->getOption('sort',$_REQUEST,'pagetitle');
-$dir = $modx->getOption('dir',$_REQUEST,'ASC');
-$query = $modx->getOption('query',$_REQUEST, 0);
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,$modx->getOption('default_per_page'));
+$sort = $modx->getOption('sort',$scriptProperties,'pagetitle');
+$dir = $modx->getOption('dir',$scriptProperties,'ASC');
+$query = $modx->getOption('query',$scriptProperties, 0);
 
-$warehouse = $modx->getOption('warehouse', $_REQUEST, $_SESSION['minishop']['warehouse']);
-$category = $modx->getOption('category', $_REQUEST, $_SESSION['minishop']['category']);
+$warehouse = $modx->getOption('warehouse', $scriptProperties, $_SESSION['minishop']['warehouse']);
+$category = $modx->getOption('category', $scriptProperties, $_SESSION['minishop']['category']);
 $_SESSION['minishop']['warehouse'] = $warehouse;
 $_SESSION['minishop']['category'] = $category;
 

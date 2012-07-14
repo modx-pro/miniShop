@@ -6,7 +6,7 @@
  * @subpackage processors
  */
 
-$id = $modx->getOption('id',$_REQUEST, 0);
+$id = $modx->getOption('id',$scriptProperties, 0);
 
 if (empty($id)) {
 	return $modx->error->failure($modx->lexicon('ms.order_err_ns'));

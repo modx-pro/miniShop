@@ -6,14 +6,14 @@
  * @subpackage processors
  */
 
-$isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,10);
-$sort = $modx->getOption('sort',$_REQUEST,'id');
-$dir = $modx->getOption('dir',$_REQUEST,'DESC');
-$oid = $modx->getOption('oid', $_REQUEST, 0);
-$type = $modx->getOption('type', $_REQUEST, 0);
-$operation = $modx->getOption('operation', $_REQUEST, 0);
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,10);
+$sort = $modx->getOption('sort',$scriptProperties,'id');
+$dir = $modx->getOption('dir',$scriptProperties,'DESC');
+$oid = $modx->getOption('oid', $scriptProperties, 0);
+$type = $modx->getOption('type', $scriptProperties, 0);
+$operation = $modx->getOption('operation', $scriptProperties, 0);
 
 $c = $modx->newQuery('ModLog');
 $c->where(array('oid' => $oid));

@@ -7,12 +7,12 @@
  */
 if (!$modx->hasPermission('view')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
  
-$isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,$modx->getOption('default_per_page'));
-$sort = $modx->getOption('sort',$_REQUEST,'id');
-$dir = $modx->getOption('dir',$_REQUEST,'ASC');
-$query = $modx->getOption('query',$_REQUEST, 0);
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,$modx->getOption('default_per_page'));
+$sort = $modx->getOption('sort',$scriptProperties,'id');
+$dir = $modx->getOption('dir',$scriptProperties,'ASC');
+$query = $modx->getOption('query',$scriptProperties, 0);
 
 $c = $modx->newQuery('ModWarehouse');
 if (!empty($query)) {
@@ -38,9 +38,6 @@ foreach ($warehouses as $v) {
 		continue;
 	}
     $tmp = $v->toArray();
-	//$tmp['fullname'] = $v->getFullName();
-	//$tmp['warehousename'] = $v->getWarehouseName();
-	//$tmp['statusname'] = $v->getStatusName();
 	$arr[]= $tmp;
 	
 }

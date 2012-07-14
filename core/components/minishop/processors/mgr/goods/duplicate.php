@@ -9,11 +9,11 @@
 
 if (!$modx->hasPermission('save')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
 
-if (empty($_POST['id'])) {
+if (empty($scriptProperties['id'])) {
 	$modx->error->failure('pagetitle',$modx->lexicon('ms.required_field'));
 }
 
-if ($res = $modx->getObject('modResource', $_POST['id'])) {
+if ($res = $modx->getObject('modResource', $scriptProperties['id'])) {
 	$name = $res->get('pagetitle') . ' copy';
 	if (strstr($name, ' copy #') != false) {
 		preg_match('/\#[\d]{1,3}/', $name, $tmp);
@@ -32,12 +32,12 @@ while (true) {
 	$i++;
 }
 
-$response = $modx->runProcessor('resource/duplicate', array('id' => $_POST['id'], 'name' => $name));
+$response = $modx->runProcessor('resource/duplicate', array('id' => $scriptProperties['id'], 'name' => $name));
 if ($response->isError()) {
     return $modx->error->failure($response->getMessage());
 }
 
-$id_old = $_POST['id'];
+$id_old = $scriptProperties['id'];
 $id_new = $response->response['object']['id'];
 
 if ($res_old = $modx->getObject('ModGoods', array('gid' => $id_old, 'wid' => $_SESSION['minishop']['warehouse']))) {

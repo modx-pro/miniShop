@@ -15,12 +15,12 @@ if (!$modx->hasPermission('view')) {return $modx->error->failure($modx->lexicon(
 
 $kits_tpls = $miniShop->config['ms_kits_tpls'];
 
-$isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,$modx->getOption('default_per_page'));
-$sort = $modx->getOption('sort',$_REQUEST,'pagetitle');
-$dir = $modx->getOption('dir',$_REQUEST,'ASC');
-$query = $modx->getOption('query',$_REQUEST, 0);
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,$modx->getOption('default_per_page'));
+$sort = $modx->getOption('sort',$scriptProperties,'pagetitle');
+$dir = $modx->getOption('dir',$scriptProperties,'ASC');
+$query = $modx->getOption('query',$scriptProperties, 0);
 
 $c = $modx->newQuery('modResource');
 $c->where(array('template:IN' => $kits_tpls));

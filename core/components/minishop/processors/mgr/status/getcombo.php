@@ -7,12 +7,12 @@
  */
 if (!$modx->hasPermission('view')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
 
-$isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,$modx->getOption('default_per_page'));
-$sort = $modx->getOption('sort',$_REQUEST,'id');
-$dir = $modx->getOption('dir',$_REQUEST,'ASC');
-$addall = $modx->getOption('addall',$_REQUEST, 0);
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,$modx->getOption('default_per_page'));
+$sort = $modx->getOption('sort',$scriptProperties,'id');
+$dir = $modx->getOption('dir',$scriptProperties,'ASC');
+$addall = $modx->getOption('addall',$scriptProperties, 0);
 
 $c = $modx->newQuery('ModStatus');
 $count = $modx->getCount('ModStatus',$c);

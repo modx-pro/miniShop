@@ -7,7 +7,7 @@
  */
 if (!$modx->hasPermission('view')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));} 
 
-$query = $modx->getOption('query', $_REQUEST, 0);
+$query = $modx->getOption('query', $scriptProperties, 0);
 $q = $modx->newQuery('ModTags');
 
 $arr = array();
