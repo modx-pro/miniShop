@@ -117,5 +117,16 @@ class ModOrders extends xPDOSimpleObject {
 			}
 		}
 	}
+	
+	function getOrderedGoods() {
+		$arr = array();
+		
+		$res = $this->xpdo->getIterator('ModOrderedGoods', array('oid' => $this->get('id')));
+		foreach ($res as $v) {
+			$arr[] = $v;
+		}
+		
+		return $arr;
+	}
 
 }
