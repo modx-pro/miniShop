@@ -157,8 +157,8 @@ $_lang['ms.goods.change'] = 'Edit';
 $_lang['ms.goods.goto_manager_page'] = 'Open in new page';
 $_lang['ms.goods.goto_site_page'] = 'View on site';
 //$_lang['ms.goods.delete'] = 'Remove goods';
-$_lang['ms.goods.delete_confirm'] = 'Are you sure to remove this product?<br/>This will set parameter "deleted" to 1 and delete all product properties, such as price, image, remains, gallery etc.<br/>Then you can undelete this or clean trash in resources tree.';
-$_lang['ms.kits.delete_confirm'] = 'Are you sure to remove this лше?<br/>This will set parameter "deleted" to 1 and remove connection of goods with this kit.';
+$_lang['ms.goods.delete_confirm'] = 'Are you sure to remove this product?';
+$_lang['ms.kits.delete_confirm'] = 'Are you sure to remove this kit?';
 $_lang['ms.goods.err_delete'] = 'Failed to remove goods.';
 $_lang['ms.goods.err_ns'] = 'Goods ID not set.';
 $_lang['ms.goods.err_nf'] = 'Goods not found';
@@ -235,3 +235,8 @@ $_lang['ms.template.select'] = 'Select template';
 $_lang['ms.cart_empty.warning'] = 'Your cart will be cleared! Continue?';
 
 $_lang['ms.payment.error'] = 'Failed to make a payment';
+
+
+$_lang['ms.menu.editpage'] = 'Edit this page';
+$_lang['ms.menu.editproduct'] = 'Edit this product';
+$_lang['ms.menu.component'] = 'Go to miniShop component';

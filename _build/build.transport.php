@@ -74,6 +74,15 @@ if (!is_array($chunks)) {
     $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($chunks).' chunks.');
 }
 
+/* add plugins */
+$plugins = include $sources['data'].'transport.plugins.php';
+if (!is_array($plugins)) {
+    $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in plugins.');
+} else {
+    $category->addMany($plugins);
+    $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($plugins).' plugins.');
+}
+
 /* create category vehicle */
 $attr = array(
     xPDOTransport::UNIQUE_KEY => 'category',
@@ -109,6 +118,16 @@ $attr = array(
             xPDOTransport::UPDATE_OBJECT => false,
             xPDOTransport::UNIQUE_KEY => 'name',
         ),
+		'Plugins' => array (
+			xPDOTransport::PRESERVE_KEYS => false,
+			xPDOTransport::UPDATE_OBJECT => true,
+			xPDOTransport::UNIQUE_KEY => 'name',
+		),
+		'PluginEvents' => array (
+			xPDOTransport::PRESERVE_KEYS => true,
+			xPDOTransport::UPDATE_OBJECT => true,
+			xPDOTransport::UNIQUE_KEY => array('pluginid','event'),
+		),
     ),
 );
 $vehicle = $builder->createVehicle($category,$attr);
