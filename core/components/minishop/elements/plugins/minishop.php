@@ -12,6 +12,8 @@ if ($modx->event->name == 'OnWebPagePrerender') {
 	$target = '_blank'; // or _top
 	$goods_tpls = explode(',',$modx->getOption('minishop.goods_tpl'));
 	
+	$modx->lexicon->load('minishop:default');
+	
 	if (in_array($tpl, $goods_tpls)) {
 		$add = '<br/><a href="/manager/?a='.$action.'&act=edit&item='.$id.'" target="'.$target.'">'.$modx->lexicon('ms.menu.editproduct').'</a>';
 	}
