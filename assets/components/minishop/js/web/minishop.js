@@ -130,7 +130,28 @@ function remFromCart(key) {
 	})
 }
 
-// Обновление корзины
+// Старое обновление корзины - отключено
+/*
+function cartStatus(data) {
+	var total = data.total;
+	var count = data.count;
+	if (count > 0) {
+		if ($("#cartLink").find('span').length > 0) {
+			$("#cartLink").find('span').text('('+count+')')
+		}
+		else {
+			$("#cartLink").html($("#cartLink").text() + ' <span>('+count+')</span>')
+		}
+		$("#cartLink").attr('title', 'В корзине сейчас товаров: '+count+'шт., на сумму: '+total+'руб.')
+	}
+	else {
+		$("#cartLink").find('span').remove()
+		$("#cartLink").attr('title', 'Корзина пуста')
+	}
+}
+*/
+
+// Новое обновление корзины
 function cartStatus(data) {
 	var total = data.total;
 	var count = data.count;
