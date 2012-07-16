@@ -49,4 +49,18 @@ $events[5]->fromArray(array (
   'groupname' => 'miniShop',
 ), '', true, true);
 
+$events[6]= $modx->newObject('modEvent');
+$events[6]->fromArray(array (
+  'name' => 'msOnBeforeOrderDelete',
+  'service' => 6,
+  'groupname' => 'miniShop',
+), '', true, true);
+
+$events[7]= $modx->newObject('modEvent');
+$events[7]->fromArray(array (
+  'name' => 'msOnOrderDelete',
+  'service' => 6,
+  'groupname' => 'miniShop',
+), '', true, true);
+
 return $events;
