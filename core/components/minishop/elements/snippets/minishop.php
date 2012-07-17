@@ -25,11 +25,11 @@ switch ($action) {
 	case 'receivePayment': $res = $modx->miniShop->receivePayment($_REQUEST); break;
   
 	//ExtJS connectors
-	case 'orders/getlist': echo $modx->runProcessor('web/orders/getlist', array(), array('processors_path' => $modx->miniShop->config['processorsPath']))->response; die;
-	case 'status/getcombo': echo $modx->runProcessor('web/status/getcombo', array(), array('processors_path' => $modx->miniShop->config['processorsPath']))->response; die;
-	case 'orders/get': $res = $modx->runProcessor('web/orders/get', array(), array('processors_path' => $modx->miniShop->config['processorsPath'])); echo json_encode($res->response); die;
-	case 'orderedgoods/getlist': echo $modx->runProcessor('web/orderedgoods/getlist', array(), array('processors_path' => $modx->miniShop->config['processorsPath']))->response; die;
-	case 'log/getlist': echo $modx->runProcessor('web/log/getlist', array(), array('processors_path' => $modx->miniShop->config['processorsPath']))->response; die;
+	case 'orders/getlist': echo $modx->runProcessor('web/orders/getlist', $_REQUEST, array('processors_path' => $modx->miniShop->config['processorsPath']))->response; die;
+	case 'status/getcombo': echo $modx->runProcessor('web/status/getcombo', $_REQUEST, array('processors_path' => $modx->miniShop->config['processorsPath']))->response; die;
+	case 'orders/get': $res = $modx->runProcessor('web/orders/get', $_REQUEST, array('processors_path' => $modx->miniShop->config['processorsPath'])); echo json_encode($res->response); die;
+	case 'orderedgoods/getlist': echo $modx->runProcessor('web/orderedgoods/getlist', $_REQUEST, array('processors_path' => $modx->miniShop->config['processorsPath']))->response; die;
+	case 'log/getlist': echo $modx->runProcessor('web/log/getlist', $_REQUEST, array('processors_path' => $modx->miniShop->config['processorsPath']))->response; die;
 	//
     default: $res = '';
 }
