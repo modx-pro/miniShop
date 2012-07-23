@@ -1,5 +1,10 @@
 Changelog for miniShop.
 
+1.8.2 (**.**.2012)
+- Добавлен вывод родительских категорий у настройки мультикатегорий товара в админке
+-----
+- Added displaying parent categories for multi-categories setting in goods manager
+
 1.8.1 (17.07.2012)
 =============
 - Исправлена работа с процессорами личного кабинета

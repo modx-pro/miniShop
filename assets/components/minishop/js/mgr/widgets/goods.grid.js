@@ -437,8 +437,8 @@ miniShop.grid.Categories = function(config) {
 		,columns: [
 			{header: _('ms.cid'),dataIndex: 'id',hidden: true}
 			,{header: _('ms.gid'),dataIndex: 'gid',hidden: true}
-			,{header: _('ms.name'),dataIndex: 'pagetitle',width: 100,sortable: true}
-			,{header: _('ms.enabled'),dataIndex: 'enabled',width: 60,editor: { xtype: 'combo-boolean', renderer: 'boolean' }}
+			,{header: _('ms.name'),dataIndex: 'pagetitle',width: 500,sortable: true}
+			,{header: _('ms.enabled'),dataIndex: 'enabled',width: 100,editor: { xtype: 'combo-boolean', renderer: 'boolean' }}
 		]
 		,tbar: [{
 			xtype: 'tbfill'

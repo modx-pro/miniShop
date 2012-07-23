@@ -24,7 +24,7 @@ if (empty($gid)) {
 $c = $modx->newQuery('modResource');
 $c->where(array('template:IN' => $categories_tpls, 'isfolder' => 1));
 
-// Фильтрация по строке поиска
+// Filter by search query
 if (!empty($query)) {
 	$c->andCondition(array('pagetitle:LIKE' => '%'.$query.'%'));
 }
@@ -32,9 +32,9 @@ if (!empty($query)) {
 $count = $modx->getCount('modResource',$c);
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);
-$c->select('modResource.id,modResource.pagetitle');
+$c->select('id,pagetitle,parent');
 
-// Узнаем основную категорию товара
+// Get main category of product
 if ($tmp = $modx->getObject('modResource', $gid)) {
 	$parent = $tmp->get('parent');
 }
@@ -42,11 +42,19 @@ if ($tmp = $modx->getObject('modResource', $gid)) {
 $res = $modx->getCollection('modResource',$c);
 $arr = array();
 foreach ($res as $v) {
-	if ($v->get('id') == $parent) {continue;} // Выключаем основную категорию товара из списка
+	
+	if ($v->get('id') == $parent) {continue;} // Excluding main category
+	
+	// If it is nested category - adding name of parent
+	if ($tmp2 = $modx->getObject('modResource', array('id' => $v->get('parent'), 'template:IN' => $categories_tpls))) {
+		$pagetitle = $tmp2->get('pagetitle') . ' &rarr; ' . $v->get('pagetitle');
+	}
+	else {$pagetitle = $v->get('pagetitle');}
+	
     $tmp = array(
 		'id' => $v->get('id')
 		,'gid' => $gid
-		,'pagetitle' => $v->get('pagetitle')
+		,'pagetitle' => $pagetitle
 	);
 	
 	if ($tmp2 = $modx->getObject('ModCategories', array('cid' => $v->get('id'), 'gid' => $gid))) {
