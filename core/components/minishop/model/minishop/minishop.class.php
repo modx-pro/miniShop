@@ -1057,39 +1057,59 @@ class miniShop {
 	 *
 	 * @param int $id						// modResource id
 	 * @param int $wid						// ModWarehouse id
-	 * @param bool $level						// Level of retrieving.
-	 *									0 - goods properties
-	 *									1 - goods + resource
-	 * 									2 - goods + resource + tvs
+	 * @param bool $level					// Level of retrieving.
+	 *											0 - goods properties
+	 *											1 - goods + resource
+	 *											2 - goods + resource + tvs
+	 * @param mode							// 0 - array, 1 - objects
 	 *
 	 * @return array $arr					// Resource with goods properties and tags and processed price
 	 * */
-	function getProduct($id = 0, $wid = 0, $level = 0) {
+	function getProduct($id = 0, $wid = 0, $level = 0, $mode = 0) {
 		if (empty($id)) {$id = $this->modx->resource->id;}
 		if (empty($wid)) {$wid = $_SESSION['minishop']['warehouse'];}
-
+		
+		$arr = array();
+		
 		$res = array();
 		if ($level > 0 && $resource = $this->modx->getObject('modResource', $id)) {
-			$res = $resource->toArray();
+			if ($mode == 0) {
+				$res = $resource->toArray();
+			}
+			else {
+				$arr['resource'] = $resource;
+			}
 		}
 
 		$tvs = array();
 		if ($level > 1) {
 			$tmp = $resource->getMany('TemplateVars');
 			foreach ($tmp as $v) {
-				$tvs['tv.'.$v->get('name')] = $v->get('value');
+				if ($mode == 0) {
+					$tvs['tv.'.$v->get('name')] = $v->get('value');
+				}
+				else {
+					$arr['tvs'][$v->get('name')] = $v;
+				}
 			}
 		}
 
 		$goods = array();
 		if ($tmp = $this->modx->getObject('ModGoods', array('gid' => $id, 'wid' => $wid))) {
-			$goods = $tmp->toArray();
-			unset($goods['id']);
-			$goods['price'] = $this->getPrice($id);
-			$goods['tags'] = implode(', ', $tmp->getTags());
+			if ($mode == 0) {
+				$goods = $tmp->toArray();
+				unset($goods['id']);
+				$goods['price'] = $this->getPrice($id);
+				$goods['tags'] = implode(', ', $tmp->getTags());			
+			}
+			else {
+				$arr['goods'] = $tmp;
+			}
 		}
-
-		$arr = array_merge($res, $goods, $tvs);
+		
+		if ($mode == 0) {
+			$arr = array_merge($res, $goods, $tvs);
+		}
 		return $arr;
 	}
 	
