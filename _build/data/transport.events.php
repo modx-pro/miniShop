@@ -63,4 +63,18 @@ $events[7]->fromArray(array (
   'groupname' => 'miniShop',
 ), '', true, true);
 
+$events[8]= $modx->newObject('modEvent');
+$events[8]->fromArray(array (
+  'name' => 'msOnBeforeTVUpdate',
+  'service' => 6,
+  'groupname' => 'miniShop',
+), '', true, true);
+
+$events[9]= $modx->newObject('modEvent');
+$events[9]->fromArray(array (
+  'name' => 'msOnTVUpdate',
+  'service' => 6,
+  'groupname' => 'miniShop',
+), '', true, true);
+
 return $events;
