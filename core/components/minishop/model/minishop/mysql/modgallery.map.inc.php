@@ -11,6 +11,7 @@ $xpdo_meta_map['ModGallery']= array (
     'name' => NULL,
     'description' => NULL,
     'file' => NULL,
+    'fileorder' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -48,6 +49,14 @@ $xpdo_meta_map['ModGallery']= array (
       'precision' => '255',
       'phptype' => 'string',
       'null' => false,
+    ),
+    'fileorder' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
     ),
   ),
   'indexes' => 

@@ -48,6 +48,7 @@
 		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
 		<field key="description" dbtype="text" phptype="string" null="false" />
 		<field key="file" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="fileorder" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
 
 		<index alias="wid" name="wid" primary="false" unique="true" type="BTREE" >
 			<column key="wid" length="" collation="A" null="false" />

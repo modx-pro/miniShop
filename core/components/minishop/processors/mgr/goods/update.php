@@ -73,11 +73,10 @@ if ($modx->getCount('modResource', $id) > 0) {
 		$res->set('add2', $scriptProperties['add2']);
 		$res->set('add3', $scriptProperties['add3']);
 		
+		$modx->invokeEvent('msOnBeforeProductUpdate', array('product' => $res));
 		if ($res->save()) {
+			$modx->invokeEvent('msOnProductUpdate', array('product' => $res));
 			$res->addTags($scriptProperties['tags']);
-			if (!$nolog) {
-				//$miniShop->Log('goods', $res->get('id'), 'remains', $old, $scriptProperties['remains']);
-			}
 		}
 	}
 	

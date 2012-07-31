@@ -78,6 +78,7 @@ if ($object->xpdo) {
 			$otable = $modx->getTableName('ModOrders');
 			$stable = $modx->getTableName('ModStatus');
 			$ltable = $modx->getTableName('ModLog');
+			$galtable = $modx->getTableName('ModGallery');
 
 			$res = $modx->getCollection('ModStatus');
 			foreach ($res as $v) {
@@ -127,6 +128,9 @@ if ($object->xpdo) {
 			$sql = "ALTER TABLE {$ltable} CHANGE `iid` `oid` INT(11) NOT NULL DEFAULT '0';
 				ALTER TABLE {$ltable} ADD `iid` INT NOT NULL AFTER `oid` DEFAULT '0';
 				ALTER TABLE {$ltable} ADD `comment` TEXT NULL";
+			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
+
+			$sql = "ALTER TABLE {$galtable} ADD `fileorder` INT NOT NULL DEFAULT '0'";
 			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
 			
 			break;

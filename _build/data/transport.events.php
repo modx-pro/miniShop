@@ -77,4 +77,18 @@ $events[9]->fromArray(array (
   'groupname' => 'miniShop',
 ), '', true, true);
 
+$events[10]= $modx->newObject('modEvent');
+$events[10]->fromArray(array (
+  'name' => 'msOnBeforeProductUpdate',
+  'service' => 6,
+  'groupname' => 'miniShop',
+), '', true, true);
+
+$events[11]= $modx->newObject('modEvent');
+$events[11]->fromArray(array (
+  'name' => 'msOnProductUpdate',
+  'service' => 6,
+  'groupname' => 'miniShop',
+), '', true, true);
+
 return $events;

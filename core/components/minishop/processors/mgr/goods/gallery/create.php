@@ -15,6 +15,8 @@ if (empty($gid)) {return $modx->error->failure($modx->lexicon('ms.gallery.err_nf
 if (empty($scriptProperties['file'])) {$modx->error->addField('file',$modx->lexicon('ms.required_field'));}
 if ($modx->error->hasError()) {return $modx->error->failure();}
 
+$order = $modx->getCount('ModGallery', array('gid' => $gid, 'wid' => $_SESSION['minishop']['warehouse']));
+
 $res = $modx->newObject('ModGallery');
 $res->fromArray(array(
 	'gid' => $gid
@@ -22,6 +24,7 @@ $res->fromArray(array(
 	,'file' => $file
 	,'name' => $scriptProperties['name']
 	,'description' => $scriptProperties['description']
+	,'order' => $order
 ));
 
 $res->save();

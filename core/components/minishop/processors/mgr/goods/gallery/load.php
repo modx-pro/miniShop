@@ -25,6 +25,8 @@ if (strstr($dir, $base_path) == false) {$dir = $base_path.$dir;}
 
 if (!file_exists($dir)) {return $modx->error->failure('Wrong directory: '.$dir);}
 
+$order = $modx->getCount('ModGallery', array('gid' => $gid, 'wid' => $_SESSION['minishop']['warehouse']));
+
 $files = scandir($dir);
 foreach ($files as $v) {
 	if (is_dir($v)) {continue;}
@@ -45,7 +47,10 @@ foreach ($files as $v) {
 		,'wid' => $_SESSION['minishop']['warehouse']
 		,'name' => $name
 		,'file' => $file
+		,'sort' => $order
 	));
 	$res->save();
+	$order++;
+	
 	//return $modx->error->failure(print_r($res->toArray(),1));
 }

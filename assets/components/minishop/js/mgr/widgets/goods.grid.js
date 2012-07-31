@@ -121,8 +121,7 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
 			,record: {richtext: 1}
 			,listeners: {
 				'success':{fn:function() {Ext.getCmp('minishop-grid-goods').store.reload();},scope:this}
-				//,'hide':{fn:function() {this.destroy();}}
-				,'show':{fn:function() {this.center();}}
+				,'hide':{fn:function() {this.getEl().remove();}}
 				,'beforesubmit': {fn:function(d) {
 					if (d.parent == 0) {
 						if (!confirm(_('ms.goods.cat0_confirm'))) {return false;}
@@ -167,6 +166,7 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
 									Ext.getCmp('minishop-grid-goods').store.reload();
 								}
 								changed = 0;
+								this.getEl().remove()
 							}}
 						}
 					});
@@ -290,7 +290,8 @@ miniShop.window.createGoods = function(config) {
 				return { activeTab:this.items.indexOf(this.getActiveTab()) };
 			}
 			,items: [{
-				title: _('resource')
+				id: 'modx-'+this.ident+'-resource'
+				,title: _('resource')
 				,layout: 'form'
 				,cls: 'modx-panel'
 				,bodyStyle: { background: 'transparent', padding: '10px' }
@@ -363,7 +364,8 @@ miniShop.window.createGoods = function(config) {
 					,{xtype: 'checkbox',name: 'duplicate',value: 1,style: 'padding: 10px;',fieldLabel: _('ms.goods.duplicate'),description: _('ms.goods.duplicate.desc')}
 				]
 			},{
-				title: 'TVs'
+				id: 'modx-'+this.ident+'-tvs'
+				,title: 'TVs'
 				,items: [{
 					xtype: 'minishop-grid-tvs'
 					,disabled: config.disable_categories
@@ -373,7 +375,8 @@ miniShop.window.createGoods = function(config) {
 					}
 				}]
 			},{
-				title: _('ms.gallery')
+				id: 'modx-'+this.ident+'-gallery'
+				,title: _('ms.gallery')
 				,items: [{
 					xtype: 'minishop-grid-gallery'
 					,disabled: config.disable_categories
@@ -384,7 +387,8 @@ miniShop.window.createGoods = function(config) {
 					,gid: gid
 				}]
 			},{
-				title: _('ms.categories')
+				id: 'modx-'+this.ident+'-categories'
+				,title: _('ms.categories')
 				,items: [{
 					xtype: 'minishop-grid-categories'
 					,disabled: config.disable_categories
@@ -618,10 +622,10 @@ miniShop.grid.Gallery = function(config) {
 	config = config || {};
 
 	Ext.applyIf(config,{
-		id: 'product-grid-gallery'
+		id: this.ident+'-grid-gallery'
 		,url: miniShop.config.connector_url
 		,action: 'mgr/goods/gallery/getlist'
-		,fields: ['id','gid','name','description','file']
+		,fields: ['id','gid','name','description','file','fileorder']
 		,pageSize: Math.round(MODx.config.default_per_page / 4)
 		,autoHeight: true
 		,paging: true
@@ -645,6 +649,38 @@ miniShop.grid.Gallery = function(config) {
 			,handler: this.loadImages
 			,scope: this
 		}]
+		,plugins: [new Ext.ux.dd.GridDragDropRowOrder({
+			listeners: {
+				'afterrowmove': {
+					fn: function(drag, old_order, new_order, row) {
+						var row = row[0];
+						var grid = drag.grid;
+						var el = Ext.get(this.ident+'-grid-gallery');
+						el.mask(_('loading'),'x-mask-loading')
+						MODx.Ajax.request({
+							url: miniShop.config.connector_url
+							,params: {
+								action: 'mgr/goods/gallery/sort'
+								,id: row.data.id
+								,gid: row.data.gid
+								,new_order: new_order
+								,old_order: old_order
+							}
+							,listeners: {
+								'success': {fn:function(r) {
+									el.unmask();
+									grid.refresh();
+								},scope:grid}
+								,'failure': {fn:function(r) {
+									el.unmask();
+								},scope:grid}
+							}
+						})
+					}
+					,scope: this
+				}
+			}
+		})]
 		,listeners: {
 			rowDblClick: function(grid, rowIndex, e) {
 				var row = grid.store.getAt(rowIndex);
