@@ -535,6 +535,9 @@ class miniShop {
 						$tmp['data.'.$k2] = $v2;
 					}
 				}
+				$tmp['price'] = $v['price'];
+				$tmp['weight'] = $v['weight'];
+				
 				$arr['rows'] .= $this->modx->getChunk($tpl, $tmp);
 				
 				$arr['count'] += $tmp['num'];
