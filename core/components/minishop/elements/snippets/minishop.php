@@ -16,7 +16,7 @@ switch ($action) {
 	case 'addToCart': $res = $modx->miniShop->addToCart($_POST['gid'], $_POST['num'], $_POST['data']); break;
 	case 'remFromCart': $res = $modx->miniShop->remFromCart($_POST['key']); break;
 	case 'changeCartCount': $res = $modx->miniShop->changeCartCount($_POST['key'], $_POST['val']); break;
-	//case 'getCartStatus': $res = $modx->miniShop->getCartStatus(); break;
+	case 'getCartStatus': $res = $modx->miniShop->getCartStatus(); break;
 	case 'getDelivery': $res = $modx->miniShop->getDelivery(); break;
 	case 'getPayments': $res = $modx->miniShop->getPayments(); break; 
 	case 'submitOrder': $res = $modx->miniShop->submitOrder(); break;
