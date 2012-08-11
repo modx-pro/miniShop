@@ -245,12 +245,13 @@ class miniShop {
 	function getGoodsByCategories($parents = array()) {
 		if (empty($parents)) {$parents = array($this->modx->resource->id);}
 		if (!is_array($parents)) {$parents = explode(',', $parents);}
-		// Поиск подходящих ресурсов через связи в ModCategories
+		
 		$ids = array();
-		if ($res = $this->modx->getCollection('ModCategories', array('cid:IN' => $parents))) {
-			foreach ($res as $v) {
-				$ids[] = $v->get('gid');
-			}
+		$c = $this->modx->newQuery('ModCategories');
+		$c->where(array('cid:IN' => $parents));
+		$c->select('gid');
+		if ($c->prepare() && $c->stmt->execute()) {
+			$ids = $c->stmt->fetchAll(PDO::FETCH_COLUMN);
 		}
 		return $ids;
 	}
