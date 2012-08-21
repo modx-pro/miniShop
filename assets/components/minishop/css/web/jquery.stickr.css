@@ -5,7 +5,7 @@
 	width: 250px;
 	position: relative;
 	border-radius: 5px;
-	z-index: 10000;	
+	z-index: 10000;
 }
 .stickr_error {
 	padding: 20px 10px;
@@ -25,4 +25,3 @@
 	border-radius: 5px;
 	z-index: 10000;
 }
-
