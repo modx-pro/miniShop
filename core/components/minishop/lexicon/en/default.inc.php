@@ -240,3 +240,5 @@ $_lang['ms.payment.error'] = 'Failed to make a payment';
 $_lang['ms.menu.editpage'] = 'Edit this page';
 $_lang['ms.menu.editproduct'] = 'Edit this product';
 $_lang['ms.menu.component'] = 'Go to miniShop component';
+
+$_lang['ms.import.intro_msg'] = 'Select a *.csv file for import.';

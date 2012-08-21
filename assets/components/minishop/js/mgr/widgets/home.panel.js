@@ -380,8 +380,8 @@ miniShop.combo.Browser = function(config) {
 	}
 
 	Ext.applyIf(config,{
-	   width: 300
-	   ,triggerAction: 'all'
+		width: 300
+		,triggerAction: 'all'
 	});
 	miniShop.combo.Browser.superclass.constructor.call(this,config);
 	this.config = config;

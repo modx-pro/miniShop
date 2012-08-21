@@ -239,3 +239,5 @@ $_lang['ms.payment.error'] = 'Ошибка проведения платежа';
 $_lang['ms.menu.editpage'] = 'Редактировать эту страницу';
 $_lang['ms.menu.editproduct'] = 'Изменить этот товар';
 $_lang['ms.menu.component'] = 'Перейти к управлению товарами';
+
+$_lang['ms.import.intro_msg'] = 'Выберите *.csv файл для импорта.';
