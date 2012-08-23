@@ -1,17 +1,20 @@
 Changelog for miniShop.
 
-1.8.2 (**.**.2012)
-- Добавлен вывод родительских категорий у настройки мультикатегорий товара в админке
-- Добавлены события msOnBeforeTVUpdate и msOnTVUpdate
-- Добавлены события msOnBeforeProductUpdate и msOnProductUpdate
-- Метод getProduct теперь может возвращать массив объектов а не значений.
+1.9.0 (23.08.2012)
+=============
 - Возможность сортировки элементов галереи перетаскиванием.
+- Импорт товаров из *.csv
+- Добавлен вывод родительских категорий у настройки мультикатегорий товара в админке.
+- Добавлены события msOnBeforeTVUpdate и msOnTVUpdate.
+- Добавлены события msOnBeforeProductUpdate и msOnProductUpdate.
+- Метод getProduct теперь может возвращать массив объектов а не значений.
 -----
-- Added displaying parent categories for multi-categories setting in goods manager
-- Added events msOnBeforeTVUpdate and msOnTVUpdate
-- Added events msOnBeforeProductUpdate and msOnProductUpdate
-- Method getProduct can return array of objects instead of array of values.
 - Ability to sort the elements of the gallery by drag-n-drop.
+- Import of goods from *.csv
+- Added displaying parent categories for multi-categories setting in goods manager.
+- Added events msOnBeforeTVUpdate and msOnTVUpdate.
+- Added events msOnBeforeProductUpdate and msOnProductUpdate.
+- Method getProduct can return array of objects instead of array of values.
 
 1.8.1 (17.07.2012)
 =============

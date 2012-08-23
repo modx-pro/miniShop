@@ -124,4 +124,13 @@ $settings[12]->fromArray(array(
     'area' => 'settings',
 ),'',true,true);
 
+$settings[13]= $modx->newObject('modSystemSetting');
+$settings[13]->fromArray(array(
+    'key' => 'minishop.import_fields',
+    'value' => 'pagetitle,longtitle,introtext,content,ms_price,ms_weight,ms_article,ms_img',
+    'xtype' => 'textfield',
+    'namespace' => 'minishop',
+    'area' => 'settings',
+),'',true,true);
+
 return $settings;

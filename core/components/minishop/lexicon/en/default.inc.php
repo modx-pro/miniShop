@@ -241,4 +241,15 @@ $_lang['ms.menu.editpage'] = 'Edit this page';
 $_lang['ms.menu.editproduct'] = 'Edit this product';
 $_lang['ms.menu.component'] = 'Go to miniShop component';
 
-$_lang['ms.import.intro_msg'] = 'Select a *.csv file for import.';
+
+$_lang['ms.import.src'] = 'File field';
+$_lang['ms.import.dst'] = 'Product property';
+$_lang['ms.import.offset'] = 'Start from row';
+$_lang['ms.import.select_file'] = 'Select file';
+$_lang['ms.import.select_category'] = 'Select category';
+$_lang['ms.import.select_mode'] = 'Select import mode';
+$_lang['ms.import.mode_add'] = 'Add goods';
+$_lang['ms.import.mode_update'] = 'Update goods';
+$_lang['ms.import.wrong_file'] = 'Wrong file was selected';
+$_lang['ms.import.intro_msg'] = 'You need to select file for import and specify its fields to goods properties.<br/>Possible options of a goods are specified in the system setting <b>minishop.import_fields<b>.';
+$_lang['ms.import.btn_import'] = 'Import';

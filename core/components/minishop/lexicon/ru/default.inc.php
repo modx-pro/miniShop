@@ -240,4 +240,15 @@ $_lang['ms.menu.editpage'] = 'Редактировать эту страницу
 $_lang['ms.menu.editproduct'] = 'Изменить этот товар';
 $_lang['ms.menu.component'] = 'Перейти к управлению товарами';
 
-$_lang['ms.import.intro_msg'] = 'Выберите *.csv файл для импорта.';
+
+$_lang['ms.import.src'] = 'Поле файла';
+$_lang['ms.import.dst'] = 'Свойство товара';
+$_lang['ms.import.offset'] = 'Начать со строки';
+$_lang['ms.import.select_file'] = 'Выберите файл';
+$_lang['ms.import.select_category'] = 'Выберите категорию';
+$_lang['ms.import.select_mode'] = 'Режим импорта';
+$_lang['ms.import.mode_add'] = 'Добавить товары';
+$_lang['ms.import.mode_update'] = 'Перезаписать товары';
+$_lang['ms.import.wrong_file'] = 'Некорректный файл';
+$_lang['ms.import.intro_msg'] = 'Вам нужно выбрать файл для импорта и назначить его поля параметрам товаров.<br/>Возможные параметры указываются в системной настройке <b>minishop.import_fields<b>.';
+$_lang['ms.import.btn_import'] = 'Импортировать';
