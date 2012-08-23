@@ -113,11 +113,14 @@ class ModGoods extends xPDOSimpleObject {
 		return $arr;
 	}
 
-	function getGallery($sort = 'fileorder', $dir = 'ASC') {
+	function getGallery($sort = 'fileorder', $dir = 'ASC', $limit = 0) {
 		$gid = $this->get('gid');
 
 		$q = $this->xpdo->newQuery('ModGallery', array('gid' => $gid, 'wid' => $_SESSION['minishop']['warehouse']));
 		$q->sortby($sort,$dir);
+		if (!empty($limit)) {
+			$q->limit($limit);
+		}
 		$files = $this->xpdo->getCollection('ModGallery', $q);
 		
 		$arr = array();

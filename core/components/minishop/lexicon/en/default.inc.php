@@ -253,3 +253,7 @@ $_lang['ms.import.mode_update'] = 'Update goods';
 $_lang['ms.import.wrong_file'] = 'Wrong file was selected';
 $_lang['ms.import.intro_msg'] = 'You need to select file for import and specify its fields to goods properties.<br/>Possible options of a goods are specified in the system setting <b>minishop.import_fields<b>.';
 $_lang['ms.import.btn_import'] = 'Import';
+$_lang['ms.import.err_ns'] = 'Required fields are not set';
+$_lang['ms.import.err_config'] = 'No config of file fields and goods properties';
+$_lang['ms.import.category_purge'] = 'Delete all goods in this category';
+$_lang['ms.import.purge_confirm'] = 'Are you sure to remove all goods from this category?';

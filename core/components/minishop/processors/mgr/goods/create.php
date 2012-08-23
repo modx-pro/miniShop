@@ -15,12 +15,12 @@ if (empty($scriptProperties['pagetitle'])) {
 	//$modx->error->addField('parent',$modx->lexicon('ms.required_field'));
 //}
 if ($modx->error->hasError()) {
-    return $modx->error->failure($modx->lexicon('ms.required_field'));
+	return $modx->error->failure($modx->lexicon('ms.required_field'));
 }
 
 $response = $modx->runProcessor('resource/create', $scriptProperties);
 if ($response->isError()) {
-    return $modx->error->failure($response->getMessage());
+	return $modx->error->failure($response->getMessage());
 }
 
 $id = $response->response['object']['id'];
@@ -42,7 +42,7 @@ if ($modx->getCount('modResource', $id) > 0) {
 		}
 	}
 	else {
-		$wids[] = $_SESSION['minishop']['warehouse'];
+		$wids[] = !empty($scriptProperties['wid']) ? $scriptProperties['wid'] : $_SESSION['minishop']['warehouse'];
 	}
 
 	foreach ($wids as $wid) {

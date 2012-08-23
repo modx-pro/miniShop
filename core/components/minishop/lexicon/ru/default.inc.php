@@ -252,3 +252,7 @@ $_lang['ms.import.mode_update'] = 'Перезаписать товары';
 $_lang['ms.import.wrong_file'] = 'Некорректный файл';
 $_lang['ms.import.intro_msg'] = 'Вам нужно выбрать файл для импорта и назначить его поля параметрам товаров.<br/>Возможные параметры указываются в системной настройке <b>minishop.import_fields<b>.';
 $_lang['ms.import.btn_import'] = 'Импортировать';
+$_lang['ms.import.err_ns'] = 'Нужные параметры не получены';
+$_lang['ms.import.err_config'] = 'Нет конфигурации полей файла и свойств товара';
+$_lang['ms.import.category_purge'] = 'Удалить все товары категории';
+$_lang['ms.import.purge_confirm'] = 'Вы уверены, что хотите удалить все товары в этой категории?';

@@ -31,6 +31,10 @@ miniShop.window.Import = function(config) {
 				,layout: 'form'
 				,labelAlign: 'top'
 				,items: [{
+					xtype: 'minishop-combo-goodstemplate'
+					,allowBlank: false
+					,anchor: '100%'
+				},{
 					xtype: 'modx-combo-browser'
 					,name: 'file' 
 					,anchor: '100%'
@@ -52,7 +56,7 @@ miniShop.window.Import = function(config) {
 						,name: 'offset'
 						,allowDecimals: false
 						,allowNegative: false
-						,inputValue: '0'
+						,inputValue: 0
 						,anchor: '100%'
 						,fieldLabel: _('ms.import.offset')
 						//,allowBlank: false
@@ -83,6 +87,13 @@ miniShop.window.Import = function(config) {
 						{boxLabel: _('ms.import.mode_add'),name: 'mode',inputValue: 'add', checked: true},
 						{boxLabel: _('ms.import.mode_update'),name: 'mode', inputValue: 'update'},
 					]
+				},{
+					xtype: 'xcheckbox'
+					,id: 'import-purge'
+					,boxLabel: _('ms.import.category_purge')
+					,name: 'purge'
+					,inputValue: 1
+					,checked: false
 				}]
 			}]
 		},{
@@ -95,8 +106,12 @@ miniShop.window.Import = function(config) {
 			'success': {fn:function(result) {
 				this.enable().checkImport(result)
 			}}
-			,'beforeSubmit': {fn:function() {
+			,'beforeSubmit': {fn:function(form) {
+				if (form.purge != 0) {
+					if (!confirm(_('ms.import.purge_confirm'))) {return false;}
+				}
 				this.disable();
+				
 			}}
 			,'failure': {fn:function() {
 				this.enable();
@@ -127,6 +142,7 @@ Ext.extend(miniShop.window.Import,MODx.Window, {
 		result = result.a.result;
 		if (result.message != 'ok') {
 			Ext.getCmp('import-offset').setValue(result.message);
+			Ext.getCmp('import-purge').reset();
 			this.submit(false)
 		}
 		else {

@@ -8,6 +8,7 @@ Changelog for miniShop.
 - Добавлены события msOnBeforeTVUpdate и msOnTVUpdate.
 - Добавлены события msOnBeforeProductUpdate и msOnProductUpdate.
 - Метод getProduct теперь может возвращать массив объектов а не значений.
+- Если не задано поле "img" у товара, то админка попытается вывести в таблицу первое изображение из галереи этого товара.
 -----
 - Ability to sort the elements of the gallery by drag-n-drop.
 - Import of goods from *.csv
@@ -15,6 +16,7 @@ Changelog for miniShop.
 - Added events msOnBeforeTVUpdate and msOnTVUpdate.
 - Added events msOnBeforeProductUpdate and msOnProductUpdate.
 - Method getProduct can return array of objects instead of array of values.
+- If not set field "img" in the product, goods grid will tray to display first image from product gallery.
 
 1.8.1 (17.07.2012)
 =============

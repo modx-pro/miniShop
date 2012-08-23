@@ -76,17 +76,24 @@ foreach ($goods as $v) {
 		,'hidemenu' => $v->get('hidemenu')
 	);
 	$tmp['url'] = $this->modx->makeUrl($v->get('id'), '', '', 'full');
-	if ($tmp2 = $modx->getObject('ModGoods', array('gid' => $tmp['id'], 'wid' => $warehouse)) ) {
-		$tmp2 = $tmp2->toArray();
+	if ($product = $modx->getObject('ModGoods', array('gid' => $tmp['id'], 'wid' => $warehouse)) ) {
+		$tmp2 = $product->toArray();
 		unset($tmp2['id'], $tmp2['gid']);
 	}
 	else {
+		$product = null;
 		$tmp2 = array(
 			'wid' => $warehouse
 		);
 	}
 	
 	$tmp = array_merge($tmp, $tmp2);
+	if (empty($tmp['img']) && is_object($product)) {
+		$gallery = $product->getGallery('fileorder','ASC',1);
+		if (isset($gallery[0]) && is_object($gallery[0])) {
+			$tmp['img'] = $gallery[0]->get('file');
+		}
+	}
 
 	$tmp['menu'] = array(
 		array('text' => $modx->lexicon('ms.goods.change'), 'handler' => 'this.editGoods')
@@ -99,6 +106,6 @@ foreach ($goods as $v) {
 	$tmp['menu'][] = $tmp['published'] ? array('text' => $modx->lexicon('resource_unpublish'), 'handler' => 'this.unpublishGoods') : array('text' => $modx->lexicon('resource_publish'), 'handler' => 'this.publishGoods');
 	$tmp['menu'][] = $tmp['deleted'] ? array('text' => $modx->lexicon('resource_undelete'), 'handler' => 'this.undeleteGoods') : array('text' => $modx->lexicon('resource_delete'), 'handler' => 'this.deleteGoods');
 
-    $arr[]= $tmp;
+	$arr[]= $tmp;
 }
 return $this->outputArray($arr, $count);

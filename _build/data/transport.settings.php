@@ -127,7 +127,7 @@ $settings[12]->fromArray(array(
 $settings[13]= $modx->newObject('modSystemSetting');
 $settings[13]->fromArray(array(
     'key' => 'minishop.import_fields',
-    'value' => 'pagetitle,longtitle,introtext,content,ms_price,ms_weight,ms_article,ms_img',
+    'value' => 'pagetitle,longtitle,introtext,content,ms_price,ms_weight,ms_article,ms_img,tag,gallery',
     'xtype' => 'textfield',
     'namespace' => 'minishop',
     'area' => 'settings',

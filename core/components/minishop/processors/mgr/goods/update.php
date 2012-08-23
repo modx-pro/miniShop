@@ -15,7 +15,7 @@ if (empty($scriptProperties['pagetitle'])) {
 //	$modx->error->addField('parent',$modx->lexicon('ms.required_field'));
 //}
 if ($modx->error->hasError()) {
-    return $modx->error->failure();
+	return $modx->error->failure();
 }
 
 $id = $modx->getOption('id', $scriptProperties, 0);
@@ -28,11 +28,11 @@ if ($modx->getCount('modResource', $id) > 0) {
 		return $modx->error->failure($response->getMessage());
 	}
 
-	$miniShop = new miniShop($modx);
+	//$miniShop = new miniShop($modx);
 
 	// If resource is deleted - clean records in miniShop and exit
 	if ($scriptProperties['deleted'] == 1) {
-		$response = $modx->runProcessor('mgr/goods/delete', $scriptProperties, array('processors_path' => $miniShop->config['processorsPath']));
+		$response = $modx->runProcessor('mgr/goods/delete', $scriptProperties, array('processors_path' => MODX_CORE_PATH.'components/minishop/processors/'));
 		if ($response->isError()) {
 			return $modx->error->failure($response->getMessage());
 		}
