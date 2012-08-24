@@ -104,14 +104,13 @@ miniShop.window.Import = function(config) {
 		//,keys: [{key: Ext.EventObject.ENTER,shift: true,fn: this.submit,scope: this}]
 		,listeners: {
 			'success': {fn:function(result) {
-				this.enable().checkImport(result)
+				this.checkImport(result)
 			}}
 			,'beforeSubmit': {fn:function(form) {
 				if (form.purge != 0) {
 					if (!confirm(_('ms.import.purge_confirm'))) {return false;}
 				}
 				this.disable();
-				
 			}}
 			,'failure': {fn:function() {
 				this.enable();
@@ -143,12 +142,13 @@ Ext.extend(miniShop.window.Import,MODx.Window, {
 		if (result.message != 'ok') {
 			Ext.getCmp('import-offset').setValue(result.message);
 			Ext.getCmp('import-purge').reset();
+			Ext.getCmp('minishop-grid-goods').refresh();
 			this.submit(false)
 		}
 		else {
+			Ext.getCmp('minishop-grid-goods').refresh();
 			this.close();
 		}
-		Ext.getCmp('minishop-grid-goods').refresh();
 	}
 	
 });

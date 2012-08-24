@@ -19,7 +19,7 @@ $tpls = explode(',', $modx->getOption('minishop.categories_tpl'));
 $types = explode(',', $modx->getOption('minishop.import_fields', '', 'pagetitle,longtitle,introtext,content,ms_price,ms_weight,ms_article,ms_img,tag,gallery'));
 $wid = $modx->getOption('wid', $scriptProperties, $_SESSION['minishop']['warehouse']);
 
-if (($tmp = fopen($file, "r")) !== false) {
+if (($file = fopen($file, "r")) !== false) {
 	// Cleaning up category
 	if ($purge == 1) {
 		$q = $modx->newQuery('modResource', array('parent' => $category/*, 'template:IN' => $tpls*/));
@@ -40,8 +40,10 @@ if (($tmp = fopen($file, "r")) !== false) {
 	
 	// Importing
 	$i = 0;
-	while (($csv = fgetcsv($tmp, 0, ';')) !== false) {
+	while (($csv = fgetcsv($file, 0, ';')) !== false) {
 		if ($offset > 0 && $i < $offset) {$i++; continue;}
+		$modx->error->message = null;
+		$modx->error->errors = array();
 		
 		$tvs = $gallery = $tags = array();
 		$product = array('parent' => $category, 'template' => $template);
@@ -99,11 +101,22 @@ if (($tmp = fopen($file, "r")) !== false) {
 
 		foreach ($gallery as $v) {
 			if (!empty($v)) {
-				$response = $modx->runProcessor(
-					'mgr/goods/gallery/create'
-					,array('gid' => $id, 'wid' => $wid, 'file' => $v)
-					,array('processors_path' => MODX_CORE_PATH.'components/minishop/processors/')
-				);
+				$tmp = pathinfo($v);
+				//return $modx->error->failure('Error on row '.$i.': '.print_r($tmp,1));
+				if (empty($tmp['extension'])) {
+					$response = $modx->runProcessor(
+						'mgr/goods/gallery/load'
+						,array('gid' => $id, 'dir' => $wid, 'dir' => $v)
+						,array('processors_path' => MODX_CORE_PATH.'components/minishop/processors/')
+					);
+				}
+				else {
+					$response = $modx->runProcessor(
+						'mgr/goods/gallery/create'
+						,array('gid' => $id, 'wid' => $wid, 'file' => $v)
+						,array('processors_path' => MODX_CORE_PATH.'components/minishop/processors/')
+					);
+				}
 			}
 		}
 		foreach ($tvs as $k => $v) {

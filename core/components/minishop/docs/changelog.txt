@@ -4,9 +4,11 @@ Changelog for miniShop.
 =============
 - [#61] Добавлено поле "Страна" в ModAddress.
 - [#62] Исправлены map файлы модели. Изменен скрипт перегенерации модели gen.php.
+- Теперь вы можете указывать директорию для картинок в Импорте. Директория и изображения должны быть на сервере.
 -----
 - [#61] Added fiels "country" in ModAddress.
 - [#62] Fixed map files of the model. Changed script of model generation gen.php.
+- Now you can set directory for images in Import. Directory and images must exist on server.
 
 1.9.0 (23.08.2012)
 =============

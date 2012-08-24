@@ -9,10 +9,10 @@
 if (!$modx->hasPermission('save')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
 
 if (empty($scriptProperties['pagetitle'])) {
-	$modx->error->addField('pagetitle',$modx->lexicon('ms.required_field'));
+	$modx->error->addField('pagetitle',$modx->lexicon('ms.required_field').': pagetitle');
 }
 //if (empty($scriptProperties['parent'])) {
-//	$modx->error->addField('parent',$modx->lexicon('ms.required_field'));
+//	$modx->error->addField('parent',$modx->lexicon('ms.required_field').': parent');
 //}
 if ($modx->error->hasError()) {
 	return $modx->error->failure();
