@@ -1,4 +1,8 @@
 <?php
+/**
+ * @var modX $modx
+ * @var fiHooks $hook
+ */
 $data = $hook->getValues();
 
 if (!empty($data['delivery'])) {$_SESSION['minishop']['delivery'] = $data['delivery'];}

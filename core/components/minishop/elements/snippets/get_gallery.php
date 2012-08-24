@@ -1,7 +1,10 @@
 <?php
-
+/**
+ * @var modX $modx
+ * @var array $scriptProperties
+ */
 if (!isset($modx->miniShop) || !is_object($modx->miniShop)) {
-  $modx->miniShop = $modx->getService('minishop','miniShop', $modx->getOption('core_path').'components/minishop/model/minishop/', $scriptProperties);
+    $modx->miniShop = $modx->getService('minishop','miniShop', $modx->getOption('minishop.core_path', null, $modx->getOption('core_path') . 'components/minishop/') . 'model/minishop/', $scriptProperties);
   if (!($modx->miniShop instanceof miniShop)) return '';
 }
 
@@ -29,6 +32,7 @@ $gallery = $modx->getCollection('ModGallery', $q);
 
 
 $result = array();
+/** @var Modgallery $v */
 foreach ($gallery as $v) {
 	$v = $v->toArray();
 	if (!$res = $modx->getChunk($tpl, $v)) {
