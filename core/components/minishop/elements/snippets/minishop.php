@@ -1,11 +1,15 @@
 <?php
+/**
+ * @var modX $modx
+ * @var array $scriptProperties
+ */
 // Defining action. If no action in $_REQUEST - set default (getCart)
 if (empty($_REQUEST['action'])) {$action = $modx->getOption('action', $scriptProperties, 'getCart');}
 else {$action = $_REQUEST['action'];}
 
 // Load class
 if (!isset($modx->miniShop) || !is_object($modx->miniShop)) {
-  $modx->miniShop = $modx->getService('minishop','miniShop', $modx->getOption('core_path').'components/minishop/model/minishop/', $scriptProperties);
+    $modx->miniShop = $modx->getService('minishop','miniShop', $modx->getOption('minishop.core_path', null, $modx->getOption('core_path') . 'components/minishop/') . 'model/minishop/', $scriptProperties);
   if (!($modx->miniShop instanceof miniShop)) return '';
 }
 
@@ -18,12 +22,12 @@ switch ($action) {
 	case 'changeCartCount': $res = $modx->miniShop->changeCartCount($_POST['key'], $_POST['val']); break;
 	case 'getCartStatus': $res = $modx->miniShop->getCartStatus(); break;
 	case 'getDelivery': $res = $modx->miniShop->getDelivery(); break;
-	case 'getPayments': $res = $modx->miniShop->getPayments(); break; 
+	case 'getPayments': $res = $modx->miniShop->getPayments(); break;
 	case 'submitOrder': $res = $modx->miniShop->submitOrder(); break;
 	case 'getMyOrdersList': $res = $modx->miniShop->getMyOrdersList(); break;
 	case 'redirectCustomer': $res = $modx->miniShop->redirectCustomer($_REQUEST['oid'], $_REQUEST['email']); break;
 	case 'receivePayment': $res = $modx->miniShop->receivePayment($_REQUEST); break;
-  
+
 	//ExtJS connectors
 	case 'orders/getlist': echo $modx->runProcessor('web/orders/getlist', $_REQUEST, array('processors_path' => $modx->miniShop->config['processorsPath']))->response; die;
 	case 'status/getcombo': echo $modx->runProcessor('web/status/getcombo', $_REQUEST, array('processors_path' => $modx->miniShop->config['processorsPath']))->response; die;
