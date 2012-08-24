@@ -9,7 +9,7 @@
 if ($object->xpdo) {
 	$modx =& $object->xpdo;
 	$modelPath = $modx->getOption('minishop.core_path',null,$modx->getOption('core_path').'components/minishop/').'model/';
-	$modx->addPackage('minishop',$modelPath, $modx->config['table_prefix'].'ms_');
+	$modx->addPackage('minishop',$modelPath/*, $modx->config['table_prefix'].'ms_'*/);
 
 	$manager = $modx->getManager();
 

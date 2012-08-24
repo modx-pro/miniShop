@@ -2,7 +2,7 @@
 $xpdo_meta_map['ModLog']= array (
   'package' => 'minishop',
   'version' => '1.1',
-  'table' => 'modLog',
+  'table' => 'ms_modLog',
   'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (

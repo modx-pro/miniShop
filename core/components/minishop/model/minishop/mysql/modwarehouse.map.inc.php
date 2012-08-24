@@ -2,7 +2,7 @@
 $xpdo_meta_map['ModWarehouse']= array (
   'package' => 'minishop',
   'version' => '1.1',
-  'table' => 'modWarehouse',
+  'table' => 'ms_modWarehouse',
   'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (

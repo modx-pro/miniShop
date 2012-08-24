@@ -59,6 +59,9 @@ $generator = $manager->getGenerator();
 $generator->writeSchema($xml, $obj, 'xPDOObject', $tablePrefix, $restrictPrefix=true  );
 
 // Создает классы и мапы (php) по схеме xml
+$tmp = preg_replace('/table=\"mod/', 'table="ms_mod', file_get_contents($xml));
+file_put_contents($xml, $tmp);
+
 $generator->parseSchema($xml, $Model);
 
 print "<br /><br />Выполнено";

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model package="minishop" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" version="1.1">
-	<object class="ModAddress" table="modAddress" extends="xPDOSimpleObject">
+	<object class="ModAddress" table="ms_modAddress" extends="xPDOSimpleObject">
 		<field key="uid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
 		<field key="receiver" dbtype="varchar" precision="255" phptype="string" null="false" />
 		<field key="phone" dbtype="varchar" precision="20" phptype="string" null="false" />
@@ -18,7 +18,7 @@
 			<column key="uid" length="" collation="A" null="false" />
 		</index>
 	</object>
-	<object class="ModCategories" table="modCategories" extends="xPDOSimpleObject">
+	<object class="ModCategories" table="ms_modCategories" extends="xPDOSimpleObject">
 		<field key="gid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
 		<field key="cid" dbtype="int" precision="11" phptype="integer" null="false" />
 
@@ -27,7 +27,7 @@
 			<column key="cid" length="" collation="A" null="false" />
 		</index>
 	</object>
-	<object class="ModDelivery" table="modDelivery" extends="xPDOSimpleObject">
+	<object class="ModDelivery" table="ms_modDelivery" extends="xPDOSimpleObject">
 		<field key="wid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
 		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
 		<field key="description" dbtype="text" phptype="string" null="false" />
@@ -43,7 +43,7 @@
 			<column key="payments" length="" collation="A" null="false" />
 		</index>
 	</object>
-	<object class="ModGallery" table="modGallery" extends="xPDOSimpleObject">
+	<object class="ModGallery" table="ms_modGallery" extends="xPDOSimpleObject">
 		<field key="wid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
 		<field key="gid" dbtype="int" precision="11" phptype="integer" null="false" />
 		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
@@ -57,7 +57,7 @@
 			<column key="file" length="" collation="A" null="false" />
 		</index>
 	</object>
-	<object class="ModGoods" table="modGoods" extends="xPDOSimpleObject">
+	<object class="ModGoods" table="ms_modGoods" extends="xPDOSimpleObject">
 		<field key="wid" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
 		<field key="gid" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
 		<field key="article" dbtype="varchar" precision="50" phptype="string" null="false" default="0" />
@@ -75,7 +75,7 @@
 			<column key="gid" length="" collation="A" null="false" />
 		</index>
 	</object>
-	<object class="ModKits" table="modKits" extends="xPDOSimpleObject">
+	<object class="ModKits" table="ms_modKits" extends="xPDOSimpleObject">
 		<field key="rid" dbtype="int" precision="10" phptype="integer" null="false" index="index" />
 		<field key="gid" dbtype="int" precision="10" phptype="integer" null="false" />
 
@@ -84,7 +84,7 @@
 			<column key="gid" length="" collation="A" null="false" />
 		</index>
 	</object>
-	<object class="ModLog" table="modLog" extends="xPDOSimpleObject">
+	<object class="ModLog" table="ms_modLog" extends="xPDOSimpleObject">
 		<field key="type" dbtype="varchar" precision="50" phptype="string" null="false" index="index" />
 		<field key="oid" dbtype="int" precision="11" phptype="integer" null="false" />
 		<field key="iid" dbtype="int" precision="11" phptype="integer" null="false" />
@@ -104,7 +104,7 @@
 			<column key="oid" length="" collation="A" null="false" />
 		</index>
 	</object>
-	<object class="ModOrderedGoods" table="modOrderedGoods" extends="xPDOSimpleObject">
+	<object class="ModOrderedGoods" table="ms_modOrderedGoods" extends="xPDOSimpleObject">
 		<field key="gid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
 		<field key="oid" dbtype="int" precision="11" phptype="integer" null="false" />
 		<field key="num" dbtype="int" precision="11" phptype="integer" null="false" default="1" />
@@ -118,7 +118,7 @@
 			<column key="oid" length="" collation="A" null="false" />
 		</index>
 	</object>
-	<object class="ModOrders" table="modOrders" extends="xPDOSimpleObject">
+	<object class="ModOrders" table="ms_modOrders" extends="xPDOSimpleObject">
 		<field key="uid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
 		<field key="num" dbtype="varchar" precision="20" phptype="string" null="false" />
 		<field key="wid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
@@ -142,12 +142,12 @@
 			<column key="wid" length="" collation="A" null="false" />
 		</index>
 	</object>
-	<object class="ModPayment" table="modPayment" extends="xPDOSimpleObject">
+	<object class="ModPayment" table="ms_modPayment" extends="xPDOSimpleObject">
 		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
 		<field key="description" dbtype="text" phptype="string" null="true" />
 		<field key="snippet" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
 	</object>
-	<object class="ModStatus" table="modStatus" extends="xPDOSimpleObject">
+	<object class="ModStatus" table="ms_modStatus" extends="xPDOSimpleObject">
 		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />
 		<field key="color" dbtype="char" precision="6" phptype="string" null="false" default="000000" />
 		<field key="email2user" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" />
@@ -161,7 +161,7 @@
 			<column key="name" length="" collation="A" null="false" />
 		</index>
 	</object>
-	<object class="ModTags" table="modTags" extends="xPDOSimpleObject">
+	<object class="ModTags" table="ms_modTags" extends="xPDOSimpleObject">
 		<field key="rid" dbtype="int" precision="10" phptype="integer" null="false" />
 		<field key="gid" dbtype="int" precision="10" phptype="integer" null="false" index="index" />
 		<field key="tag" dbtype="varchar" precision="255" phptype="string" null="false" />
@@ -171,7 +171,7 @@
 			<column key="tag" length="" collation="A" null="false" />
 		</index>
 	</object>
-	<object class="ModWarehouse" table="modWarehouse" extends="xPDOSimpleObject">
+	<object class="ModWarehouse" table="ms_modWarehouse" extends="xPDOSimpleObject">
 		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />
 		<field key="currency" dbtype="varchar" precision="20" phptype="string" null="false" />
 		<field key="address" dbtype="text" phptype="string" null="false" />

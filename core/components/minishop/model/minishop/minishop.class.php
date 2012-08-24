@@ -62,7 +62,7 @@ class miniShop {
 			'ms_status_new' => $this->modx->getOption('minishop.status_new', '', 1)
 		),$config);
 
-		$this->modx->addPackage('minishop',$this->config['modelPath'], $this->modx->config['table_prefix'].'ms_');
+		$this->modx->addPackage('minishop',$this->config['modelPath']/*, $this->modx->config['table_prefix'].'ms_'*/);
 		$this->modx->lexicon->load('minishop:default');
 		$this->modx->lexicon->load('minishop:add');
 

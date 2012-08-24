@@ -2,7 +2,7 @@
 $xpdo_meta_map['ModGallery']= array (
   'package' => 'minishop',
   'version' => '1.1',
-  'table' => 'modGallery',
+  'table' => 'ms_modGallery',
   'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (

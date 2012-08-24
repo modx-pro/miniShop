@@ -2,9 +2,11 @@ Changelog for miniShop.
 
 1.9.1 (**.**.2012)
 =============
-- [#61] Добавлено поле "Страна" в ModAddress
+- [#61] Добавлено поле "Страна" в ModAddress.
+- [#62] Исправлены map файлы модели. Изменен скрипт перегенерации модели gen.php.
 -----
-- [#61] Added fiels "country" in ModAddress
+- [#61] Added fiels "country" in ModAddress.
+- [#62] Fixed map files of the model. Changed script of model generation gen.php.
 
 1.9.0 (23.08.2012)
 =============

@@ -2,7 +2,7 @@
 $xpdo_meta_map['ModOrders']= array (
   'package' => 'minishop',
   'version' => '1.1',
-  'table' => 'modOrders',
+  'table' => 'ms_modOrders',
   'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
