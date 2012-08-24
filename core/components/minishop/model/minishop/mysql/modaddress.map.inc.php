@@ -9,6 +9,7 @@ $xpdo_meta_map['ModAddress']= array (
     'uid' => NULL,
     'receiver' => NULL,
     'phone' => NULL,
+    'country' => NULL,
     'index' => NULL,
     'region' => NULL,
     'city' => NULL,
@@ -39,6 +40,13 @@ $xpdo_meta_map['ModAddress']= array (
     array (
       'dbtype' => 'varchar',
       'precision' => '20',
+      'phptype' => 'string',
+      'null' => false,
+    ),
+    'country' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '100',
       'phptype' => 'string',
       'null' => false,
     ),

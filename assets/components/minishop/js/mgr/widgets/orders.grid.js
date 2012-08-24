@@ -243,6 +243,7 @@ miniShop.window.EditOrder = function(config) {
 						,{xtype: 'textfield',name: 'addr_receiver',fieldLabel: _('ms.receiver'),anchor: '90%'}
 						,{xtype: 'textfield',name: 'addr_phone',fieldLabel: _('ms.phone')}
 						,{xtype: 'numberfield',name: 'addr_index',fieldLabel: _('ms.index')}
+						,{xtype: 'textfield',name: 'addr_country',fieldLabel: _('ms.country')}
 						,{xtype: 'textfield',name: 'addr_region',fieldLabel: _('ms.region')}
 						,{xtype: 'textfield',name: 'addr_city',fieldLabel: _('ms.city')}
 						,{xtype: 'textfield',name: 'addr_metro',fieldLabel: _('ms.metro')}

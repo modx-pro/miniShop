@@ -79,6 +79,7 @@ if ($object->xpdo) {
 			$stable = $modx->getTableName('ModStatus');
 			$ltable = $modx->getTableName('ModLog');
 			$galtable = $modx->getTableName('ModGallery');
+			$atable = $modx->getTableName('ModAddress');
 
 			$res = $modx->getCollection('ModStatus');
 			foreach ($res as $v) {
@@ -131,6 +132,9 @@ if ($object->xpdo) {
 			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
 
 			$sql = "ALTER TABLE {$galtable} ADD `fileorder` INT NOT NULL DEFAULT '0'";
+			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
+
+			$sql = "ALTER TABLE {$atable} ADD `country` VARCHAR(100) NOT NULL DEFAULT AFTER `phone`";
 			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
 			
 			break;

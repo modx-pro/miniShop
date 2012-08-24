@@ -33,50 +33,50 @@ class miniShop {
 	 * @param class modX
 	 * @param array $config
 	 * */
-    function __construct(modX &$modx,array $config = array()) {
-        $this->modx =& $modx;
+	function __construct(modX &$modx,array $config = array()) {
+		$this->modx =& $modx;
 
-        $corePath = $this->modx->getOption('minishop.core_path',$config,$this->modx->getOption('core_path').'components/minishop/');
-        $assetsUrl = $this->modx->getOption('minishop.assets_url',$config,$this->modx->getOption('assets_url').'components/minishop/');
-        $connectorUrl = $assetsUrl.'connector.php';
-        $connectorsUrl = $assetsUrl.'connectors/';
+		$corePath = $this->modx->getOption('minishop.core_path',$config,$this->modx->getOption('core_path').'components/minishop/');
+		$assetsUrl = $this->modx->getOption('minishop.assets_url',$config,$this->modx->getOption('assets_url').'components/minishop/');
+		$connectorUrl = $assetsUrl.'connector.php';
+		$connectorsUrl = $assetsUrl.'connectors/';
 
-        $this->config = array_merge(array(
-            'assetsUrl' => $assetsUrl,
-            'cssUrl' => $assetsUrl.'css/',
-            'jsUrl' => $assetsUrl.'js/',
-            'imagesUrl' => $assetsUrl.'images/',
+		$this->config = array_merge(array(
+			'assetsUrl' => $assetsUrl,
+			'cssUrl' => $assetsUrl.'css/',
+			'jsUrl' => $assetsUrl.'js/',
+			'imagesUrl' => $assetsUrl.'images/',
 
-            'connectorUrl' => $connectorUrl,
-            'connectorsUrl' => $connectorsUrl,
+			'connectorUrl' => $connectorUrl,
+			'connectorsUrl' => $connectorsUrl,
 
-            'corePath' => $corePath,
-            'modelPath' => $corePath.'model/',
-            'chunksPath' => $corePath.'elements/chunks/',
-            'chunkSuffix' => '.tpl',
-            'snippetsPath' => $corePath.'elements/snippets/',
-            'processorsPath' => $corePath.'processors/',
+			'corePath' => $corePath,
+			'modelPath' => $corePath.'model/',
+			'chunksPath' => $corePath.'elements/chunks/',
+			'chunkSuffix' => '.tpl',
+			'snippetsPath' => $corePath.'elements/snippets/',
+			'processorsPath' => $corePath.'processors/',
 			'ms_categories_tpls' => explode(',', $this->modx->getOption('minishop.categories_tpl', '', 1)),
 			'ms_goods_tpls' => explode(',', $this->modx->getOption('minishop.goods_tpl', '', 1)),
 			'ms_kits_tpls' => explode(',', $this->modx->getOption('minishop.kits_tpl', '', 1)),
 			'ms_status_new' => $this->modx->getOption('minishop.status_new', '', 1)
-        ),$config);
+		),$config);
 
-        $this->modx->addPackage('minishop',$this->config['modelPath'], $this->modx->config['table_prefix'].'ms_');
-        $this->modx->lexicon->load('minishop:default');
-        $this->modx->lexicon->load('minishop:add');
+		$this->modx->addPackage('minishop',$this->config['modelPath'], $this->modx->config['table_prefix'].'ms_');
+		$this->modx->lexicon->load('minishop:default');
+		$this->modx->lexicon->load('minishop:add');
 
 		// Show errors if debug enabled
-		if (isset($this->config['debug']) && $this->config['debug']) {
+		if (!empty($this->config['debug'])) {
 			ini_set('display_errors', 1); 
-			error_reporting(E_ALL ^ E_NOTICE);
+			ini_set('error_reporting', -1);
 		}
 
 		// Default session variables for miniShop
 		if (!isset($_SESSION['minishop']['warehouse'])) {$_SESSION['minishop']['warehouse'] = $this->getDefaultWarehouse();}
 		if (!isset($_SESSION['minishop']['category'])) {$_SESSION['minishop']['category'] = 0;}
 		if (!isset($_SESSION['minishop']['status'])) {$_SESSION['minishop']['status'] = 0;}
-    }
+	}
 
 	/**
 	 * Initializes miniShop into different contexts.
@@ -1104,7 +1104,7 @@ class miniShop {
 				$goods = $tmp->toArray();
 				unset($goods['id']);
 				$goods['price'] = $this->getPrice($id);
-				$goods['tags'] = implode(', ', $tmp->getTags());			
+				$goods['tags'] = implode(', ', $tmp->getTags());
 			}
 			else {
 				$arr['goods'] = $tmp;
@@ -1137,7 +1137,7 @@ class miniShop {
 		$string = mb_ereg_replace("^[\ ]+","", $string);
 		$string = mb_strtolower($string, "utf-8");
 		$string = mb_strtoupper(mb_substr($string, 0, 1, "utf-8"), "UTF-8").mb_substr($string, 1, mb_strlen($string), "UTF-8" );  
-		return $string;  
+		return $string;
 	}
 	function getGoods($parents) {
 		return $this->getGoodsByCategories($parents);

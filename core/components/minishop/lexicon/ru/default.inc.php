@@ -24,6 +24,7 @@ $_lang['ms.email'] = 'Email';
 $_lang['ms.currency'] = 'Валюта';
 $_lang['ms.receiver'] = 'Получатель';
 $_lang['ms.phone'] = 'Телефон';
+$_lang['ms.country'] = 'Страна';
 $_lang['ms.index'] = 'Индекс';
 $_lang['ms.region'] = 'Область';
 $_lang['ms.city'] = 'Город';
