@@ -713,7 +713,9 @@ Ext.extend(miniShop.grid.Gallery,MODx.grid.Grid, {
 				action: 'mgr/goods/gallery/create'
 				,gid: this.config.gid
 			}
-			,listeners: {'success':{fn:function() {Ext.getCmp('product-grid-gallery').store.reload();},scope:this},'show':{fn:function() {this.center();}}}
+			,listeners: {
+				'success':{fn:function() {this.refresh();},scope:this}
+				,'show':{fn:function() {this.center();}}}
 		});
 		w.show(e.target,function() {w.setPosition(null,100)},this);
 	}
@@ -725,7 +727,9 @@ Ext.extend(miniShop.grid.Gallery,MODx.grid.Grid, {
 				action: 'mgr/goods/gallery/load'
 				,gid: this.config.gid
 			}
-			,listeners: {'success':{fn:function() {Ext.getCmp('product-grid-gallery').store.reload();},scope:this},'show':{fn:function() {this.center();}}}
+			,listeners: {
+				'success':{fn:function() {this.refresh();},scope:this}
+				,'show':{fn:function() {this.center();}}}
 		});
 		w.show(e.target,function() {w.setPosition(null,100)},this);
 	}

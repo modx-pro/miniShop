@@ -47,7 +47,7 @@ foreach ($files as $v) {
 		,'wid' => $_SESSION['minishop']['warehouse']
 		,'name' => $name
 		,'file' => $file
-		,'sort' => $order
+		,'fileorder' => $order
 	));
 	$res->save();
 	$order++;

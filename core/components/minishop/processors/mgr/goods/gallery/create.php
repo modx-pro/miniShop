@@ -25,7 +25,7 @@ $res->fromArray(array(
 	,'file' => $file
 	,'name' => $scriptProperties['name']
 	,'description' => $scriptProperties['description']
-	,'order' => $order
+	,'fileorder' => $order
 ));
 
 $res->save();
