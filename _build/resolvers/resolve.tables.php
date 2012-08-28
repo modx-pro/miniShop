@@ -134,7 +134,7 @@ if ($object->xpdo) {
 			$sql = "ALTER TABLE {$galtable} ADD `fileorder` INT NOT NULL DEFAULT '0'";
 			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
 
-			$sql = "ALTER TABLE {$atable} ADD `country` VARCHAR(100) NOT NULL DEFAULT AFTER `phone`";
+			$sql = "ALTER TABLE {$atable} ADD `country` VARCHAR(100) NOT NULL AFTER `phone`";
 			if ($stmt = $modx->prepare($sql)) {$stmt->execute();}
 			
 			break;
