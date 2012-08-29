@@ -37,6 +37,7 @@ if ($modx->event->name == 'OnEmptyTrash') {
 	
 	$modx->removeCollection('ModGoods', array('gid:IN' => $ids));
 	$modx->removeCollection('ModCategories', array('gid:IN' => $ids));
+	$modx->removeCollection('ModGallery', array('gid:IN' => $ids));
 	$modx->removeCollection('ModTags', array('rid:IN' => $ids));
 
 	$q = $modx->newQuery('ModKits',array('rid:IN' => $ids));
