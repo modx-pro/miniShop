@@ -33,7 +33,7 @@ if ($modx->event->name == 'OnEmptyTrash') {
 	$ids = $params['ids'];
 	if (empty($ids)) {return;}
 
-	$modx->addPackage('minishop',$modx->getOption('core_path').'components/minishop/model/', $modx->config['table_prefix'].'ms_');
+	$modx->addPackage('minishop',$modx->getOption('core_path').'components/minishop/model/');
 	
 	$modx->removeCollection('ModGoods', array('gid:IN' => $ids));
 	$modx->removeCollection('ModCategories', array('gid:IN' => $ids));
