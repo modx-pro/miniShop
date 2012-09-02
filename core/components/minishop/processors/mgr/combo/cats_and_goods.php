@@ -8,8 +8,8 @@
 if (!$modx->hasPermission('view')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
 
 // Getting ids of templates
-$categories_tpls = explode(',', $this->modx->getOption('minishop.categories_tpl', '', 1));
-$goods_tpls = explode(',', $this->modx->getOption('minishop.goods_tpl', '', 1));
+$categories_tpls = explode(',', $modx->getOption('minishop.categories_tpl', '', 1));
+$goods_tpls = explode(',', $modx->getOption('minishop.goods_tpl', '', 1));
 
 // Getting variables
 $isLimit = !empty($scriptProperties['limit']);
