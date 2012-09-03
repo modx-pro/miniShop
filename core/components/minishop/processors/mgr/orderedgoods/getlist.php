@@ -27,9 +27,13 @@ $orders = $modx->getCollection('ModOrderedGoods',$c);
 $arr = array();
 foreach ($orders as $v) {
     $tmp = $v->toArray();
-	if ($res = $modx->getObject('modResource', $tmp['gid'])) {
-		$tmp['name'] = $res->get('pagetitle');
-	}
+
+	$tmp['name'] = $v->getGoodsName();
+	$tmp['url'] = $modx->makeUrl($tmp['gid'],'','','full');
+	if ($product = $v->getGoodsParams()) {
+		$tmp['article'] = $product->get('article');
+	} else {$tmp['article'] = '';}
+
 	if ($tmp2 = json_decode($tmp['data'], true)) {
 		if (is_array($tmp2)){
 			$tmp['data_view'] = '<ul>';

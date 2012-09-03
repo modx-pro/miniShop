@@ -1,5 +1,15 @@
 Changelog for miniShop.
 
+1.9.2 (03.09.2012)
+=============
+- Исправлено подключение к БД в плагине
+- Добавлен вывод столбца "Артикул" в заказанных товарах при просмотре заказа в админке
+- Добавлены пункты в контекстное меню заказанного товара: просмотреть на сайте, и просмотреть в админке
+-----
+- Fixed connection to DB in plugin
+- Added displaying of column "Article" in the ordered goods when viewing the order in manager
+- Added context menu items for ordered product: view on the site and view in the manager
+
 1.9.1 (28.08.2012)
 =============
 - [#61] Добавлено поле "Страна" в ModAddress.

@@ -24,7 +24,7 @@ $orders = $modx->getCollection('ModOrderedGoods',$c);
 
 $arr = array();
 foreach ($orders as $v) {
-	if ($v->get(data) == '[]') {$data = '';}
+	if ($v->get('data') == '[]') {$data = '';}
 	else {
 		$tmp = json_decode($v->get('data'), true);
 		$data = '<ul>';
@@ -33,8 +33,10 @@ foreach ($orders as $v) {
 		}
 		$data .= '</ul>';
 	}
+	$product = $v->getGoodsParams();
 	$arr[] = array(
 		'name' => $v->getGoodsName()
+		,'article' = is_object($product) ? $product->get('article') : ''
 		,'num' => $v->get('num')
 		,'price' => $v->get('price')
 		,'weight' => $v->get('weight')

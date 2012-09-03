@@ -344,7 +344,7 @@ miniShop.grid.Goods = function(config) {
 	Ext.applyIf(config,{
 		id: this.ident+'-grid-goods'
 		,url: miniShop.config.connector_url
-		,fields: ['id','gid','oid','name','num','price','weight','sum','data','data_view']
+		,fields: ['id','gid','oid','name','article','num','price','weight','sum','data','data_view','url']
 		,pageSize: Math.round(MODx.config.default_per_page / 2)
 		,autoHeight: true
 		,paging: true
@@ -354,6 +354,7 @@ miniShop.grid.Goods = function(config) {
 			,{header: _('id'),dataIndex: 'id',hidden: true,sortable: true,width: 35}
 			,{header: _('ms.gid'),dataIndex: 'gid',hidden: true,sortable: true,width: 35}
 			,{header: _('ms.goods.name'),dataIndex: 'name',width: 100}
+			,{header: _('ms.article'),dataIndex: 'article',width: 100}
 			,{header: _('ms.goods.num'),dataIndex: 'num',sortable: true,width: 50}
 			,{header: _('ms.price'),dataIndex: 'price',sortable: true,width: 50}
 			,{header: _('ms.weight'),dataIndex: 'weight',sortable: true,width: 50}
@@ -381,6 +382,15 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid, {
 		m.push({
 			text: _('ms.orderedgoods.update')
 			,handler: this.updateGoods
+		});
+		m.push('-');
+		m.push({
+			text: _('ms.goods.goto_site_page')
+			,handler: this.goToGoodsSitePage
+		});
+		m.push({
+			text: _('ms.goods.goto_manager_page')
+			,handler: this.goToGoodsManagerPage
 		});
 		m.push('-');
 		m.push({
@@ -437,6 +447,14 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid, {
 				'success': {fn:function(r) { this.refresh(); },scope:this}
 			}
 		});
+	}
+	,goToGoodsSitePage: function() {
+		var url = this.menu.record.url;
+		window.open(url);
+	}
+	,goToGoodsManagerPage: function() {
+		var gid = this.menu.record.gid;
+		window.open('/manager/index.php?a=30&id=' + gid);
 	}
 });
 
