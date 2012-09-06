@@ -1,7 +1,8 @@
 function renderImg(img) {
+	img_lwc = img.toLowerCase();
 	if (img.length > 0) {
-		if (!/(jpg|jpeg|png|gif|bmp)$/.test(img)) {return img;}
-		else if (/^(http|https|\/)/.test(img)) {return '<img src="'+img+'" alt="" style="display:block;margin:auto;height:30px;" />'}
+		if (!/(jpg|jpeg|png|gif|bmp)$/.test(img_lwc)) {return img;}
+		else if (/^(http|https|\/)/.test(img_lwc)) {return '<img src="'+img+'" alt="" style="display:block;margin:auto;height:30px;" />'}
 		else {return '<img src="/'+img+'" alt="" style="display:block;margin:auto;height:30px;" />'}
 	}
 	else {return '';}
