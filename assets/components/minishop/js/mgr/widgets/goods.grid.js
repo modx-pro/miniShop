@@ -1,3 +1,5 @@
+miniShop.tempids = {};
+
 function renderImg(img) {
 	if (img.length > 0) {
 		if (!/(jpg|jpeg|png|gif|bmp)$/.test(img)) {return img;}
@@ -170,8 +172,10 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
 							}}
 						}
 					});
-					w.setValues(r.object);
 					w.show(e.target,function() {w.setPosition(null,50)},this);
+                    w.setValues(r.object);
+                    var ed = Ext.getCmp('modx-'+miniShop.tempids.createGoods+'-content');
+                    ed.setRawValue(r.object.content);
 				},scope:this}
 			}
 		});
@@ -265,8 +269,8 @@ Ext.reg('minishop-grid-goods',miniShop.grid.Goods);
 
 miniShop.window.createGoods = function(config) {
 	config = config || {};
-
-	this.ident = config.ident || 'qcr'+Ext.id();
+    
+	this.ident = miniShop.tempids.createGoods = config.ident || 'qcr'+Ext.id();
 	Ext.applyIf(config,{
 		title: _('ms.goods.create')
 		,id: this.ident
@@ -328,7 +332,7 @@ miniShop.window.createGoods = function(config) {
 							,{xtype: 'xcheckbox',name: 'cacheable',id: 'modx-'+this.ident+'-cacheable',boxLabel: _('resource_cacheable'),description: _('resource_cacheable_help'),inputValue: 1,checked: MODx.config.cache_default == '1' && config.disable_categories  ? 1 : 0}
 						]
 					}]
-				},{xtype: config.record.richtext ? 'htmleditor' : 'textarea',name: 'content',id: 'modx-'+this.ident+'-content', fieldLabel: _('content'),anchor: '100%',height: 150}
+				},{xtype: config.record.richtext ? (typeof Tiny!='undefined') ? 'tinymce' :'htmleditor' : 'textarea',name: 'content',id: 'modx-'+this.ident+'-content', fieldLabel: _('content'),anchor: '100%',height: 150}
 					,{xtype: 'xcheckbox',name: 'richtext',id: 'modx-'+this.ident+'-richtext',boxLabel: _('resource_richtext'),description: _('resource_richtext_help'),inputValue: 1,checked: MODx.config.richtext_default == '1' && config.disable_categories  ? 1 : 0}
 					,{xtype: 'hidden',name: 'class_key',value: 'modDocument'}
 					,{xtype: 'hidden',name: 'context_key'}
