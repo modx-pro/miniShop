@@ -3,6 +3,7 @@
 <script src="/manager/assets/modext/core/modx.js" type="text/javascript"></script>
 <script src="/connectors/lang.js.php?ctx=web&topic=minishop:default" type="text/javascript"></script>
 
+<script type="text/javascript" src="/manager/assets/modext/core/modx.localization.js"></script>
 <script type="text/javascript" src="/manager/assets/modext/util/utilities.js"></script>
 <script type="text/javascript" src="/manager/assets/modext/core/modx.component.js"></script>
 <script type="text/javascript" src="/manager/assets/modext/widgets/core/modx.panel.js"></script>
