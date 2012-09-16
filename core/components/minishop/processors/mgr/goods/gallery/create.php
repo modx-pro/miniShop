@@ -13,7 +13,7 @@ $wid = $modx->getOption('wid', $scriptProperties, $_SESSION['minishop']['warehou
 
 // Проверка обязательных полей
 if (empty($gid)) {return $modx->error->failure($modx->lexicon('ms.gallery.err_nf'));}
-if (empty($scriptProperties['file'])) {$modx->error->addField('file',$modx->lexicon('ms.required_field'));}
+if (empty($file)) {$modx->error->addField('file',$modx->lexicon('ms.required_field'));}
 if ($modx->error->hasError()) {return $modx->error->failure();}
 
 $order = $modx->getCount('ModGallery', array('gid' => $gid, 'wid' => $_SESSION['minishop']['warehouse']));
