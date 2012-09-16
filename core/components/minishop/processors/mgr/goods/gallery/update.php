@@ -7,8 +7,8 @@
  */
 
 if (!$modx->hasPermission('save')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
-$file = trim($_POST['file']);
-$id = $_POST['id'];
+$file = trim($scriptProperties['file']);
+$id = $scriptProperties['id'];
 
 if (empty($id)) {return $modx->error->failure($modx->lexicon('ms.gallery.item.err_nf'));}
 if (empty($scriptProperties['file'])) {
@@ -20,8 +20,8 @@ if ($modx->error->hasError()) {
 
 if ($res = $modx->getObject('ModGallery', $id)) {
 	$res->set('file', $file);
-	$res->set('name', $_POST['name']);
-	$res->set('description', $_POST['description']);
+	$res->set('name', $scriptProperties['name']);
+	$res->set('description', $scriptProperties['description']);
 	$res->save();
 	return $modx->error->success('', $res);
 }
