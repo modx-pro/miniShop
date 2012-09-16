@@ -15,14 +15,14 @@ if ($modx->event->name == 'OnWebPagePrerender') {
 	$modx->lexicon->load('minishop:default');
 	
 	if (in_array($tpl, $goods_tpls)) {
-		$add = '<br/><a href="/manager/?a='.$action.'&act=edit&item='.$id.'" target="'.$target.'">'.$modx->lexicon('ms.menu.editproduct').'</a>';
+		$add = '<br/><a href="'.$modx->config['manager_url'].'?a='.$action.'&act=edit&item='.$id.'" target="'.$target.'">'.$modx->lexicon('ms.menu.editproduct').'</a>';
 	}
-	else {$add = '<br/><a href="/manager/?a='.$action.'&act=tab&item=1" target="'.$target.'">'.$modx->lexicon('ms.menu.component').'</a>';}
+	else {$add = '<br/><a href="'.$modx->config['manager_url'].'?a='.$action.'&act=tab&item=1" target="'.$target.'">'.$modx->lexicon('ms.menu.component').'</a>';}
 
 
 	$html = '
 		<div id="msMenu" style="position:absolute;z-index:1000;left:0;top:0;padding:5px;">
-			<a href="/manager/index.php?a=30&id='.$id.'" target="'.$target.'">'.$modx->lexicon('ms.menu.editpage').'</a>
+			<a href="'.$modx->config['manager_url'].'index.php?a=30&id='.$id.'" target="'.$target.'">'.$modx->lexicon('ms.menu.editpage').'</a>
 			'.$add.'
 		</div>';
 	$modx->resource->_output .= $html;
