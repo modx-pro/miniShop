@@ -36,7 +36,7 @@ foreach ($orders as $v) {
 	$product = $v->getGoodsParams();
 	$arr[] = array(
 		'name' => $v->getGoodsName()
-		,'article' = is_object($product) ? $product->get('article') : ''
+		,'article' => is_object($product) ? $product->get('article') : ''
 		,'num' => $v->get('num')
 		,'price' => $v->get('price')
 		,'weight' => $v->get('weight')
