@@ -6,6 +6,7 @@ else {$action = $_REQUEST['action'];}
 // Load class
 $modx->miniShop = $modx->getService('minishop','miniShop', $modx->getOption('core_path').'components/minishop/model/minishop/', $scriptProperties);
 if (!($modx->miniShop instanceof miniShop)) return '';
+$modx->miniShop->config = array_merge($modx->miniShop->config, $scriptProperties);
 
 // Load needed method
 switch ($action) {
