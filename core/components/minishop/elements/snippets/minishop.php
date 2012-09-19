@@ -4,10 +4,8 @@ if (empty($_REQUEST['action'])) {$action = $modx->getOption('action', $scriptPro
 else {$action = $_REQUEST['action'];}
 
 // Load class
-if (!isset($modx->miniShop) || !is_object($modx->miniShop)) {
-  $modx->miniShop = $modx->getService('minishop','miniShop', $modx->getOption('core_path').'components/minishop/model/minishop/', $scriptProperties);
-  if (!($modx->miniShop instanceof miniShop)) return '';
-}
+$modx->miniShop = $modx->getService('minishop','miniShop', $modx->getOption('core_path').'components/minishop/model/minishop/', $scriptProperties);
+if (!($modx->miniShop instanceof miniShop)) return '';
 
 // Load needed method
 switch ($action) {
