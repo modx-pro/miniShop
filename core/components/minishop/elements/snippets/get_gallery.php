@@ -7,6 +7,8 @@ if (!isset($modx->miniShop) || !is_object($modx->miniShop)) {
 
 if (empty($id)) {$id = $modx->resource->id;}
 
+$idx = !empty($idx) && $idx !== '0' ? (integer) $idx : 1;
+
 if (!$modx->getCount('modResource', $id)) {return $modx->lexicon('ms.goods.err_nf');}
 
 $arr = array();
@@ -30,11 +32,13 @@ $gallery = $modx->getCollection('ModGallery', $q);
 
 $result = array();
 foreach ($gallery as $v) {
+	$modx->setPlaceholder('idx', $idx);
 	$v = $v->toArray();
 	if (!$res = $modx->getChunk($tpl, $v)) {
 		$res = '<pre>'.(print_r($v, true)).'</pre>';
 	}
 	$result[] = $res;
+	$idx++;
 }
 
 return implode($outputSeparator, $result);
