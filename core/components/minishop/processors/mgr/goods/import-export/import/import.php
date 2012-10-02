@@ -92,7 +92,7 @@ if (($file = fopen($file, "r")) !== false) {
 				return $modx->error->failure('Error on row '.$i.': '.$response->getMessage());
 			}
 			else {
-				$id = $response->response['object']['id'];
+				$id = $response->response['object']['gid'];
 				if (!$res = $modx->getObject('modResource', $id)) {
 					return $modx->error->failure('Error on row '.$i.': '.print_r($response->response['object'],1));
 				}
