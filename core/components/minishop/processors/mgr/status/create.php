@@ -1,8 +1,8 @@
 <?php
 /**
  * Create an Status
- * 
- * @package modextra
+ *
+ * @package minishop
  * @subpackage processors
  */
 if (!$modx->hasPermission('create')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
@@ -40,7 +40,7 @@ if (empty($data['color'])) {$data['color'] = '000000';}
 
 if ($modx->error->hasError()) {
     return $modx->error->failure();
-} 
+}
 
 $res = $modx->newObject('ModStatus');
 $res->fromArray($data);

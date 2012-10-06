@@ -11,7 +11,12 @@ class miniShopHomeManagerController extends miniShopManagerController {
         // miniShop
         $this->addCss($this->minishop->config['css_url'].'mgr/main.css');
 
+        $this->addJavascript($this->minishop->config['js_url'].'mgr/core/combos.js');
+        $this->addJavascript($this->minishop->config['js_url'].'mgr/core/utils.js');
+        $this->addJavascript($this->minishop->config['js_url'].'mgr/core/windows.js');
+
         $this->addJavascript($this->minishop->config['js_url'].'mgr/plugins/dragdropgrid.js');
+
         $this->addJavascript($this->minishop->config['js_url'].'mgr/widgets/kits.grid.js');
         $this->addJavascript($this->minishop->config['js_url'].'mgr/widgets/statuses.grid.js');
         $this->addJavascript($this->minishop->config['js_url'].'mgr/widgets/payments.grid.js');
@@ -20,7 +25,8 @@ class miniShopHomeManagerController extends miniShopManagerController {
         $this->addJavascript($this->minishop->config['js_url'].'mgr/widgets/goods.grid.js');
         $this->addJavascript($this->minishop->config['js_url'].'mgr/widgets/orders.grid.js');
         $this->addJavascript($this->minishop->config['js_url'].'mgr/widgets/home.panel.js');
-        $this->addJavascript($this->minishop->config['js_url'].'mgr/sections/home.js');
+
+        $this->addJavascript($this->minishop->config['js_url'].'mgr/sections/home.page.js');
 
         $this->addHtml('<script type="text/javascript">
             Ext.onReady(function() {

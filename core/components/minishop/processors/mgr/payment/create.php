@@ -1,12 +1,12 @@
 <?php
 /**
  * Create an Payment
- * 
- * @package modextra
+ *
+ * @package minishop
  * @subpackage processors
  */
 if (!$modx->hasPermission('create')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
- 
+
 if($modx->getObject('ModPayment',array('name' => $scriptProperties['name']))) {
     $modx->error->addField('name',$modx->lexicon('ms.payement.err_ae'));
 }

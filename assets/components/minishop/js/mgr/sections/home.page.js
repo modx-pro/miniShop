@@ -1,3 +1,9 @@
+/**
+ * @class miniShop.page.Home
+ * @extends MODx.Component
+ * @param {Object} config
+ * @xtype minishop-page-home
+ */
 miniShop.page.Home = function(config) {
     config = config || {};
 

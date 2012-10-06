@@ -1,8 +1,8 @@
 <?php
 /**
  * Update an Status
- * 
- * @package modextra
+ *
+ * @package minishop
  * @subpackage processors
  */
 if (!$modx->hasPermission('save')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
@@ -15,7 +15,7 @@ if (!$res = $modx->getObject('ModStatus', $data['id'])) {
 // Проверка уникальности его имени
 if ($modx->getObject('ModStatus',array('name' => $data['name'], 'id:!=' => $data['id'] ))) {
     $modx->error->addField('name',$modx->lexicon('ms.status.err_ae'));
-} 
+}
 
 // Проверка параметров отправки уведомлений
 $data['email2user'] = !empty($data['email2user']) ? 1 : 0;

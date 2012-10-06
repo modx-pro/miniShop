@@ -1,13 +1,13 @@
 <?php
 /**
  * Create an Delivery
- * 
- * @package modextra
+ *
+ * @package minishop
  * @subpackage processors
  */
 
 if (!$modx->hasPermission('create')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
- 
+
 if($modx->getObject('ModDelivery',array('name' => $scriptProperties['name'], 'wid' => $scriptProperties['wid']))) {
     $modx->error->addField('name',$modx->lexicon('ms.delivery.err_ae'));
 }
