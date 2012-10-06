@@ -6,7 +6,7 @@
  * @subpackage processors
  */
 if (!$modx->hasPermission('view')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
- 
+
 $isLimit = !empty($scriptProperties['limit']);
 $start = $modx->getOption('start',$scriptProperties,0);
 $limit = $modx->getOption('limit',$scriptProperties, round($modx->getOption('default_per_page') / 2));
@@ -49,3 +49,36 @@ foreach ($orders as $v) {
 	$arr[] = $tmp;
 }
 return $this->outputArray($arr, $count);
+
+//class ModOrderedGoodsGetListProcessor extends modObjectGetListProcessor {
+//    public $classKey = 'ModOrderedGoods';
+//    public $defaultSortField = 'id';
+//    public $defaultSortDirection = 'ASC';
+//    public $languageTopics = array('minishop:default');
+//    public $objectType = 'minishop.modwarehouse';
+//
+//    public function prepareQueryBeforeCount(xPDOQuery $c) {
+//        $orderID = $this->getProperty('oid');
+//        if (!$orderID) {
+//            // @todo: return error
+//        }
+//        $c->where(array('oid' => $orderID));
+//        return $c;
+//    }
+//
+//    public function prepareRow(ModOrderedGoods $object) {
+//        $objectArray = $object->toArray();
+//        $objectArray['name'] = $object->getGoodsName();
+//        $objectArray['url'] = $this->modx->makeUrl($objectArray['gid'], '', '', 'full');
+//        /** @var ModGoods $product */
+//        $product = $object->getGoodsParams();
+//        if ($product) {
+//            $objectArray['article'] = $product->get('article');
+//        } else {
+//            $objectArray['article'] = '';
+//        }
+//
+//        return $objectArray;
+//    }
+//}
+//return 'ModOrderedGoodsGetListProcessor';

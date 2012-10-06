@@ -1,11 +1,10 @@
 <?php
 /**
  * Delete an OrderedGoods.
- * 
+ *
  * @package minishop
  * @subpackage processors
  */
-
 if (!$modx->hasPermission('remove')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
 
 $id = $scriptProperties['id'];
@@ -36,3 +35,16 @@ if ($order = $modx->getObject('ModOrders', $oid)) {
 }
 
 return $modx->error->success('',$res);
+
+//class ModOrderedGoodsRemoveProcessor extends modObjectRemoveProcessor {
+//    public $classKey = 'ModOrderedGoods';
+//    public $languageTopics = array('minishop:default');
+//    public $objectType = 'minishop.modorderedgoods';
+//
+//    public function afterRemove() {
+//        $id = $this->getProperty('id');
+//        $this->modx->removeCollection('ModDelivery', array('wid' => $id));
+//        //$this->modx->removeCollection('ModGoods', array('wid' => $id));
+//    }
+//}
+//return 'ModOrderedGoodsRemoveProcessor';
