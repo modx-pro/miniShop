@@ -17,6 +17,8 @@
         <index alias="uid" name="uid" primary="false" unique="false" type="BTREE" >
             <column key="uid" length="" collation="A" null="false" />
         </index>
+
+        <aggregate alias="User" class="modUser" local="uid" foreign="id" cardinality="one" owner="foreign"/>
     </object>
 
     <object class="ModCategories" table="ms_modCategories" extends="xPDOSimpleObject">
@@ -27,6 +29,9 @@
             <column key="gid" length="" collation="A" null="false" />
             <column key="cid" length="" collation="A" null="false" />
         </index>
+
+        <aggregate alias="Good" class="modResource" local="gid" foreign="id" cardinality="one" owner="foreign"/>
+        <aggregate alias="Category" class="modResource" local="cid" foreign="id" cardinality="one" owner="foreign"/>
     </object>
 
     <object class="ModDelivery" table="ms_modDelivery" extends="xPDOSimpleObject">
@@ -45,6 +50,8 @@
         <index alias="payments" name="payments" primary="false" unique="false" type="BTREE" >
             <column key="payments" length="" collation="A" null="false" />
         </index>
+
+        <aggregate alias="Warehouse" class="ModWarehouse" local="wid" foreign="id" cardinality="one" owner="foreign"/>
     </object>
 
     <object class="ModGallery" table="ms_modGallery" extends="xPDOSimpleObject">
@@ -60,6 +67,9 @@
             <column key="gid" length="" collation="A" null="false" />
             <column key="file" length="" collation="A" null="false" />
         </index>
+
+        <aggregate alias="Warehouse" class="ModWarehouse" local="wid" foreign="id" cardinality="one" owner="foreign"/>
+        <aggregate alias="Good" class="ModGoods" local="gid" foreign="id" cardinality="one" owner="foreign"/>
     </object>
 
     <object class="ModGoods" table="ms_modGoods" extends="xPDOSimpleObject">
@@ -79,6 +89,9 @@
             <column key="wid" length="" collation="A" null="false" />
             <column key="gid" length="" collation="A" null="false" />
         </index>
+
+        <aggregate alias="Warehouse" class="ModWarehouse" local="wid" foreign="id" cardinality="one" owner="foreign"/>
+        <aggregate alias="Good" class="ModGoods" local="gid" foreign="id" cardinality="one" owner="foreign"/>
     </object>
 
     <object class="ModKits" table="ms_modKits" extends="xPDOSimpleObject">
@@ -89,6 +102,9 @@
             <column key="rid" length="" collation="A" null="false" />
             <column key="gid" length="" collation="A" null="false" />
         </index>
+
+        <aggregate alias="Resource" class="modResource" local="rid" foreign="id" cardinality="one" owner="foreign"/>
+        <aggregate alias="Good" class="ModGoods" local="gid" foreign="id" cardinality="one" owner="foreign"/>
     </object>
 
     <object class="ModLog" table="ms_modLog" extends="xPDOSimpleObject">
@@ -110,6 +126,9 @@
             <column key="type" length="" collation="A" null="false" />
             <column key="oid" length="" collation="A" null="false" />
         </index>
+
+        <aggregate alias="Order" class="ModOrders" local="oid" foreign="id" cardinality="one" owner="foreign"/>
+        <aggregate alias="User" class="modUser" local="uid" foreign="id" cardinality="one" owner="foreign"/>
     </object>
 
     <object class="ModOrderedGoods" table="ms_modOrderedGoods" extends="xPDOSimpleObject">
@@ -150,6 +169,10 @@
         <index alias="warehouse" name="warehouse" primary="false" unique="false" type="BTREE" >
             <column key="wid" length="" collation="A" null="false" />
         </index>
+
+        <aggregate alias="User" class="modUser" local="uid" foreign="id" cardinality="one" owner="foreign"/>
+        <aggregate alias="Warehouse" class="ModWarehouse" local="wid" foreign="id" cardinality="one" owner="foreign"/>
+        <aggregate alias="Status" class="ModStatus" local="status" foreign="id" cardinality="one" owner="foreign"/>
     </object>
 
     <object class="ModPayment" table="ms_modPayment" extends="xPDOSimpleObject">
@@ -198,5 +221,10 @@
         <index alias="name" name="name" primary="false" unique="false" type="BTREE" >
             <column key="name" length="" collation="A" null="false" />
         </index>
+
+        <composite alias="Goods" class="ModGoods" local="id" foreign="wid" cardinality="many" owner="local" />
+        <composite alias="Orders" class="ModOrders" local="id" foreign="wid" cardinality="many" owner="local" />
+        <composite alias="Galleries" class="ModGallery" local="id" foreign="wid" cardinality="many" owner="local" />
+        <composite alias="Deliveries" class="ModDelivery" local="id" foreign="wid" cardinality="many" owner="local" />
     </object>
 </model>
