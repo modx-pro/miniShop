@@ -28,6 +28,7 @@ $xpdo_meta_map['MsKit']= array (
       'precision' => '10',
       'phptype' => 'integer',
       'null' => false,
+      'index' => 'index',
     ),
   ),
   'indexes' => 
@@ -46,6 +47,16 @@ $xpdo_meta_map['MsKit']= array (
           'collation' => 'A',
           'null' => false,
         ),
+      ),
+    ),
+    'gid' => 
+    array (
+      'alias' => 'gid',
+      'primary' => false,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
         'gid' => 
         array (
           'length' => '',

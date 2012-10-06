@@ -36,6 +36,7 @@ $xpdo_meta_map['MsTag']= array (
       'precision' => '255',
       'phptype' => 'string',
       'null' => false,
+      'index' => 'index',
     ),
   ),
   'indexes' => 
@@ -54,6 +55,16 @@ $xpdo_meta_map['MsTag']= array (
           'collation' => 'A',
           'null' => false,
         ),
+      ),
+    ),
+    'tag' => 
+    array (
+      'alias' => 'tag',
+      'primary' => false,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
         'tag' => 
         array (
           'length' => '',
@@ -61,6 +72,17 @@ $xpdo_meta_map['MsTag']= array (
           'null' => false,
         ),
       ),
+    ),
+  ),
+  'aggregates' => 
+  array (
+    'Goods' => 
+    array (
+      'class' => 'MsGood',
+      'local' => 'gid',
+      'foreign' => 'gid',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
     ),
   ),
 );

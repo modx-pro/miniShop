@@ -32,6 +32,7 @@ $xpdo_meta_map['MsGallery']= array (
       'precision' => '11',
       'phptype' => 'integer',
       'null' => false,
+      'index' => 'index',
     ),
     'name' => 
     array (
@@ -52,6 +53,7 @@ $xpdo_meta_map['MsGallery']= array (
       'precision' => '255',
       'phptype' => 'string',
       'null' => false,
+      'index' => 'index',
     ),
     'fileorder' => 
     array (
@@ -78,12 +80,32 @@ $xpdo_meta_map['MsGallery']= array (
           'collation' => 'A',
           'null' => false,
         ),
+      ),
+    ),
+    'gid' => 
+    array (
+      'alias' => 'gid',
+      'primary' => false,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
         'gid' => 
         array (
           'length' => '',
           'collation' => 'A',
           'null' => false,
         ),
+      ),
+    ),
+    'file' => 
+    array (
+      'alias' => 'file',
+      'primary' => false,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
         'file' => 
         array (
           'length' => '',

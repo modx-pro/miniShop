@@ -39,6 +39,7 @@ $xpdo_meta_map['MsGood']= array (
       'phptype' => 'integer',
       'null' => false,
       'default' => 0,
+      'index' => 'index',
     ),
     'article' => 
     array (
@@ -123,6 +124,16 @@ $xpdo_meta_map['MsGood']= array (
           'collation' => 'A',
           'null' => false,
         ),
+      ),
+    ),
+    'gid' => 
+    array (
+      'alias' => 'gid',
+      'primary' => false,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
         'gid' => 
         array (
           'length' => '',
@@ -148,6 +159,30 @@ $xpdo_meta_map['MsGood']= array (
       'local' => 'gid',
       'foreign' => 'id',
       'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
+    'Tags' => 
+    array (
+      'class' => 'MsTag',
+      'local' => 'gid',
+      'foreign' => 'gid',
+      'cardinality' => 'many',
+      'owner' => 'foreign',
+    ),
+    'Kits' => 
+    array (
+      'class' => 'MsKit',
+      'local' => 'gid',
+      'foreign' => 'gid',
+      'cardinality' => 'many',
+      'owner' => 'foreign',
+    ),
+    'Galleries' => 
+    array (
+      'class' => 'MsGallery',
+      'local' => 'gid',
+      'foreign' => 'gid',
+      'cardinality' => 'many',
       'owner' => 'foreign',
     ),
   ),

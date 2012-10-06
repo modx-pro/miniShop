@@ -28,6 +28,7 @@ $xpdo_meta_map['MsCategory']= array (
       'precision' => '11',
       'phptype' => 'integer',
       'null' => false,
+      'index' => 'index',
     ),
   ),
   'indexes' => 
@@ -46,6 +47,16 @@ $xpdo_meta_map['MsCategory']= array (
           'collation' => 'A',
           'null' => false,
         ),
+      ),
+    ),
+    'cid' => 
+    array (
+      'alias' => 'cid',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
         'cid' => 
         array (
           'length' => '',

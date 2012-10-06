@@ -33,6 +33,7 @@ $xpdo_meta_map['MsOrderedGood']= array (
       'precision' => '11',
       'phptype' => 'integer',
       'null' => false,
+      'index' => 'index',
     ),
     'num' => 
     array (
@@ -87,6 +88,16 @@ $xpdo_meta_map['MsOrderedGood']= array (
           'collation' => 'A',
           'null' => false,
         ),
+      ),
+    ),
+    'oid' => 
+    array (
+      'alias' => 'oid',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
         'oid' => 
         array (
           'length' => '',
@@ -94,6 +105,25 @@ $xpdo_meta_map['MsOrderedGood']= array (
           'null' => false,
         ),
       ),
+    ),
+  ),
+  'aggregates' => 
+  array (
+    'Order' => 
+    array (
+      'class' => 'MsOrder',
+      'local' => 'oid',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
+    'Resource' => 
+    array (
+      'class' => 'modResource',
+      'local' => 'gid',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
     ),
   ),
 );

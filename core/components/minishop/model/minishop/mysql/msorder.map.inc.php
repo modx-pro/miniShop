@@ -167,6 +167,17 @@ $xpdo_meta_map['MsOrder']= array (
       ),
     ),
   ),
+  'composites' => 
+  array (
+    'Goods' => 
+    array (
+      'class' => 'MsGood',
+      'local' => 'id',
+      'foreign' => 'oid',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+  ),
   'aggregates' => 
   array (
     'User' => 
@@ -189,6 +200,30 @@ $xpdo_meta_map['MsOrder']= array (
     array (
       'class' => 'MsStatus',
       'local' => 'status',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
+    'Address' => 
+    array (
+      'class' => 'MsAddress',
+      'local' => 'address',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
+    'Delivery' => 
+    array (
+      'class' => 'MsDelivery',
+      'local' => 'delivery',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
+    'Payment' => 
+    array (
+      'class' => 'MsPayment',
+      'local' => 'payment',
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',

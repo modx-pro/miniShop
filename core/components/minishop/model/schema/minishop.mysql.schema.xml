@@ -18,20 +18,22 @@
             <column key="uid" length="" collation="A" null="false" />
         </index>
 
-        <aggregate alias="User" class="modUser" local="uid" foreign="id" cardinality="one" owner="foreign"/>
+        <aggregate alias="User" class="modUser" local="uid" foreign="id" cardinality="one" owner="foreign" />
     </object>
 
     <object class="MsCategory" table="ms_categories" extends="xPDOSimpleObject">
         <field key="gid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
-        <field key="cid" dbtype="int" precision="11" phptype="integer" null="false" />
+        <field key="cid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
 
         <index alias="gid" name="gid" primary="false" unique="false" type="BTREE" >
             <column key="gid" length="" collation="A" null="false" />
+        </index>
+        <index alias="cid" name="cid" primary="false" unique="false" type="BTREE" >
             <column key="cid" length="" collation="A" null="false" />
         </index>
 
-        <aggregate alias="Good" class="modResource" local="gid" foreign="id" cardinality="one" owner="foreign"/>
-        <aggregate alias="Category" class="modResource" local="cid" foreign="id" cardinality="one" owner="foreign"/>
+        <aggregate alias="Good" class="modResource" local="gid" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Category" class="modResource" local="cid" foreign="id" cardinality="one" owner="foreign" />
     </object>
 
     <object class="MsDelivery" table="ms_deliveries" extends="xPDOSimpleObject">
@@ -51,30 +53,34 @@
             <column key="payments" length="" collation="A" null="false" />
         </index>
 
-        <aggregate alias="Warehouse" class="MsWarehouse" local="wid" foreign="id" cardinality="one" owner="foreign"/>
+        <aggregate alias="Warehouse" class="MsWarehouse" local="wid" foreign="id" cardinality="one" owner="foreign" />
     </object>
 
     <object class="MsGallery" table="ms_galleries" extends="xPDOSimpleObject">
         <field key="wid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
-        <field key="gid" dbtype="int" precision="11" phptype="integer" null="false" />
+        <field key="gid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
         <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
         <field key="description" dbtype="text" phptype="string" null="false" />
-        <field key="file" dbtype="varchar" precision="255" phptype="string" null="false" />
+        <field key="file" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />
         <field key="fileorder" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
 
         <index alias="wid" name="wid" primary="false" unique="true" type="BTREE" >
             <column key="wid" length="" collation="A" null="false" />
+        </index>
+        <index alias="gid" name="gid" primary="false" unique="true" type="BTREE" >
             <column key="gid" length="" collation="A" null="false" />
+        </index>
+        <index alias="file" name="file" primary="false" unique="true" type="BTREE" >
             <column key="file" length="" collation="A" null="false" />
         </index>
 
-        <aggregate alias="Warehouse" class="MsWarehouse" local="wid" foreign="id" cardinality="one" owner="foreign"/>
-        <aggregate alias="Good" class="MsGood" local="gid" foreign="id" cardinality="one" owner="foreign"/>
+        <aggregate alias="Warehouse" class="MsWarehouse" local="wid" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Good" class="MsGood" local="gid" foreign="id" cardinality="one" owner="foreign" />
     </object>
 
     <object class="MsGood" table="ms_goods" extends="xPDOSimpleObject">
         <field key="wid" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
-        <field key="gid" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
+        <field key="gid" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index"  />
         <field key="article" dbtype="varchar" precision="50" phptype="string" null="false" default="0" />
         <field key="price" dbtype="float" precision="10,2" phptype="float" null="false" default="0.00" />
         <field key="weight" dbtype="float" precision="10,3" phptype="float" null="false" default="0.000" />
@@ -87,29 +93,36 @@
 
         <index alias="wid" name="wid" primary="false" unique="true" type="BTREE" >
             <column key="wid" length="" collation="A" null="false" />
+        </index>
+        <index alias="gid" name="gid" primary="false" unique="true" type="BTREE" >
             <column key="gid" length="" collation="A" null="false" />
         </index>
 
-        <aggregate alias="Warehouse" class="MsWarehouse" local="wid" foreign="id" cardinality="one" owner="foreign"/>
-        <aggregate alias="Good" class="MsGood" local="gid" foreign="id" cardinality="one" owner="foreign"/>
+        <aggregate alias="Warehouse" class="MsWarehouse" local="wid" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Good" class="MsGood" local="gid" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Tags" class="MsTag" local="gid" foreign="gid" cardinality="many" owner="foreign" />
+        <aggregate alias="Kits" class="MsKit" local="gid" foreign="gid" cardinality="many" owner="foreign" />
+        <aggregate alias="Galleries" class="MsGallery" local="gid" foreign="gid" cardinality="many" owner="foreign" />
     </object>
 
     <object class="MsKit" table="ms_kits" extends="xPDOSimpleObject">
         <field key="rid" dbtype="int" precision="10" phptype="integer" null="false" index="index" />
-        <field key="gid" dbtype="int" precision="10" phptype="integer" null="false" />
+        <field key="gid" dbtype="int" precision="10" phptype="integer" null="false" index="index" />
 
         <index alias="rid" name="rid" primary="false" unique="true" type="BTREE" >
             <column key="rid" length="" collation="A" null="false" />
+        </index>
+        <index alias="gid" name="gid" primary="false" unique="true" type="BTREE" >
             <column key="gid" length="" collation="A" null="false" />
         </index>
 
-        <aggregate alias="Resource" class="modResource" local="rid" foreign="id" cardinality="one" owner="foreign"/>
-        <aggregate alias="Good" class="MsGood" local="gid" foreign="id" cardinality="one" owner="foreign"/>
+        <aggregate alias="Resource" class="modResource" local="rid" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Good" class="MsGood" local="gid" foreign="id" cardinality="one" owner="foreign" />
     </object>
 
     <object class="MsLog" table="ms_logs" extends="xPDOSimpleObject">
         <field key="type" dbtype="varchar" precision="50" phptype="string" null="false" index="index" />
-        <field key="oid" dbtype="int" precision="11" phptype="integer" null="false" />
+        <field key="oid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
         <field key="iid" dbtype="int" precision="11" phptype="integer" null="false" />
         <field key="operation" dbtype="varchar" precision="255" phptype="string" null="false" />
         <field key="old" dbtype="text" phptype="string" null="false" />
@@ -124,16 +137,18 @@
         </index>
         <index alias="type" name="type" primary="false" unique="false" type="BTREE" >
             <column key="type" length="" collation="A" null="false" />
+        </index>
+        <index alias="oid" name="oid" primary="false" unique="false" type="BTREE" >
             <column key="oid" length="" collation="A" null="false" />
         </index>
 
-        <aggregate alias="Order" class="MsOrder" local="oid" foreign="id" cardinality="one" owner="foreign"/>
-        <aggregate alias="User" class="modUser" local="uid" foreign="id" cardinality="one" owner="foreign"/>
+        <aggregate alias="Order" class="MsOrder" local="oid" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="User" class="modUser" local="uid" foreign="id" cardinality="one" owner="foreign" />
     </object>
 
     <object class="MsOrderedGood" table="ms_ordered_goods" extends="xPDOSimpleObject">
         <field key="gid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
-        <field key="oid" dbtype="int" precision="11" phptype="integer" null="false" />
+        <field key="oid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
         <field key="num" dbtype="int" precision="11" phptype="integer" null="false" default="1" />
         <field key="price" dbtype="float" precision="10,2" phptype="float" null="false" />
         <field key="weight" dbtype="float" precision="10,3" phptype="float" null="false" default="0.000" />
@@ -142,8 +157,14 @@
 
         <index alias="gid" name="gid" primary="false" unique="false" type="BTREE" >
             <column key="gid" length="" collation="A" null="false" />
+        </index>
+        <index alias="oid" name="oid" primary="false" unique="false" type="BTREE" >
             <column key="oid" length="" collation="A" null="false" />
         </index>
+
+        <aggregate alias="Order" class="MsOrder" local="oid" foreign="id" cardinality="one" owner="foreign" />
+        <!--<aggregate alias="Good" class="MsGood" local="gid" foreign="gid" cardinality="one" owner="foreign" />-->
+        <aggregate alias="Resource" class="modResource" local="gid" foreign="id" cardinality="one" owner="foreign" />
     </object>
 
     <object class="MsOrder" table="ms_orders" extends="xPDOSimpleObject">
@@ -170,9 +191,14 @@
             <column key="wid" length="" collation="A" null="false" />
         </index>
 
-        <aggregate alias="User" class="modUser" local="uid" foreign="id" cardinality="one" owner="foreign"/>
-        <aggregate alias="Warehouse" class="MsWarehouse" local="wid" foreign="id" cardinality="one" owner="foreign"/>
-        <aggregate alias="Status" class="MsStatus" local="status" foreign="id" cardinality="one" owner="foreign"/>
+        <aggregate alias="User" class="modUser" local="uid" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Warehouse" class="MsWarehouse" local="wid" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Status" class="MsStatus" local="status" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Address" class="MsAddress" local="address" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Delivery" class="MsDelivery" local="delivery" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Payment" class="MsPayment" local="payment" foreign="id" cardinality="one" owner="foreign" />
+
+        <composite alias="Goods" class="MsGood" local="id" foreign="oid" cardinality="many" owner="local" />
     </object>
 
     <object class="MsPayment" table="ms_payments" extends="xPDOSimpleObject">
@@ -180,7 +206,7 @@
         <field key="description" dbtype="text" phptype="string" null="true" />
         <field key="snippet" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
 
-        <aggregate alias="Snippet" class="modSnippet" local="snippet" foreign="id" cardinality="one" owner="foreign"/>
+        <aggregate alias="Snippet" class="modSnippet" local="snippet" foreign="id" cardinality="one" owner="foreign" />
     </object>
 
     <object class="MsStatus" table="ms_status" extends="xPDOSimpleObject">
@@ -201,12 +227,16 @@
     <object class="MsTag" table="ms_tags" extends="xPDOSimpleObject">
         <field key="rid" dbtype="int" precision="10" phptype="integer" null="false" />
         <field key="gid" dbtype="int" precision="10" phptype="integer" null="false" index="index" />
-        <field key="tag" dbtype="varchar" precision="255" phptype="string" null="false" />
+        <field key="tag" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />
 
         <index alias="gid" name="gid" primary="false" unique="true" type="BTREE" >
             <column key="gid" length="" collation="A" null="false" />
+        </index>
+        <index alias="tag" name="tag" primary="false" unique="true" type="BTREE" >
             <column key="tag" length="" collation="A" null="false" />
         </index>
+
+        <aggregate alias="Goods" class="MsGood" local="gid" foreign="gid" cardinality="one" owner="foreign" />
     </object>
 
     <object class="MsWarehouse" table="ms_warehouses" extends="xPDOSimpleObject">

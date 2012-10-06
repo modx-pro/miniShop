@@ -36,6 +36,7 @@ $xpdo_meta_map['MsLog']= array (
       'precision' => '11',
       'phptype' => 'integer',
       'null' => false,
+      'index' => 'index',
     ),
     'iid' => 
     array (
@@ -124,6 +125,16 @@ $xpdo_meta_map['MsLog']= array (
           'collation' => 'A',
           'null' => false,
         ),
+      ),
+    ),
+    'oid' => 
+    array (
+      'alias' => 'oid',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
         'oid' => 
         array (
           'length' => '',
