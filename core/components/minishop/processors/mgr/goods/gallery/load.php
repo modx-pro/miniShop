@@ -1,7 +1,7 @@
 <?php
 /**
  * Search in directory and create images records for Goods
- * 
+ *
  * @package minishop
  * @subpackage processors
  */
@@ -25,7 +25,7 @@ if (strstr($dir, $base_path) == false) {$dir = $base_path.$dir;}
 
 if (!file_exists($dir)) {return $modx->error->failure('Wrong directory: '.$dir);}
 
-$order = $modx->getCount('ModGallery', array('gid' => $gid, 'wid' => $_SESSION['minishop']['warehouse']));
+$order = $modx->getCount('MsGallery', array('gid' => $gid, 'wid' => $_SESSION['minishop']['warehouse']));
 
 $files = scandir($dir);
 foreach ($files as $v) {
@@ -33,15 +33,15 @@ foreach ($files as $v) {
 	preg_match('/\.(.*)$/i', $v, $tmp);
 	if (!in_array(strtolower($tmp[1]), $extensions)) {continue;}
 	if (!file_exists($dir.$v)) {continue;}
-	
+
 	$name = preg_replace('/\.(.*)$/i', '', $v);
 	$file = str_replace(array($modx->getOption('base_path'), '//'), array('','/'), $dir.$v);
-	
+
 	if (preg_match('/^\//',$file)) {$file = substr($file,1);}
-	
-	if ($modx->getCount('ModGallery', array('gid' => $gid, 'wid' => $_SESSION['minishop']['warehouse'], 'file' => $file))) {continue;}
-	
-	$res = $modx->newObject('ModGallery');
+
+	if ($modx->getCount('MsGallery', array('gid' => $gid, 'wid' => $_SESSION['minishop']['warehouse'], 'file' => $file))) {continue;}
+
+	$res = $modx->newObject('MsGallery');
 	$res->fromArray(array(
 		'gid' => $gid
 		,'wid' => $_SESSION['minishop']['warehouse']
@@ -51,6 +51,6 @@ foreach ($files as $v) {
 	));
 	$res->save();
 	$order++;
-	
+
 	//return $modx->error->failure(print_r($res->toArray(),1));
 }

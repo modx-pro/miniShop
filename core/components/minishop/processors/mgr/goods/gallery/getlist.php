@@ -16,13 +16,13 @@ $gid = $modx->getOption('gid',$_REQUEST,0);
 
 if (empty($gid)) {return $modx->error->failure($modx->lexicon('ms.gallery.err_nf'));}
 
-$c = $modx->newQuery('ModGallery');
+$c = $modx->newQuery('MsGallery');
 $c->where(array('gid' => $gid,'wid' => $_SESSION['minishop']['warehouse']));
 
-$count = $modx->getCount('ModGallery',$c);
+$count = $modx->getCount('MsGallery',$c);
 $c->sortby($sort,$dir);
 if ($isLimit) {$c->limit($limit,$start);}
-$images = $modx->getCollection('ModGallery', $c);
+$images = $modx->getCollection('MsGallery', $c);
 
 $arr = array();
 foreach ($images as $v) {

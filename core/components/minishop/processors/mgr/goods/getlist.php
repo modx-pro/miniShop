@@ -5,7 +5,7 @@
  * @package minishop
  * @subpackage processors
  */
- 
+
 if (!isset($modx->miniShop) || !is_object($modx->miniShop)) {
 	$miniShop = $modx->getService('miniShop','miniShop',$modx->getOption('minishop.core_path',null,$modx->getOption('core_path').'components/minishop/').'model/minishop/', $scriptProperties);
 	if (!($miniShop instanceof miniShop)) return '';
@@ -29,9 +29,9 @@ $_SESSION['minishop']['category'] = $category;
 
 $c = $modx->newQuery('modResource');
 
-$c->leftJoin('ModGoods', 'ModGoods', array(
-	"ModGoods.gid = modResource.id",
-	"ModGoods.wid = ".$_SESSION['minishop']['warehouse']
+$c->leftJoin('MsGood', 'MsGood', array(
+	"MsGood.gid = modResource.id",
+	"MsGood.wid = ".$_SESSION['minishop']['warehouse']
 ));
 
 $c->where(array('modResource.template:IN' => $goods_tpls, 'modResource.isfolder:=' => 0));
@@ -43,7 +43,7 @@ if (!empty($category)) {
 		$categories[] = $category;
 		$c->andCondition(array('parent:IN' => $categories), '', 1);
 	}
-	
+
 	$ids = $modx->miniShop->getGoodsByCategories($category);
 	if (!empty($ids)) {
 		$c->orCondition(array('id:IN' => $ids), '', 1);
@@ -54,7 +54,7 @@ if (!empty($category)) {
 if (!empty($query)) {
 	// Search by pagetitle or article
 	$c->andCondition(array('modResource.pagetitle:LIKE' => '%'.$query.'%'), '', 2);
-	$c->orCondition(array('ModGoods.article:LIKE' => '%'.$query.'%'), '', 2);
+	$c->orCondition(array('MsGood.article:LIKE' => '%'.$query.'%'), '', 2);
 }
 
 $count = $modx->getCount('modResource',$c);
@@ -76,7 +76,7 @@ foreach ($goods as $v) {
 		,'hidemenu' => $v->get('hidemenu')
 	);
 	$tmp['url'] = $this->modx->makeUrl($v->get('id'), '', '', 'full');
-	if ($product = $modx->getObject('ModGoods', array('gid' => $tmp['id'], 'wid' => $warehouse)) ) {
+	if ($product = $modx->getObject('MsGood', array('gid' => $tmp['id'], 'wid' => $warehouse)) ) {
 		$tmp2 = $product->toArray();
 		unset($tmp2['id'], $tmp2['gid']);
 	}
@@ -86,7 +86,7 @@ foreach ($goods as $v) {
 			'wid' => $warehouse
 		);
 	}
-	
+
 	$tmp = array_merge($tmp, $tmp2);
 	if (empty($tmp['img']) && is_object($product)) {
 		$gallery = $product->getGallery('fileorder','ASC',1);

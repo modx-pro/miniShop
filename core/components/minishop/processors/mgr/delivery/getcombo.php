@@ -14,18 +14,18 @@ $sort = $modx->getOption('sort',$scriptProperties,'id');
 $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 $query = $modx->getOption('query', $scriptProperties, 0);
 
-$c = $modx->newQuery('ModDelivery');
+$c = $modx->newQuery('MsDelivery');
 
 if (!empty($query)) {
 	$c->andCondition(array('name:LIKE' => '%'.$query.'%'));
 }
 
-$count = $modx->getCount('ModDelivery',$c);
+$count = $modx->getCount('MsDelivery',$c);
 $c->sortby($sort,$dir);
-$c->select('ModDelivery.id,ModDelivery.name');
+$c->select('MsDelivery.id,MsDelivery.name');
 if ($isLimit) $c->limit($limit,$start);
 
-$res = $modx->getCollection('ModDelivery',$c);
+$res = $modx->getCollection('MsDelivery',$c);
 $arr = array(array(
 	'id' => '0'
 	,'name' => $modx->lexicon('no')

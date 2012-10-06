@@ -1,7 +1,7 @@
 <?php
 /**
  * Create an OrderedGoods
- * 
+ *
  * @package minishop
  * @subpackage processors
  */
@@ -34,8 +34,8 @@ if ($res = $modx->getObject('modResource', $scriptProperties['gid'])) {
 	$price = !empty($scriptProperties['price']) ? $scriptProperties['price'] : $miniShop->getPrice($scriptProperties['gid']);
 	$weight = !empty($scriptProperties['weight']) ? $scriptProperties['weight'] : $miniShop->getWeight($scriptProperties['gid']);
 	$sum = $scriptProperties['num'] * $price;
-	
-	$goods = $modx->newObject('ModOrderedGoods');
+
+	$goods = $modx->newObject('MsOrderedGood');
 	$goods->fromArray(array(
 		'gid' => $scriptProperties['gid']
 		,'oid' => $scriptProperties['oid']
@@ -48,7 +48,7 @@ if ($res = $modx->getObject('modResource', $scriptProperties['gid'])) {
 	$goods->save();
 	$miniShop->Log('goods', $scriptProperties['oid'], $scriptProperties['gid'], 'add', 0, $scriptProperties['num'], 'Added '.$scriptProperties['num'].' items of "'. $res->get('pagetitle').'"');
 
-	if ($order = $modx->getObject('ModOrders', $scriptProperties['oid'])) {
+	if ($order = $modx->getObject('MsOrder', $scriptProperties['oid'])) {
 		$order->updateSum();
 		$order->updateWeight();
 	}

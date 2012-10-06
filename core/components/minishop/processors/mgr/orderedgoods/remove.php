@@ -1,15 +1,14 @@
 <?php
 /**
  * Delete an OrderedGoods.
- * 
+ *
  * @package minishop
  * @subpackage processors
  */
-
 if (!$modx->hasPermission('remove')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
 
 $id = $scriptProperties['id'];
-if (!$res = $modx->getObject('ModOrderedGoods', $id)) {
+if (!$res = $modx->getObject('MsOrderedGood', $id)) {
 	return $modx->error->failure($modx->lexicon('ms.goods.err_nf'));
 }
 $oldval = $res->get('num');
@@ -30,9 +29,22 @@ $oid = $res->get('oid');
 $res->remove();
 $miniShop->Log('goods', $oid, $gid, 'remove', $oldval, 0, 'Removed "'. $name . '" product from the order.');
 
-if ($order = $modx->getObject('ModOrders', $oid)) {
+if ($order = $modx->getObject('MsOrder', $oid)) {
 	$order->updateSum();
 	$order->updateWeight();
 }
 
 return $modx->error->success('',$res);
+
+//class MsOrderedGoodRemoveProcessor extends modObjectRemoveProcessor {
+//    public $classKey = 'MsOrderedGood';
+//    public $languageTopics = array('minishop:default');
+//    public $objectType = 'minishop.modorderedgoods';
+//
+//    public function afterRemove() {
+//        $id = $this->getProperty('id');
+//        $this->modx->removeCollection('MsDelivery', array('wid' => $id));
+//        //$this->modx->removeCollection('MsGood', array('wid' => $id));
+//    }
+//}
+//return 'MsOrderedGoodRemoveProcessor';

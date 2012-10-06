@@ -1,187 +1,260 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model package="minishop" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" version="1.1">
-	<object class="ModAddress" table="ms_modAddress" extends="xPDOSimpleObject">
-		<field key="uid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
-		<field key="receiver" dbtype="varchar" precision="255" phptype="string" null="false" />
-		<field key="phone" dbtype="varchar" precision="20" phptype="string" null="false" />
-		<field key="country" dbtype="varchar" precision="100" phptype="string" null="false" />
-		<field key="index" dbtype="int" precision="11" phptype="integer" null="false" />
-		<field key="region" dbtype="varchar" precision="100" phptype="string" null="false" />
-		<field key="city" dbtype="varchar" precision="100" phptype="string" null="false" />
-		<field key="metro" dbtype="varchar" precision="255" phptype="string" null="false" />
-		<field key="street" dbtype="varchar" precision="255" phptype="string" null="false" />
-		<field key="building" dbtype="varchar" precision="10" phptype="string" null="false" />
-		<field key="room" dbtype="varchar" precision="10" phptype="string" null="false" />
-		<field key="comment" dbtype="text" phptype="string" null="false" />
+    <object class="MsAddress" table="ms_addresses" extends="xPDOSimpleObject">
+        <field key="uid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
+        <field key="receiver" dbtype="varchar" precision="255" phptype="string" null="false" />
+        <field key="phone" dbtype="varchar" precision="20" phptype="string" null="false" />
+        <field key="country" dbtype="varchar" precision="100" phptype="string" null="false" />
+        <field key="index" dbtype="int" precision="11" phptype="integer" null="false" />
+        <field key="region" dbtype="varchar" precision="100" phptype="string" null="false" />
+        <field key="city" dbtype="varchar" precision="100" phptype="string" null="false" />
+        <field key="metro" dbtype="varchar" precision="255" phptype="string" null="false" />
+        <field key="street" dbtype="varchar" precision="255" phptype="string" null="false" />
+        <field key="building" dbtype="varchar" precision="10" phptype="string" null="false" />
+        <field key="room" dbtype="varchar" precision="10" phptype="string" null="false" />
+        <field key="comment" dbtype="text" phptype="string" null="false" />
 
-		<index alias="uid" name="uid" primary="false" unique="false" type="BTREE" >
-			<column key="uid" length="" collation="A" null="false" />
-		</index>
-	</object>
-	<object class="ModCategories" table="ms_modCategories" extends="xPDOSimpleObject">
-		<field key="gid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
-		<field key="cid" dbtype="int" precision="11" phptype="integer" null="false" />
+        <index alias="uid" name="uid" primary="false" unique="false" type="BTREE" >
+            <column key="uid" length="" collation="A" null="false" />
+        </index>
 
-		<index alias="gid" name="gid" primary="false" unique="false" type="BTREE" >
-			<column key="gid" length="" collation="A" null="false" />
-			<column key="cid" length="" collation="A" null="false" />
-		</index>
-	</object>
-	<object class="ModDelivery" table="ms_modDelivery" extends="xPDOSimpleObject">
-		<field key="wid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
-		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
-		<field key="description" dbtype="text" phptype="string" null="false" />
-		<field key="price" dbtype="float" precision="10,2" phptype="float" null="false" default="0.00" />
-		<field key="add_price" dbtype="float" precision="10,2" phptype="float" null="false" default="0.00" />
-		<field key="enabled" dbtype="tinyint" precision="1" phptype="integer" null="false" default="1" />
-		<field key="payments" dbtype="varchar" precision="255" phptype="string" null="false" default="[]" index="index" />
+        <aggregate alias="User" class="modUser" local="uid" foreign="id" cardinality="one" owner="foreign" />
+    </object>
 
-		<index alias="wid" name="wid" primary="false" unique="false" type="BTREE" >
-			<column key="wid" length="" collation="A" null="false" />
-		</index>
-		<index alias="payments" name="payments" primary="false" unique="false" type="BTREE" >
-			<column key="payments" length="" collation="A" null="false" />
-		</index>
-	</object>
-	<object class="ModGallery" table="ms_modGallery" extends="xPDOSimpleObject">
-		<field key="wid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
-		<field key="gid" dbtype="int" precision="11" phptype="integer" null="false" />
-		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
-		<field key="description" dbtype="text" phptype="string" null="false" />
-		<field key="file" dbtype="varchar" precision="255" phptype="string" null="false" />
-		<field key="fileorder" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+    <object class="MsCategory" table="ms_categories" extends="xPDOSimpleObject">
+        <field key="gid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
+        <field key="cid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
 
-		<index alias="wid" name="wid" primary="false" unique="true" type="BTREE" >
-			<column key="wid" length="" collation="A" null="false" />
-			<column key="gid" length="" collation="A" null="false" />
-			<column key="file" length="" collation="A" null="false" />
-		</index>
-	</object>
-	<object class="ModGoods" table="ms_modGoods" extends="xPDOSimpleObject">
-		<field key="wid" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
-		<field key="gid" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
-		<field key="article" dbtype="varchar" precision="50" phptype="string" null="false" default="0" />
-		<field key="price" dbtype="float" precision="10,2" phptype="float" null="false" default="0.00" />
-		<field key="weight" dbtype="float" precision="10,3" phptype="float" null="false" default="0.000" />
-		<field key="img" dbtype="text" phptype="string" null="false" />
-		<field key="remains" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
-		<field key="reserved" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
-		<field key="add1" dbtype="varchar" precision="255" phptype="string" null="false" />
-		<field key="add2" dbtype="varchar" precision="255" phptype="string" null="false" />
-		<field key="add3" dbtype="text" phptype="string" null="false" />
+        <index alias="gid" name="gid" primary="false" unique="false" type="BTREE" >
+            <column key="gid" length="" collation="A" null="false" />
+        </index>
+        <index alias="cid" name="cid" primary="false" unique="false" type="BTREE" >
+            <column key="cid" length="" collation="A" null="false" />
+        </index>
 
-		<index alias="wid" name="wid" primary="false" unique="true" type="BTREE" >
-			<column key="wid" length="" collation="A" null="false" />
-			<column key="gid" length="" collation="A" null="false" />
-		</index>
-	</object>
-	<object class="ModKits" table="ms_modKits" extends="xPDOSimpleObject">
-		<field key="rid" dbtype="int" precision="10" phptype="integer" null="false" index="index" />
-		<field key="gid" dbtype="int" precision="10" phptype="integer" null="false" />
+        <aggregate alias="Good" class="modResource" local="gid" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Category" class="modResource" local="cid" foreign="id" cardinality="one" owner="foreign" />
+    </object>
 
-		<index alias="rid" name="rid" primary="false" unique="true" type="BTREE" >
-			<column key="rid" length="" collation="A" null="false" />
-			<column key="gid" length="" collation="A" null="false" />
-		</index>
-	</object>
-	<object class="ModLog" table="ms_modLog" extends="xPDOSimpleObject">
-		<field key="type" dbtype="varchar" precision="50" phptype="string" null="false" index="index" />
-		<field key="oid" dbtype="int" precision="11" phptype="integer" null="false" />
-		<field key="iid" dbtype="int" precision="11" phptype="integer" null="false" />
-		<field key="operation" dbtype="varchar" precision="255" phptype="string" null="false" />
-		<field key="old" dbtype="text" phptype="string" null="false" />
-		<field key="new" dbtype="text" phptype="string" null="false" />
-		<field key="uid" dbtype="int" precision="11" phptype="integer" null="false" />
-		<field key="ip" dbtype="varchar" precision="15" phptype="string" null="false" />
-		<field key="timestamp" dbtype="timestamp" phptype="timestamp" null="false" default="CURRENT_TIMESTAMP" index="index" />
-		<field key="comment" dbtype="text" phptype="string" null="true" />
+    <object class="MsDelivery" table="ms_deliveries" extends="xPDOSimpleObject">
+        <field key="wid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
+        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
+        <field key="description" dbtype="text" phptype="string" null="false" />
+        <field key="price" dbtype="float" precision="10,2" phptype="float" null="false" default="0.00" />
+        <field key="add_price" dbtype="float" precision="10,2" phptype="float" null="false" default="0.00" />
+        <field key="enabled" dbtype="tinyint" precision="1" phptype="integer" null="false" default="1" />
+        <!-- @todo : JSON ? -->
+        <field key="payments" dbtype="varchar" precision="255" phptype="string" null="false" default="[]" index="index" />
 
-		<index alias="timestamp" name="timestamp" primary="false" unique="false" type="BTREE" >
-			<column key="timestamp" length="" collation="A" null="false" />
-		</index>
-		<index alias="type" name="type" primary="false" unique="false" type="BTREE" >
-			<column key="type" length="" collation="A" null="false" />
-			<column key="oid" length="" collation="A" null="false" />
-		</index>
-	</object>
-	<object class="ModOrderedGoods" table="ms_modOrderedGoods" extends="xPDOSimpleObject">
-		<field key="gid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
-		<field key="oid" dbtype="int" precision="11" phptype="integer" null="false" />
-		<field key="num" dbtype="int" precision="11" phptype="integer" null="false" default="1" />
-		<field key="price" dbtype="float" precision="10,2" phptype="float" null="false" />
-		<field key="weight" dbtype="float" precision="10,3" phptype="float" null="false" default="0.000" />
-		<field key="sum" dbtype="float" precision="10,2" phptype="float" null="false" />
-		<field key="data" dbtype="text" phptype="string" null="false" />
+        <index alias="wid" name="wid" primary="false" unique="false" type="BTREE" >
+            <column key="wid" length="" collation="A" null="false" />
+        </index>
+        <index alias="payments" name="payments" primary="false" unique="false" type="BTREE" >
+            <column key="payments" length="" collation="A" null="false" />
+        </index>
 
-		<index alias="gid" name="gid" primary="false" unique="false" type="BTREE" >
-			<column key="gid" length="" collation="A" null="false" />
-			<column key="oid" length="" collation="A" null="false" />
-		</index>
-	</object>
-	<object class="ModOrders" table="ms_modOrders" extends="xPDOSimpleObject">
-		<field key="uid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
-		<field key="num" dbtype="varchar" precision="20" phptype="string" null="false" />
-		<field key="wid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
-		<field key="status" dbtype="tinyint" precision="2" phptype="integer" null="false" default="1" index="index" />
-		<field key="sum" dbtype="float" precision="10,2" phptype="float" null="false" />
-		<field key="weight" dbtype="float" precision="10,3" phptype="float" null="false" default="0.000" />
-		<field key="created" dbtype="timestamp" phptype="timestamp" null="false" default="0000-00-00 00:00:00" />
-		<field key="updated" dbtype="timestamp" phptype="timestamp" null="false" default="0000-00-00 00:00:00" />
-		<field key="comment" dbtype="text" phptype="string" null="false" />
-		<field key="delivery" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
-		<field key="payment" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
-		<field key="address" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
+        <aggregate alias="Warehouse" class="MsWarehouse" local="wid" foreign="id" cardinality="one" owner="foreign" />
+    </object>
 
-		<index alias="status" name="status" primary="false" unique="false" type="BTREE" >
-			<column key="status" length="" collation="A" null="false" />
-		</index>
-		<index alias="uid" name="uid" primary="false" unique="false" type="BTREE" >
-			<column key="uid" length="" collation="A" null="false" />
-		</index>
-		<index alias="warehouse" name="warehouse" primary="false" unique="false" type="BTREE" >
-			<column key="wid" length="" collation="A" null="false" />
-		</index>
-	</object>
-	<object class="ModPayment" table="ms_modPayment" extends="xPDOSimpleObject">
-		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
-		<field key="description" dbtype="text" phptype="string" null="true" />
-		<field key="snippet" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
-	</object>
-	<object class="ModStatus" table="ms_modStatus" extends="xPDOSimpleObject">
-		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />
-		<field key="color" dbtype="char" precision="6" phptype="string" null="false" default="000000" />
-		<field key="email2user" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" />
-		<field key="email2manager" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" />
-		<field key="subject2user" dbtype="varchar" precision="255" phptype="string" null="false" />
-		<field key="subject2manager" dbtype="varchar" precision="255" phptype="string" null="false" />
-		<field key="body2user" dbtype="int" precision="10" phptype="integer" null="true" default="0" />
-		<field key="body2manager" dbtype="int" precision="10" phptype="integer" null="true" default="0" />
+    <object class="MsGallery" table="ms_galleries" extends="xPDOSimpleObject">
+        <field key="wid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
+        <field key="gid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
+        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
+        <field key="description" dbtype="text" phptype="string" null="false" />
+        <field key="file" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />
+        <field key="fileorder" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
 
-		<index alias="name" name="name" primary="false" unique="false" type="BTREE" >
-			<column key="name" length="" collation="A" null="false" />
-		</index>
-	</object>
-	<object class="ModTags" table="ms_modTags" extends="xPDOSimpleObject">
-		<field key="rid" dbtype="int" precision="10" phptype="integer" null="false" />
-		<field key="gid" dbtype="int" precision="10" phptype="integer" null="false" index="index" />
-		<field key="tag" dbtype="varchar" precision="255" phptype="string" null="false" />
+        <index alias="wid" name="wid" primary="false" unique="true" type="BTREE" >
+            <column key="wid" length="" collation="A" null="false" />
+        </index>
+        <index alias="gid" name="gid" primary="false" unique="true" type="BTREE" >
+            <column key="gid" length="" collation="A" null="false" />
+        </index>
+        <index alias="file" name="file" primary="false" unique="true" type="BTREE" >
+            <column key="file" length="" collation="A" null="false" />
+        </index>
 
-		<index alias="gid" name="gid" primary="false" unique="true" type="BTREE" >
-			<column key="gid" length="" collation="A" null="false" />
-			<column key="tag" length="" collation="A" null="false" />
-		</index>
-	</object>
-	<object class="ModWarehouse" table="ms_modWarehouse" extends="xPDOSimpleObject">
-		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />
-		<field key="currency" dbtype="varchar" precision="20" phptype="string" null="false" />
-		<field key="address" dbtype="text" phptype="string" null="false" />
-		<field key="phone" dbtype="varchar" precision="20" phptype="string" null="false" />
-		<field key="email" dbtype="varchar" precision="100" phptype="string" null="false" />
-		<field key="description" dbtype="text" phptype="string" null="false" />
-		<field key="permission" dbtype="varchar" precision="100" phptype="string" null="false" />
+        <aggregate alias="Warehouse" class="MsWarehouse" local="wid" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Good" class="MsGood" local="gid" foreign="id" cardinality="one" owner="foreign" />
+    </object>
 
-		<index alias="name" name="name" primary="false" unique="false" type="BTREE" >
-			<column key="name" length="" collation="A" null="false" />
-		</index>
-	</object>
+    <object class="MsGood" table="ms_goods" extends="xPDOSimpleObject">
+        <field key="wid" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
+        <field key="gid" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index"  />
+        <field key="article" dbtype="varchar" precision="50" phptype="string" null="false" default="0" />
+        <field key="price" dbtype="float" precision="10,2" phptype="float" null="false" default="0.00" />
+        <field key="weight" dbtype="float" precision="10,3" phptype="float" null="false" default="0.000" />
+        <field key="img" dbtype="text" phptype="string" null="false" />
+        <field key="remains" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
+        <field key="reserved" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
+        <field key="add1" dbtype="varchar" precision="255" phptype="string" null="false" />
+        <field key="add2" dbtype="varchar" precision="255" phptype="string" null="false" />
+        <field key="add3" dbtype="text" phptype="string" null="false" />
+
+        <index alias="wid" name="wid" primary="false" unique="true" type="BTREE" >
+            <column key="wid" length="" collation="A" null="false" />
+        </index>
+        <index alias="gid" name="gid" primary="false" unique="true" type="BTREE" >
+            <column key="gid" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="Warehouse" class="MsWarehouse" local="wid" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Good" class="MsGood" local="gid" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Tags" class="MsTag" local="gid" foreign="gid" cardinality="many" owner="foreign" />
+        <aggregate alias="Kits" class="MsKit" local="gid" foreign="gid" cardinality="many" owner="foreign" />
+        <aggregate alias="Galleries" class="MsGallery" local="gid" foreign="gid" cardinality="many" owner="foreign" />
+    </object>
+
+    <object class="MsKit" table="ms_kits" extends="xPDOSimpleObject">
+        <field key="rid" dbtype="int" precision="10" phptype="integer" null="false" index="index" />
+        <field key="gid" dbtype="int" precision="10" phptype="integer" null="false" index="index" />
+
+        <index alias="rid" name="rid" primary="false" unique="true" type="BTREE" >
+            <column key="rid" length="" collation="A" null="false" />
+        </index>
+        <index alias="gid" name="gid" primary="false" unique="true" type="BTREE" >
+            <column key="gid" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="Resource" class="modResource" local="rid" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Good" class="MsGood" local="gid" foreign="id" cardinality="one" owner="foreign" />
+    </object>
+
+    <object class="MsLog" table="ms_logs" extends="xPDOSimpleObject">
+        <field key="type" dbtype="varchar" precision="50" phptype="string" null="false" index="index" />
+        <field key="oid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
+        <field key="iid" dbtype="int" precision="11" phptype="integer" null="false" />
+        <field key="operation" dbtype="varchar" precision="255" phptype="string" null="false" />
+        <field key="old" dbtype="text" phptype="string" null="false" />
+        <field key="new" dbtype="text" phptype="string" null="false" />
+        <field key="uid" dbtype="int" precision="11" phptype="integer" null="false" />
+        <field key="ip" dbtype="varchar" precision="15" phptype="string" null="false" />
+        <field key="timestamp" dbtype="timestamp" phptype="timestamp" null="false" default="CURRENT_TIMESTAMP" index="index" />
+        <field key="comment" dbtype="text" phptype="string" null="true" />
+
+        <index alias="timestamp" name="timestamp" primary="false" unique="false" type="BTREE" >
+            <column key="timestamp" length="" collation="A" null="false" />
+        </index>
+        <index alias="type" name="type" primary="false" unique="false" type="BTREE" >
+            <column key="type" length="" collation="A" null="false" />
+        </index>
+        <index alias="oid" name="oid" primary="false" unique="false" type="BTREE" >
+            <column key="oid" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="Order" class="MsOrder" local="oid" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="User" class="modUser" local="uid" foreign="id" cardinality="one" owner="foreign" />
+    </object>
+
+    <object class="MsOrderedGood" table="ms_ordered_goods" extends="xPDOSimpleObject">
+        <field key="gid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
+        <field key="oid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
+        <field key="num" dbtype="int" precision="11" phptype="integer" null="false" default="1" />
+        <field key="price" dbtype="float" precision="10,2" phptype="float" null="false" />
+        <field key="weight" dbtype="float" precision="10,3" phptype="float" null="false" default="0.000" />
+        <field key="sum" dbtype="float" precision="10,2" phptype="float" null="false" />
+        <field key="data" dbtype="text" phptype="string" null="false" />
+
+        <index alias="gid" name="gid" primary="false" unique="false" type="BTREE" >
+            <column key="gid" length="" collation="A" null="false" />
+        </index>
+        <index alias="oid" name="oid" primary="false" unique="false" type="BTREE" >
+            <column key="oid" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="Order" class="MsOrder" local="oid" foreign="id" cardinality="one" owner="foreign" />
+        <!--<aggregate alias="Good" class="MsGood" local="gid" foreign="gid" cardinality="one" owner="foreign" />-->
+        <aggregate alias="Resource" class="modResource" local="gid" foreign="id" cardinality="one" owner="foreign" />
+    </object>
+
+    <object class="MsOrder" table="ms_orders" extends="xPDOSimpleObject">
+        <field key="uid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
+        <field key="num" dbtype="varchar" precision="20" phptype="string" null="false" />
+        <field key="wid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
+        <field key="status" dbtype="tinyint" precision="2" phptype="integer" null="false" default="1" index="index" />
+        <field key="sum" dbtype="float" precision="10,2" phptype="float" null="false" />
+        <field key="weight" dbtype="float" precision="10,3" phptype="float" null="false" default="0.000" />
+        <field key="created" dbtype="timestamp" phptype="timestamp" null="false" default="0000-00-00 00:00:00" />
+        <field key="updated" dbtype="timestamp" phptype="timestamp" null="false" default="0000-00-00 00:00:00" />
+        <field key="comment" dbtype="text" phptype="string" null="false" />
+        <field key="delivery" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
+        <field key="payment" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
+        <field key="address" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
+
+        <index alias="status" name="status" primary="false" unique="false" type="BTREE" >
+            <column key="status" length="" collation="A" null="false" />
+        </index>
+        <index alias="uid" name="uid" primary="false" unique="false" type="BTREE" >
+            <column key="uid" length="" collation="A" null="false" />
+        </index>
+        <index alias="warehouse" name="warehouse" primary="false" unique="false" type="BTREE" >
+            <column key="wid" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="User" class="modUser" local="uid" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Warehouse" class="MsWarehouse" local="wid" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Status" class="MsStatus" local="status" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Address" class="MsAddress" local="address" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Delivery" class="MsDelivery" local="delivery" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Payment" class="MsPayment" local="payment" foreign="id" cardinality="one" owner="foreign" />
+
+        <composite alias="Goods" class="MsGood" local="id" foreign="oid" cardinality="many" owner="local" />
+    </object>
+
+    <object class="MsPayment" table="ms_payments" extends="xPDOSimpleObject">
+        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
+        <field key="description" dbtype="text" phptype="string" null="true" />
+        <field key="snippet" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
+
+        <aggregate alias="Snippet" class="modSnippet" local="snippet" foreign="id" cardinality="one" owner="foreign" />
+    </object>
+
+    <object class="MsStatus" table="ms_status" extends="xPDOSimpleObject">
+        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />
+        <field key="color" dbtype="char" precision="6" phptype="string" null="false" default="000000" />
+        <field key="email2user" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" />
+        <field key="email2manager" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" />
+        <field key="subject2user" dbtype="varchar" precision="255" phptype="string" null="false" />
+        <field key="subject2manager" dbtype="varchar" precision="255" phptype="string" null="false" />
+        <field key="body2user" dbtype="int" precision="10" phptype="integer" null="true" default="0" />
+        <field key="body2manager" dbtype="int" precision="10" phptype="integer" null="true" default="0" />
+
+        <index alias="name" name="name" primary="false" unique="false" type="BTREE" >
+            <column key="name" length="" collation="A" null="false" />
+        </index>
+    </object>
+
+    <object class="MsTag" table="ms_tags" extends="xPDOSimpleObject">
+        <field key="rid" dbtype="int" precision="10" phptype="integer" null="false" />
+        <field key="gid" dbtype="int" precision="10" phptype="integer" null="false" index="index" />
+        <field key="tag" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />
+
+        <index alias="gid" name="gid" primary="false" unique="true" type="BTREE" >
+            <column key="gid" length="" collation="A" null="false" />
+        </index>
+        <index alias="tag" name="tag" primary="false" unique="true" type="BTREE" >
+            <column key="tag" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="Goods" class="MsGood" local="gid" foreign="gid" cardinality="one" owner="foreign" />
+    </object>
+
+    <object class="MsWarehouse" table="ms_warehouses" extends="xPDOSimpleObject">
+        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />
+        <field key="currency" dbtype="varchar" precision="20" phptype="string" null="false" />
+        <field key="address" dbtype="text" phptype="string" null="false" />
+        <field key="phone" dbtype="varchar" precision="20" phptype="string" null="false" />
+        <field key="email" dbtype="varchar" precision="100" phptype="string" null="false" />
+        <field key="description" dbtype="text" phptype="string" null="false" />
+        <field key="permission" dbtype="varchar" precision="100" phptype="string" null="false" />
+
+        <index alias="name" name="name" primary="false" unique="false" type="BTREE" >
+            <column key="name" length="" collation="A" null="false" />
+        </index>
+
+        <composite alias="Goods" class="MsGood" local="id" foreign="wid" cardinality="many" owner="local" />
+        <composite alias="Orders" class="MsOrder" local="id" foreign="wid" cardinality="many" owner="local" />
+        <composite alias="Galleries" class="MsGallery" local="id" foreign="wid" cardinality="many" owner="local" />
+        <composite alias="Deliveries" class="MsDelivery" local="id" foreign="wid" cardinality="many" owner="local" />
+    </object>
 </model>

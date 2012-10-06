@@ -1,6 +1,6 @@
 <?php
 
-if (!$product = $modx->getObject('ModGoods', array('gid' => $scriptProperties['gid'], 'wid' => $_SESSION['minishop']['warehouse']))) {
+if (!$product = $modx->getObject('MsGood', array('gid' => $scriptProperties['gid'], 'wid' => $_SESSION['minishop']['warehouse']))) {
 	return $modx->error->failure($modx->lexicon('ms.goods.err_nf'));
 }
 
@@ -16,9 +16,9 @@ foreach ($files as $v) {
 		$excluded = $v;
 		continue;
 	}
-	
+
 	$order = $v->get('fileorder');
-	
+
 	if (empty($order)) {
 		$empty[] = $v;
 	}
@@ -42,7 +42,7 @@ for ($i = 0; $i <= $count; $i++) {
 	if ($i == $scriptProperties['new_order'] && ($direction == 'up' || $i == 1 || $scriptProperties['old_order'] == 0)) {
 		$arr[] = $excluded;
 	}
-	
+
 	if (isset($ordered[$i]) && is_object($ordered[$i])) {
 		$arr[] = $ordered[$i];
 	}
@@ -52,7 +52,7 @@ for ($i = 0; $i <= $count; $i++) {
 			$arr[] = $tmp;
 		}
 	}
-	
+
 	if ($i == $scriptProperties['new_order'] && $direction == 'down' && $i != 1 && $scriptProperties['old_order'] != 0) {
 		$arr[] = $excluded;
 	}

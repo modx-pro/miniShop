@@ -14,13 +14,13 @@ $sort = $modx->getOption('sort',$scriptProperties,'id');
 $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 $addall = $modx->getOption('addall',$scriptProperties, 0);
 
-$c = $modx->newQuery('ModStatus');
-$count = $modx->getCount('ModStatus',$c);
+$c = $modx->newQuery('MsStatus');
+$count = $modx->getCount('MsStatus',$c);
 
 $c->sortby($sort,$dir);
 $c->select('id,name');
 if ($isLimit) $c->limit($limit,$start);
-$items = $modx->getCollection('ModStatus',$c);
+$items = $modx->getCollection('MsStatus',$c);
 
 if (!empty($addall)) {
 	$list = array(array('id' => 0, 'name' => $modx->lexicon('ms.combo.all')));

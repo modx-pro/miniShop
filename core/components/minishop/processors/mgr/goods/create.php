@@ -1,7 +1,7 @@
 <?php
 /**
  * Create an Goods
- * 
+ *
  * @package minishop
  * @subpackage processors
  */
@@ -30,7 +30,7 @@ if ($modx->getCount('modResource', $id) > 0) {
 	$wids = array();
 	// If updating resource on all warehouses - get its ids
 	if ($scriptProperties['duplicate']) {
-		$tmp = $modx->getCollection('ModWarehouse');
+		$tmp = $modx->getCollection('MsWarehouse');
 		foreach ($tmp as $v) {
 			$permission = $v->get('permission');
 			if (!empty($permission) && !$modx->hasPermission($permission)) {
@@ -46,7 +46,7 @@ if ($modx->getCount('modResource', $id) > 0) {
 	}
 
 	foreach ($wids as $wid) {
-		$res = $modx->newObject('ModGoods', array('wid' => $wid, 'gid' => $id));
+		$res = $modx->newObject('MsGood', array('wid' => $wid, 'gid' => $id));
 		$res->set('article', $scriptProperties['article']);
 		$res->set('price', $scriptProperties['price']);
 		$res->set('weight', $scriptProperties['weight']);

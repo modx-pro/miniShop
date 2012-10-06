@@ -18,8 +18,8 @@ $resource = $modx->getOption('gid', $scriptProperties, 0);
 
 if (empty($resource)) {return $modx->error->faulure($modx->lexicon('ms.goods.err_ns'));}
 
-$c = $modx->newQuery('ModKits', array('rid' => $resource));
-$c->leftJoin('modResource', 'modResource', array("modResource.id = ModKits.gid"));
+$c = $modx->newQuery('MsKit', array('rid' => $resource));
+$c->leftJoin('modResource', 'modResource', array("modResource.id = MsKit.gid"));
 // Filtering by search query
 /*
 if (!empty($query)) {
@@ -27,11 +27,11 @@ if (!empty($query)) {
 }
 */
 
-$count = $modx->getCount('ModKits',$c);
+$count = $modx->getCount('MsKit',$c);
 $c->sortby($sort,$dir);
 
 if ($isLimit) {$c->limit($limit,$start);}
-$kits = $modx->getCollection('ModKits', $c);
+$kits = $modx->getCollection('MsKit', $c);
 
 $arr = array();
 foreach ($kits as $v) {
@@ -51,7 +51,7 @@ foreach ($kits as $v) {
 		,'-'
 		,array('text' => $modx->lexicon('delete'), 'handler' => 'this.removeItem')
 	);
-	
+
 	$arr[] = array_merge($tmp, $res);
 }
 return $this->outputArray($arr, $count);
