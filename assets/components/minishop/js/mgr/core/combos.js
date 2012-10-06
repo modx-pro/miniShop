@@ -29,7 +29,7 @@ miniShop.combo.status = function(config) {
         ,value: miniShop.config.status
         ,emptyText: _('ms.combo.select')
         ,baseParams: {
-            action: 'mgr/status/getcombo'
+            action: 'mgr/status/getList'
         }
     });
     miniShop.combo.status.superclass.constructor.call(this, config);
