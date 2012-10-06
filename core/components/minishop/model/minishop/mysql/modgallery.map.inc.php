@@ -1,10 +1,10 @@
 <?php
-$xpdo_meta_map['ModGallery']= array (
+$xpdo_meta_map['MsGallery']= array (
   'package' => 'minishop',
   'version' => '1.1',
   'table' => 'ms_modGallery',
   'extends' => 'xPDOSimpleObject',
-  'fields' => 
+  'fields' =>
   array (
     'wid' => NULL,
     'gid' => NULL,
@@ -13,9 +13,9 @@ $xpdo_meta_map['ModGallery']= array (
     'file' => NULL,
     'fileorder' => 0,
   ),
-  'fieldMeta' => 
+  'fieldMeta' =>
   array (
-    'wid' => 
+    'wid' =>
     array (
       'dbtype' => 'int',
       'precision' => '11',
@@ -23,34 +23,34 @@ $xpdo_meta_map['ModGallery']= array (
       'null' => false,
       'index' => 'index',
     ),
-    'gid' => 
+    'gid' =>
     array (
       'dbtype' => 'int',
       'precision' => '11',
       'phptype' => 'integer',
       'null' => false,
     ),
-    'name' => 
+    'name' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '255',
       'phptype' => 'string',
       'null' => false,
     ),
-    'description' => 
+    'description' =>
     array (
       'dbtype' => 'text',
       'phptype' => 'string',
       'null' => false,
     ),
-    'file' => 
+    'file' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '255',
       'phptype' => 'string',
       'null' => false,
     ),
-    'fileorder' => 
+    'fileorder' =>
     array (
       'dbtype' => 'int',
       'precision' => '10',
@@ -59,29 +59,29 @@ $xpdo_meta_map['ModGallery']= array (
       'default' => 0,
     ),
   ),
-  'indexes' => 
+  'indexes' =>
   array (
-    'wid' => 
+    'wid' =>
     array (
       'alias' => 'wid',
       'primary' => false,
       'unique' => true,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'wid' => 
+        'wid' =>
         array (
           'length' => '',
           'collation' => 'A',
           'null' => false,
         ),
-        'gid' => 
+        'gid' =>
         array (
           'length' => '',
           'collation' => 'A',
           'null' => false,
         ),
-        'file' => 
+        'file' =>
         array (
           'length' => '',
           'collation' => 'A',

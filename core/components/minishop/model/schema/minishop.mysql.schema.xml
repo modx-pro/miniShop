@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model package="minishop" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" version="1.1">
-    <object class="ModAddress" table="ms_modAddress" extends="xPDOSimpleObject">
+    <object class="MsAddress" table="ms_addresses" extends="xPDOSimpleObject">
         <field key="uid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
         <field key="receiver" dbtype="varchar" precision="255" phptype="string" null="false" />
         <field key="phone" dbtype="varchar" precision="20" phptype="string" null="false" />
@@ -21,7 +21,7 @@
         <aggregate alias="User" class="modUser" local="uid" foreign="id" cardinality="one" owner="foreign"/>
     </object>
 
-    <object class="ModCategories" table="ms_modCategories" extends="xPDOSimpleObject">
+    <object class="MsCategory" table="ms_categories" extends="xPDOSimpleObject">
         <field key="gid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
         <field key="cid" dbtype="int" precision="11" phptype="integer" null="false" />
 
@@ -34,7 +34,7 @@
         <aggregate alias="Category" class="modResource" local="cid" foreign="id" cardinality="one" owner="foreign"/>
     </object>
 
-    <object class="ModDelivery" table="ms_modDelivery" extends="xPDOSimpleObject">
+    <object class="MsDelivery" table="ms_deliveries" extends="xPDOSimpleObject">
         <field key="wid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
         <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
         <field key="description" dbtype="text" phptype="string" null="false" />
@@ -51,10 +51,10 @@
             <column key="payments" length="" collation="A" null="false" />
         </index>
 
-        <aggregate alias="Warehouse" class="ModWarehouse" local="wid" foreign="id" cardinality="one" owner="foreign"/>
+        <aggregate alias="Warehouse" class="MsWarehouse" local="wid" foreign="id" cardinality="one" owner="foreign"/>
     </object>
 
-    <object class="ModGallery" table="ms_modGallery" extends="xPDOSimpleObject">
+    <object class="MsGallery" table="ms_galleries" extends="xPDOSimpleObject">
         <field key="wid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
         <field key="gid" dbtype="int" precision="11" phptype="integer" null="false" />
         <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
@@ -68,11 +68,11 @@
             <column key="file" length="" collation="A" null="false" />
         </index>
 
-        <aggregate alias="Warehouse" class="ModWarehouse" local="wid" foreign="id" cardinality="one" owner="foreign"/>
-        <aggregate alias="Good" class="ModGoods" local="gid" foreign="id" cardinality="one" owner="foreign"/>
+        <aggregate alias="Warehouse" class="MsWarehouse" local="wid" foreign="id" cardinality="one" owner="foreign"/>
+        <aggregate alias="Good" class="MsGood" local="gid" foreign="id" cardinality="one" owner="foreign"/>
     </object>
 
-    <object class="ModGoods" table="ms_modGoods" extends="xPDOSimpleObject">
+    <object class="MsGood" table="ms_goods" extends="xPDOSimpleObject">
         <field key="wid" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
         <field key="gid" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
         <field key="article" dbtype="varchar" precision="50" phptype="string" null="false" default="0" />
@@ -90,11 +90,11 @@
             <column key="gid" length="" collation="A" null="false" />
         </index>
 
-        <aggregate alias="Warehouse" class="ModWarehouse" local="wid" foreign="id" cardinality="one" owner="foreign"/>
-        <aggregate alias="Good" class="ModGoods" local="gid" foreign="id" cardinality="one" owner="foreign"/>
+        <aggregate alias="Warehouse" class="MsWarehouse" local="wid" foreign="id" cardinality="one" owner="foreign"/>
+        <aggregate alias="Good" class="MsGood" local="gid" foreign="id" cardinality="one" owner="foreign"/>
     </object>
 
-    <object class="ModKits" table="ms_modKits" extends="xPDOSimpleObject">
+    <object class="MsKit" table="ms_kits" extends="xPDOSimpleObject">
         <field key="rid" dbtype="int" precision="10" phptype="integer" null="false" index="index" />
         <field key="gid" dbtype="int" precision="10" phptype="integer" null="false" />
 
@@ -104,10 +104,10 @@
         </index>
 
         <aggregate alias="Resource" class="modResource" local="rid" foreign="id" cardinality="one" owner="foreign"/>
-        <aggregate alias="Good" class="ModGoods" local="gid" foreign="id" cardinality="one" owner="foreign"/>
+        <aggregate alias="Good" class="MsGood" local="gid" foreign="id" cardinality="one" owner="foreign"/>
     </object>
 
-    <object class="ModLog" table="ms_modLog" extends="xPDOSimpleObject">
+    <object class="MsLog" table="ms_logs" extends="xPDOSimpleObject">
         <field key="type" dbtype="varchar" precision="50" phptype="string" null="false" index="index" />
         <field key="oid" dbtype="int" precision="11" phptype="integer" null="false" />
         <field key="iid" dbtype="int" precision="11" phptype="integer" null="false" />
@@ -127,11 +127,11 @@
             <column key="oid" length="" collation="A" null="false" />
         </index>
 
-        <aggregate alias="Order" class="ModOrders" local="oid" foreign="id" cardinality="one" owner="foreign"/>
+        <aggregate alias="Order" class="MsOrder" local="oid" foreign="id" cardinality="one" owner="foreign"/>
         <aggregate alias="User" class="modUser" local="uid" foreign="id" cardinality="one" owner="foreign"/>
     </object>
 
-    <object class="ModOrderedGoods" table="ms_modOrderedGoods" extends="xPDOSimpleObject">
+    <object class="MsOrderedGood" table="ms_ordered_goods" extends="xPDOSimpleObject">
         <field key="gid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
         <field key="oid" dbtype="int" precision="11" phptype="integer" null="false" />
         <field key="num" dbtype="int" precision="11" phptype="integer" null="false" default="1" />
@@ -146,7 +146,7 @@
         </index>
     </object>
 
-    <object class="ModOrders" table="ms_modOrders" extends="xPDOSimpleObject">
+    <object class="MsOrder" table="ms_orders" extends="xPDOSimpleObject">
         <field key="uid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
         <field key="num" dbtype="varchar" precision="20" phptype="string" null="false" />
         <field key="wid" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
@@ -171,11 +171,11 @@
         </index>
 
         <aggregate alias="User" class="modUser" local="uid" foreign="id" cardinality="one" owner="foreign"/>
-        <aggregate alias="Warehouse" class="ModWarehouse" local="wid" foreign="id" cardinality="one" owner="foreign"/>
-        <aggregate alias="Status" class="ModStatus" local="status" foreign="id" cardinality="one" owner="foreign"/>
+        <aggregate alias="Warehouse" class="MsWarehouse" local="wid" foreign="id" cardinality="one" owner="foreign"/>
+        <aggregate alias="Status" class="MsStatus" local="status" foreign="id" cardinality="one" owner="foreign"/>
     </object>
 
-    <object class="ModPayment" table="ms_modPayment" extends="xPDOSimpleObject">
+    <object class="MsPayment" table="ms_payments" extends="xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
         <field key="description" dbtype="text" phptype="string" null="true" />
         <field key="snippet" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
@@ -183,7 +183,7 @@
         <aggregate alias="Snippet" class="modSnippet" local="snippet" foreign="id" cardinality="one" owner="foreign"/>
     </object>
 
-    <object class="ModStatus" table="ms_modStatus" extends="xPDOSimpleObject">
+    <object class="MsStatus" table="ms_status" extends="xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />
         <field key="color" dbtype="char" precision="6" phptype="string" null="false" default="000000" />
         <field key="email2user" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" />
@@ -198,7 +198,7 @@
         </index>
     </object>
 
-    <object class="ModTags" table="ms_modTags" extends="xPDOSimpleObject">
+    <object class="MsTag" table="ms_tags" extends="xPDOSimpleObject">
         <field key="rid" dbtype="int" precision="10" phptype="integer" null="false" />
         <field key="gid" dbtype="int" precision="10" phptype="integer" null="false" index="index" />
         <field key="tag" dbtype="varchar" precision="255" phptype="string" null="false" />
@@ -209,7 +209,7 @@
         </index>
     </object>
 
-    <object class="ModWarehouse" table="ms_modWarehouse" extends="xPDOSimpleObject">
+    <object class="MsWarehouse" table="ms_warehouses" extends="xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />
         <field key="currency" dbtype="varchar" precision="20" phptype="string" null="false" />
         <field key="address" dbtype="text" phptype="string" null="false" />
@@ -222,9 +222,9 @@
             <column key="name" length="" collation="A" null="false" />
         </index>
 
-        <composite alias="Goods" class="ModGoods" local="id" foreign="wid" cardinality="many" owner="local" />
-        <composite alias="Orders" class="ModOrders" local="id" foreign="wid" cardinality="many" owner="local" />
-        <composite alias="Galleries" class="ModGallery" local="id" foreign="wid" cardinality="many" owner="local" />
-        <composite alias="Deliveries" class="ModDelivery" local="id" foreign="wid" cardinality="many" owner="local" />
+        <composite alias="Goods" class="MsGood" local="id" foreign="wid" cardinality="many" owner="local" />
+        <composite alias="Orders" class="MsOrder" local="id" foreign="wid" cardinality="many" owner="local" />
+        <composite alias="Galleries" class="MsGallery" local="id" foreign="wid" cardinality="many" owner="local" />
+        <composite alias="Deliveries" class="MsDelivery" local="id" foreign="wid" cardinality="many" owner="local" />
     </object>
 </model>

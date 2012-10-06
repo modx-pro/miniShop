@@ -1,2 +1,2 @@
 <?php
-class ModTags extends xPDOSimpleObject {}
+class MsTag extends xPDOSimpleObject {}

@@ -30,7 +30,7 @@ foreach ($scriptProperties as $k => $v) {
 // Loading miniShop class for its methods
 $miniShop = new miniShop($modx);
 
-if ($res = $modx->getObject('ModOrders', $id)) {
+if ($res = $modx->getObject('MsOrder', $id)) {
     $oldstatus = $res->get('status');
     $olddelivery = $res->get('delivery');
     $oldpayment = $res->get('payment');
@@ -38,7 +38,7 @@ if ($res = $modx->getObject('ModOrders', $id)) {
 
     // Changing warehouse
     if ($delivery > 0 && $warehouse != $oldwarehouse) {
-        if ($tmp = $modx->getObject('ModWarehouse', $warehouse)) {
+        if ($tmp = $modx->getObject('MsWarehouse', $warehouse)) {
             $deliveries = $tmp->getDeliveries();
             if ($delivery > 0 && !in_array($delivery, $deliveries)) {
                 return $modx->error->failure($modx->lexicon('ms.delivery.err_save'));
@@ -55,7 +55,7 @@ if ($res = $modx->getObject('ModOrders', $id)) {
     }
     // Changing delivery method and check of payment method for this delivery
     if ($delivery > 0) {
-        if ($tmp = $modx->getObject('ModDelivery', $delivery)) {
+        if ($tmp = $modx->getObject('MsDelivery', $delivery)) {
             $payments = $tmp->getPayments();
             if (!in_array($payment, $payments) && $payment != 0) {
                 return $modx->error->failure($modx->lexicon('ms.payment.err_save'));
@@ -84,7 +84,7 @@ if ($res = $modx->getObject('ModOrders', $id)) {
         $modx->invokeEvent('msOnOrderUpdate', array('order' => $res));
     }
 
-    if ($address = $modx->getObject('ModAddress', $addr['id'])) {
+    if ($address = $modx->getObject('MsAddress', $addr['id'])) {
         $address->fromArray($addr);
         $address->save();
     }
@@ -99,9 +99,9 @@ else {
 
 return $modx->error->success('', $res);
 
-//class ModOrdersUpdateProcessor extends modObjectUpdateProcessor {
-//    public $classKey = 'ModOrders';
+//class MsOrderUpdateProcessor extends modObjectUpdateProcessor {
+//    public $classKey = 'MsOrder';
 //    public $languageTopics = array('minishop:default');
 //    public $objectType = 'minishop.modorders';
 //}
-//return 'ModOrdersUpdateProcessor';
+//return 'MsOrderUpdateProcessor';

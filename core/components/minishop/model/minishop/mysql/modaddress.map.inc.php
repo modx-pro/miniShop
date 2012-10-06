@@ -1,10 +1,10 @@
 <?php
-$xpdo_meta_map['ModAddress']= array (
+$xpdo_meta_map['MsAddress']= array (
   'package' => 'minishop',
   'version' => '1.1',
   'table' => 'ms_modAddress',
   'extends' => 'xPDOSimpleObject',
-  'fields' => 
+  'fields' =>
   array (
     'uid' => NULL,
     'receiver' => NULL,
@@ -19,9 +19,9 @@ $xpdo_meta_map['ModAddress']= array (
     'room' => NULL,
     'comment' => NULL,
   ),
-  'fieldMeta' => 
+  'fieldMeta' =>
   array (
-    'uid' => 
+    'uid' =>
     array (
       'dbtype' => 'int',
       'precision' => '11',
@@ -29,94 +29,94 @@ $xpdo_meta_map['ModAddress']= array (
       'null' => false,
       'index' => 'index',
     ),
-    'receiver' => 
+    'receiver' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '255',
       'phptype' => 'string',
       'null' => false,
     ),
-    'phone' => 
+    'phone' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '20',
       'phptype' => 'string',
       'null' => false,
     ),
-    'country' => 
+    'country' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '100',
       'phptype' => 'string',
       'null' => false,
     ),
-    'index' => 
+    'index' =>
     array (
       'dbtype' => 'int',
       'precision' => '11',
       'phptype' => 'integer',
       'null' => false,
     ),
-    'region' => 
+    'region' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '100',
       'phptype' => 'string',
       'null' => false,
     ),
-    'city' => 
+    'city' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '100',
       'phptype' => 'string',
       'null' => false,
     ),
-    'metro' => 
+    'metro' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '255',
       'phptype' => 'string',
       'null' => false,
     ),
-    'street' => 
+    'street' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '255',
       'phptype' => 'string',
       'null' => false,
     ),
-    'building' => 
+    'building' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '10',
       'phptype' => 'string',
       'null' => false,
     ),
-    'room' => 
+    'room' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '10',
       'phptype' => 'string',
       'null' => false,
     ),
-    'comment' => 
+    'comment' =>
     array (
       'dbtype' => 'text',
       'phptype' => 'string',
       'null' => false,
     ),
   ),
-  'indexes' => 
+  'indexes' =>
   array (
-    'uid' => 
+    'uid' =>
     array (
       'alias' => 'uid',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'uid' => 
+        'uid' =>
         array (
           'length' => '',
           'collation' => 'A',

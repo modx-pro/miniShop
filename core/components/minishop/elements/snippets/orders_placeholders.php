@@ -12,7 +12,7 @@ $ms = $modx->getService('minishop','miniShop', $modx->getOption('minishop.core_p
 if (!($ms instanceof miniShop)) return '';
 
 // Placeholders of order
-if ($order = $modx->getObject('ModOrders', $oid)) {
+if ($order = $modx->getObject('MsOrder', $oid)) {
     $tmp = $order->toArray();
     $tmp['delivery_name'] = $order->getDeliveryName();
     $tmp['payment_name'] = $order->getPaymentName();
@@ -20,13 +20,13 @@ if ($order = $modx->getObject('ModOrders', $oid)) {
     $modx->setPlaceholders($tmp,'order.');
 }
 // Placeholders of address
-if ($address = $modx->getObject('ModAddress', $order->get('address'))) {
+if ($address = $modx->getObject('MsAddress', $order->get('address'))) {
     $tmp = $address->toArray();
     $modx->setPlaceholders($tmp,'addr.');
 }
 
 // Placeholders of warehouse
-if ($warehouse = $modx->getObject('ModWarehouse', $order->get('wid'))) {
+if ($warehouse = $modx->getObject('MsWarehouse', $order->get('wid'))) {
     $tmp = $warehouse->toArray();
     $modx->setPlaceholders($tmp,'wh.');
 }
@@ -41,8 +41,8 @@ if ($user = $modx->getObject('modUserProfile', $order->get('uid'))) {
 $arr = array();
 $arr['rows'] = '';
 $arr['count'] = $arr['total'] = 0;
-$cart = $modx->getCollection('ModOrderedGoods', array('oid' => $order->get('id')));
-/** @var ModOrderedGoods $v */
+$cart = $modx->getCollection('MsOrderedGood', array('oid' => $order->get('id')));
+/** @var MsOrderedGood $v */
 foreach ($cart as $v) {
     $ordered = $v->toArray();
     unset($ordered['id']);

@@ -1,11 +1,11 @@
 <?php
 /**
  * Duplicate an Goods
- * 
+ *
  * @package minishop
  * @subpackage processors
  */
- 
+
 
 if (!$modx->hasPermission('save')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
 
@@ -40,28 +40,28 @@ if ($response->isError()) {
 $id_old = $scriptProperties['id'];
 $id_new = $response->response['object']['id'];
 
-if ($res_old = $modx->getObject('ModGoods', array('gid' => $id_old, 'wid' => $_SESSION['minishop']['warehouse']))) {
+if ($res_old = $modx->getObject('MsGood', array('gid' => $id_old, 'wid' => $_SESSION['minishop']['warehouse']))) {
 	$tmp = $res_old->toArray();
 	$tags = $res_old->getTags();
 	unset($tmp['id']);
 	$tmp['gid'] = $id_new;
 
-	$res_new = $modx->newObject('ModGoods');
+	$res_new = $modx->newObject('MsGood');
 	$res_new->fromArray($tmp);
 	if (!$res_new->save()) {
 		return $modx->error->failure('ms.goods.err_save');
 	}
-	
-	$res = $modx->getIterator('ModCategories', array('gid' => $id_old));
+
+	$res = $modx->getIterator('MsCategory', array('gid' => $id_old));
 	foreach ($res as $v) {
 		$cid = $v->get('cid');
-		$tmp = $modx->newObject('ModCategories', array('gid' => $id_new, 'cid' => $cid));
+		$tmp = $modx->newObject('MsCategory', array('gid' => $id_new, 'cid' => $cid));
 		$tmp->save();
 	}
 
-	$res = $modx->getIterator('ModGallery', array('gid' => $id_old, 'wid' => $_SESSION['minishop']['warehouse']));
+	$res = $modx->getIterator('MsGallery', array('gid' => $id_old, 'wid' => $_SESSION['minishop']['warehouse']));
 	foreach ($res as $v) {
-		$tmp = $modx->newObject('ModGallery');
+		$tmp = $modx->newObject('MsGallery');
 		$tmp->fromArray($v->toArray());
 		$tmp->set('id', 0);
 		$tmp->set('gid', $id_new);

@@ -1,25 +1,25 @@
 <?php
-$xpdo_meta_map['ModTags']= array (
+$xpdo_meta_map['MsTag']= array (
   'package' => 'minishop',
   'version' => '1.1',
   'table' => 'ms_modTags',
   'extends' => 'xPDOSimpleObject',
-  'fields' => 
+  'fields' =>
   array (
     'rid' => NULL,
     'gid' => NULL,
     'tag' => NULL,
   ),
-  'fieldMeta' => 
+  'fieldMeta' =>
   array (
-    'rid' => 
+    'rid' =>
     array (
       'dbtype' => 'int',
       'precision' => '10',
       'phptype' => 'integer',
       'null' => false,
     ),
-    'gid' => 
+    'gid' =>
     array (
       'dbtype' => 'int',
       'precision' => '10',
@@ -27,7 +27,7 @@ $xpdo_meta_map['ModTags']= array (
       'null' => false,
       'index' => 'index',
     ),
-    'tag' => 
+    'tag' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '255',
@@ -35,23 +35,23 @@ $xpdo_meta_map['ModTags']= array (
       'null' => false,
     ),
   ),
-  'indexes' => 
+  'indexes' =>
   array (
-    'gid' => 
+    'gid' =>
     array (
       'alias' => 'gid',
       'primary' => false,
       'unique' => true,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'gid' => 
+        'gid' =>
         array (
           'length' => '',
           'collation' => 'A',
           'null' => false,
         ),
-        'tag' => 
+        'tag' =>
         array (
           'length' => '',
           'collation' => 'A',

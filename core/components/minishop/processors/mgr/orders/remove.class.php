@@ -8,7 +8,7 @@
 //if (!$modx->hasPermission('remove')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
 //
 //$id = $scriptProperties['id'];
-//if (!$order = $modx->getObject('ModOrders', $id)) {
+//if (!$order = $modx->getObject('MsOrder', $id)) {
 //	return $modx->error->failure($modx->lexicon('ms.orders.err_nf'));
 //}
 //if ($modx->getOption('minishop.enable_remains')) {
@@ -16,8 +16,8 @@
 //}
 //$modx->invokeEvent('msOnBeforeOrderDelete', array('order' => $order));
 //if ($order->remove()) {
-//	$modx->removeCollection('ModOrderedGoods', array('oid' => $id));
-//	$modx->removeCollection('ModLog', array('iid' => $id, 'type' => 'status'));
+//	$modx->removeCollection('MsOrderedGood', array('oid' => $id));
+//	$modx->removeCollection('MsLog', array('iid' => $id, 'type' => 'status'));
 //	$modx->invokeEvent('msOnOrderDelete', array());
 //}
 //else {
@@ -25,8 +25,8 @@
 //}
 //
 //return $modx->error->success('',$order);
-class ModOrdersRemoveProcessor extends modObjectRemoveProcessor {
-    public $classKey = 'ModOrders';
+class MsOrderRemoveProcessor extends modObjectRemoveProcessor {
+    public $classKey = 'MsOrder';
     public $languageTopics = array('minishop:default');
     public $objectType = 'minishop.modorders';
     // @todo : make sure arguments are passed to events
@@ -35,8 +35,8 @@ class ModOrdersRemoveProcessor extends modObjectRemoveProcessor {
 
     public function afterRemove() {
         $id = $this->getProperty('id');
-        $this->modx->removeCollection('ModOrderedGoods', array('oid' => $id));
-        $this->modx->removeCollection('ModLog', array('iid' => $id, 'type' => 'status'));
+        $this->modx->removeCollection('MsOrderedGood', array('oid' => $id));
+        $this->modx->removeCollection('MsLog', array('iid' => $id, 'type' => 'status'));
     }
 }
-return 'ModOrdersRemoveProcessor';
+return 'MsOrderRemoveProcessor';

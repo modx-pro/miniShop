@@ -1,7 +1,7 @@
 <?php
 /**
  * Create an Image record for Goods
- * 
+ *
  * @package minishop
  * @subpackage processors
  */
@@ -16,9 +16,9 @@ if (empty($gid)) {return $modx->error->failure($modx->lexicon('ms.gallery.err_nf
 if (empty($file)) {$modx->error->addField('file',$modx->lexicon('ms.required_field'));}
 if ($modx->error->hasError()) {return $modx->error->failure();}
 
-$order = $modx->getCount('ModGallery', array('gid' => $gid, 'wid' => $_SESSION['minishop']['warehouse']));
+$order = $modx->getCount('MsGallery', array('gid' => $gid, 'wid' => $_SESSION['minishop']['warehouse']));
 
-$res = $modx->newObject('ModGallery');
+$res = $modx->newObject('MsGallery');
 $res->fromArray(array(
 	'gid' => $gid
 	,'wid' => $wid

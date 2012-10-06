@@ -3,7 +3,7 @@
  * -----------------
  * This is modification of getResources 1.4.2pl made for miniShop
  * The difference in
- *   1. Sorting and filtering by ModGoods.
+ *   1. Sorting and filtering by MsGood.
  *   2. Supports multicategories.
  *   3. Loads goods properties (such as price, img, remains etc) in &tpl chunk.
  *
@@ -37,7 +37,7 @@
  *
  * contexts - (Opt) Comma-delimited list of context keys to limit results by; if empty, contexts for all specified
  * parents will be used (all contexts if 0 is specified) [default=]
- * 
+ *
  * depth - (Opt) Integer value indicating depth to search for resources from each parent [default=10]
  *
  * tvFilters - (Opt) Delimited-list of TemplateVar values to filter resources by. Supports two
@@ -226,7 +226,7 @@ $parents = array_merge($parentArray, $children);
 $criteria = array("modResource.parent IN (" . implode(',', $parents) . ")");
 // added by bezumkin 22.02.2012
 if (!empty($incats)) {
-	$criteria[0] .= " OR modResource.id IN (" . implode(',', $incats) . ")"; 
+	$criteria[0] .= " OR modResource.id IN (" . implode(',', $incats) . ")";
 }
 // eof add
 if ($contextSpecified) {
@@ -364,9 +364,9 @@ if (!empty($where)) {
 }
 // add by bezumkin 01.04.2012
 if (!empty($sortbyMS)) {
-	$criteria->leftJoin('ModGoods', 'ModGoods', array(
-		"ModGoods.gid = modResource.id",
-		"ModGoods.wid = ".$_SESSION['minishop']['warehouse']
+	$criteria->leftJoin('MsGood', 'MsGood', array(
+		"MsGood.gid = modResource.id",
+		"MsGood.wid = ".$_SESSION['minishop']['warehouse']
 	));
 	$criteria->sortby($sortbyMS, $sortdir);
 }
@@ -476,20 +476,20 @@ foreach ($collection as $resourceId => $resource) {
                     $value = $templateVar->prepareOutput($value);
                 }
                 $tvs[$tvPrefix . $templateVar->get('name')] = $value;
-								
+
             }
         }
     }
-	
+
 	// bof add by bezumkin 11.02.2012
 	$ms_properties = array();
-	if ($msp = $modx->getObject('ModGoods', array('gid' => $resource->get('id'), 'wid' => $_SESSION['minishop']['warehouse']))) {
+	if ($msp = $modx->getObject('MsGood', array('gid' => $resource->get('id'), 'wid' => $_SESSION['minishop']['warehouse']))) {
 		$ms_properties = $msp->toArray();
 		$ms_properties['price'] = $modx->miniShop->getPrice($resource->get('id'));
 		unset($ms_properties['id']);
 	}
 	// eof add
-	
+
     $odd = ($idx & 1);
     $properties = array_merge(
         $scriptProperties
@@ -503,7 +503,7 @@ foreach ($collection as $resourceId => $resource) {
         ,$tvs
 				,$ms_properties	// added by bezumkin 11.02.2012
     );
-	
+
     $resourceTpl = '';
 		if ($idx == $first && !empty($tplFirst)) {
         $resourceTpl = parseTpl($tplFirst, $properties);
@@ -613,7 +613,7 @@ foreach ($collection as $resourceId => $resource) {
         if (!empty($tplCon)) {
             $resourceTpl = parseTpl($tplCon, $properties);
         }
-    }    
+    }
     if (!empty($tpl) && empty($resourceTpl)) {
         $resourceTpl = parseTpl($tpl, $properties);
     }

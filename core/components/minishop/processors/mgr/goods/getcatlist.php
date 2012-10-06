@@ -42,28 +42,28 @@ if ($tmp = $modx->getObject('modResource', $gid)) {
 $res = $modx->getCollection('modResource',$c);
 $arr = array();
 foreach ($res as $v) {
-	
+
 	if ($v->get('id') == $parent) {continue;} // Excluding main category
-	
+
 	// If it is nested category - adding name of parent
 	if ($tmp2 = $modx->getObject('modResource', array('id' => $v->get('parent'), 'template:IN' => $categories_tpls))) {
 		$pagetitle = $tmp2->get('pagetitle') . ' &rarr; ' . $v->get('pagetitle');
 	}
 	else {$pagetitle = $v->get('pagetitle');}
-	
+
     $tmp = array(
 		'id' => $v->get('id')
 		,'gid' => $gid
 		,'pagetitle' => $pagetitle
 	);
-	
-	if ($tmp2 = $modx->getObject('ModCategories', array('cid' => $v->get('id'), 'gid' => $gid))) {
+
+	if ($tmp2 = $modx->getObject('MsCategory', array('cid' => $v->get('id'), 'gid' => $gid))) {
 		$tmp['enabled'] = 1;
 	}
 	else {
 		$tmp['enabled'] = 0;
 	}
-	
+
 	$arr[]= $tmp;
 }
 return $this->outputArray($arr,$count);

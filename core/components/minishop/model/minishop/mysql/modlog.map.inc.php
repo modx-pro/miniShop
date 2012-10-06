@@ -1,10 +1,10 @@
 <?php
-$xpdo_meta_map['ModLog']= array (
+$xpdo_meta_map['MsLog']= array (
   'package' => 'minishop',
   'version' => '1.1',
   'table' => 'ms_modLog',
   'extends' => 'xPDOSimpleObject',
-  'fields' => 
+  'fields' =>
   array (
     'type' => NULL,
     'oid' => NULL,
@@ -17,9 +17,9 @@ $xpdo_meta_map['ModLog']= array (
     'timestamp' => 'CURRENT_TIMESTAMP',
     'comment' => NULL,
   ),
-  'fieldMeta' => 
+  'fieldMeta' =>
   array (
-    'type' => 
+    'type' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '50',
@@ -27,54 +27,54 @@ $xpdo_meta_map['ModLog']= array (
       'null' => false,
       'index' => 'index',
     ),
-    'oid' => 
+    'oid' =>
     array (
       'dbtype' => 'int',
       'precision' => '11',
       'phptype' => 'integer',
       'null' => false,
     ),
-    'iid' => 
+    'iid' =>
     array (
       'dbtype' => 'int',
       'precision' => '11',
       'phptype' => 'integer',
       'null' => false,
     ),
-    'operation' => 
+    'operation' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '255',
       'phptype' => 'string',
       'null' => false,
     ),
-    'old' => 
+    'old' =>
     array (
       'dbtype' => 'text',
       'phptype' => 'string',
       'null' => false,
     ),
-    'new' => 
+    'new' =>
     array (
       'dbtype' => 'text',
       'phptype' => 'string',
       'null' => false,
     ),
-    'uid' => 
+    'uid' =>
     array (
       'dbtype' => 'int',
       'precision' => '11',
       'phptype' => 'integer',
       'null' => false,
     ),
-    'ip' => 
+    'ip' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '15',
       'phptype' => 'string',
       'null' => false,
     ),
-    'timestamp' => 
+    'timestamp' =>
     array (
       'dbtype' => 'timestamp',
       'phptype' => 'timestamp',
@@ -82,24 +82,24 @@ $xpdo_meta_map['ModLog']= array (
       'default' => 'CURRENT_TIMESTAMP',
       'index' => 'index',
     ),
-    'comment' => 
+    'comment' =>
     array (
       'dbtype' => 'text',
       'phptype' => 'string',
       'null' => true,
     ),
   ),
-  'indexes' => 
+  'indexes' =>
   array (
-    'timestamp' => 
+    'timestamp' =>
     array (
       'alias' => 'timestamp',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'timestamp' => 
+        'timestamp' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -107,21 +107,21 @@ $xpdo_meta_map['ModLog']= array (
         ),
       ),
     ),
-    'type' => 
+    'type' =>
     array (
       'alias' => 'type',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'type' => 
+        'type' =>
         array (
           'length' => '',
           'collation' => 'A',
           'null' => false,
         ),
-        'oid' => 
+        'oid' =>
         array (
           'length' => '',
           'collation' => 'A',

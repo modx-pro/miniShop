@@ -5,9 +5,9 @@
  * @package minishop
  * @subpackage processors
  */
-class ModPaymentCreateProcessor extends modObjectCreateProcessor {
-    public $classKey = 'ModPayment';
+class MsPaymentCreateProcessor extends modObjectCreateProcessor {
+    public $classKey = 'MsPayment';
     public $languageTopics = array('minishop:default');
     public $objectType = 'minishop.modpayment';
 }
-return 'ModPaymentCreateProcessor';
+return 'MsPaymentCreateProcessor';

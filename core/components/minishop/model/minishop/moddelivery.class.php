@@ -1,9 +1,9 @@
 <?php
-class ModDelivery extends xPDOSimpleObject {
-	
+class MsDelivery extends xPDOSimpleObject {
+
 	function getPayments() {
 		$tmp = $this->get('payments');
-		
+
 		if ($res = json_decode($tmp, true)) {
 			return $res;
 		}
@@ -11,5 +11,5 @@ class ModDelivery extends xPDOSimpleObject {
 			return array();
 		}
 	}
-	
+
 }

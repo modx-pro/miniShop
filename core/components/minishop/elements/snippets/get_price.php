@@ -12,7 +12,7 @@ if (!($ms instanceof miniShop)) return '';
 $id = $resource->get('id');
 
 // Getting properties of product
-if (!$res = $modx->getObject('ModGoods', array('gid' => $id, 'wid' => $_SESSION['minishop']['warehouse']))) {return 0;}
+if (!$res = $modx->getObject('MsGood', array('gid' => $id, 'wid' => $_SESSION['minishop']['warehouse']))) {return 0;}
 
 // Retrieving price
 $price = $res->get('price');

@@ -5,10 +5,10 @@
  * @package minishop
  * @subpackage processors
  */
-class ModOrdersGetProcessor extends modObjectGetProcessor {
-    /** @var ModOrders */
+class MsOrderGetProcessor extends modObjectGetProcessor {
+    /** @var MsOrder */
     public $object;
-    public $classKey = 'ModOrders';
+    public $classKey = 'MsOrder';
     public $languageTopics = array('minishop:default');
     public $objectType = 'minishop.modorders';
 
@@ -28,4 +28,4 @@ class ModOrdersGetProcessor extends modObjectGetProcessor {
         return $this->success('', $objectArray);
     }
 }
-return 'ModOrdersGetProcessor';
+return 'MsOrderGetProcessor';

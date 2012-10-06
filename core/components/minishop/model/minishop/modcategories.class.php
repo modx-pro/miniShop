@@ -1,2 +1,2 @@
 <?php
-class ModCategories extends xPDOSimpleObject {}
+class MsCategory extends xPDOSimpleObject {}

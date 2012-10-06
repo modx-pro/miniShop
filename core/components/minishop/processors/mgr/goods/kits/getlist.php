@@ -49,9 +49,9 @@ foreach ($kits as $v) {
 		,'hidemenu' => $v->get('hidemenu')
 	);
 	$tmp['url'] = $this->modx->makeUrl($v->get('id'), '', '', 'full');
-	
+
 	// Resources in kit
-	$q = $modx->newQuery('ModKits', array('rid' => $v->get('id')));
+	$q = $modx->newQuery('MsKit', array('rid' => $v->get('id')));
 	$q->select('gid');
 	if ($q->prepare() && $q->stmt->execute()) {
 		$ids = $q->stmt->fetchAll(PDO::FETCH_COLUMN, 0);
@@ -64,7 +64,7 @@ foreach ($kits as $v) {
 			}
 		}
 	}
-	
+
 	//Menu
 	$tmp['menu'] = array(
 		array('text' => $modx->lexicon('ms.goods.change'), 'handler' => 'this.editKit')

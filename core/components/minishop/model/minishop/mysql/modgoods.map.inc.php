@@ -1,10 +1,10 @@
 <?php
-$xpdo_meta_map['ModGoods']= array (
+$xpdo_meta_map['MsGood']= array (
   'package' => 'minishop',
   'version' => '1.1',
   'table' => 'ms_modGoods',
   'extends' => 'xPDOSimpleObject',
-  'fields' => 
+  'fields' =>
   array (
     'wid' => 0,
     'gid' => 0,
@@ -18,9 +18,9 @@ $xpdo_meta_map['ModGoods']= array (
     'add2' => NULL,
     'add3' => NULL,
   ),
-  'fieldMeta' => 
+  'fieldMeta' =>
   array (
-    'wid' => 
+    'wid' =>
     array (
       'dbtype' => 'int',
       'precision' => '11',
@@ -29,7 +29,7 @@ $xpdo_meta_map['ModGoods']= array (
       'default' => 0,
       'index' => 'index',
     ),
-    'gid' => 
+    'gid' =>
     array (
       'dbtype' => 'int',
       'precision' => '11',
@@ -37,7 +37,7 @@ $xpdo_meta_map['ModGoods']= array (
       'null' => false,
       'default' => 0,
     ),
-    'article' => 
+    'article' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '50',
@@ -45,7 +45,7 @@ $xpdo_meta_map['ModGoods']= array (
       'null' => false,
       'default' => '0',
     ),
-    'price' => 
+    'price' =>
     array (
       'dbtype' => 'float',
       'precision' => '10,2',
@@ -53,7 +53,7 @@ $xpdo_meta_map['ModGoods']= array (
       'null' => false,
       'default' => 0,
     ),
-    'weight' => 
+    'weight' =>
     array (
       'dbtype' => 'float',
       'precision' => '10,3',
@@ -61,13 +61,13 @@ $xpdo_meta_map['ModGoods']= array (
       'null' => false,
       'default' => 0,
     ),
-    'img' => 
+    'img' =>
     array (
       'dbtype' => 'text',
       'phptype' => 'string',
       'null' => false,
     ),
-    'remains' => 
+    'remains' =>
     array (
       'dbtype' => 'int',
       'precision' => '11',
@@ -75,7 +75,7 @@ $xpdo_meta_map['ModGoods']= array (
       'null' => false,
       'default' => 0,
     ),
-    'reserved' => 
+    'reserved' =>
     array (
       'dbtype' => 'int',
       'precision' => '11',
@@ -83,44 +83,44 @@ $xpdo_meta_map['ModGoods']= array (
       'null' => false,
       'default' => 0,
     ),
-    'add1' => 
+    'add1' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '255',
       'phptype' => 'string',
       'null' => false,
     ),
-    'add2' => 
+    'add2' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '255',
       'phptype' => 'string',
       'null' => false,
     ),
-    'add3' => 
+    'add3' =>
     array (
       'dbtype' => 'text',
       'phptype' => 'string',
       'null' => false,
     ),
   ),
-  'indexes' => 
+  'indexes' =>
   array (
-    'wid' => 
+    'wid' =>
     array (
       'alias' => 'wid',
       'primary' => false,
       'unique' => true,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'wid' => 
+        'wid' =>
         array (
           'length' => '',
           'collation' => 'A',
           'null' => false,
         ),
-        'gid' => 
+        'gid' =>
         array (
           'length' => '',
           'collation' => 'A',

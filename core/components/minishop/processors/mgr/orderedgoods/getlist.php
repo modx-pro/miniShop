@@ -16,13 +16,13 @@ $oid = $modx->getOption('oid',$scriptProperties, 0);
 
 $query = $modx->getOption('query',$scriptProperties, 0);
 
-$c = $modx->newQuery('ModOrderedGoods');
+$c = $modx->newQuery('MsOrderedGood');
 $c->where(array('oid' => $oid));
-$count = $modx->getCount('ModOrderedGoods',$c);
+$count = $modx->getCount('MsOrderedGood',$c);
 
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit, $start);
-$orders = $modx->getCollection('ModOrderedGoods',$c);
+$orders = $modx->getCollection('MsOrderedGood',$c);
 
 $arr = array();
 foreach ($orders as $v) {
@@ -50,8 +50,8 @@ foreach ($orders as $v) {
 }
 return $this->outputArray($arr, $count);
 
-//class ModOrderedGoodsGetListProcessor extends modObjectGetListProcessor {
-//    public $classKey = 'ModOrderedGoods';
+//class MsOrderedGoodGetListProcessor extends modObjectGetListProcessor {
+//    public $classKey = 'MsOrderedGood';
 //    public $defaultSortField = 'id';
 //    public $defaultSortDirection = 'ASC';
 //    public $languageTopics = array('minishop:default');
@@ -66,11 +66,11 @@ return $this->outputArray($arr, $count);
 //        return $c;
 //    }
 //
-//    public function prepareRow(ModOrderedGoods $object) {
+//    public function prepareRow(MsOrderedGood $object) {
 //        $objectArray = $object->toArray();
 //        $objectArray['name'] = $object->getGoodsName();
 //        $objectArray['url'] = $this->modx->makeUrl($objectArray['gid'], '', '', 'full');
-//        /** @var ModGoods $product */
+//        /** @var MsGood $product */
 //        $product = $object->getGoodsParams();
 //        if ($product) {
 //            $objectArray['article'] = $product->get('article');
@@ -81,4 +81,4 @@ return $this->outputArray($arr, $count);
 //        return $objectArray;
 //    }
 //}
-//return 'ModOrderedGoodsGetListProcessor';
+//return 'MsOrderedGoodGetListProcessor';

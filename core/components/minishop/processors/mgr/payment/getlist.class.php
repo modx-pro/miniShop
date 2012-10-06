@@ -5,8 +5,8 @@
  * @package minishop
  * @subpackage processors
  */
-class ModPaymentGetListProcessor extends modObjectGetListProcessor {
-    public $classKey = 'ModPayment';
+class MsPaymentGetListProcessor extends modObjectGetListProcessor {
+    public $classKey = 'MsPayment';
     public $defaultSortField = 'id';
     public $defaultSortDirection = 'ASC';
     public $languageTopics = array('minishop:default');
@@ -38,4 +38,4 @@ class ModPaymentGetListProcessor extends modObjectGetListProcessor {
         return $objectArray;
     }
 }
-return 'ModPaymentGetListProcessor';
+return 'MsPaymentGetListProcessor';

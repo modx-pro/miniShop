@@ -1,7 +1,7 @@
 <?php
 /**
  * Get an Order
- * 
+ *
  * @package minishop
  * @subpackage processors
  */
@@ -12,7 +12,7 @@ if (empty($id)) {
 	return $modx->error->failure($modx->lexicon('ms.order_err_ns'));
 }
 
-if ($res = $modx->getObject('ModOrders', $id)) {
+if ($res = $modx->getObject('MsOrder', $id)) {
 	$arr = array();
 	$arr['num'] =  $res->get('num');
 	$arr['sum'] = $res->get('sum') + $res->getDeliveryPrice();

@@ -1,5 +1,5 @@
 <?php
-class ModOrders extends xPDOSimpleObject {
+class MsOrder extends xPDOSimpleObject {
 
 	function getUserName() {
 		if ($res = $this->xpdo->getObject('modUser', $this->get('uid'))) {
@@ -20,25 +20,25 @@ class ModOrders extends xPDOSimpleObject {
 	}
 
 	function getStatusName() {
-		if ($res = $this->xpdo->getObject('ModStatus', $this->get('status'))) {
+		if ($res = $this->xpdo->getObject('MsStatus', $this->get('status'))) {
 			return $res->get('name');
 		}
 	}
 
 	function getWarehouseName() {
-		if ($res = $this->xpdo->getObject('ModWarehouse', $this->get('wid'))) {
+		if ($res = $this->xpdo->getObject('MsWarehouse', $this->get('wid'))) {
 			return $res->get('name');
-		}     
+		}
 	}
 
 	function getAddress() {
-		if ($res = $this->xpdo->getObject('ModAddress', $this->get('address'))) {
+		if ($res = $this->xpdo->getObject('MsAddress', $this->get('address'))) {
 			return $res->toArray();
 		}
 	}
 
 	function updateSum() {
-		if ($res = $this->xpdo->getCollection('ModOrderedGoods', array('oid' => $this->get('id')))) {
+		if ($res = $this->xpdo->getCollection('MsOrderedGood', array('oid' => $this->get('id')))) {
 			$sum = 0;
 			foreach ($res as $v) {
 				$sum += $v->get('sum');
@@ -49,7 +49,7 @@ class ModOrders extends xPDOSimpleObject {
 	}
 
 	function updateWeight() {
-		if ($res = $this->xpdo->getCollection('ModOrderedGoods', array('oid' => $this->get('id')))) {
+		if ($res = $this->xpdo->getCollection('MsOrderedGood', array('oid' => $this->get('id')))) {
 			$weight = 0;
 			foreach ($res as $v) {
 				$weight += $v->get('weight');
@@ -58,15 +58,15 @@ class ModOrders extends xPDOSimpleObject {
 			$this->save();
 		}
 	}
-	
+
 	function getDeliveryName() {
-		if ($res = $this->xpdo->getObject('ModDelivery', $this->get('delivery'))) {
+		if ($res = $this->xpdo->getObject('MsDelivery', $this->get('delivery'))) {
 			return $res->get('name');
 		}
 	}
 
 	function getPaymentName() {
-		if ($res = $this->xpdo->getObject('ModPayment', $this->get('payment'))) {
+		if ($res = $this->xpdo->getObject('MsPayment', $this->get('payment'))) {
 			return $res->get('name');
 		}
 	}
@@ -74,7 +74,7 @@ class ModOrders extends xPDOSimpleObject {
 	function getDeliveryPrice() {
 		$weight = $this->get('weight');
 
-		if ($res = $this->xpdo->getObject('ModDelivery', $this->get('delivery'))) {
+		if ($res = $this->xpdo->getObject('MsDelivery', $this->get('delivery'))) {
 			$price = $res->get('price');
 			$add_price = $res->get('add_price');
 
@@ -88,13 +88,13 @@ class ModOrders extends xPDOSimpleObject {
 	function unReserve() {
 		$oid = $this->get('id');
 		$wid = $this->get('wid');
-		
-		$res = $this->xpdo->getIterator('ModOrderedGoods', array('oid' => $oid));
+
+		$res = $this->xpdo->getIterator('MsOrderedGood', array('oid' => $oid));
 		foreach ($res as $v) {
 			$gid = $v->get('gid');
 			$num = $v->get('num');
-			
-			if ($res2 = $this->xpdo->getObject('ModGoods', array('gid' => $gid, 'wid' => $wid))) {
+
+			if ($res2 = $this->xpdo->getObject('MsGood', array('gid' => $gid, 'wid' => $wid))) {
 				$reserved = $res2->get('reserved') - $num;
 				$res2->set('reserved', $reserved);
 				$res2->save();
@@ -106,26 +106,26 @@ class ModOrders extends xPDOSimpleObject {
 		$oid = $this->get('id');
 		$wid = $this->get('wid');
 		$miniShop = new miniShop($this->xpdo);
-		
-		$res = $this->xpdo->getIterator('ModOrderedGoods', array('oid' => $oid));
+
+		$res = $this->xpdo->getIterator('MsOrderedGood', array('oid' => $oid));
 		foreach ($res as $v) {
 			$gid = $v->get('gid');
 			$num = $v->get('num');
-			
-			if ($res2 = $this->xpdo->getObject('ModGoods', array('gid' => $gid, 'wid' => $wid))) {
+
+			if ($res2 = $this->xpdo->getObject('MsGood', array('gid' => $gid, 'wid' => $wid))) {
 				$res2->release($num);
 			}
 		}
 	}
-	
+
 	function getOrderedGoods() {
 		$arr = array();
-		
-		$res = $this->xpdo->getIterator('ModOrderedGoods', array('oid' => $this->get('id')));
+
+		$res = $this->xpdo->getIterator('MsOrderedGood', array('oid' => $this->get('id')));
 		foreach ($res as $v) {
 			$arr[] = $v;
 		}
-		
+
 		return $arr;
 	}
 

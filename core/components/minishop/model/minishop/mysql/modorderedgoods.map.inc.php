@@ -1,10 +1,10 @@
 <?php
-$xpdo_meta_map['ModOrderedGoods']= array (
+$xpdo_meta_map['MsOrderedGood']= array (
   'package' => 'minishop',
   'version' => '1.1',
   'table' => 'ms_modOrderedGoods',
   'extends' => 'xPDOSimpleObject',
-  'fields' => 
+  'fields' =>
   array (
     'gid' => NULL,
     'oid' => NULL,
@@ -14,9 +14,9 @@ $xpdo_meta_map['ModOrderedGoods']= array (
     'sum' => NULL,
     'data' => NULL,
   ),
-  'fieldMeta' => 
+  'fieldMeta' =>
   array (
-    'gid' => 
+    'gid' =>
     array (
       'dbtype' => 'int',
       'precision' => '11',
@@ -24,14 +24,14 @@ $xpdo_meta_map['ModOrderedGoods']= array (
       'null' => false,
       'index' => 'index',
     ),
-    'oid' => 
+    'oid' =>
     array (
       'dbtype' => 'int',
       'precision' => '11',
       'phptype' => 'integer',
       'null' => false,
     ),
-    'num' => 
+    'num' =>
     array (
       'dbtype' => 'int',
       'precision' => '11',
@@ -39,14 +39,14 @@ $xpdo_meta_map['ModOrderedGoods']= array (
       'null' => false,
       'default' => 1,
     ),
-    'price' => 
+    'price' =>
     array (
       'dbtype' => 'float',
       'precision' => '10,2',
       'phptype' => 'float',
       'null' => false,
     ),
-    'weight' => 
+    'weight' =>
     array (
       'dbtype' => 'float',
       'precision' => '10,3',
@@ -54,37 +54,37 @@ $xpdo_meta_map['ModOrderedGoods']= array (
       'null' => false,
       'default' => 0,
     ),
-    'sum' => 
+    'sum' =>
     array (
       'dbtype' => 'float',
       'precision' => '10,2',
       'phptype' => 'float',
       'null' => false,
     ),
-    'data' => 
+    'data' =>
     array (
       'dbtype' => 'text',
       'phptype' => 'string',
       'null' => false,
     ),
   ),
-  'indexes' => 
+  'indexes' =>
   array (
-    'gid' => 
+    'gid' =>
     array (
       'alias' => 'gid',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'gid' => 
+        'gid' =>
         array (
           'length' => '',
           'collation' => 'A',
           'null' => false,
         ),
-        'oid' => 
+        'oid' =>
         array (
           'length' => '',
           'collation' => 'A',

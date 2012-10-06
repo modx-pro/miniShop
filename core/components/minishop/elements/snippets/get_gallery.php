@@ -12,7 +12,7 @@ if (empty($id)) {$id = $modx->resource->id;}
 if (!$modx->getCount('modResource', $id)) {return $modx->lexicon('ms.goods.err_nf');}
 
 $arr = array();
-$q = $modx->newQuery('ModGallery');
+$q = $modx->newQuery('MsGallery');
 $q->andCondition(array('gid' => $id, 'wid' => $_SESSION['minishop']['warehouse']), '', 0);
 if ($onlyImg) {
     $extensions = explode(',',$modx->getOption('upload_images'));
@@ -22,16 +22,16 @@ if ($onlyImg) {
     }
 }
 
-$total = $modx->getCount('ModGallery', $q);
+$total = $modx->getCount('MsGallery', $q);
 $modx->setPlaceholder($totalVar, $total);
 
 $q->sortby($sortby, $sortdir);
 if (!empty($limit)) {$q->limit($limit,$offset);}
-$gallery = $modx->getCollection('ModGallery', $q);
+$gallery = $modx->getCollection('MsGallery', $q);
 
 
 $result = array();
-/** @var ModGallery $v */
+/** @var MsGallery $v */
 foreach ($gallery as $v) {
     $v = $v->toArray();
     if (!$res = $modx->getChunk($tpl, $v)) {

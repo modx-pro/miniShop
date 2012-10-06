@@ -1,10 +1,10 @@
 <?php
-$xpdo_meta_map['ModWarehouse']= array (
+$xpdo_meta_map['MsWarehouse']= array (
   'package' => 'minishop',
   'version' => '1.1',
   'table' => 'ms_modWarehouse',
   'extends' => 'xPDOSimpleObject',
-  'fields' => 
+  'fields' =>
   array (
     'name' => NULL,
     'currency' => NULL,
@@ -14,9 +14,9 @@ $xpdo_meta_map['ModWarehouse']= array (
     'description' => NULL,
     'permission' => NULL,
   ),
-  'fieldMeta' => 
+  'fieldMeta' =>
   array (
-    'name' => 
+    'name' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '255',
@@ -24,40 +24,40 @@ $xpdo_meta_map['ModWarehouse']= array (
       'null' => false,
       'index' => 'index',
     ),
-    'currency' => 
+    'currency' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '20',
       'phptype' => 'string',
       'null' => false,
     ),
-    'address' => 
+    'address' =>
     array (
       'dbtype' => 'text',
       'phptype' => 'string',
       'null' => false,
     ),
-    'phone' => 
+    'phone' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '20',
       'phptype' => 'string',
       'null' => false,
     ),
-    'email' => 
+    'email' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '100',
       'phptype' => 'string',
       'null' => false,
     ),
-    'description' => 
+    'description' =>
     array (
       'dbtype' => 'text',
       'phptype' => 'string',
       'null' => false,
     ),
-    'permission' => 
+    'permission' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '100',
@@ -65,17 +65,17 @@ $xpdo_meta_map['ModWarehouse']= array (
       'null' => false,
     ),
   ),
-  'indexes' => 
+  'indexes' =>
   array (
-    'name' => 
+    'name' =>
     array (
       'alias' => 'name',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'name' => 
+        'name' =>
         array (
           'length' => '',
           'collation' => 'A',

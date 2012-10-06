@@ -1,10 +1,10 @@
 <?php
-$xpdo_meta_map['ModStatus']= array (
+$xpdo_meta_map['MsStatus']= array (
   'package' => 'minishop',
   'version' => '1.1',
   'table' => 'ms_modStatus',
   'extends' => 'xPDOSimpleObject',
-  'fields' => 
+  'fields' =>
   array (
     'name' => NULL,
     'color' => '000000',
@@ -15,9 +15,9 @@ $xpdo_meta_map['ModStatus']= array (
     'body2user' => 0,
     'body2manager' => 0,
   ),
-  'fieldMeta' => 
+  'fieldMeta' =>
   array (
-    'name' => 
+    'name' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '255',
@@ -25,7 +25,7 @@ $xpdo_meta_map['ModStatus']= array (
       'null' => false,
       'index' => 'index',
     ),
-    'color' => 
+    'color' =>
     array (
       'dbtype' => 'char',
       'precision' => '6',
@@ -33,7 +33,7 @@ $xpdo_meta_map['ModStatus']= array (
       'null' => false,
       'default' => '000000',
     ),
-    'email2user' => 
+    'email2user' =>
     array (
       'dbtype' => 'tinyint',
       'precision' => '1',
@@ -41,7 +41,7 @@ $xpdo_meta_map['ModStatus']= array (
       'null' => false,
       'default' => 0,
     ),
-    'email2manager' => 
+    'email2manager' =>
     array (
       'dbtype' => 'tinyint',
       'precision' => '1',
@@ -49,21 +49,21 @@ $xpdo_meta_map['ModStatus']= array (
       'null' => false,
       'default' => 0,
     ),
-    'subject2user' => 
+    'subject2user' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '255',
       'phptype' => 'string',
       'null' => false,
     ),
-    'subject2manager' => 
+    'subject2manager' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '255',
       'phptype' => 'string',
       'null' => false,
     ),
-    'body2user' => 
+    'body2user' =>
     array (
       'dbtype' => 'int',
       'precision' => '10',
@@ -71,7 +71,7 @@ $xpdo_meta_map['ModStatus']= array (
       'null' => true,
       'default' => 0,
     ),
-    'body2manager' => 
+    'body2manager' =>
     array (
       'dbtype' => 'int',
       'precision' => '10',
@@ -80,17 +80,17 @@ $xpdo_meta_map['ModStatus']= array (
       'default' => 0,
     ),
   ),
-  'indexes' => 
+  'indexes' =>
   array (
-    'name' => 
+    'name' =>
     array (
       'alias' => 'name',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'name' => 
+        'name' =>
         array (
           'length' => '',
           'collation' => 'A',

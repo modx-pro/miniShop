@@ -1,2 +1,2 @@
 <?php
-class ModKits extends xPDOSimpleObject {}
+class MsKit extends xPDOSimpleObject {}

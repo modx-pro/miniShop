@@ -112,7 +112,7 @@ class miniShop {
 
 
     /*
-     * Function for logging events in table ModLog
+     * Function for logging events in table MsLog
      *
      * @param string $type			// any type, like warehouse, goods, status etc
      * @param int $oid				// id of the order, which owns the record
@@ -125,7 +125,7 @@ class miniShop {
     function Log($type, $oid, $iid, $operation, $old, $new, $comment = '') {
         if ($old == $new) {return;}
         $uid = empty($this->modx->user->id) ? 1 : $this->modx->user->id;
-        $res = $this->modx->newObject('ModLog');
+        $res = $this->modx->newObject('MsLog');
         $res->set('uid', $uid);
         $res->set('type', $type);
         $res->set('oid', $oid);
@@ -140,15 +140,15 @@ class miniShop {
 
 
     /*
-     * Get array of statuses from ModStatus
+     * Get array of statuses from MsStatus
      * Used for render statuses in manager
      *
      * @returns array $arr
      * */
     function getStatusesArray() {
         $arr = array();
-        if ($tmp = $this->modx->getCollection('ModStatus')) {
-            /** @var ModStatus $v */
+        if ($tmp = $this->modx->getCollection('MsStatus')) {
+            /** @var MsStatus $v */
             foreach ($tmp as $v) {
                 $arr[$v->get('id')] = array('name' => $v->get('name'), 'color' => $v->get('color'));
             }
@@ -160,7 +160,7 @@ class miniShop {
     /*
      * Function returns id of warehouse for this user
      *
-     * @returns int $id					// id of entry in ModWarehouse
+     * @returns int $id					// id of entry in MsWarehouse
      * */
     function getDefaultWarehouse() {
         // If variable exists in $_SESSION - return it
@@ -168,10 +168,10 @@ class miniShop {
             return $_SESSION['minishop']['warehouse'];
         }
         //If no - calculate
-        $q = $this->modx->newQuery('ModWarehouse');
+        $q = $this->modx->newQuery('MsWarehouse');
         $q->sortby('name', 'ASC');
-        $tmp = $this->modx->getCollection('ModWarehouse', $q);
-        /** @var ModWarehouse $v */
+        $tmp = $this->modx->getCollection('MsWarehouse', $q);
+        /** @var MsWarehouse $v */
         foreach ($tmp as $v) {
             // Check required permission for this warehouse
             $permission = $v->get('permission');
@@ -194,7 +194,7 @@ class miniShop {
      * @param string $msg				// key of lexicon entry
      * @param array $data				// any additional data for response
      * @param array $pl					// placeholders for lexicon entry
-     * @returns array $data				// id of entry in ModWarehouse
+     * @returns array $data				// id of entry in MsWarehouse
      * */
     function error($msg, $data = array(), $pl = array()) {
         $data['status'] = 'error';
@@ -210,7 +210,7 @@ class miniShop {
      * @param string $msg				// key of lexicon entry
      * @param array $data				// any additional data for response
      * @param array $pl					// placeholders for lexicon entry
-     * @returns array $data				// id of entry in ModWarehouse
+     * @returns array $data				// id of entry in MsWarehouse
      * */
     function success($msg, $data = array(), $pl = array()) {
         $data['status'] = 'success';
@@ -231,7 +231,7 @@ class miniShop {
         if (!is_array($parents)) {$parents = explode(',', $parents);}
 
         $ids = array();
-        $c = $this->modx->newQuery('ModCategories');
+        $c = $this->modx->newQuery('MsCategory');
         $c->where(array('cid:IN' => $parents));
         $c->select('gid');
         if ($c->prepare() && $c->stmt->execute()) {
@@ -300,7 +300,7 @@ class miniShop {
             else {$price = 0;}
         }
         else {
-            if ($res = $this->modx->getObject('ModGoods', array('gid' => $id, 'wid' => $_SESSION['minishop']['warehouse']))) {
+            if ($res = $this->modx->getObject('MsGood', array('gid' => $id, 'wid' => $_SESSION['minishop']['warehouse']))) {
                 $price = $res->get('price');
             }
             else {$price = 0;}
@@ -324,7 +324,7 @@ class miniShop {
             else {$weight = 0;}
         }
         else {
-            if ($res = $this->modx->getObject('ModGoods', array('gid' => $id, 'wid' => $_SESSION['minishop']['warehouse']))) {
+            if ($res = $this->modx->getObject('MsGood', array('gid' => $id, 'wid' => $_SESSION['minishop']['warehouse']))) {
                 $weight = $res->get('weight');
             }
             else {$weight = 0;}
@@ -351,9 +351,9 @@ class miniShop {
             $tpl = $res->get('template');
             // This is a kit
             if (in_array($tpl, $this->config['ms_kits_tpls']) && !in_array($tpl, $this->config['ms_goods_tpls'])) {
-                $tmp = $this->modx->getCollection('ModKits', array('rid' => $id));
+                $tmp = $this->modx->getCollection('MsKit', array('rid' => $id));
                 $i = 0;
-                /** @var ModKits $v */
+                /** @var MsKit $v */
                 foreach ($tmp as $v) {
                     $response = $this->addToCart($v->get('gid'), 1);
                     if ($response['status'] == 'error') {
@@ -510,7 +510,7 @@ class miniShop {
                 }
 
                 // Main properties of product
-                if ($tmp2 = $this->modx->getObject('ModGoods', array('gid' => $v['id'], 'wid' => $_SESSION['minishop']['warehouse']))) {
+                if ($tmp2 = $this->modx->getObject('MsGood', array('gid' => $v['id'], 'wid' => $_SESSION['minishop']['warehouse']))) {
                     $tmp3 = $tmp2->toArray();
                     unset($tmp3['id']);
                     $tmp = array_merge($tmp, $tmp3);
@@ -543,12 +543,12 @@ class miniShop {
      * @returns string $options				// processed html
      * */
     function getDelivery() {
-        $q = $this->modx->newQuery('ModDelivery');
+        $q = $this->modx->newQuery('MsDelivery');
         $q->where(array('enabled' => 1, 'wid' => $_SESSION['minishop']['warehouse']));
         $q->sortby('id','ASC');
 
-        if ($res = $this->modx->getCollection('ModDelivery', $q)) {
-            /** @var ModDelivery $v */
+        if ($res = $this->modx->getCollection('MsDelivery', $q)) {
+            /** @var MsDelivery $v */
             foreach ($res as $v) {
                 $tmp = $v->toArray();
                 if ($_POST['delivery'] == $tmp['id'] || $_SESSION['minishop']['delivery'] == $tmp['id']) {$tmp['selected'] = 'selected';} else {$tmp['selected'] = '';}
@@ -566,10 +566,10 @@ class miniShop {
      * @returns string $options				// processed html
      * */
     function getPayments() {
-        $q = $this->modx->newQuery('ModPayment');
+        $q = $this->modx->newQuery('MsPayment');
 
         $did = $_SESSION['minishop']['delivery'];
-        if ($delivery = $this->modx->getObject('ModDelivery', $did)) {
+        if ($delivery = $this->modx->getObject('MsDelivery', $did)) {
             $payments = $delivery->getPayments();
             if (count($payments)) {
                 $q->where(array('id:IN' => $payments));
@@ -577,7 +577,7 @@ class miniShop {
         }
         $q->sortby('id','ASC');
 
-        if ($res = $this->modx->getCollection('ModPayment', $q)) {
+        if ($res = $this->modx->getCollection('MsPayment', $q)) {
             foreach ($res as $v) {
                 $tmp = $v->toArray();
                 if ($_POST['payment'] == $tmp['id'] || $_SESSION['minishop']['payment'] == $tmp['id']) {$tmp['selected'] = 'selected';} else {$tmp['selected'] = '';}
@@ -640,7 +640,7 @@ class miniShop {
         // Sending order to databse
         // First of all we need to get the current number of order
         $td = date('ym');
-        $tmp = $this->modx->query("SELECT `num` FROM {$this->modx->getTableName('ModOrders')} WHERE `num` LIKE '{$td}%' ORDER BY `id` DESC LIMIT 1");
+        $tmp = $this->modx->query("SELECT `num` FROM {$this->modx->getTableName('MsOrder')} WHERE `num` LIKE '{$td}%' ORDER BY `id` DESC LIMIT 1");
         $tnum = $tmp->fetch(PDO::FETCH_COLUMN);
         $tmp->closeCursor();
 
@@ -649,10 +649,10 @@ class miniShop {
         $num = $td.'/'.($tnum[1] + 1);
 
         // Getting address of order
-        // If we received an array - creating the new address entry in ModAddress
+        // If we received an array - creating the new address entry in MsAddress
         $addr = $_SESSION['minishop']['address'];
         if (is_array($addr) && !empty($addr)) {
-            $address = $this->modx->newObject('ModAddress');
+            $address = $this->modx->newObject('MsAddress');
             $address->fromArray($addr);
             $address->set('uid', $uid);
             $address->save();
@@ -661,7 +661,7 @@ class miniShop {
         // If we received an single number - it is id of the existing record and we must check it.
         // If it ok - we use this id.
         else if (!is_array($addr) && intval($addr) > 0) {
-            if ($address = $this->modx->getObject('ModAddress', array('id' => $_SESSION['minishop']['address'], 'uid' => $this->modx->user->id))) {
+            if ($address = $this->modx->getObject('MsAddress', array('id' => $_SESSION['minishop']['address'], 'uid' => $this->modx->user->id))) {
                 $aid = $address->get('id');
             }
         }
@@ -676,7 +676,7 @@ class miniShop {
         $delivery = !empty($_SESSION['minishop']['delivery']) ? $_SESSION['minishop']['delivery'] : '0';
         $payment = !empty($_SESSION['minishop']['payment']) ? $_SESSION['minishop']['payment'] : '0';
 
-        $order = $this->modx->newObject('ModOrders');
+        $order = $this->modx->newObject('MsOrder');
         $order->set('uid', $uid);
         $order->set('num', $num);
         $order->set('wid', $_SESSION['minishop']['warehouse']);
@@ -697,7 +697,7 @@ class miniShop {
         $oid = $order->get('id');
         $goods = array();
         foreach ($cart as $v) {
-            $res = $this->modx->newObject('ModOrderedGoods');
+            $res = $this->modx->newObject('MsOrderedGood');
             $res->set('oid', $oid);
             $res->set('gid', $v['id']);
             $res->set('price', $v['price']);
@@ -713,7 +713,7 @@ class miniShop {
             $goods[] = $res;
             // If the remains are enabled - reserving goods
             if ($enable_remains) {
-                if ($tmp = $this->modx->getObject('ModGoods', array('gid' => $v['id'], 'wid' => $_SESSION['minishop']['warehouse']))) {
+                if ($tmp = $this->modx->getObject('MsGood', array('gid' => $v['id'], 'wid' => $_SESSION['minishop']['warehouse']))) {
                     $tmp->reserve($v['num']);
                 }
             }
@@ -729,7 +729,7 @@ class miniShop {
         if ($this->changeOrderStatus($order->get('id'), $this->config['ms_status_new'])) {
             unset($_SESSION['minishop']);
             // Launching special snippet (if it set) for processing the order
-            if (!empty($payment) && $tmp = $this->modx->getObject('ModPayment', $payment)) {
+            if (!empty($payment) && $tmp = $this->modx->getObject('MsPayment', $payment)) {
                 if ($snippet = $tmp->getSnippetName()) {
                     return $this->modx->runSnippet($snippet, array('order' => $order, 'profile' => $profile, 'address' => $address));
                 }
@@ -752,11 +752,11 @@ class miniShop {
      * @param int $new						// new order status
      * */
     function changeOrderStatus($oid, $new) {
-        if (!$order = $this->modx->getObject('ModOrders', $oid)) {return false;}
+        if (!$order = $this->modx->getObject('MsOrder', $oid)) {return false;}
         $pls = $this->makePlaceholders($order->toArray());
         $maxIterations = (integer) $this->modx->getOption('parser_max_iterations', null, 10);
 
-        if ($status = $this->modx->getObject('ModStatus', $new)) {
+        if ($status = $this->modx->getObject('MsStatus', $new)) {
             $old = $order->get('status');
             $order->set('status', $new);
             $this->modx->invokeEvent('msOnBeforeOrderChangeStatus', array('order' => $order, 'old' => $old, 'new' => $new));
@@ -792,7 +792,7 @@ class miniShop {
 
             // Email to manager
             if ($status->get('email2manager')) {
-                if ($tmp = $this->modx->getObject('ModWarehouse', $pls['vl']['wid'])) {
+                if ($tmp = $this->modx->getObject('MsWarehouse', $pls['vl']['wid'])) {
                     $email = $tmp->get('email');
                     if (!empty($email)) {
                         $subject = str_replace($pls['pl'], $pls['vl'], $status->get('subject2manager'));
@@ -857,7 +857,7 @@ class miniShop {
             return $this->modx->lexicon('ms.payment.error');
         }
 
-        if ($tmp = $this->modx->getObject('ModOrders', $oid)) {
+        if ($tmp = $this->modx->getObject('MsOrder', $oid)) {
             $order = $tmp->toArray();
             $order['sum'] += $tmp->getDeliveryPrice();
 
@@ -906,7 +906,7 @@ class miniShop {
         // Check shop number
         if ($LMI_PAYEE_PURSE != $shop_id) {$this->paymentError('Invalid shop Id '.$LMI_PAYEE_PURSE);}
         // Check order
-        if ($res = $this->modx->getObject('ModOrders', array('id' => $LMI_PAYMENT_NO, 'status:!=' => $status_paid))) {
+        if ($res = $this->modx->getObject('MsOrder', array('id' => $LMI_PAYMENT_NO, 'status:!=' => $status_paid))) {
             $sum = $res->get('sum') + $res->getDeliveryPrice();
             if ($sum != intval($LMI_PAYMENT_AMOUNT)) {$this->paymentError('Wrong amount of the order');}
         }
@@ -962,11 +962,11 @@ class miniShop {
         if (!$this->modx->getCount('modResource', $id)) {return false;}
 
         $arr = array();
-        $q = $this->modx->newQuery('ModGallery');
+        $q = $this->modx->newQuery('MsGallery');
         $q->where(array('gid' => $id, 'wid' => $_SESSION['minishop']['warehouse']));
         $q->sortby($sort,$dir);
-        $gallery = $this->modx->getCollection('ModGallery', $q);
-        /** @var ModGallery $v */
+        $gallery = $this->modx->getCollection('MsGallery', $q);
+        /** @var MsGallery $v */
         foreach ($gallery as $v) {
             $arr[] = $v->toArray();
         }
@@ -986,7 +986,7 @@ class miniShop {
     function getTagged($tags = array(), $strict = 0, $only_ids = 0) {
         if (!is_array($tags)) {$tags = explode(',', $tags);}
 
-        $sql = "SELECT `rid` FROM {$this->modx->getTableName('ModTags')} WHERE `tag` IN ('".implode("','", $tags)."')";
+        $sql = "SELECT `rid` FROM {$this->modx->getTableName('MsTag')} WHERE `tag` IN ('".implode("','", $tags)."')";
         $q = new xPDOCriteria($this->modx, $sql);
         $ids = array();
         if ($q->prepare() && $q->stmt->execute()){
@@ -1002,14 +1002,14 @@ class miniShop {
         if ($strict) {
             foreach ($ids as $key => $rid) {
                 if ($strict > 1) {
-                    if ($this->modx->getCount('ModTags', array('rid' => $rid)) != $count) {
+                    if ($this->modx->getCount('MsTag', array('rid' => $rid)) != $count) {
                         unset($ids[$key]);
                         continue;
                     }
                 }
 
                 foreach ($tags as $tag) {
-                    if (!$this->modx->getCount('ModTags', array('rid' => $rid, 'tag' => $tag))) {
+                    if (!$this->modx->getCount('MsTag', array('rid' => $rid, 'tag' => $tag))) {
                         unset($ids[$key]);
                         break;
                     }
@@ -1028,7 +1028,7 @@ class miniShop {
         foreach ($ids as $id) {
             if (!$only_ids) {
                 if ($res = $this->modx->getObject('modResource', $id)) {
-                    if ($goods = $this->modx->getObject('ModGoods', array('gid' => $id, 'wid' => $_SESSION['minishop']['warehouse']))) {
+                    if ($goods = $this->modx->getObject('MsGood', array('gid' => $id, 'wid' => $_SESSION['minishop']['warehouse']))) {
                         $goods_arr = $goods->toArray();
                         $goods_arr['gid'] = $goods_arr['id'];
                         unset($goods_arr['id']);
@@ -1048,7 +1048,7 @@ class miniShop {
      * Gets resource with goods properties
      *
      * @param int $id						// modResource id
-     * @param int $wid						// ModWarehouse id
+     * @param int $wid						// MsWarehouse id
      * @param bool $level					// Level of retrieving.
      *											0 - goods properties
      *											1 - goods + resource
@@ -1087,7 +1087,7 @@ class miniShop {
         }
 
         $goods = array();
-        if ($tmp = $this->modx->getObject('ModGoods', array('gid' => $id, 'wid' => $wid))) {
+        if ($tmp = $this->modx->getObject('MsGood', array('gid' => $id, 'wid' => $wid))) {
             if ($mode == 0) {
                 $goods = $tmp->toArray();
                 unset($goods['id']);

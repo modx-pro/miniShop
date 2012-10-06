@@ -5,8 +5,8 @@
  * @package minishop
  * @subpackage processors
  */
-class ModWarehouseCreateProcessor extends modObjectCreateProcessor {
-    public $classKey = 'ModWarehouse';
+class MsWarehouseCreateProcessor extends modObjectCreateProcessor {
+    public $classKey = 'MsWarehouse';
     public $languageTopics = array('minishop:default');
     public $objectType = 'minishop.modwarehouse';
 
@@ -22,4 +22,4 @@ class ModWarehouseCreateProcessor extends modObjectCreateProcessor {
         return parent::beforeSave();
     }
 }
-return 'ModWarehouseCreateProcessor';
+return 'MsWarehouseCreateProcessor';

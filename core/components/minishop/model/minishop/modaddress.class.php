@@ -1,2 +1,2 @@
 <?php
-class ModAddress extends xPDOSimpleObject {}
+class MsAddress extends xPDOSimpleObject {}

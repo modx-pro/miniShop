@@ -44,13 +44,13 @@ switch ($modx->event->name) {
 
         $modx->addPackage('minishop', $modx->getOption('minishop.core_path', null, $modx->getOption('core_path') . 'components/minishop/') . 'model/minishop/');
 
-        $modx->removeCollection('ModGoods', array('gid:IN' => $ids));
-        $modx->removeCollection('ModCategories', array('gid:IN' => $ids));
-        $modx->removeCollection('ModGallery', array('gid:IN' => $ids));
-        $modx->removeCollection('ModTags', array('rid:IN' => $ids));
+        $modx->removeCollection('MsGood', array('gid:IN' => $ids));
+        $modx->removeCollection('MsCategory', array('gid:IN' => $ids));
+        $modx->removeCollection('MsGallery', array('gid:IN' => $ids));
+        $modx->removeCollection('MsTag', array('rid:IN' => $ids));
 
-        $q = $modx->newQuery('ModKits',array('rid:IN' => $ids));
+        $q = $modx->newQuery('MsKit',array('rid:IN' => $ids));
         $q->orCondition(array('gid:IN' => $ids));
-        $modx->removeCollection('ModKits', $q);
+        $modx->removeCollection('MsKit', $q);
         break;
 }

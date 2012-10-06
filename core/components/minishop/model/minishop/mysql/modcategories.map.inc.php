@@ -1,17 +1,17 @@
 <?php
-$xpdo_meta_map['ModCategories']= array (
+$xpdo_meta_map['MsCategory']= array (
   'package' => 'minishop',
   'version' => '1.1',
   'table' => 'ms_modCategories',
   'extends' => 'xPDOSimpleObject',
-  'fields' => 
+  'fields' =>
   array (
     'gid' => NULL,
     'cid' => NULL,
   ),
-  'fieldMeta' => 
+  'fieldMeta' =>
   array (
-    'gid' => 
+    'gid' =>
     array (
       'dbtype' => 'int',
       'precision' => '11',
@@ -19,7 +19,7 @@ $xpdo_meta_map['ModCategories']= array (
       'null' => false,
       'index' => 'index',
     ),
-    'cid' => 
+    'cid' =>
     array (
       'dbtype' => 'int',
       'precision' => '11',
@@ -27,23 +27,23 @@ $xpdo_meta_map['ModCategories']= array (
       'null' => false,
     ),
   ),
-  'indexes' => 
+  'indexes' =>
   array (
-    'gid' => 
+    'gid' =>
     array (
       'alias' => 'gid',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'gid' => 
+        'gid' =>
         array (
           'length' => '',
           'collation' => 'A',
           'null' => false,
         ),
-        'cid' => 
+        'cid' =>
         array (
           'length' => '',
           'collation' => 'A',

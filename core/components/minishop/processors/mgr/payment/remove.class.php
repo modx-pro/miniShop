@@ -8,7 +8,7 @@
 //if (!$modx->hasPermission('remove')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
 //
 //$id = $scriptProperties['id'];
-//if (!$res = $modx->getObject('ModPayment', $id)) {
+//if (!$res = $modx->getObject('MsPayment', $id)) {
 //	return $modx->error->failure($modx->lexicon('ms.payment.err_nf'));
 //}
 //
@@ -16,7 +16,7 @@
 //    return $modx->error->failure($modx->lexicon('ms.payment.err_remove'));
 //}
 //else {
-//	$res = $modx->getCollection('ModDelivery', array('payments:LIKE' => '%'.$id.'%'));
+//	$res = $modx->getCollection('MsDelivery', array('payments:LIKE' => '%'.$id.'%'));
 //	foreach ($res as $v) {
 //		$tmp = $v->getPayments();
 //		$key = array_search($id, $tmp);
@@ -28,15 +28,15 @@
 //}
 //
 //return $modx->error->success('',$res);
-class ModPaymentRemoveProcessor extends modObjectRemoveProcessor {
-    public $classKey = 'ModPayment';
+class MsPaymentRemoveProcessor extends modObjectRemoveProcessor {
+    public $classKey = 'MsPayment';
     public $languageTopics = array('minishop:default');
     public $objectType = 'minishop.modpayment';
 
     public function afterRemove() {
         $id = $this->getProperty('id');
-        $deliveries = $this->modx->getCollection('ModDelivery', array('payments' => $id));
-        /** @var ModDelivery $delivery */
+        $deliveries = $this->modx->getCollection('MsDelivery', array('payments' => $id));
+        /** @var MsDelivery $delivery */
         foreach ($deliveries as $delivery) {
             $payments = $delivery->getPayments();
             $key = array_search($id, $payments);
@@ -49,4 +49,4 @@ class ModPaymentRemoveProcessor extends modObjectRemoveProcessor {
 
     }
 }
-return 'ModPaymentRemoveProcessor';
+return 'MsPaymentRemoveProcessor';

@@ -5,7 +5,7 @@
  * @package minishop
  * @subpackage processors
  */
- 
+
 $isLimit = !empty($scriptProperties['limit']);
 $start = $modx->getOption('start',$scriptProperties,0);
 $limit = $modx->getOption('limit',$scriptProperties,10);
@@ -14,13 +14,13 @@ $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 $oid = $modx->getOption('oid',$scriptProperties, 0);
 $query = $modx->getOption('query',$scriptProperties, 0);
 
-$c = $modx->newQuery('ModOrderedGoods');
+$c = $modx->newQuery('MsOrderedGood');
 $c->where(array('oid' => $oid));
-$count = $modx->getCount('ModOrderedGoods',$c);
+$count = $modx->getCount('MsOrderedGood',$c);
 
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit, $start);
-$orders = $modx->getCollection('ModOrderedGoods',$c);
+$orders = $modx->getCollection('MsOrderedGood',$c);
 
 $arr = array();
 foreach ($orders as $v) {

@@ -1,10 +1,10 @@
 <?php
-$xpdo_meta_map['ModDelivery']= array (
+$xpdo_meta_map['MsDelivery']= array (
   'package' => 'minishop',
   'version' => '1.1',
   'table' => 'ms_modDelivery',
   'extends' => 'xPDOSimpleObject',
-  'fields' => 
+  'fields' =>
   array (
     'wid' => NULL,
     'name' => NULL,
@@ -14,9 +14,9 @@ $xpdo_meta_map['ModDelivery']= array (
     'enabled' => 1,
     'payments' => '[]',
   ),
-  'fieldMeta' => 
+  'fieldMeta' =>
   array (
-    'wid' => 
+    'wid' =>
     array (
       'dbtype' => 'int',
       'precision' => '11',
@@ -24,20 +24,20 @@ $xpdo_meta_map['ModDelivery']= array (
       'null' => false,
       'index' => 'index',
     ),
-    'name' => 
+    'name' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '255',
       'phptype' => 'string',
       'null' => false,
     ),
-    'description' => 
+    'description' =>
     array (
       'dbtype' => 'text',
       'phptype' => 'string',
       'null' => false,
     ),
-    'price' => 
+    'price' =>
     array (
       'dbtype' => 'float',
       'precision' => '10,2',
@@ -45,7 +45,7 @@ $xpdo_meta_map['ModDelivery']= array (
       'null' => false,
       'default' => 0,
     ),
-    'add_price' => 
+    'add_price' =>
     array (
       'dbtype' => 'float',
       'precision' => '10,2',
@@ -53,7 +53,7 @@ $xpdo_meta_map['ModDelivery']= array (
       'null' => false,
       'default' => 0,
     ),
-    'enabled' => 
+    'enabled' =>
     array (
       'dbtype' => 'tinyint',
       'precision' => '1',
@@ -61,7 +61,7 @@ $xpdo_meta_map['ModDelivery']= array (
       'null' => false,
       'default' => 1,
     ),
-    'payments' => 
+    'payments' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '255',
@@ -71,17 +71,17 @@ $xpdo_meta_map['ModDelivery']= array (
       'index' => 'index',
     ),
   ),
-  'indexes' => 
+  'indexes' =>
   array (
-    'wid' => 
+    'wid' =>
     array (
       'alias' => 'wid',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'wid' => 
+        'wid' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -89,15 +89,15 @@ $xpdo_meta_map['ModDelivery']= array (
         ),
       ),
     ),
-    'payments' => 
+    'payments' =>
     array (
       'alias' => 'payments',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'payments' => 
+        'payments' =>
         array (
           'length' => '',
           'collation' => 'A',

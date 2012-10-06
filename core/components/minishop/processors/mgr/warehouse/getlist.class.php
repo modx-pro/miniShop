@@ -14,7 +14,7 @@
 //$dir = $modx->getOption('dir',$scriptProperties,'ASC');
 //$query = $modx->getOption('query',$scriptProperties, 0);
 //
-//$c = $modx->newQuery('ModWarehouse');
+//$c = $modx->newQuery('MsWarehouse');
 //if (!empty($query)) {
 //	$c->orCondition(array(
 //		'name:LIKE' => '%'.$query.'%'
@@ -25,11 +25,11 @@
 //	));
 //}
 //
-//$count = $modx->getCount('ModWarehouse',$c);
+//$count = $modx->getCount('MsWarehouse',$c);
 //
 //$c->sortby($sort,$dir);
 //if ($isLimit) $c->limit($limit, $start);
-//$warehouses = $modx->getCollection('ModWarehouse',$c);
+//$warehouses = $modx->getCollection('MsWarehouse',$c);
 //
 //$arr = array();
 //foreach ($warehouses as $v) {
@@ -42,8 +42,8 @@
 //
 //}
 //return $this->outputArray($arr, $count);
-class ModWarehouseGetListProcessor extends modObjectGetListProcessor {
-    public $classKey = 'ModWarehouse';
+class MsWarehouseGetListProcessor extends modObjectGetListProcessor {
+    public $classKey = 'MsWarehouse';
     public $defaultSortField = 'id';
     public $defaultSortDirection = 'ASC';
     public $languageTopics = array('minishop:default');
@@ -63,4 +63,4 @@ class ModWarehouseGetListProcessor extends modObjectGetListProcessor {
         return $c;
     }
 }
-return 'ModWarehouseGetListProcessor';
+return 'MsWarehouseGetListProcessor';

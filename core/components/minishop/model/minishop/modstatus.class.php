@@ -1,2 +1,2 @@
 <?php
-class ModStatus extends xPDOSimpleObject {}
+class MsStatus extends xPDOSimpleObject {}

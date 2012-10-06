@@ -14,7 +14,7 @@ if ($options == 'price') {
     $result =  $ms->getPrice($id);
 } else {
     $wid = $_SESSION['minishop']['warehouse'];
-    if ($res = $modx->getObject('ModGoods', array('gid' => $id, 'wid' => $wid))) {
+    if ($res = $modx->getObject('MsGood', array('gid' => $id, 'wid' => $wid))) {
         if ($options == 'tags') {
             $result =  implode(', ', $res->getTags());
         } else {

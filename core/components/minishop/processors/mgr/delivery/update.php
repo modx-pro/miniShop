@@ -8,14 +8,14 @@
 
 if (!$modx->hasPermission('save')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
 
-if($modx->getObject('ModDelivery',array('name' => $scriptProperties['name'], 'wid' => $scriptProperties['wid'], 'id:!=' => $scriptProperties['id'] ))) {
+if($modx->getObject('MsDelivery',array('name' => $scriptProperties['name'], 'wid' => $scriptProperties['wid'], 'id:!=' => $scriptProperties['id'] ))) {
     $modx->error->addField('name',$modx->lexicon('ms.delivery.err_ae'));
 }
 if ($modx->error->hasError()) {
     return $modx->error->failure();
 }
 
-if (!$res = $modx->getObject('ModDelivery', $scriptProperties['id'])) {
+if (!$res = $modx->getObject('MsDelivery', $scriptProperties['id'])) {
     $modx->error->failure($modx->lexicon('ms.delivery.err_nf'));
 }
 

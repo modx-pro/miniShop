@@ -1,17 +1,17 @@
 <?php
-$xpdo_meta_map['ModKits']= array (
+$xpdo_meta_map['MsKit']= array (
   'package' => 'minishop',
   'version' => '1.1',
   'table' => 'ms_modKits',
   'extends' => 'xPDOSimpleObject',
-  'fields' => 
+  'fields' =>
   array (
     'rid' => NULL,
     'gid' => NULL,
   ),
-  'fieldMeta' => 
+  'fieldMeta' =>
   array (
-    'rid' => 
+    'rid' =>
     array (
       'dbtype' => 'int',
       'precision' => '10',
@@ -19,7 +19,7 @@ $xpdo_meta_map['ModKits']= array (
       'null' => false,
       'index' => 'index',
     ),
-    'gid' => 
+    'gid' =>
     array (
       'dbtype' => 'int',
       'precision' => '10',
@@ -27,23 +27,23 @@ $xpdo_meta_map['ModKits']= array (
       'null' => false,
     ),
   ),
-  'indexes' => 
+  'indexes' =>
   array (
-    'rid' => 
+    'rid' =>
     array (
       'alias' => 'rid',
       'primary' => false,
       'unique' => true,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'rid' => 
+        'rid' =>
         array (
           'length' => '',
           'collation' => 'A',
           'null' => false,
         ),
-        'gid' => 
+        'gid' =>
         array (
           'length' => '',
           'collation' => 'A',

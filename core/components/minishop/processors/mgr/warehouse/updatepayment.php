@@ -1,7 +1,7 @@
 <?php
 /**
  * Enable or disable an Payment for this Delivery
- * 
+ *
  * @package minishop
  * @subpackage processors
  */
@@ -14,7 +14,7 @@ if (empty($tmp['id']) || empty($tmp['delivery'])) {
 	return $modx->error->failure($modx->lexicon('ms.payment.err_save'));
 }
 
-if ($res = $modx->getObject('ModDelivery', $tmp['delivery']))  {
+if ($res = $modx->getObject('MsDelivery', $tmp['delivery']))  {
 	$cur_payments = $res->getPayments();
 	$key = array_search($tmp['id'], $cur_payments);
 	if ($tmp['enabled']) {

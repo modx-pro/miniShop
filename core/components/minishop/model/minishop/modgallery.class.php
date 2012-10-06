@@ -1,2 +1,2 @@
 <?php
-class ModGallery extends xPDOSimpleObject {}
+class MsGallery extends xPDOSimpleObject {}

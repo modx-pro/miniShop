@@ -5,8 +5,8 @@
  * @package minishop
  * @subpackage processors
  */
-class ModStatusUpdateProcessor extends modObjectUpdateProcessor {
-    public $classKey = 'ModStatus';
+class MsStatusUpdateProcessor extends modObjectUpdateProcessor {
+    public $classKey = 'MsStatus';
     public $languageTopics = array('minishop:default');
     public $objectType = 'minishop.modstatus';
     public $defaultColor = '000000';
@@ -57,4 +57,4 @@ class ModStatusUpdateProcessor extends modObjectUpdateProcessor {
         }
     }
 }
-return 'ModStatusUpdateProcessor';
+return 'MsStatusUpdateProcessor';

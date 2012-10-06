@@ -5,9 +5,9 @@
  * @package minishop
  * @subpackage processors
  */
-class ModStatusRemoveProcessor extends modObjectRemoveProcessor {
-    public $classKey = 'ModStatus';
+class MsStatusRemoveProcessor extends modObjectRemoveProcessor {
+    public $classKey = 'MsStatus';
     public $languageTopics = array('minishop:default');
     public $objectType = 'minishop.modstatus';
 }
-return 'ModStatusRemoveProcessor';
+return 'MsStatusRemoveProcessor';

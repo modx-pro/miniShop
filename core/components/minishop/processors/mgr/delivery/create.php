@@ -8,7 +8,7 @@
 
 if (!$modx->hasPermission('create')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
 
-if($modx->getObject('ModDelivery',array('name' => $scriptProperties['name'], 'wid' => $scriptProperties['wid']))) {
+if($modx->getObject('MsDelivery',array('name' => $scriptProperties['name'], 'wid' => $scriptProperties['wid']))) {
     $modx->error->addField('name',$modx->lexicon('ms.delivery.err_ae'));
 }
 
@@ -16,7 +16,7 @@ if ($modx->error->hasError()) {
     return $modx->error->failure();
 }
 
-$res = $modx->newObject('ModDelivery');
+$res = $modx->newObject('MsDelivery');
 $scriptProperties['enabled'] = $scriptProperties['enabled'] == 'true' || $scriptProperties['enabled'] == '1' ? 1 : 0;
 $res->fromArray($scriptProperties);
 

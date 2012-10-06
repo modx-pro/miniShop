@@ -1,10 +1,10 @@
 <?php
-$xpdo_meta_map['ModOrders']= array (
+$xpdo_meta_map['MsOrder']= array (
   'package' => 'minishop',
   'version' => '1.1',
   'table' => 'ms_modOrders',
   'extends' => 'xPDOSimpleObject',
-  'fields' => 
+  'fields' =>
   array (
     'uid' => NULL,
     'num' => NULL,
@@ -19,9 +19,9 @@ $xpdo_meta_map['ModOrders']= array (
     'payment' => 0,
     'address' => 0,
   ),
-  'fieldMeta' => 
+  'fieldMeta' =>
   array (
-    'uid' => 
+    'uid' =>
     array (
       'dbtype' => 'int',
       'precision' => '11',
@@ -29,14 +29,14 @@ $xpdo_meta_map['ModOrders']= array (
       'null' => false,
       'index' => 'index',
     ),
-    'num' => 
+    'num' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '20',
       'phptype' => 'string',
       'null' => false,
     ),
-    'wid' => 
+    'wid' =>
     array (
       'dbtype' => 'int',
       'precision' => '11',
@@ -44,7 +44,7 @@ $xpdo_meta_map['ModOrders']= array (
       'null' => false,
       'index' => 'index',
     ),
-    'status' => 
+    'status' =>
     array (
       'dbtype' => 'tinyint',
       'precision' => '2',
@@ -53,14 +53,14 @@ $xpdo_meta_map['ModOrders']= array (
       'default' => 1,
       'index' => 'index',
     ),
-    'sum' => 
+    'sum' =>
     array (
       'dbtype' => 'float',
       'precision' => '10,2',
       'phptype' => 'float',
       'null' => false,
     ),
-    'weight' => 
+    'weight' =>
     array (
       'dbtype' => 'float',
       'precision' => '10,3',
@@ -68,27 +68,27 @@ $xpdo_meta_map['ModOrders']= array (
       'null' => false,
       'default' => 0,
     ),
-    'created' => 
+    'created' =>
     array (
       'dbtype' => 'timestamp',
       'phptype' => 'timestamp',
       'null' => false,
       'default' => '0000-00-00 00:00:00',
     ),
-    'updated' => 
+    'updated' =>
     array (
       'dbtype' => 'timestamp',
       'phptype' => 'timestamp',
       'null' => false,
       'default' => '0000-00-00 00:00:00',
     ),
-    'comment' => 
+    'comment' =>
     array (
       'dbtype' => 'text',
       'phptype' => 'string',
       'null' => false,
     ),
-    'delivery' => 
+    'delivery' =>
     array (
       'dbtype' => 'int',
       'precision' => '11',
@@ -96,7 +96,7 @@ $xpdo_meta_map['ModOrders']= array (
       'null' => false,
       'default' => 0,
     ),
-    'payment' => 
+    'payment' =>
     array (
       'dbtype' => 'int',
       'precision' => '11',
@@ -104,7 +104,7 @@ $xpdo_meta_map['ModOrders']= array (
       'null' => false,
       'default' => 0,
     ),
-    'address' => 
+    'address' =>
     array (
       'dbtype' => 'int',
       'precision' => '11',
@@ -113,17 +113,17 @@ $xpdo_meta_map['ModOrders']= array (
       'default' => 0,
     ),
   ),
-  'indexes' => 
+  'indexes' =>
   array (
-    'status' => 
+    'status' =>
     array (
       'alias' => 'status',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'status' => 
+        'status' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -131,15 +131,15 @@ $xpdo_meta_map['ModOrders']= array (
         ),
       ),
     ),
-    'uid' => 
+    'uid' =>
     array (
       'alias' => 'uid',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'uid' => 
+        'uid' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -147,15 +147,15 @@ $xpdo_meta_map['ModOrders']= array (
         ),
       ),
     ),
-    'warehouse' => 
+    'warehouse' =>
     array (
       'alias' => 'warehouse',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'wid' => 
+        'wid' =>
         array (
           'length' => '',
           'collation' => 'A',

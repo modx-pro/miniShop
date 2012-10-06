@@ -12,12 +12,12 @@ Changelog for miniShop.
 
 1.9.1 (28.08.2012)
 =============
-- [#61] Добавлено поле "Страна" в ModAddress.
+- [#61] Добавлено поле "Страна" в MsAddress.
 - [#62] Исправлены map файлы модели. Изменен скрипт перегенерации модели gen.php.
 - Теперь вы можете указывать директорию для картинок в Импорте. Директория и изображения должны быть на сервере.
 - Исправлена ошибка с окошком Галереи товара
 -----
-- [#61] Added fiels "country" in ModAddress.
+- [#61] Added fiels "country" in MsAddress.
 - [#62] Fixed map files of the model. Changed script of model generation gen.php.
 - Now you can set directory for images in Import. Directory and images must exist on server.
 - Fixed error with popup window of Gallery
@@ -118,7 +118,7 @@ Changelog for miniShop.
 - msGetGoodsPlaceholder и msGetGoodsPlaceholders теперь поддерживают получение тэгов товара
 - Небольшие улучшения кода сниппетов
 -----
-- Added parameters to snippet miniShop. 
+- Added parameters to snippet miniShop.
 - Added parameters to snippet msGetGallery.
 - Added parameters to snippet. Also translated into Russian all original parameters of getResources.
 - msGetGoodsPlaceholder and msGetGoodsPlaceholders are now supporting retrieving tags of product
@@ -181,19 +181,19 @@ Changelog for miniShop.
 - Новый сниппет msGetGallery для вывода изображений товара (поддерживает getPage).
 - Новый чанк msGallery.row.tpl для оформления вывода изображений.
 - [#30] Добавлено окно об ошибке при создании товара.
-- [#34] Чанки в ModStatus сохраняются не по имени, а по ID.
+- [#34] Чанки в MsStatus сохраняются не по имени, а по ID.
 - [#35] Выбор чанков и сниппетов в комбобоксах поддерживает автодополнение.
 -----
 - Added gallery for goods
 - New snippet msGetGallery to display product images (supports getPage)
 - New chunk msGallery.row.tpl for templating images of product.
 - [#30] Added an error window when creating a product.
-- [#34] Chunks in ModStatus are saved by ID.
+- [#34] Chunks in MsStatus are saved by ID.
 - [#35] The choice of chunks, and snippets in the combobox supports autocompletion.
 
 1.4.0 beta (13.04.2012)
 =============
-- Добавлено упрощенное редактирование ТВ параметров прямо в окне редактирования товара. 
+- Добавлено упрощенное редактирование ТВ параметров прямо в окне редактирования товара.
 - Добавлено изменение товаров в заказе: добавление, редактирование и удаление.
 - Возможность изменения в заказе способа доставки и оплаты.
 - При редактировании в окнах активные вкладки запоминаются.
@@ -214,9 +214,9 @@ Changelog for miniShop.
 1.3.2 beta (09.04.2012)
 =============
 - Товарам добавлено свойство "вес".
-	- Новый системный параметр getweight_snippet. Можно указать сниппет (по типу msGetPrice), который примет объект ресурса и выдаст его вес. По умолчанию - нет, выдается вес из ModGoods.
+	- Новый системный параметр getweight_snippet. Можно указать сниппет (по типу msGetPrice), который примет объект ресурса и выдаст его вес. По умолчанию - нет, выдается вес из MsGood.
 	- Изменены чанки корзины и песем для поддержки нового свойства товаров.
-- Указание сниппета в системной настройке getprice_snippet больше не обязательно. В таком случае будет просто возвращена цена из ModGoods, без дополнительной обработки.
+- Указание сниппета в системной настройке getprice_snippet больше не обязательно. В таком случае будет просто возвращена цена из MsGood, без дополнительной обработки.
 - Добавлена возможность создавать различные методы оплаты
 	- Привязка методов оплаты к способам доставки в настройках складов.
 	- Если в методе оплаты указан сниппет - после создания заказа ему передаются объекты заказа, профиля и адреса для дальнейшей обработки заказа.
@@ -225,7 +225,7 @@ Changelog for miniShop.
 - New goods parameter - "weight"
 	- New system setting getweight_snippet. You may set snippet as msGetPrice for weight correction.
 	- Changed chunks for new parameter support
-- Snippet in system setting getprice_snippet is not required anymore. If it empty, then will return price from ModGoods without any changing.
+- Snippet in system setting getprice_snippet is not required anymore. If it empty, then will return price from MsGood without any changing.
 - Added ability to create a variety of payment methods
 	- Linking of payment methods to the methods of delivery in the warehouses settings.
 	- If in the payment method specified snippet - after creation of order its runs with 3 objects (order,profile,address) for further processing of the order.
@@ -234,19 +234,19 @@ Changelog for miniShop.
 1.2.0 beta (21.03.2012)
 =============
 - Полностью работают остатки товаров, в связи с этим:
-	- В таблице ModGoods добавлен столбец "reserved" INT(11), для резервирования товара при заказе.
+	- В таблице MsGood добавлен столбец "reserved" INT(11), для резервирования товара при заказе.
 	- Новый системный параметр minishop.enable_remains - включает учет остатков при различных операциях. Ставит товар в резерв.
 	- Новый системный параметр minishop.status_final - статус завершения заказа. Снимает товар с резерва.
 	- Новый системный параметр minishop.status_cancel - статус отмены заказа. Резерв возвращается в остаток.
-	- Изменения остатков пишутся в таблицу ModLog.
+	- Изменения остатков пишутся в таблицу MsLog.
 - [#23] Добавлена проверка на добавление в корзину товара больше 1000000 штук.
 -----
 - Remains are now works, considering this:
-	- Add field "reserved" INT(11) in ModGoods for reserving goods.
+	- Add field "reserved" INT(11) in MsGood for reserving goods.
 	- Add new system parameter minishop.enable_remains - enabling work with remains. Add goods to reserve.
 	- Add new system parameter minishop.status_final - status for end or order processing. Remove goods from reserve.
 	- Add new system parameter minishop.status_cancel - status for cancel order. Move goods from reserve back to remains.
-	- Changing of remains are written in ModLog table.
+	- Changing of remains are written in MsLog table.
 - [#23] Added check to add items to the cart more than 1000000 units.
 
 
@@ -268,4 +268,4 @@ Changelog for miniShop.
 - Исправление ошибок и генеральная уборка кода.
 -----
 - Change personal details for order submition to FormIt to make flexible validation. Chunk tpl.msAddrForm was changed.
-- Add new &action to miniShop snippet - getDelivery. It outputs methods of the delivery for current 
+- Add new &action to miniShop snippet - getDelivery. It outputs methods of the delivery for current

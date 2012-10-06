@@ -5,8 +5,8 @@
  * @package minishop
  * @subpackage processors
  */
-class ModWarehouseRemoveProcessor extends modObjectRemoveProcessor {
-    public $classKey = 'ModWarehouse';
+class MsWarehouseRemoveProcessor extends modObjectRemoveProcessor {
+    public $classKey = 'MsWarehouse';
     public $languageTopics = array('minishop:default');
     public $objectType = 'minishop.modwarehouse';
 
@@ -20,8 +20,8 @@ class ModWarehouseRemoveProcessor extends modObjectRemoveProcessor {
 
     public function afterRemove() {
         $id = $this->getProperty('id');
-        $this->modx->removeCollection('ModDelivery', array('wid' => $id));
-        //$this->modx->removeCollection('ModGoods', array('wid' => $id));
+        $this->modx->removeCollection('MsDelivery', array('wid' => $id));
+        //$this->modx->removeCollection('MsGood', array('wid' => $id));
     }
 }
-return 'ModWarehouseRemoveProcessor';
+return 'MsWarehouseRemoveProcessor';

@@ -11,14 +11,14 @@ $gid = $modx->resource->id;
 // warehouse id
 $wid = $_SESSION['minishop']['warehouse'];
 // Good placeholders
-if ($res = $modx->getObject('ModGoods', array('gid' => $gid, 'wid' => $wid))) {
+if ($res = $modx->getObject('MsGood', array('gid' => $gid, 'wid' => $wid))) {
     $arr = $res->toArray();
     $arr['price'] = $ms->getPrice($gid);
     $arr['tags'] = implode(', ', $res->getTags());
     $modx->setPlaceholders($arr);
 }
 // Warehouse placeholders
-if ($res = $modx->getObject('ModWarehouse', $wid)) {
+if ($res = $modx->getObject('MsWarehouse', $wid)) {
     $arr = array(
         'warehouse' => $res->get('name')
         ,'currency' => $res->get('currency')

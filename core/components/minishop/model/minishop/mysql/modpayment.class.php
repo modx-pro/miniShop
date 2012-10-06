@@ -1,3 +1,3 @@
 <?php
 require_once (dirname(dirname(__FILE__)) . '/modpayment.class.php');
-class ModPayment_mysql extends ModPayment {}
+class MsPayment_mysql extends MsPayment {}

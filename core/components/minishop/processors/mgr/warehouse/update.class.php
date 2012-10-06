@@ -5,8 +5,8 @@
  * @package minishop
  * @subpackage processors
  */
-class ModWarehouseUpdateProcessor extends modObjectUpdateProcessor {
-    public $classKey = 'ModWarehouse';
+class MsWarehouseUpdateProcessor extends modObjectUpdateProcessor {
+    public $classKey = 'MsWarehouse';
     public $languageTopics = array('minishop:default');
     public $objectType = 'minishop.modwarehouse';
 
@@ -19,4 +19,4 @@ class ModWarehouseUpdateProcessor extends modObjectUpdateProcessor {
         return true;
     }
 }
-return 'ModWarehouseUpdateProcessor';
+return 'MsWarehouseUpdateProcessor';

@@ -15,9 +15,9 @@ else {
     $ms = $modx->getService('minishop','miniShop', $modx->getOption('minishop.core_path', null, $modx->getOption('core_path') . 'components/minishop/') . 'model/minishop/', $scriptProperties);
     if (!($ms instanceof miniShop)) return '';
 
-    if ($res = $modx->getCollection('ModWarehouse')) {
+    if ($res = $modx->getCollection('MsWarehouse')) {
         $options = array();
-        /** @var ModWarehouse $v */
+        /** @var MsWarehouse $v */
         foreach ($res as $v) {
             $selected = '';
             if ($_SESSION['minishop']['warehouse'] == $v->get('id')) {

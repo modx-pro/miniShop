@@ -5,8 +5,8 @@
  * @package minishop
  * @subpackage processors
  */
-class ModStatusGetListProcessor extends modObjectGetListProcessor {
-    public $classKey = 'ModStatus';
+class MsStatusGetListProcessor extends modObjectGetListProcessor {
+    public $classKey = 'MsStatus';
     public $defaultSortField = 'id';
     public $defaultSortDirection = 'ASC';
     public $languageTopics = array('minishop:default');
@@ -22,4 +22,4 @@ class ModStatusGetListProcessor extends modObjectGetListProcessor {
         return $c;
     }
 }
-return 'ModStatusGetListProcessor';
+return 'MsStatusGetListProcessor';

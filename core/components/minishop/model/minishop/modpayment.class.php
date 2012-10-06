@@ -1,5 +1,5 @@
 <?php
-class ModPayment extends xPDOSimpleObject {
+class MsPayment extends xPDOSimpleObject {
 
 	function getSnippetName() {
 		if ($res = $this->xpdo->getObject('modSnippet', $this->get('snippet'))) {

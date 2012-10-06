@@ -1,5 +1,5 @@
 <?php
-class ModLog extends xPDOSimpleObject {
+class MsLog extends xPDOSimpleObject {
 
 	function getUserName() {
 		if ($res = $this->xpdo->getObject('modUser', $this->get('uid'))) {
@@ -11,12 +11,12 @@ class ModLog extends xPDOSimpleObject {
 		$type = $this->get('type');
 		$val = $this->get($val);
 		switch ($type) {
-			case 'status': $obj = 'ModStatus'; break;
+			case 'status': $obj = 'MsStatus'; break;
 			case 'goods': $obj = 'modResource'; break;
-			case 'delivery': $obj = 'ModDelivery'; break;
-			case 'payment': $obj = 'ModPayment'; break;
-			case 'warehouse': $obj = 'ModWarehouse'; break;
-			default: $obj = ''; 
+			case 'delivery': $obj = 'MsDelivery'; break;
+			case 'payment': $obj = 'MsPayment'; break;
+			case 'warehouse': $obj = 'MsWarehouse'; break;
+			default: $obj = '';
 		}
 		if (empty($obj)) {return $val;}
 		if ($type == 'goods') {
@@ -33,7 +33,7 @@ class ModLog extends xPDOSimpleObject {
 			}
 		}
 	}
-	
+
 	function getStatusName($val = 'new') {
 		return $this->getName($val);
 	}
