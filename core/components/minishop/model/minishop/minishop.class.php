@@ -36,33 +36,35 @@ class miniShop {
     function __construct(modX &$modx,array $config = array()) {
         $this->modx =& $modx;
 
-        $corePath = $this->modx->getOption('minishop.core_path',$config,$this->modx->getOption('core_path').'components/minishop/');
-        $assetsUrl = $this->modx->getOption('minishop.assets_url',$config,$this->modx->getOption('assets_url').'components/minishop/');
+        $corePath = $this->modx->getOption('minishop.core_path', $config, $this->modx->getOption('core_path').'components/minishop/');
+        $assetsUrl = $this->modx->getOption('minishop.assets_url', $config, $this->modx->getOption('assets_url').'components/minishop/');
         $connectorUrl = $assetsUrl.'connector.php';
-        $connectorsUrl = $assetsUrl.'connectors/';
+        //$connectorsUrl = $assetsUrl.'connectors/';
 
         $this->config = array_merge(array(
-            'assetsUrl' => $assetsUrl,
-            'cssUrl' => $assetsUrl.'css/',
-            'jsUrl' => $assetsUrl.'js/',
-            'imagesUrl' => $assetsUrl.'images/',
+            'assets_url' => $assetsUrl,
+            'css_url' => $assetsUrl.'css/',
+            'js_url' => $assetsUrl.'js/',
+            'images_url' => $assetsUrl.'images/',
 
-            'connectorUrl' => $connectorUrl,
-            'connectorsUrl' => $connectorsUrl,
+            'connector_url' => $connectorUrl,
+            //'connectors_url' => $connectorsUrl,
 
-            'corePath' => $corePath,
-            'modelPath' => $corePath.'model/',
-            'chunksPath' => $corePath.'elements/chunks/',
-            'chunkSuffix' => '.tpl',
-            'snippetsPath' => $corePath.'elements/snippets/',
-            'processorsPath' => $corePath.'processors/',
+            'core_path' => $corePath,
+            'model_path' => $corePath.'model/',
+            'chunks_path' => $corePath.'elements/chunks/',
+            'chunk_suffix' => '.tpl',
+            'snippets_path' => $corePath.'elements/snippets/',
+            'processors_path' => $corePath.'processors/',
+            'templates_path' => $corePath.'templates/',
+
             'ms_categories_tpls' => explode(',', $this->modx->getOption('minishop.categories_tpl', '', 1)),
             'ms_goods_tpls' => explode(',', $this->modx->getOption('minishop.goods_tpl', '', 1)),
             'ms_kits_tpls' => explode(',', $this->modx->getOption('minishop.kits_tpl', '', 1)),
             'ms_status_new' => $this->modx->getOption('minishop.status_new', '', 1)
-        ),$config);
+        ), $config);
 
-        $this->modx->addPackage('minishop',$this->config['modelPath']/*, $this->modx->config['table_prefix'].'ms_'*/);
+        $this->modx->addPackage('minishop', $this->config['model_path']/*, $this->modx->config['table_prefix'].'ms_'*/);
         $this->modx->lexicon->load('minishop:default');
         $this->modx->lexicon->load('minishop:add');
 
@@ -76,26 +78,6 @@ class miniShop {
         if (!isset($_SESSION['minishop']['warehouse'])) {$_SESSION['minishop']['warehouse'] = $this->getDefaultWarehouse();}
         if (!isset($_SESSION['minishop']['category'])) {$_SESSION['minishop']['category'] = 0;}
         if (!isset($_SESSION['minishop']['status'])) {$_SESSION['minishop']['status'] = 0;}
-    }
-
-    /**
-     * Initializes miniShop into different contexts.
-     *
-     * @access public
-     * @param string $ctx The context to load. Defaults to web.
-     */
-    public function initialize($ctx = 'web') {
-        switch ($ctx) {
-            case 'mgr':
-                $this->config['statuses'] = json_encode($this->getStatusesArray());
-                if (!$this->modx->loadClass('minishop.request.miniShopControllerRequest',$this->config['modelPath'],true,true)) {
-                    return 'Could not load controller request handler.';
-                }
-                $this->request = new miniShopControllerRequest($this);
-                return $this->request->handleRequest();
-            break;
-            default: break;
-        }
     }
 
 
@@ -166,6 +148,7 @@ class miniShop {
     function getStatusesArray() {
         $arr = array();
         if ($tmp = $this->modx->getCollection('ModStatus')) {
+            /** @var ModStatus $v */
             foreach ($tmp as $v) {
                 $arr[$v->get('id')] = array('name' => $v->get('name'), 'color' => $v->get('color'));
             }
@@ -188,6 +171,7 @@ class miniShop {
         $q = $this->modx->newQuery('ModWarehouse');
         $q->sortby('name', 'ASC');
         $tmp = $this->modx->getCollection('ModWarehouse', $q);
+        /** @var ModWarehouse $v */
         foreach ($tmp as $v) {
             // Check required permission for this warehouse
             $permission = $v->get('permission');
@@ -369,6 +353,7 @@ class miniShop {
             if (in_array($tpl, $this->config['ms_kits_tpls']) && !in_array($tpl, $this->config['ms_goods_tpls'])) {
                 $tmp = $this->modx->getCollection('ModKits', array('rid' => $id));
                 $i = 0;
+                /** @var ModKits $v */
                 foreach ($tmp as $v) {
                     $response = $this->addToCart($v->get('gid'), 1);
                     if ($response['status'] == 'error') {
@@ -519,6 +504,7 @@ class miniShop {
 
                 // Template variables
                 $tvs = $res->getMany('TemplateVars');
+                /** @var modTemplateVar $v2 */
                 foreach ($tvs as $v2) {
                     $tmp[$v2->get('name')] = $v2->get('value');
                 }
@@ -562,6 +548,7 @@ class miniShop {
         $q->sortby('id','ASC');
 
         if ($res = $this->modx->getCollection('ModDelivery', $q)) {
+            /** @var ModDelivery $v */
             foreach ($res as $v) {
                 $tmp = $v->toArray();
                 if ($_POST['delivery'] == $tmp['id'] || $_SESSION['minishop']['delivery'] == $tmp['id']) {$tmp['selected'] = 'selected';} else {$tmp['selected'] = '';}
@@ -979,6 +966,7 @@ class miniShop {
         $q->where(array('gid' => $id, 'wid' => $_SESSION['minishop']['warehouse']));
         $q->sortby($sort,$dir);
         $gallery = $this->modx->getCollection('ModGallery', $q);
+        /** @var ModGallery $v */
         foreach ($gallery as $v) {
             $arr[] = $v->toArray();
         }

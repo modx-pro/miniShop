@@ -5,7 +5,9 @@
  * @package minishop
  * @subpackage processors
  */
-if (!$modx->hasPermission('view')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
+if (!$modx->hasPermission('view')) {
+    return $modx->error->failure($modx->lexicon('ms.no_permission'));
+}
 
 $isLimit = !empty($scriptProperties['limit']);
 $start = $modx->getOption('start',$scriptProperties,0);
@@ -16,9 +18,8 @@ $query = $modx->getOption('query', $scriptProperties, 0);
 $addall = $modx->getOption('addall',$scriptProperties, 0);
 
 $c = $modx->newQuery('ModWarehouse');
-
 if (!empty($query)) {
-	$c->andCondition(array('name:LIKE' => '%'.$query.'%'));
+    $c->andCondition(array('name:LIKE' => '%'.$query.'%'));
 }
 
 $count = $modx->getCount('ModWarehouse',$c);
@@ -27,13 +28,13 @@ $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);
 
 $res = $modx->getCollection('ModWarehouse',$c);
+/** @var ModWarehouse $v */
 foreach ($res as $v) {
-	$permission = $v->get('permission');
-	if (!empty($permission) && !$modx->hasPermission($permission)) {
-		continue;
-	}
+    $permission = $v->get('permission');
+    if (!empty($permission) && !$modx->hasPermission($permission)) {
+        continue;
+    }
     $tmp = $v->toArray();
-	
-	$arr[]= $tmp;
+    $arr[]= $tmp;
 }
 return $this->outputArray($arr,$count);
