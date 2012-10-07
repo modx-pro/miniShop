@@ -68,7 +68,7 @@ class miniShop {
 
 		// Show errors if debug enabled
 		if (!empty($this->config['debug'])) {
-			ini_set('display_errors', 1); 
+			ini_set('display_errors', 1);
 			ini_set('error_reporting', -1);
 		}
 
@@ -98,7 +98,7 @@ class miniShop {
 		}
 	}
 
- 
+
 	/*
 	 * Print human-readable array.
 	 * Used in the development.
@@ -245,7 +245,7 @@ class miniShop {
 	function getGoodsByCategories($parents = array()) {
 		if (empty($parents)) {$parents = array($this->modx->resource->id);}
 		if (!is_array($parents)) {$parents = explode(',', $parents);}
-		
+
 		$ids = array();
 		$c = $this->modx->newQuery('ModCategories');
 		$c->where(array('cid:IN' => $parents));
@@ -273,8 +273,8 @@ class miniShop {
 			,'connector_url' => $this->modx->makeUrl($this->modx->resource->id, '', '', 'full')
 			,'connectors_url' => $this->config['connectorsUrl']
 		);
-		
-		
+
+
 		return $this->modx->getChunk($this->config['tplMyOrdersList'], $arr);
 	}
 
@@ -287,7 +287,7 @@ class miniShop {
 	function getCartStatus() {
 		$cart = $_SESSION['minishop']['goods'];
 		if (empty($cart)) {$cart = array();}
-		
+
 		$arr = array();
 		$arr['total'] = 0;
 		$arr['count'] = 0;
@@ -321,7 +321,7 @@ class miniShop {
 			}
 			else {$price = 0;}
 		}
-		return $price;
+		return number_format($price, 2);
 	}
 
 
@@ -351,7 +351,7 @@ class miniShop {
 
 	/*
 	 * Adds product in cart
-	 * 
+	 *
 	 * @param $id							// id of resource
 	 * @param $num							// quantity
 	 * @param $data							// array with additional data (color, manufacterer, country etc)
@@ -388,16 +388,16 @@ class miniShop {
 			}
 		}
 		else {return $this->error('ms.addToCart.error');}
-		
+
 		// Continuing adding product
 		$num = intval($num);
 		if ($num > 1000000) {return $this->error('ms.addToCart.error', $this->getCartStatus());}
 
 		if (!isset($_SESSION['minishop'])) {$_SESSION['minishop'] = array();}
 		if (!isset($_SESSION['minishop']['goods'])) {$_SESSION['minishop']['goods'] = array();}
-		
+
 		$key = md5($id.(json_encode($data)));
-		
+
 		if (array_key_exists($key, $_SESSION['minishop']['goods'])) {
 			$_SESSION['minishop']['goods'][$key]['num'] += $num;
 			return $this->success('ms.addToCart.success', $this->getCartStatus());
@@ -410,7 +410,7 @@ class miniShop {
 				,'num' => $num
 				,'data' => $data
 			);
-			
+
 			return $this->success('ms.addToCart.success', $this->getCartStatus());
 		}
 	}
@@ -418,7 +418,7 @@ class miniShop {
 
 	/*
 	 * Removes product from cart
-	 * 
+	 *
 	 * @param $key							// key of entry for remove
 	 * @returns array $cartStatus
 	 * */
@@ -458,7 +458,7 @@ class miniShop {
 
 	/*
 	 * Prepares and returns rendered cart for frontend
-	 * 
+	 *
 	 * @returns string $cart				// fully processed cart
 	 * */
 	function getCart() {
@@ -481,26 +481,26 @@ class miniShop {
 				,'index' => $profile->get('zip')
 			));
 		}
-		
+
 		return $this->modx->getChunk($this->config['tplCartOuter'], $pl);
 	}
 
 
 	/*
 	 * Returns mini cart for frontend
-	 * 
+	 *
 	 * @returns string $cart				// fully processed mini cart
 	 * */
 	function getMiniCart() {
 		$status = $this->getCartStatus();
-		
+
 		return $this->modx->getChunk($this->config['tplMiniCart'], $status);
 	}
-	
-	
+
+
 	/*
 	 * Renders cart rows, e.g. products
-	 * 
+	 *
 	 * @param string $tpl				// template for processing
 	 * @returns array $arr				// array with rendered cart rows and cart total vars (weight, price and quantity)
 	 * */
@@ -522,14 +522,14 @@ class miniShop {
 				foreach ($tvs as $v2) {
 					$tmp[$v2->get('name')] = $v2->get('value');
 				}
-				
+
 				// Main properties of product
 				if ($tmp2 = $this->modx->getObject('ModGoods', array('gid' => $v['id'], 'wid' => $_SESSION['minishop']['warehouse']))) {
-					$tmp3 = $tmp2->toArray(); 
+					$tmp3 = $tmp2->toArray();
 					unset($tmp3['id']);
 					$tmp = array_merge($tmp, $tmp3);
 				}
-				
+
 				// Additional properties of product
 				if (is_array($v['data']) && !empty($v['data'])) {
 					foreach ($v['data'] as $k2 => $v2) {
@@ -538,9 +538,9 @@ class miniShop {
 				}
 				$tmp['price'] = $v['price'];
 				$tmp['weight'] = $v['weight'];
-				
+
 				$arr['rows'] .= $this->modx->getChunk($tpl, $tmp);
-				
+
 				$arr['count'] += $tmp['num'];
 				$arr['total'] += $tmp['sum'];
 				$arr['weight'] += $tmp['tmp_weight'];
@@ -553,7 +553,7 @@ class miniShop {
 	/*
 	 * Renders methods of delivery of the current warehouse.
 	 * Used for selecting by customer on frontend.
-	 * 
+	 *
 	 * @returns string $options				// processed html
 	 * */
 	function getDelivery() {
@@ -575,12 +575,12 @@ class miniShop {
 	/*
 	 * Renders methods of payments of the current warehouse and selected method of delivery.
 	 * Used for selecting by customer on frontend.
-	 * 
+	 *
 	 * @returns string $options				// processed html
 	 * */
 	function getPayments() {
 		$q = $this->modx->newQuery('ModPayment');
-	
+
 		$did = $_SESSION['minishop']['delivery'];
 		if ($delivery = $this->modx->getObject('ModDelivery', $did)) {
 			$payments = $delivery->getPayments();
@@ -604,7 +604,7 @@ class miniShop {
 	/*
 	 * Create order
 	 * All necessary parameters are taken from the $_SESSION
-	 * 
+	 *
 	 * @returns string $chunk				// processed html with success message or error
 	 * */
 	function submitOrder() {
@@ -627,7 +627,7 @@ class miniShop {
 		}
 		// Processing not authenticated user
 		else {
-			// Checking user by email. 
+			// Checking user by email.
 			$email = $_SESSION['minishop']['address']['email'];
 			if ($profile = $this->modx->getObject('modUserProfile', array('email' => $email))) {
 				$uid = $profile->get('internalKey');
@@ -638,7 +638,7 @@ class miniShop {
 				$profile = $this->modx->newObject('modUserProfile', array('email' => $email, 'fullname' => $_SESSION['minishop']['address']['receiver']));
 				$user->addOne($profile);
 				$user->save();
-				
+
 				// If needed - write the user to a group
 				if (!empty($this->config['userGroups'])) {
 					$groups = explode(',', $this->config['userGroups']);
@@ -649,7 +649,7 @@ class miniShop {
 				$uid = $user->get('id');
 			}
 		}
-		
+
 		// Sending order to databse
 		// First of all we need to get the current number of order
 		$td = date('ym');
@@ -682,8 +682,8 @@ class miniShop {
 			// Bad address, but we continue.
 			// Maybe, in this shop address not needed fo ordering?
 		}
-		
-		
+
+
 		// Creation of the order
 		// Get an delivery and payment ids
 		$delivery = !empty($_SESSION['minishop']['delivery']) ? $_SESSION['minishop']['delivery'] : '0';
@@ -719,10 +719,10 @@ class miniShop {
 			$res->set('num', $v['num']);
 			$res->set('data', json_encode($v['data']));
 			$res->save();
-			
+
 			$cart_sum += $v['price'] * $v['num'];
 			$cart_weight += $v['weight'] * $v['num'];
-			
+
 			$goods[] = $res;
 			// If the remains are enabled - reserving goods
 			if ($enable_remains) {
@@ -733,7 +733,7 @@ class miniShop {
 		}
 		$order->set('sum', $cart_sum);
 		$order->set('weight', $cart_weight);
-		
+
 		if ($order->save()) {
 			$this->modx->invokeEvent('msOnOrderCreate', array('order' => $order, 'profile' => $profile, 'address' => $address, 'goods' => $goods));
 		}
@@ -760,7 +760,7 @@ class miniShop {
 
 	/*
 	 * Changes order status with logging and sending email notices
-	 * 
+	 *
 	 * @param int $oid						// id of order
 	 * @param int $new						// new order status
 	 * */
@@ -777,7 +777,7 @@ class miniShop {
 			if ($order->save()) {
 				$this->Log('status', $order->get('id'), 0, 'change', $old, $new);
 				$this->modx->invokeEvent('msOnOrderChangeStatus', array('order' => $order, 'old' => $old, 'new' => $new));
-				
+
 				if ($this->modx->getOption('minishop.enable_remains')) {
 					if ($new == $this->modx->getOption('minishop.status_final')) {
 						$order->unReserve();
@@ -826,7 +826,7 @@ class miniShop {
 
 	/*
 	 * Sends emails
-	 * 
+	 *
 	 * @param int $to
 	 * @param int $subject
 	 * @param int $message
@@ -855,7 +855,7 @@ class miniShop {
 	/*
 	 * Prepares and returns chunk for redirecting customer to payment gateway
 	 * Designed for work with z-payment.ru, but must work with other gateways. It depends of form in parsed chunk.
-	 * 
+	 *
 	 * @param int $oid						// id of existing order
 	 * @param int $email					// email of customer from this order for verification
 	 * return string $chunk
@@ -897,7 +897,7 @@ class miniShop {
 	 * Receiving info about payment
 	 * This is totally for z-payments.ru. Will not work with other payments systems.
 	 * Fot other systems you must create your own snippet.
-	 * 
+	 *
 	 * @param array $data						// request array
 	 * return string $chunk
 	 * */
@@ -952,7 +952,7 @@ class miniShop {
 
 	/*
 	 * Log payment errors and returns HTTP code so z-payment.ru continue trying
-	 * 
+	 *
 	 * @param string $text
 	 * */
 	function paymentError($text) {
@@ -964,7 +964,7 @@ class miniShop {
 
 	/*
 	 * Gets gallery of files for product
-	 * 
+	 *
 	 * @param int $id						// id of existing resource
 	 * @param string $sord					// field for sorting
 	 * @param string $dir					// direction of sorting
@@ -1005,7 +1005,7 @@ class miniShop {
 			$ids = $q->stmt->fetchAll(PDO::FETCH_COLUMN);
 		}
 		$ids = array_unique($ids);
-		
+
 		// If needed only ids of not strictly mathed items - return.
 		if (!$strict && $only_ids) {return $ids;}
 
@@ -1019,7 +1019,7 @@ class miniShop {
 						continue;
 					}
 				}
-				
+
 				foreach ($tags as $tag) {
 					if (!$this->modx->getCount('ModTags', array('rid' => $rid, 'tag' => $tag))) {
 						unset($ids[$key]);
@@ -1072,9 +1072,9 @@ class miniShop {
 	function getProduct($id = 0, $wid = 0, $level = 0, $mode = 0) {
 		if (empty($id)) {$id = $this->modx->resource->id;}
 		if (empty($wid)) {$wid = $_SESSION['minishop']['warehouse'];}
-		
+
 		$arr = array();
-		
+
 		$res = array();
 		if ($level > 0 && $resource = $this->modx->getObject('modResource', $id)) {
 			if ($mode == 0) {
@@ -1110,13 +1110,13 @@ class miniShop {
 				$arr['goods'] = $tmp;
 			}
 		}
-		
+
 		if ($mode == 0) {
 			$arr = array_merge($res, $goods, $tvs);
 		}
 		return $arr;
 	}
-	
+
 
 
 
@@ -1136,7 +1136,7 @@ class miniShop {
 	function utf8_ucfirst($string) {
 		$string = mb_ereg_replace("^[\ ]+","", $string);
 		$string = mb_strtolower($string, "utf-8");
-		$string = mb_strtoupper(mb_substr($string, 0, 1, "utf-8"), "UTF-8").mb_substr($string, 1, mb_strlen($string), "UTF-8" );  
+		$string = mb_strtoupper(mb_substr($string, 0, 1, "utf-8"), "UTF-8").mb_substr($string, 1, mb_strlen($string), "UTF-8" );
 		return $string;
 	}
 	function getGoods($parents) {
