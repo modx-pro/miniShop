@@ -19,7 +19,7 @@ $_SESSION['minishop']['warehouse'] = $warehouse;
 $_SESSION['minishop']['status'] = $status;
 
 $query = $modx->getOption('query',$scriptProperties, 0);
-$c = $modx->newQuery('ModOrders');
+$c = $modx->newQuery('MsOrder');
 
 if (!empty($status)) {
 	$c->andCondition(array('status' => $status));
@@ -32,11 +32,11 @@ if (!empty($warehouse)) {
 	$c->andCondition(array('wid' => $warehouse));
 }
 
-$count = $modx->getCount('ModOrders',$c);
+$count = $modx->getCount('MsOrder',$c);
 
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit, $start);
-$orders = $modx->getCollection('ModOrders',$c);
+$orders = $modx->getCollection('MsOrder',$c);
 
 $arr = array();
 foreach ($orders as $v) {
@@ -45,6 +45,6 @@ foreach ($orders as $v) {
 	$tmp['warehousename'] = $v->getWarehouseName();
 	$tmp['sum'] += $v->getDeliveryPrice();
 	$arr[]= $tmp;
-	
+
 }
 return $this->outputArray($arr, $count);

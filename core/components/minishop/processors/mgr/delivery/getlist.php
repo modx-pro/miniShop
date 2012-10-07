@@ -7,7 +7,7 @@
  */
 
 if (!$modx->hasPermission('view')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
- 
+
 $isLimit = !empty($scriptProperties['limit']);
 $start = $modx->getOption('start',$scriptProperties,0);
 $limit = $modx->getOption('limit',$scriptProperties,$modx->getOption('default_per_page'));
@@ -16,19 +16,19 @@ $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 $wid = $modx->getOption('wid',$scriptProperties,0);
 
 $query = $modx->getOption('query',$scriptProperties, 0);
-$c = $modx->newQuery('ModDelivery');
+$c = $modx->newQuery('MsDelivery');
 $c->where(array('wid' => $wid));
 
-$count = $modx->getCount('ModDelivery',$c);
+$count = $modx->getCount('MsDelivery',$c);
 
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit, $start);
-$delivery = $modx->getCollection('ModDelivery',$c);
+$delivery = $modx->getCollection('MsDelivery',$c);
 
 $arr = array();
 foreach ($delivery as $v) {
     $tmp = $v->toArray();
 	$arr[]= $tmp;
-	
+
 }
 return $this->outputArray($arr, $count);

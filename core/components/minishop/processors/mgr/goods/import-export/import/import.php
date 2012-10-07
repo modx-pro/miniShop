@@ -28,23 +28,23 @@ if (($file = fopen($file, "r")) !== false) {
 			$ids = $q->stmt->fetchAll(PDO::FETCH_COLUMN,0);
 		}
 		$modx->removeCollection('modResource', array('id:IN' => $ids));
-		$modx->removeCollection('ModGoods', array('gid:IN' => $ids));
-		$modx->removeCollection('ModCategories', array('gid:IN' => $ids));
-		$modx->removeCollection('ModTags', array('rid:IN' => $ids));
-		$modx->removeCollection('ModGallery', array('gid:IN' => $ids));
+		$modx->removeCollection('MsGood', array('gid:IN' => $ids));
+		$modx->removeCollection('MsCategory', array('gid:IN' => $ids));
+		$modx->removeCollection('MsTag', array('rid:IN' => $ids));
+		$modx->removeCollection('MsGallery', array('gid:IN' => $ids));
 
-		$q = $modx->newQuery('ModKits',array('rid:IN' => $ids));
+		$q = $modx->newQuery('MsKit',array('rid:IN' => $ids));
 		$q->orCondition(array('gid:IN' => $ids));
-		$modx->removeCollection('ModKits', $q);
+		$modx->removeCollection('MsKit', $q);
 	}
-	
+
 	// Importing
 	$i = 0;
 	while (($csv = fgetcsv($file, 0, ';')) !== false) {
 		if ($offset > 0 && $i < $offset) {$i++; continue;}
 		$modx->error->message = null;
 		$modx->error->errors = array();
-		
+
 		$tvs = $gallery = $tags = array();
 		$product = array('parent' => $category, 'template' => $template);
 		$ms = array('wid' => $wid);
@@ -56,7 +56,7 @@ if (($file = fopen($file, "r")) !== false) {
 			else if ($v == 'tag') {$tags[] = $csv[$k];}
 			else {$product[$v] = $csv[$k];}
 		}
-		
+
 		if ($res = $modx->getObject('modResource', array('parent' => $category, 'pagetitle' => $product['pagetitle']))) {
 			if ($mode == 'update') {
 				$id = $res->get('id');
@@ -70,7 +70,7 @@ if (($file = fopen($file, "r")) !== false) {
 				if ($response->isError()) {
 					return $modx->error->failure('Error on row '.$i.': '.$response->getMessage());
 				}
-				$modx->removeCollection('ModGallery', array('gid' => $id));
+				$modx->removeCollection('MsGallery', array('gid' => $id));
 			}
 			else {
 				$i++;
@@ -124,7 +124,7 @@ if (($file = fopen($file, "r")) !== false) {
 				$res->setTVValue($k, $v);
 			}
 		}
-		
+
 		$i++;
 		if ((time() - $time) >= $time_limit) {
 			return $modx->error->success($i);

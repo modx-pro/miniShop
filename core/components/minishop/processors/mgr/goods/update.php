@@ -1,7 +1,7 @@
 <?php
 /**
  * Update an Goods
- * 
+ *
  * @package minishop
  * @subpackage processors
  */
@@ -42,7 +42,7 @@ if ($modx->getCount('modResource', $id) > 0) {
 	$wids = array();
 	// If updating resource on all warehouses - get its ids
 	if ($scriptProperties['duplicate']) {
-		$tmp = $modx->getCollection('ModWarehouse');
+		$tmp = $modx->getCollection('MsWarehouse');
 		foreach ($tmp as $v) {
 			$permission = $v->get('permission');
 			if (!empty($permission) && !$modx->hasPermission($permission)) {
@@ -59,8 +59,8 @@ if ($modx->getCount('modResource', $id) > 0) {
 
 	foreach ($wids as $wid) {
 		$nolog = 0;
-		if (!$res = $modx->getObject('ModGoods', array('wid' => $wid, 'gid' => $id))) {
-			$res = $modx->newObject('ModGoods', array('wid' => $wid, 'gid' => $id));
+		if (!$res = $modx->getObject('MsGood', array('wid' => $wid, 'gid' => $id))) {
+			$res = $modx->newObject('MsGood', array('wid' => $wid, 'gid' => $id));
 			$nolog = 1;
 		}
 		$old =  $res->get('remains');
@@ -72,16 +72,16 @@ if ($modx->getCount('modResource', $id) > 0) {
 		$res->set('add1', $scriptProperties['add1']);
 		$res->set('add2', $scriptProperties['add2']);
 		$res->set('add3', $scriptProperties['add3']);
-		
+
 		$modx->invokeEvent('msOnBeforeProductUpdate', array('product' => $res));
 		if ($res->save()) {
 			$modx->invokeEvent('msOnProductUpdate', array('product' => $res));
 			$res->addTags($scriptProperties['tags']);
 		}
 	}
-	
+
 	// Defence agaid duplicate main category of the product and additionals
-	if ($tmp = $modx->getObject('ModCategories', array('gid' => $id, 'cid' => $scriptProperties['parent']))) {
+	if ($tmp = $modx->getObject('MsCategory', array('gid' => $id, 'cid' => $scriptProperties['parent']))) {
 		$tmp->remove();
 	}
 }

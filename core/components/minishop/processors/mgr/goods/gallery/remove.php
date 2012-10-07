@@ -2,7 +2,7 @@
 
 /**
  * Create an Image record for Goods
- * 
+ *
  * @package minishop
  * @subpackage processors
  */
@@ -12,7 +12,7 @@ $id = $_POST['id'];
 
 // Проверка обязательных полей
 if (empty($id)) {return $modx->error->failure($modx->lexicon('ms.gallery.item.err_nf'));}
-if ($res = $modx->getObject('ModGallery', $id)) {
+if ($res = $modx->getObject('MsGallery', $id)) {
 	$res->remove();
 }
 return $modx->error->success('', $res);

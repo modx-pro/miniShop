@@ -1,7 +1,7 @@
 <?php
 /**
  * Update an Image record for Goods
- * 
+ *
  * @package minishop
  * @subpackage processors
  */
@@ -18,7 +18,7 @@ if ($modx->error->hasError()) {
 	return $modx->error->failure();
 }
 
-if ($res = $modx->getObject('ModGallery', $id)) {
+if ($res = $modx->getObject('MsGallery', $id)) {
 	$res->set('file', $file);
 	$res->set('name', $scriptProperties['name']);
 	$res->set('description', $scriptProperties['description']);

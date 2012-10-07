@@ -1,7 +1,7 @@
 <?php
 /**
  * Remove an Product from Kit.
- * 
+ *
  * @package minishop
  * @subpackage processors
  */
@@ -10,7 +10,7 @@ if (!$modx->hasPermission('remove')) {return $modx->error->failure($modx->lexico
 
 $id = $scriptProperties['id'];
 
-if ($res = $modx->getObject('ModKits', $id)) {
+if ($res = $modx->getObject('MsKit', $id)) {
 	$res->remove();
 	return $modx->error->success('',$res);
 }

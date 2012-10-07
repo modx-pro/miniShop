@@ -14,7 +14,7 @@ $dir = $modx->getOption('dir',$scriptProperties,'DESC');
 $status = $_SESSION['minishop']['status'] = $modx->getOption('status', $scriptProperties, $_SESSION['minishop']['status']);
 $query = $modx->getOption('query',$scriptProperties, 0);
 
-$c = $modx->newQuery('ModOrders', array('uid' => $modx->user->id));
+$c = $modx->newQuery('MsOrder', array('uid' => $modx->user->id));
 
 if (!empty($status)) {
 	$c->andCondition(array('status' => $status));
@@ -24,11 +24,11 @@ if (!empty($query)) {
 	$c->andCondition(array('num:LIKE' => '%'.$query.'%'));
 }
 
-$count = $modx->getCount('ModOrders',$c);
+$count = $modx->getCount('MsOrder',$c);
 
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit, $start);
-$orders = $modx->getCollection('ModOrders',$c);
+$orders = $modx->getCollection('MsOrder',$c);
 
 $arr = array();
 foreach ($orders as $v) {

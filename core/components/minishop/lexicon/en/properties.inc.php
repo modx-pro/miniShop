@@ -62,6 +62,6 @@ $_lang['gr.where'] = 'A JSON expression of criteria to build any additional wher
 $_lang['gr.dbCacheFlag'] = 'Determines how result sets are cached if cache_db is enabled in MODX. 0|false = do not cache result set; 1 = cache result set according to cache settings, any other integer value = number of seconds to cache result set';
 $_lang['gr.context'] = 'A comma-delimited list of context keys for limiting results. Default is empty, i.e. do not limit results by context.';
 
-$_lang['ms.sortbyMS'] = 'A field name of ModGoods table to sort by or JSON object of field names and sortdir for each field, e.g. {"price:>":500,"remains:<":15}';
+$_lang['ms.sortbyMS'] = 'A field name of MsGood table to sort by or JSON object of field names and sortdir for each field, e.g. {"price:>":500,"remains:<":15}';
 
 

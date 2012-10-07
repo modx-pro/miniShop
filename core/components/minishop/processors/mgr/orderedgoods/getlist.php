@@ -6,7 +6,7 @@
  * @subpackage processors
  */
 if (!$modx->hasPermission('view')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
- 
+
 $isLimit = !empty($scriptProperties['limit']);
 $start = $modx->getOption('start',$scriptProperties,0);
 $limit = $modx->getOption('limit',$scriptProperties, round($modx->getOption('default_per_page') / 2));
@@ -16,13 +16,13 @@ $oid = $modx->getOption('oid',$scriptProperties, 0);
 
 $query = $modx->getOption('query',$scriptProperties, 0);
 
-$c = $modx->newQuery('ModOrderedGoods');
+$c = $modx->newQuery('MsOrderedGood');
 $c->where(array('oid' => $oid));
-$count = $modx->getCount('ModOrderedGoods',$c);
+$count = $modx->getCount('MsOrderedGood',$c);
 
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit, $start);
-$orders = $modx->getCollection('ModOrderedGoods',$c);
+$orders = $modx->getCollection('MsOrderedGood',$c);
 
 $arr = array();
 foreach ($orders as $v) {
@@ -49,3 +49,36 @@ foreach ($orders as $v) {
 	$arr[] = $tmp;
 }
 return $this->outputArray($arr, $count);
+
+//class MsOrderedGoodGetListProcessor extends modObjectGetListProcessor {
+//    public $classKey = 'MsOrderedGood';
+//    public $defaultSortField = 'id';
+//    public $defaultSortDirection = 'ASC';
+//    public $languageTopics = array('minishop:default');
+//    public $objectType = 'minishop.modwarehouse';
+//
+//    public function prepareQueryBeforeCount(xPDOQuery $c) {
+//        $orderID = $this->getProperty('oid');
+//        if (!$orderID) {
+//            // @todo: return error
+//        }
+//        $c->where(array('oid' => $orderID));
+//        return $c;
+//    }
+//
+//    public function prepareRow(MsOrderedGood $object) {
+//        $objectArray = $object->toArray();
+//        $objectArray['name'] = $object->getGoodsName();
+//        $objectArray['url'] = $this->modx->makeUrl($objectArray['gid'], '', '', 'full');
+//        /** @var MsGood $product */
+//        $product = $object->getGoodsParams();
+//        if ($product) {
+//            $objectArray['article'] = $product->get('article');
+//        } else {
+//            $objectArray['article'] = '';
+//        }
+//
+//        return $objectArray;
+//    }
+//}
+//return 'MsOrderedGoodGetListProcessor';

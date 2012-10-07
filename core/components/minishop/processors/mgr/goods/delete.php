@@ -1,7 +1,7 @@
 <?php
 /**
  * Delete an Goods.
- * 
+ *
  * @package minishop
  * @subpackage processors
  */
@@ -15,12 +15,12 @@ if ($response->isError()) {
 	return $modx->error->failure($response->getMessage());
 }
 /*
-$modx->removeCollection('ModGoods', array('gid' => $id));
-$modx->removeCollection('ModCategories', array('gid' => $id));
-$modx->removeCollection('ModTags', array('rid' => $id));
+$modx->removeCollection('MsGood', array('gid' => $id));
+$modx->removeCollection('MsCategory', array('gid' => $id));
+$modx->removeCollection('MsTag', array('rid' => $id));
 
-$q = $modx->newQuery('ModKits',array('rid' => $id));
+$q = $modx->newQuery('MsKit',array('rid' => $id));
 $q->orCondition(array('gid' => $id));
-$modx->removeCollection('ModKits', $q);
+$modx->removeCollection('MsKit', $q);
 */
 return $modx->error->success('',$res);

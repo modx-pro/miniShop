@@ -6,7 +6,7 @@
  * @subpackage processors
  */
 if (!$modx->hasPermission('view')) {return $modx->error->failure($modx->lexicon('ms.no_permission'));}
- 
+
 $isLimit = !empty($scriptProperties['limit']);
 $start = $modx->getOption('start',$scriptProperties,0);
 $limit = $modx->getOption('limit',$scriptProperties,round($modx->getOption('default_per_page') / 2));
@@ -18,18 +18,18 @@ if (empty($did)) {
 	return $modx->error->failure($modx->lexicon('ms.delivery.err_nf'));
 }
 else {
-	if (!$delivery = $modx->getObject('ModDelivery', $did)) {
+	if (!$delivery = $modx->getObject('MsDelivery', $did)) {
 		return $modx->error->failure($modx->lexicon('ms.delivery.err_nf'));
 	}
 }
 $cur_payments = $delivery->getPayments();
 
-$c = $modx->newQuery('ModPayment');
-$count = $modx->getCount('ModPayment',$c);
+$c = $modx->newQuery('MsPayment');
+$count = $modx->getCount('MsPayment',$c);
 
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit, $start);
-$payments = $modx->getCollection('ModPayment',$c);
+$payments = $modx->getCollection('MsPayment',$c);
 
 $arr = array();
 foreach ($payments as $v) {
@@ -41,7 +41,7 @@ foreach ($payments as $v) {
 		$tmp['snippet'] = '';
 	}
 	$tmp['enabled'] = in_array($tmp['id'], $cur_payments) ? 1 : 0;
-	
+
 	$arr[]= $tmp;
 }
 return $this->outputArray($arr, $count);

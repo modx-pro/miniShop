@@ -1,7 +1,7 @@
 <?php
 /**
  * Get an Goods
- * 
+ *
  * @package minishop
  * @subpackage processors
  */
@@ -16,11 +16,11 @@ if (empty($id)) {
 
 if ($res = $modx->getObject('modResource', $id)) {
 	$arr = $res->toArray();
-	
-	if ($res2 = $modx->getObject('ModGoods', array('gid' => $id, 'wid' => $wid))) {
+
+	if ($res2 = $modx->getObject('MsGood', array('gid' => $id, 'wid' => $wid))) {
 		$tmp = $res2->toArray();
 		unset($tmp['id']);
-		
+
 		$arr = array_merge($arr, $tmp);
 		$arr['tags'] = $res2->getTags(1);
 	}

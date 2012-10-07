@@ -54,10 +54,10 @@ if (($tmp = fopen($file, "r")) !== false) {
 	// Производитель товара
 	if (!$res_vendor = $modx->getObject('modResource', array('parent' => $vend_root, 'pagetitle' => $vendor))) {
 		$res_vendor = $modx->newObject('modResource');
-		
+
 		$alias = strtolower(strtr($vendor, $translit_arr));
 		$uri = strtolower($cat2.$alias.'/');
-		
+
 		$res_vendor->fromArray(array(
 			'pagetitle' => $vendor
 			,'published' => 1
@@ -80,10 +80,10 @@ if (($tmp = fopen($file, "r")) !== false) {
 	// Категория товара
 	if (!$res_category = $modx->getObject('modResource', array('parent' => $cat_root, 'pagetitle' => $category))) {
 		$res_category = $modx->newObject('modResource');
-		
+
 		$alias = strtolower(strtr($category, $translit_arr));
 		$uri = strtolower($cat1.$alias.'/');
-		
+
 		$res_category->fromArray(array(
 			'pagetitle' => $category
 			,'published' => 1
@@ -107,10 +107,10 @@ if (($tmp = fopen($file, "r")) !== false) {
 	// ПодКатегория товара
 	if (!$res_sub_category = $modx->getObject('modResource', array('parent' => $id_category, 'pagetitle' => $sub_category))) {
 		$res_sub_category = $modx->newObject('modResource');
-		
+
 		$alias = strtolower(strtr($sub_category, $translit_arr));
 		$uri = strtolower($cat1.$alias_category.'/'.$alias.'/');
-		
+
 		$res_sub_category->fromArray(array(
 			'pagetitle' => $sub_category
 			,'published' => 1
@@ -134,10 +134,10 @@ if (($tmp = fopen($file, "r")) !== false) {
 	// Товар
 	if (!$res_product = $modx->getObject('modResource', array('parent' => $id_sub_category, 'pagetitle' => $pagetitle))) {
 		$res_product = $modx->newObject('modResource');
-		
+
 		$alias = strtolower(strtr($pagetitle, $translit_arr));
 		$uri = strtolower($cat1.$alias_category.'/'.$alias_sub_category.'/'.$alias.'.html');
-		
+
 		$res_product->fromArray(array(
 			'pagetitle' => $pagetitle
 			,'longtitle' => $longtitle
@@ -160,9 +160,9 @@ if (($tmp = fopen($file, "r")) !== false) {
 	////////////////////////////////////////////////////////////
 	// Шаг 5
 	// Дополнительная связь товара и производителя
-	if (!$res_categories = $modx->getObject('ModCategories', array('cid' => $id_vendor, 'gid' => $id_product))) {
-		$res_categories = $modx->newObject('ModCategories');
-		
+	if (!$res_categories = $modx->getObject('MsCategory', array('cid' => $id_vendor, 'gid' => $id_product))) {
+		$res_categories = $modx->newObject('MsCategory');
+
 		$res_categories->fromArray(array(
 			'cid' => $id_vendor
 			,'gid' => $id_product
@@ -177,9 +177,9 @@ if (($tmp = fopen($file, "r")) !== false) {
 	////////////////////////////////////////////////////////////
 	// Шаг 6
 	// Дополнительные параметры товара
-	if (!$res_goods = $modx->getObject('ModGoods', array('gid' => $id_product, 'wid' => $wid))) {
-		$res_goods = $modx->newObject('ModGoods');
-		
+	if (!$res_goods = $modx->getObject('MsGood', array('gid' => $id_product, 'wid' => $wid))) {
+		$res_goods = $modx->newObject('MsGood');
+
 		$res_goods->fromArray(array(
 			'wid' => $wid
 			,'gid' => $id_product
@@ -193,7 +193,7 @@ if (($tmp = fopen($file, "r")) !== false) {
 		}
 	}
 	////////////////////////////////////////////////////////////
-	
+
 	/*
 	echo '<pre>';
 	print_r($res_goods->toArray());
