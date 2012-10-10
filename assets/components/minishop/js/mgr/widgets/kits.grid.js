@@ -380,7 +380,7 @@ Ext.extend(miniShop.grid.Kititems,MODx.grid.Grid, {
 		window.open(url);
 	}
 	,goToGoodsManagerPage: function() {
-        location.href = '?a=' + MODx.action['resource/update'] + '&id=' + this.menu.record.id;
+        location.href = '?a=' + MODx.action['resource/update'] + '&id=' + this.menu.record.gid;
 	}
 });
 Ext.reg('minishop-grid-goods-in-kit',miniShop.grid.Kititems);
