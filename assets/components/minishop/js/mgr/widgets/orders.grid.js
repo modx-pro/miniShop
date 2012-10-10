@@ -453,7 +453,7 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid, {
 		window.open(url);
 	}
 	,goToGoodsManagerPage: function() {
-        location.href = '?a=' + MODx.action['resource/update'] + '&id=' + this.menu.record.id;
+        location.href = '?a=' + MODx.action['resource/update'] + '&id=' + this.menu.record.gid;
 	}
 });
 
