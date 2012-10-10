@@ -100,7 +100,7 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
 		this.getStore().baseParams['warehouse'] = cb.value;
 		this.getBottomToolbar().changePage(1);
 		this.refresh();
-	}    
+	}
 	,filterByCategory: function(cb) {
 		this.getStore().baseParams['category'] = cb.value;
 		this.getBottomToolbar().changePage(1);
@@ -111,8 +111,7 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
 		window.open(url);
 	}
 	,goToGoodsManagerPage: function() {
-		var id = this.menu.record.id;
-		window.open('/manager/index.php?a=30&id=' + id);
+        location.href = '?a=' + MODx.action['resource/update'] + '&id=' + this.menu.record.id;
 	}
 	,createGoods: function(e) {
 		gid = 0;
@@ -154,7 +153,7 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
 			,listeners: {
 				'success': {fn:function(r) {
 					var record = r.object;
-					
+
 					var w = MODx.load({
 						xtype: 'minishop-window-creategoods'
 						,title: record.pagetitle
@@ -199,7 +198,7 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
 	}
 	,deleteGoods: function(btn,e) {
 		if (!this.menu.record) return false;
-		
+
 		MODx.msg.confirm({
 			title: _('resource_delete')
 			,text: _('ms.goods.delete_confirm')
@@ -217,7 +216,7 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
 	}
 	,undeleteGoods: function(btn,e) {
 		if (!this.menu.record) return false;
-		
+
 		MODx.Ajax.request({
 			url: MODx.config.connectors_url + 'resource/index.php'
 			,params: {
@@ -248,7 +247,7 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid,{
 	}
 	,unpublishGoods: function(btn,e) {
 		if (!this.menu.record) return false;
-		
+
 		MODx.msg.confirm({
 			title: _('resource_unpublish')
 			,text: _('resource_unpublish_confirm')
@@ -270,7 +269,7 @@ Ext.reg('minishop-grid-goods',miniShop.grid.Goods);
 
 miniShop.window.createGoods = function(config) {
 	config = config || {};
-    
+
 	this.ident = miniShop.tempids.createGoods = config.ident || 'qcr'+Ext.id();
 	Ext.applyIf(config,{
 		title: _('ms.goods.create')
@@ -760,7 +759,7 @@ Ext.extend(miniShop.grid.Gallery,MODx.grid.Grid, {
 	}
 	,removeImage: function(btn,e) {
 		if (!this.menu.record) return false;
-		
+
 		MODx.msg.confirm({
 			title: _('ms.gallery.gallery')
 			,text: _('ms.gallery.remove_confirm')

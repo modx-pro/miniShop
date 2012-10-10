@@ -104,7 +104,7 @@ Ext.extend(miniShop.grid.Orders,MODx.grid.Grid,{
 	}
 	,removeOrder: function(btn,e) {
 		if (!this.menu.record) return false;
-		
+
 		MODx.msg.confirm({
 			title: _('ms.orders.remove')
 			,text: _('ms.orders.remove_confirm')
@@ -148,7 +148,7 @@ Ext.extend(miniShop.grid.Orders,MODx.grid.Grid,{
 			,listeners: {
 				'success': {fn:function(r) {
 					var pr = r.object;
-					
+
 					var w = MODx.load({
 						xtype: 'minishop-window-editorder'
 						,record: pr
@@ -292,7 +292,7 @@ Ext.extend(miniShop.window.EditOrder,MODx.Window);
 Ext.reg('minishop-window-editorder',miniShop.window.EditOrder);
 
 
-// History of changing the order 
+// History of changing the order
 miniShop.grid.Log = function(config) {
 	config = config || {};
 	this.exp = new Ext.grid.RowExpander({
@@ -334,13 +334,13 @@ Ext.reg('minishop-grid-log',miniShop.grid.Log);
 // Table with ordered goods
 miniShop.grid.Goods = function(config) {
 	config = config || {};
-	
+
 	this.exp = new Ext.grid.RowExpander({
 		expandOnDblClick: false
 		,tpl : new Ext.Template('<p class="desc">{data_view}</p>')
 		,renderer : function(v, p, record){return record.data.data_view != '' ? '<div class="x-grid3-row-expander">&#160;</div>' : '&#160;';}
 	});
-	
+
 	Ext.applyIf(config,{
 		id: this.ident+'-grid-goods'
 		,url: miniShop.config.connector_url
@@ -434,7 +434,7 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid, {
 	}
 	,removeGoods: function(btn,e) {
 		if (!this.menu.record) return false;
-		
+
 		MODx.msg.confirm({
 			title: _('ms.orderedgoods.remove')
 			,text: _('ms.orderedgoods.remove_confirm')
@@ -453,8 +453,7 @@ Ext.extend(miniShop.grid.Goods,MODx.grid.Grid, {
 		window.open(url);
 	}
 	,goToGoodsManagerPage: function() {
-		var gid = this.menu.record.gid;
-		window.open('/manager/index.php?a=30&id=' + gid);
+        location.href = '?a=' + MODx.action['resource/update'] + '&id=' + this.menu.record.id;
 	}
 });
 

@@ -65,8 +65,7 @@ Ext.extend(miniShop.grid.Kits,MODx.grid.Grid,{
 		window.open(url);
 	}
 	,goToGoodsManagerPage: function() {
-		var id = this.menu.record.id;
-		window.open('/manager/index.php?a=30&id=' + id);
+        location.href = '?a=' + MODx.action['resource/update'] + '&id=' + this.menu.record.id;
 	}
 	,createKit: function(e) {
 		var w = MODx.load({
@@ -102,7 +101,7 @@ Ext.extend(miniShop.grid.Kits,MODx.grid.Grid,{
 			,listeners: {
 				'success': {fn:function(r) {
 					var record = r.object;
-					
+
 					var w = MODx.load({
 						xtype: 'minishop-window-createkit'
 						,title: record.pagetitle
@@ -129,7 +128,7 @@ Ext.extend(miniShop.grid.Kits,MODx.grid.Grid,{
 	}
 	,deleteGoods: function(btn,e) {
 		if (!this.menu.record) return false;
-		
+
 		MODx.msg.confirm({
 			title: _('resource_delete')
 			,text: _('ms.kits.delete_confirm')
@@ -147,7 +146,7 @@ Ext.extend(miniShop.grid.Kits,MODx.grid.Grid,{
 	}
 	,undeleteGoods: function(btn,e) {
 		if (!this.menu.record) return false;
-		
+
 		MODx.Ajax.request({
 			url: MODx.config.connectors_url + 'resource/index.php'
 			,params: {
@@ -178,7 +177,7 @@ Ext.extend(miniShop.grid.Kits,MODx.grid.Grid,{
 	}
 	,unpublishGoods: function(btn,e) {
 		if (!this.menu.record) return false;
-		
+
 		MODx.msg.confirm({
 			title: _('resource_unpublish')
 			,text: _('resource_unpublish_confirm')
@@ -345,7 +344,7 @@ Ext.extend(miniShop.grid.Kititems,MODx.grid.Grid, {
 	},*/
 	removeItem: function(btn,e) {
 		if (!this.menu.record) return false;
-		
+
 		MODx.Ajax.request({
 			url: this.config.url
 			,params: {
@@ -361,7 +360,7 @@ Ext.extend(miniShop.grid.Kititems,MODx.grid.Grid, {
 	}
 	,addItem: function(combo, row, index) {
 		if (!row.id || !this.config.gid) return false;
-		
+
 		MODx.Ajax.request({
 			url: this.config.url
 			,params: {
@@ -381,8 +380,7 @@ Ext.extend(miniShop.grid.Kititems,MODx.grid.Grid, {
 		window.open(url);
 	}
 	,goToGoodsManagerPage: function() {
-		var id = this.menu.record.gid;
-		window.open('/manager/index.php?a=30&id=' + id);
+        location.href = '?a=' + MODx.action['resource/update'] + '&id=' + this.menu.record.id;
 	}
 });
 Ext.reg('minishop-grid-goods-in-kit',miniShop.grid.Kititems);
