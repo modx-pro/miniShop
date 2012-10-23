@@ -321,7 +321,7 @@ class miniShop {
 			}
 			else {$price = 0;}
 		}
-		return number_format($price, 2);
+		return $price;
 	}
 
 
