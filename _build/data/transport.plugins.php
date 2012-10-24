@@ -32,6 +32,13 @@ $events[1]->fromArray(array(
 	'propertyset' => 0,
 ),'',true,true);
 
+$events[2]= $modx->newObject('modPluginEvent');
+$events[2]->fromArray(array(
+	'event' => 'OnClearCache',
+	'priority' => 0,
+	'propertyset' => 0,
+),'',true,true);
+
 if (is_array($events) && !empty($events)) {
 	$plugins[0]->addMany($events);
 	$modx->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($events).' plugin events for miniShop.'); flush();

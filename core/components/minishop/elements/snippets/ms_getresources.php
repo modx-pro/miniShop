@@ -36,6 +36,9 @@ $limit = isset($limit) ? (integer) $limit : 5;
 $offset = isset($offset) ? (integer) $offset : 0;
 $totalVar = !empty($totalVar) ? $totalVar : 'total';
 
+$cacheChunks = !empty($cacheChunks) ? true : false;
+$cacheTime = !empty($cacheTime) ? $cacheTime : 1800;
+
 $dbCacheFlag = !isset($dbCacheFlag) ? false : $dbCacheFlag;
 if (is_string($dbCacheFlag) || is_numeric($dbCacheFlag)) {
 	if ($dbCacheFlag == '0') {
@@ -527,10 +530,15 @@ foreach ($collection as $resourceId => $resource) {
 		}
 	}
 	if (!empty($tpl) && empty($resourceTpl)) {
-		$key = 'msgr/'.md5($tpl.json_encode($properties));
-		if (!$resourceTpl = $modx->cacheManager->get($key)) {
+		if (!$cacheChunks) {
 			$resourceTpl = parseTpl($tpl, $properties);
-			$modx->cacheManager->set($key, $resourceTpl, 1800);
+		}
+		else {
+			$key = 'msgr/'.md5($tpl.json_encode($properties));
+			if (!$resourceTpl = $modx->cacheManager->get($key)) {
+				$resourceTpl = parseTpl($tpl, $properties);
+				$modx->cacheManager->set($key, $resourceTpl, $cacheTime);
+			}
 		}
 	}
 	if (empty($resourceTpl)) {

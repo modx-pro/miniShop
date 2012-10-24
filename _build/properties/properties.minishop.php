@@ -438,13 +438,26 @@ $properties[7] = array(
 		'value' => '',
 		'lexicon' => 'minishop:properties',
 	),
-
 	array(
 		'name' => 'sortbyMS',
 		'desc' => 'gr.sortbyMS',
 		'type' => 'textfield',
 		'options' => '',
 		'value' => '',
+		'lexicon' => 'minishop:properties',
+	),
+	array(
+		'name' => 'cacheChunks',
+		'desc' => 'gr.cacheChunks',
+		'type' => 'combo-boolean',
+		'value' => false,
+		'lexicon' => 'minishop:properties',
+	),
+	array(
+		'name' => 'cacheTime',
+		'desc' => 'gr.cacheTime',
+		'type' => 'numberfield',
+		'value' => 1800,
 		'lexicon' => 'minishop:properties',
 	)
 );

@@ -1,5 +1,23 @@
 Changelog for miniShop.
 
+1.9.3 (24.10.2012)
+=============
+- Сниппет miniShop при указанном дествии getMiniCart теперь игнорирует все другие действия и не отзывается на Ajax.
+- Исправлена проблема с пропадающими чанками - $scriptProperties передается в класс при каждом запуске сниппета miniShop.
+- Интеграция окна редактирования товара с TinyMCE.
+- Улучшение скорости msGetResources, за счет кэширования отрендеренных чанков. Параметр &cacheChunks, по умолчанию - отключен.
+- Исправлен импорт. Из-за опечатки возникала ошибка, при малом количестве товаров на сайте.
+- Исправлена ошибка в личном кабинете, когда из-за опечатки не выводились заказы.
+- Другие исправления\улучшения
+-----
+- If snippet miniShop called with action getMiniCart - it ignores all other actions and does not respond to Ajax.
+- $scriptProperties sended to class each time snippet miniShop is run.
+- Integration with TinyMCE in product edit popup.
+- Improved speed of msGetResources, by caching rendered chunks. Parameter &cacheChunks, by default - disabled.
+- Fixed import. Due to a typo, an error occurred in a small number of products on the site.
+- Fixed a bug in private office when not displayed orders.
+- Other fixes\improvements
+
 1.9.2 (03.09.2012)
 =============
 - Исправлено подключение к БД в плагине

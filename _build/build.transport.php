@@ -14,24 +14,24 @@ set_time_limit(0);
 /* define package */
 define('PKG_NAME','miniShop');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
-define('PKG_VERSION','1.9.2');
+define('PKG_VERSION','1.9.3');
 define('PKG_RELEASE','pl');
 
 /* define sources */
 $root = dirname(dirname(__FILE__)).'/';
 $sources = array(
-    'root' => $root,
-    'build' => $root . '_build/',
-    'data' => $root . '_build/data/',
-    'resolvers' => $root . '_build/resolvers/',
-    'chunks' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/chunks/',
-    'snippets' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/snippets/',
-    'plugins' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/plugins/',
-    'lexicon' => $root . 'core/components/'.PKG_NAME_LOWER.'/lexicon/',
-    'docs' => $root.'core/components/'.PKG_NAME_LOWER.'/docs/',
-    'pages' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/pages/',
-    'source_assets' => $root.'assets/components/'.PKG_NAME_LOWER,
-    'source_core' => $root.'core/components/'.PKG_NAME_LOWER,
+	'root' => $root,
+	'build' => $root . '_build/',
+	'data' => $root . '_build/data/',
+	'resolvers' => $root . '_build/resolvers/',
+	'chunks' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/chunks/',
+	'snippets' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/snippets/',
+	'plugins' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/plugins/',
+	'lexicon' => $root . 'core/components/'.PKG_NAME_LOWER.'/lexicon/',
+	'docs' => $root.'core/components/'.PKG_NAME_LOWER.'/docs/',
+	'pages' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/pages/',
+	'source_assets' => $root.'assets/components/'.PKG_NAME_LOWER,
+	'source_core' => $root.'core/components/'.PKG_NAME_LOWER,
 );
 unset($root);
 
@@ -60,64 +60,64 @@ $category->set('category',PKG_NAME);
 /* add snippets */
 $snippets = include $sources['data'].'transport.snippets.php';
 if (!is_array($snippets)) {
-    $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in snippets.');
+	$modx->log(modX::LOG_LEVEL_ERROR,'Could not package in snippets.');
 } else {
-    $category->addMany($snippets);
-    $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($snippets).' snippets.');
+	$category->addMany($snippets);
+	$modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($snippets).' snippets.');
 }
 /* add chunks */
 $chunks = include $sources['data'].'transport.chunks.php';
 if (!is_array($chunks)) {
-    $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in chunks.');
+	$modx->log(modX::LOG_LEVEL_ERROR,'Could not package in chunks.');
 } else {
-    $category->addMany($chunks);
-    $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($chunks).' chunks.');
+	$category->addMany($chunks);
+	$modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($chunks).' chunks.');
 }
 
 /* add plugins */
 $plugins = include $sources['data'].'transport.plugins.php';
 if (!is_array($plugins)) {
-    $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in plugins.');
+	$modx->log(modX::LOG_LEVEL_ERROR,'Could not package in plugins.');
 } else {
-    $category->addMany($plugins);
-    $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($plugins).' plugins.');
+	$category->addMany($plugins);
+	$modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($plugins).' plugins.');
 }
 
 /* create category vehicle */
 $attr = array(
-    xPDOTransport::UNIQUE_KEY => 'category',
-    xPDOTransport::PRESERVE_KEYS => false,
-    xPDOTransport::UPDATE_OBJECT => true,
-    xPDOTransport::RELATED_OBJECTS => true,
-    xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
-        'Children' => array(
-            xPDOTransport::PRESERVE_KEYS => false,
-            xPDOTransport::UPDATE_OBJECT => true,
-            xPDOTransport::UNIQUE_KEY => 'category',
-            xPDOTransport::RELATED_OBJECTS => true,
-            xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
-                'Snippets' => array(
-                    xPDOTransport::PRESERVE_KEYS => false,
-                    xPDOTransport::UPDATE_OBJECT => true,
-                    xPDOTransport::UNIQUE_KEY => 'name',
-                ),
-                'Chunks' => array(
-                    xPDOTransport::PRESERVE_KEYS => false,
-                    xPDOTransport::UPDATE_OBJECT => false,
-                    xPDOTransport::UNIQUE_KEY => 'name',
-                ),
-            ),
-        ),
-        'Snippets' => array(
-            xPDOTransport::PRESERVE_KEYS => false,
-            xPDOTransport::UPDATE_OBJECT => true,
-            xPDOTransport::UNIQUE_KEY => 'name',
-        ),
-        'Chunks' => array (
-            xPDOTransport::PRESERVE_KEYS => false,
-            xPDOTransport::UPDATE_OBJECT => false,
-            xPDOTransport::UNIQUE_KEY => 'name',
-        ),
+	xPDOTransport::UNIQUE_KEY => 'category',
+	xPDOTransport::PRESERVE_KEYS => false,
+	xPDOTransport::UPDATE_OBJECT => true,
+	xPDOTransport::RELATED_OBJECTS => true,
+	xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
+		'Children' => array(
+			xPDOTransport::PRESERVE_KEYS => false,
+			xPDOTransport::UPDATE_OBJECT => true,
+			xPDOTransport::UNIQUE_KEY => 'category',
+			xPDOTransport::RELATED_OBJECTS => true,
+			xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
+				'Snippets' => array(
+					xPDOTransport::PRESERVE_KEYS => false,
+					xPDOTransport::UPDATE_OBJECT => true,
+					xPDOTransport::UNIQUE_KEY => 'name',
+				),
+				'Chunks' => array(
+					xPDOTransport::PRESERVE_KEYS => false,
+					xPDOTransport::UPDATE_OBJECT => false,
+					xPDOTransport::UNIQUE_KEY => 'name',
+				),
+			),
+		),
+		'Snippets' => array(
+			xPDOTransport::PRESERVE_KEYS => false,
+			xPDOTransport::UPDATE_OBJECT => true,
+			xPDOTransport::UNIQUE_KEY => 'name',
+		),
+		'Chunks' => array (
+			xPDOTransport::PRESERVE_KEYS => false,
+			xPDOTransport::UPDATE_OBJECT => false,
+			xPDOTransport::UNIQUE_KEY => 'name',
+		),
 		'Plugins' => array (
 			xPDOTransport::PRESERVE_KEYS => false,
 			xPDOTransport::UPDATE_OBJECT => true,
@@ -128,94 +128,94 @@ $attr = array(
 			xPDOTransport::UPDATE_OBJECT => true,
 			xPDOTransport::UNIQUE_KEY => array('pluginid','event'),
 		),
-    ),
+	),
 );
 $vehicle = $builder->createVehicle($category,$attr);
 
 $modx->log(modX::LOG_LEVEL_INFO,'Adding file resolvers to category...');
 $vehicle->resolve('file',array(
-    'source' => $sources['source_assets'],
-    'target' => "return MODX_ASSETS_PATH . 'components/';",
+	'source' => $sources['source_assets'],
+	'target' => "return MODX_ASSETS_PATH . 'components/';",
 ));
 $vehicle->resolve('file',array(
-    'source' => $sources['source_core'],
-    'target' => "return MODX_CORE_PATH . 'components/';",
+	'source' => $sources['source_core'],
+	'target' => "return MODX_CORE_PATH . 'components/';",
 ));
 $builder->putVehicle($vehicle);
 
 /* load system settings */
 $settings = include $sources['data'].'transport.settings.php';
 if (!is_array($settings)) {
-    $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in settings.');
+	$modx->log(modX::LOG_LEVEL_ERROR,'Could not package in settings.');
 } else {
-    $attributes= array(
-        xPDOTransport::UNIQUE_KEY => 'key',
-        xPDOTransport::PRESERVE_KEYS => true,
-        xPDOTransport::UPDATE_OBJECT => false,
-    );
-    foreach ($settings as $setting) {
-        $vehicle = $builder->createVehicle($setting,$attributes);
-        $builder->putVehicle($vehicle);
-    }
-    $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($settings).' System Settings.');
+	$attributes= array(
+		xPDOTransport::UNIQUE_KEY => 'key',
+		xPDOTransport::PRESERVE_KEYS => true,
+		xPDOTransport::UPDATE_OBJECT => false,
+	);
+	foreach ($settings as $setting) {
+		$vehicle = $builder->createVehicle($setting,$attributes);
+		$builder->putVehicle($vehicle);
+	}
+	$modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($settings).' System Settings.');
 }
 unset($settings,$setting,$attributes);
 
 /* load miniShop events */
 $events = include $sources['data'].'transport.events.php';
 if (!is_array($events)) {
-    $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in events.');
+	$modx->log(modX::LOG_LEVEL_ERROR,'Could not package in events.');
 } else {
-    $attributes = array (
-        xPDOTransport::PRESERVE_KEYS => true,
-        xPDOTransport::UPDATE_OBJECT => true,
-    );
-    foreach ($events as $event) {
-        $vehicle = $builder->createVehicle($event,$attributes);
-        $builder->putVehicle($vehicle);
-    }
-    $modx->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($events).' miniShop events.');
+	$attributes = array (
+		xPDOTransport::PRESERVE_KEYS => true,
+		xPDOTransport::UPDATE_OBJECT => true,
+	);
+	foreach ($events as $event) {
+		$vehicle = $builder->createVehicle($event,$attributes);
+		$builder->putVehicle($vehicle);
+	}
+	$modx->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($events).' miniShop events.');
 }
 unset ($events, $event, $attributes);
 
 /* load menu */
 $menu = include $sources['data'].'transport.menu.php';
 if (empty($menu)) {
-    $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in menu.');
+	$modx->log(modX::LOG_LEVEL_ERROR,'Could not package in menu.');
 } else {
-    $vehicle= $builder->createVehicle($menu,array (
-        xPDOTransport::PRESERVE_KEYS => true,
-        xPDOTransport::UPDATE_OBJECT => true,
-        xPDOTransport::UNIQUE_KEY => 'text',
-        xPDOTransport::RELATED_OBJECTS => true,
-        xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
-            'Action' => array (
-                xPDOTransport::PRESERVE_KEYS => false,
-                xPDOTransport::UPDATE_OBJECT => true,
-                xPDOTransport::UNIQUE_KEY => array ('namespace','controller'),
-            ),
-        ),
-    ));
-    $modx->log(modX::LOG_LEVEL_INFO,'Adding in PHP resolvers...');
-    $vehicle->resolve('php',array(
-        'source' => $sources['resolvers'] . 'resolve.tables.php',
-    ));
-    $vehicle->resolve('php',array(
-        'source' => $sources['resolvers'] . 'resolve.paths.php',
-    ));
-    $builder->putVehicle($vehicle);
-    $modx->log(modX::LOG_LEVEL_INFO,'Packaged in menu.');
+	$vehicle= $builder->createVehicle($menu,array (
+		xPDOTransport::PRESERVE_KEYS => true,
+		xPDOTransport::UPDATE_OBJECT => true,
+		xPDOTransport::UNIQUE_KEY => 'text',
+		xPDOTransport::RELATED_OBJECTS => true,
+		xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
+			'Action' => array (
+				xPDOTransport::PRESERVE_KEYS => false,
+				xPDOTransport::UPDATE_OBJECT => true,
+				xPDOTransport::UNIQUE_KEY => array ('namespace','controller'),
+			),
+		),
+	));
+	$modx->log(modX::LOG_LEVEL_INFO,'Adding in PHP resolvers...');
+	$vehicle->resolve('php',array(
+		'source' => $sources['resolvers'] . 'resolve.tables.php',
+	));
+	$vehicle->resolve('php',array(
+		'source' => $sources['resolvers'] . 'resolve.paths.php',
+	));
+	$builder->putVehicle($vehicle);
+	$modx->log(modX::LOG_LEVEL_INFO,'Packaged in menu.');
 }
 unset($vehicle,$menu);
 
 /* now pack in the license file, readme and setup options */
 $builder->setPackageAttributes(array(
-    'license' => file_get_contents($sources['docs'] . 'license.txt'),
-    'readme' => file_get_contents($sources['docs'] . 'readme.txt'),
-    'changelog' => file_get_contents($sources['docs'] . 'changelog.txt'),
-    //'setup-options' => array(
-        //'source' => $sources['build'].'setup.options.php',
-    //),
+	'license' => file_get_contents($sources['docs'] . 'license.txt'),
+	'readme' => file_get_contents($sources['docs'] . 'readme.txt'),
+	'changelog' => file_get_contents($sources['docs'] . 'changelog.txt'),
+	//'setup-options' => array(
+		//'source' => $sources['build'].'setup.options.php',
+	//),
 ));
 $modx->log(modX::LOG_LEVEL_INFO,'Added package attributes and setup options.');
 
