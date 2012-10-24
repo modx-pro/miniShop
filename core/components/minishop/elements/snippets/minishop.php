@@ -1,7 +1,9 @@
 <?php
 // Defining action. If no action in $_REQUEST - set default (getCart)
-if (empty($_REQUEST['action'])) {$action = $modx->getOption('action', $scriptProperties, 'getCart');}
+if (empty($_REQUEST['action']) || $scriptProperties['action'] == 'getMiniCart') {$action = $modx->getOption('action', $scriptProperties, 'getCart');}
 else {$action = $_REQUEST['action'];}
+
+if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest' && $action == 'getMiniCart') {return;}
 
 // Load class
 $modx->miniShop = $modx->getService('minishop','miniShop', $modx->getOption('core_path').'components/minishop/model/minishop/', $scriptProperties);
