@@ -1,7 +1,7 @@
 <?php
 switch ($modx->event->name) {
 	case 'OnWebPagePrerender':
-		if (!$modx->user->isAuthenticated('mgr')) {return;}
+		if (!$modx->user->isAuthenticated('mgr') || $modx->resource->template == 0) {return;}
 
 		if ($tmp = $modx->getObject('modAction', array('namespace' => 'minishop', 'controller' => 'index'))) {
 			$action = $tmp->get('id');
