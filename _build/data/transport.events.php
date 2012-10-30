@@ -91,4 +91,47 @@ $events[11]->fromArray(array (
   'groupname' => 'miniShop',
 ), '', true, true);
 
+$events[12]= $modx->newObject('modEvent');
+$events[12]->fromArray(array (
+  'name' => 'msOnBeforeCartAdd',
+  'service' => 6,
+  'groupname' => 'miniShop',
+), '', true, true);
+
+$events[13]= $modx->newObject('modEvent');
+$events[13]->fromArray(array (
+  'name' => 'msOnCartAdd',
+  'service' => 6,
+  'groupname' => 'miniShop',
+), '', true, true);
+
+$events[14]= $modx->newObject('modEvent');
+$events[14]->fromArray(array (
+  'name' => 'msOnBeforeCartRemove',
+  'service' => 6,
+  'groupname' => 'miniShop',
+), '', true, true);
+
+$events[15]= $modx->newObject('modEvent');
+$events[15]->fromArray(array (
+  'name' => 'msOnCartRemove',
+  'service' => 6,
+  'groupname' => 'miniShop',
+), '', true, true);
+
+$events[16]= $modx->newObject('modEvent');
+$events[16]->fromArray(array (
+  'name' => 'msOnBeforeCartChange',
+  'service' => 6,
+  'groupname' => 'miniShop',
+), '', true, true);
+
+$events[17]= $modx->newObject('modEvent');
+$events[17]->fromArray(array (
+  'name' => 'msOnCartChange',
+  'service' => 6,
+  'groupname' => 'miniShop',
+), '', true, true);
+
+
 return $events;
