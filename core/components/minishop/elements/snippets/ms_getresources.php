@@ -401,6 +401,7 @@ foreach ($collection as $resourceId => $resource) {
 
 	if (!empty($ms_properties)) {
 		$ms_properties['price'] = $modx->miniShop->getPrice($gid);
+		$ms_properties['weight'] = $modx->miniShop->getWeight($gid);
 		if (empty($ms_properties['img'])) {$ms_properties['img'] = $ms_properties['file'];}
 		//unset($ms_properties['id']);
 	}
