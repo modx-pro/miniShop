@@ -474,6 +474,21 @@ Ext.extend(miniShop.grid.Categories,MODx.grid.Grid, {
 });
 Ext.reg('minishop-grid-categories',miniShop.grid.Categories);
 
+MODx.combo.SelectList = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        xtype:'combo'
+        ,triggerAction:'all'
+        ,mode:'local'
+        ,displayField:'text'
+        ,valueField:'value'
+        ,anchor: '100%'
+        ,fields:['value', 'text']
+    });
+    MODx.combo.SelectList.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.SelectList,MODx.combo.ComboBox);
+Ext.reg('minishop-select-list',MODx.combo.SelectList);
 
 miniShop.grid.TVs = function(config) {
 	config = config || {};
@@ -482,7 +497,7 @@ miniShop.grid.TVs = function(config) {
 		id: this.ident+'-grid-tvs'
 		,url: miniShop.config.connector_url
 		,action: 'mgr/goods/tv/getlist'
-		,fields: ['id','name','resourceId','caption','value','intro','input_properties','type']
+		,fields: ['id','name','resourceId','caption','value','intro','elements','input_properties','type']
 		,pageSize: Math.round(MODx.config.default_per_page / 2)
 		,autoHeight: true
 		,paging: true
@@ -492,6 +507,7 @@ miniShop.grid.TVs = function(config) {
 			,{header: _('name'),dataIndex: 'name',sortable: false,width: 50}
 			,{header: _('caption'),dataIndex: 'caption',sortable: false,width: 100}
 			,{header: _('value'),dataIndex: 'intro',sortable: false,width: 150}
+			,{header: _('elements'),dataIndex: 'elements',hidden: true}
 		]
 		,listeners: {
 			rowDblClick: function(grid, rowIndex, e) {
@@ -542,6 +558,20 @@ Ext.extend(miniShop.grid.TVs,MODx.grid.Grid, {
 			case 'text': vf.xtype = 'textarea'; break;
 			case 'checkbox': vf.xtype = 'textfield'; break;
 			case 'radio': vf.xtype = 'textfield'; break;
+			case 'listbox':
+				vf.xtype = 'minishop-select-list';
+				var elems = record.elements.split('||');
+				var val_list = [];
+				for (var i = 0; i < elems.length; i++) {
+					var el = elems[i].split('==');
+					if (el.length==1) {
+						val_list.push([el[0],el[0]])
+					} else {
+						val_list.push([el[1],el[0]])
+					}
+				}
+				vf.store = val_list;
+				break;
 			case 'option': vf.xtype = 'textfield'; break;
 			case 'richtext': vf.xtype = 'htmleditor'; vf.height = 400; break;
 			case 'textarea': vf.xtype = 'textarea'; vf.height = 400; break;
