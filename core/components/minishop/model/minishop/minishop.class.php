@@ -402,7 +402,7 @@ class miniShop {
 			return $this->changeCartCount($key, $_SESSION['minishop']['goods'][$key]['num'] + $num);
 		}
 		else {
-			$this->modx->invokeEvent('msOnBeforeCartAdd', array('key' => $key, 'cart' => $_SESSION['minishop']['goods']));
+			$this->modx->invokeEvent('msOnBeforeCartAdd', array('key' => $key, 'cart' => & $_SESSION['minishop']['goods']));
 			$_SESSION['minishop']['goods'][$key] = array(
 				'id' => $id
 				,'price' => $this->getPrice($id)
@@ -410,7 +410,7 @@ class miniShop {
 				,'num' => $num
 				,'data' => $data
 			);
-			$this->modx->invokeEvent('msOnCartAdd', array('key' => $key, 'cart' => $_SESSION['minishop']['goods']));
+			$this->modx->invokeEvent('msOnCartAdd', array('key' => $key, 'cart' => & $_SESSION['minishop']['goods']));
 			return $this->success('ms.addToCart.success', $this->getCartStatus());
 		}
 	}
@@ -424,9 +424,9 @@ class miniShop {
 	 * */
 	function remFromCart($key) {
 		if (array_key_exists($key, $_SESSION['minishop']['goods'])) {
-			$this->modx->invokeEvent('msOnBeforeCartRemove', array('key' => $key, 'cart' => $_SESSION['minishop']['goods']));
+			$this->modx->invokeEvent('msOnBeforeCartRemove', array('key' => $key, 'cart' => & $_SESSION['minishop']['goods']));
 			unset($_SESSION['minishop']['goods'][$key]);
-			$this->modx->invokeEvent('msOnCartRemove', array('key' => $key, 'cart' => $_SESSION['minishop']['goods']));
+			$this->modx->invokeEvent('msOnCartRemove', array('key' => $key, 'cart' => & $_SESSION['minishop']['goods']));
 			return $this->success('ms.remFromCart.success', $this->getCartStatus());
 		}
 		else {
@@ -448,9 +448,9 @@ class miniShop {
 				return $this->remFromCart($key);
 			}
 			else {
-				$this->modx->invokeEvent('msOnBeforeCartChange', array('key' => $key, 'num' => $num, 'cart' => $_SESSION['minishop']['goods']));
+				$this->modx->invokeEvent('msOnBeforeCartChange', array('key' => $key, 'num' => $num, 'cart' => & $_SESSION['minishop']['goods']));
 				$_SESSION['minishop']['goods'][$key]['num'] = $num;
-				$this->modx->invokeEvent('msOnCartChange', array('key' => $key, 'num' => $num, 'cart' => $_SESSION['minishop']['goods']));
+				$this->modx->invokeEvent('msOnCartChange', array('key' => $key, 'num' => $num, 'cart' => & $_SESSION['minishop']['goods']));
 			}
 			return $this->success('ms.changeCartCount.success', $this->getCartStatus());
 		}

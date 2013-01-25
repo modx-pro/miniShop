@@ -66,7 +66,7 @@ Ext.extend(miniShop.grid.Kits,MODx.grid.Grid,{
 	}
 	,goToGoodsManagerPage: function() {
 		var id = this.menu.record.id;
-		window.open('/manager/index.php?a=30&id=' + id);
+		window.open('./?a=' + MODx.action['resource/update'] + '&id=' + id);
 	}
 	,createKit: function(e) {
 		var w = MODx.load({
@@ -247,7 +247,7 @@ miniShop.window.createKit = function(config) {
 						,border: false
 						,layout: 'form'
 						,items: [
-							{xtype: 'minishop-combo-goodstemplate',id: 'modx-'+this.ident+'-template',baseParams: {action:  'mgr/goods/gettpllist',kits: 1}, fieldLabel: _('template'),editable: false,anchor: '100%',value: miniShop.config.ms_kits_tpls[0]}
+							{xtype: 'minishop-combo-goodstemplate',id: 'modx-'+this.ident+'-template',baseParams: {action:  'mgr/goods/gettpllist',kits: 1}, fieldLabel: _('template'),editable: false,anchor: '100%',value: config.disable_goods ? miniShop.config.ms_kits_tpls[0] : ''}
 							,{xtype: 'minishop-filter-category',id: 'modx-'+this.ident+'-category',baseParams: {action: 'mgr/combo/cats_and_goods',addall: 0,mode: 'kits'}, name: 'parent',fieldLabel: _('parent'),anchor: '100%',hiddenName: 'parent', value: MODx.config['minishop.default_kits_parent']}
 							,{xtype: 'textfield',name: 'alias',id: 'modx-'+this.ident+'-alias',fieldLabel: _('alias'),anchor: '100%'}
 							,{xtype: 'textfield',name: 'menutitle',id: 'modx-'+this.ident+'-menutitle',fieldLabel: _('resource_menutitle'),anchor: '100%'}

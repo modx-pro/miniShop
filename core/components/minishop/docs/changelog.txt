@@ -1,10 +1,20 @@
 Changelog for miniShop.
 
-1.9.5 (*.*.2012)
+1.9.5 (25.01.2013)
 =============
 - Добавлены новые события при работе с корзиной.
+- Добавлен тип ТВ select в админке.
+- Добавлены записи в лексикон для системных настроек.
+- Улучшен плагин miniShop
+- [#74] Первые шаги по переводу на французский
+- [#79] Исправлена ошибка со сбросом шаблона при редактировании товара
 -----
 - Added new events on work with cart.
+- Adding select-tv input type in manager.
+- Added lexicon etries for system settings.
+- Improved plugin miniShop
+- [#74] First steps to French translation
+- [#79] Fixed bug with wrong template on product edit
 
 1.9.4 (25.10.2012)
 =============

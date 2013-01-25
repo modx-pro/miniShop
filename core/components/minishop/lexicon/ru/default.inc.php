@@ -5,6 +5,9 @@
  * @package minishop
  * @subpackage lexicon
  */
+ 
+ include_once 'setting.inc.php';
+ 
 $_lang['minishop'] = 'miniShop';
 $_lang['ms.menu_desc'] = 'Удобный интернет-магазин для MODX Revolution';
 $_lang['ms.order'] = 'Заказ';

@@ -1,16 +1,14 @@
 <?php
 switch ($modx->event->name) {
 	case 'OnWebPagePrerender':
-		if (!$modx->user->isAuthenticated('mgr') || $modx->resource->template == 0) {return;}
-
-		if ($tmp = $modx->getObject('modAction', array('namespace' => 'minishop', 'controller' => 'index'))) {
-			$action = $tmp->get('id');
+		if (!$modx->user->isAuthenticated('mgr') || $modx->resource->contentType != 'text/html' || $modx->resource->template == 0 || !$tmp = $modx->getObject('modAction', array('namespace' => 'minishop', 'controller' => 'index'))) {
+			return false;
 		}
-		else {return;}
-
+		
+		$action = $tmp->get('id');
 		$id = $modx->resource->id;
 		$tpl = $modx->resource->template;
-		$target = '_blank'; // or _top
+		$target = '_top';
 		$goods_tpls = explode(',',$modx->getOption('minishop.goods_tpl'));
 		
 		$modx->lexicon->load('minishop:default');
@@ -21,7 +19,7 @@ switch ($modx->event->name) {
 		else {$add = '<br/><a href="'.$modx->config['manager_url'].'?a='.$action.'&act=tab&item=1" target="'.$target.'">'.$modx->lexicon('ms.menu.component').'</a>';}
 
 		$html = '
-			<div id="msMenu" style="position:absolute;z-index:1000;left:0;top:0;padding:5px;">
+			<div id="msMenu" style="position:absolute;z-index:10000;left:0;top:0;padding:5px;">
 				<a href="'.$modx->config['manager_url'].'index.php?a=30&id='.$id.'" target="'.$target.'">'.$modx->lexicon('ms.menu.editpage').'</a>
 				'.$add.'
 			</div>';
@@ -39,10 +37,8 @@ switch ($modx->event->name) {
 		$modx->removeCollection('ModCategories', array('gid:IN' => $ids));
 		$modx->removeCollection('ModGallery', array('gid:IN' => $ids));
 		$modx->removeCollection('ModTags', array('rid:IN' => $ids));
-
-		$q = $modx->newQuery('ModKits',array('rid:IN' => $ids));
-		$q->orCondition(array('gid:IN' => $ids));
-		$modx->removeCollection('ModKits', $q);
+		$modx->removeCollection('ModKits', array('rid:IN' => $ids));
+		$modx->removeCollection('ModKits', array('gid:IN' => $ids));
 	break;
 
 	case 'OnSiteRefresh':
