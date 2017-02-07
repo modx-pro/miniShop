@@ -72,15 +72,15 @@ class ModOrders extends xPDOSimpleObject {
 	}
 
 	function getDeliveryPrice() {
-		$weight = $this->get('weight');
+		$count = $this->get('count'); //Количество товаров
 
 		if ($res = $this->xpdo->getObject('ModDelivery', $this->get('delivery'))) {
 			$price = $res->get('price');
 			$add_price = $res->get('add_price');
 
-			$sum = round($weight * $price, 2);
+			$sum = round($count * $add_price, 2); // Умножаем количество на цену доставки 1 товара, округляем
 
-			return $sum + $add_price;
+			return $sum + $price; // К конечной стоимости добавляем стоимость доставки
 		}
 		else {return 0;}
 	}
