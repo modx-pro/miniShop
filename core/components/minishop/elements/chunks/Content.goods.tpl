@@ -17,7 +17,7 @@
       </div>
       <div class="row show-grid">
 	<div class="span2" data-original-title="">Вес:</div>
-	<div class="span4" data-original-title=""><strong>[[+weight:default=`0`]]</strong> кг.</div>
+	<div class="span4" data-original-title=""><strong>[[+weight:default=`0`]]</strong> кг</div>
       </div>
       <div class="row show-grid">
 	<div class="span2" data-original-title="">Текущий склад:</div>

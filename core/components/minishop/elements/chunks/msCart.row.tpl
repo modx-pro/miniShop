@@ -8,7 +8,7 @@
     <a href="[[~[[+id]]]]">[[+pagetitle]]</a>
   </td>
   <td class="price">[[+price]] [[+currency:default=`руб.`]]</td>
-  <td class="weight">[[+weight]] кг.</td>
+  <td class="weight">[[+weight]] кг</td>
   <td class="num">
     <input type="number" size="3" value="[[+num]]" data-key="[[+key]]" data-price="[[+price]]" class="center input-small changeCartCount" />
   </td>
